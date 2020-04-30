@@ -1,0 +1,3 @@
+displayName = Super Ancients Awakened
+author = Alphakip and Cerberus
+version = 0.1
