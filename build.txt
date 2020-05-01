@@ -1,3 +1,7 @@
 displayName = Super Ancients Awakened
 author = Alphakip and Cerberus
-version = 0.1
+hideCode = true
+includeSource = false
+modReferences = AAMod
+version = 1.0
+homepage = https://discord.gg/MmpCpj4
