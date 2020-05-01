@@ -33,7 +33,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
             npc.height = 80;
             npc.aiStyle = -1;
             npc.netAlways = true;
-            npc.damage = 150;
+            npc.damage = 200;
 			npc.defense = 270;
 			npc.lifeMax = 600000;
             npc.value = Item.sellPrice(0, 40, 0, 0);
@@ -90,6 +90,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
             base.SendExtraAI(writer);
             if (Main.netMode == 2 || Main.dedServ)
             {
+                writer.Write(internalAI[0]);
                 writer.Write(internalAI[1]);
                 writer.Write(internalAI[2]);
                 writer.Write(internalAI[3]);
@@ -100,6 +101,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
             base.ReceiveExtraAI(reader);
             if (Main.netMode == 1)
             {
+                internalAI[0] = reader.ReadFloat();
                 internalAI[1] = reader.ReadFloat();
                 internalAI[2] = reader.ReadFloat();
                 internalAI[3] = reader.ReadFloat();
@@ -146,6 +148,22 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
             {
                 npc.alpha = 0;
             }
+
+            internalAI[0] += 1f;
+			if (internalAI[0] == 300f)
+			{
+				QuoteSaid = false;
+				Roar(roarTimerMax, false);
+				internalAI[1] = (float)Main.rand.Next(6);
+			}
+			if (internalAI[0] > 300f)
+			{
+				Attack(npc);
+			}
+			if (internalAI[0] >= 400f)
+			{
+				internalAI[0] = 0f;
+			}
 
             if (Main.netMode != 1)
             {
@@ -719,6 +737,58 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                 return roarTimer > 0;
             }
         }
+
+        
+
+        public void Attack(NPC npc)
+		{
+			Player player = Main.player[npc.target];
+			bool flag = Main.rand.Next(4) == 0;
+            if (internalAI[1] == 1f)
+			{
+				if (internalAI[0] == 350f)
+				{
+					int num2 = Main.expertMode ? 5 : 3;
+					double num3 = (double)0.783f;
+					float num4 = (float)Math.Sqrt((double)(npc.velocity.X * npc.velocity.X + npc.velocity.Y * npc.velocity.Y));
+					double num5 = Math.Atan2((double)npc.velocity.X, (double)npc.velocity.Y) - 0.1;
+					double num6 = num3 / (double)6f;
+					for (int j = 0; j < num2; j++)
+					{
+						double num7 = num5 + num6 * (double)j;
+						Projectile.NewProjectile(npc.Center.X, npc.Center.Y, num4 * (float)Math.Sin(num7) * 2f, num4 * (float)Math.Cos(num7) * 2f, ModContent.ProjectileType<AkumaABomb>(), this.damage, 3f, Main.myPlayer, 0f, 0f);
+					}
+					return;
+				}
+			}
+			else if (internalAI[1] == 3f)
+			{
+				if (internalAI[0] == 350f && NPC.CountNPCS(ModContent.NPCType<AwakenedLung>()) < (Main.expertMode ? 3 : 4))
+				{
+					AkumaAttacks.SpawnLung(player, base.mod, true);
+					AkumaA.MinionCount++;
+					return;
+				}
+			}
+			else if (internalAI[1] == 4f)
+			{
+				if (internalAI[0] == 350f)
+				{
+					Projectile.NewProjectile(npc.Center.X, npc.Center.Y, npc.velocity.X * 2f, npc.velocity.Y, ModContent.ProjectileType<AFireProjHostile>(), this.damage, 3f, Main.myPlayer, 0f, 0f);
+					return;
+				}
+			}
+			else
+			{
+				if (internalAI[0] == 350f)
+				{
+					for (int l = 0; l < 3; l++)
+					{
+						NPC.NewNPC((int)(player.position.X + (float)Main.rand.Next(700)), (int)(player.position.Y + (float)Main.rand.Next(700)), ModContent.NPCType<SunA>(), 0, 0f, 0f, 0f, 0f, 255);
+					}
+				}
+			}
+		}
 
         public void Roar(int timer, bool fireSound)
         {

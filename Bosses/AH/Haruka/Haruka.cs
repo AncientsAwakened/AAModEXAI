@@ -974,6 +974,7 @@ namespace AAModEXAI.Bosses.AH.Haruka
                 npc.alpha -= 8;
                 Main.npc[ShadowNPC[1]].alpha = npc.alpha;
                 Main.npc[ShadowNPC[2]].alpha = npc.alpha;
+                ShadowkingPosition = playerLocation;
             }
             else if(!npc.active || npc.life <= 0)
             {
@@ -986,7 +987,6 @@ namespace AAModEXAI.Bosses.AH.Haruka
             }
             else
             {
-                if(internalAI[4] == 10) ShadowkingPosition = playerLocation;
                 npc.alpha = 0;
                 Main.npc[ShadowNPC[1]].alpha = npc.alpha;
                 Main.npc[ShadowNPC[2]].alpha = npc.alpha;

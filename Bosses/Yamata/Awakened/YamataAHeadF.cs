@@ -112,7 +112,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
 
             npc.alpha = Body.npc.alpha;
             
-            npc.TargetClosest();
+            npc.TargetClosest(true);
             Player targetPlayer = Main.player[npc.target];
             if (targetPlayer == null || !targetPlayer.active || targetPlayer.dead) targetPlayer = null; //deliberately set to null
             

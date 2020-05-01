@@ -944,6 +944,7 @@ namespace AAModEXAI.Bosses.Shen.AwakenedShenAH
                 npc.alpha -= 8;
                 Main.npc[ShadowNPC[1]].alpha = npc.alpha;
                 Main.npc[ShadowNPC[2]].alpha = npc.alpha;
+                ShadowkingPosition = playerLocation;
             }
             else if(!npc.active || npc.life <= 0)
             {

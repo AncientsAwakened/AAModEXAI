@@ -452,8 +452,8 @@ namespace AAModEXAI.Bosses.Shen
                         if (Main.netMode != 1)
                         {
                             const float ai0 = 0.01f;
-                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(Math.PI / 2), Accel, npc.damage / 4, 0f, Main.myPlayer, ai0);
-                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(-Math.PI / 2), Accel, npc.damage / 4, 0f, Main.myPlayer, ai0);
+                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(Math.PI / 2), Accel, npc.damage / 4, 0f, Main.myPlayer, ai0, -ai0);
+                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(-Math.PI / 2), Accel, npc.damage / 4, 0f, Main.myPlayer, ai0, ai0);
                         }
                     }
                     if (++npc.ai[1] > 40)
@@ -569,8 +569,8 @@ namespace AAModEXAI.Bosses.Shen
                         if (Main.netMode != 1)
                         {
                             const float ai0 = 0.004f;
-                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(Math.PI / 2), Accel, npc.damage / 4, 0f, Main.myPlayer, ai0);
-                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(-Math.PI / 2), Accel, npc.damage / 4, 0f, Main.myPlayer, ai0);
+                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(Math.PI / 2), Accel, npc.damage / 4, 0f, Main.myPlayer, ai0, -ai0);
+                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(-Math.PI / 2), Accel, npc.damage / 4, 0f, Main.myPlayer, ai0, ai0);
                         }
                     }
                     if (npc.ai[1] <= 1)

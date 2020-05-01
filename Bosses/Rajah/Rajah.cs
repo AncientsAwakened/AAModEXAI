@@ -1240,7 +1240,7 @@ namespace AAModEXAI.Bosses.Rajah
         public override void SetDefaults()
         {
             base.SetDefaults();
-            npc.damage = 150;
+            npc.damage = 310;
             npc.defense = 0;
             npc.lifeMax = 1200000;
             npc.life = 1200000;

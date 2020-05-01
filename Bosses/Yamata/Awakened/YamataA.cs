@@ -349,6 +349,33 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
             TargetClosest();
             HandleHeads();
 
+            if (npc.life <= npc.lifeMax / 2 && !spawnHaruka)
+			{
+				spawnHaruka = true;
+				if (AAWorld.downedYamata)
+				{
+					if (Main.netMode != 1)
+					{
+						AAModEXAI.Chat(AAMod.Lang.BossChat("YamataA14"), new Color(72, 78, 117), true);
+					}
+					if (Main.netMode != 1)
+					{
+						AAModEXAI.Chat(AAMod.Lang.BossChat("YamataA15"), new Color(146, 30, 68), true);
+					}
+					AAModGlobalNPC.SpawnBoss(Main.player[npc.target], base.mod.NPCType("HarukaY"), false, 0, 0, "", false);
+					return;
+				}
+				if (Main.netMode != 1)
+				{
+					AAModEXAI.Chat(AAMod.Lang.BossChat("YamataA16"), new Color(146, 30, 68), true);
+				}
+				if (Main.netMode != 1)
+				{
+					AAModEXAI.Chat(AAMod.Lang.BossChat("YamataA17"), new Color(72, 78, 117), true);
+				}
+				AAModGlobalNPC.SpawnBoss(Main.player[npc.target], base.mod.NPCType("HarukaY"), false, 0, 0, "", false);
+			}
+
             if (Tag)
             {
                 npc.life = 0;
@@ -386,15 +413,6 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
             if (foundTarget)
             {
                 NoFlyCountDown--;
-
-                for (int p = 0; p < Main.maxPlayers; p++)
-                {
-                    Player t = Main.player[p];
-                    if (t.active && !t.dead)
-                    {
-                        Main.player[p].AddBuff(ModLoader.GetMod("AAMod").BuffType("YamataAGravity"), 10, true);
-                    }
-                }
 
                 float dist = npc.Distance(playerTarget.Center);
                 if (dist > 1200 || !Collision.CanHit(npc.position, npc.width, npc.height, Main.player[npc.target].position, Main.player[npc.target].width, Main.player[npc.target].height)
@@ -507,10 +525,6 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                 if (inRangeX && inRangeY)
                 {
                     ai[2] += 1f;
-                    if (ai[2] >= 30f && tileDist == 16)
-                    {
-                        flyUpward = true;
-                    }
                     if (ai[2] >= 60f)
                     {
                         ai[2] = -200f;
@@ -556,10 +570,6 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                     break;
                 }
             }
-            if (flyUpward)
-            {
-                tileBelowEmpty = true;
-            }
 
             if (tileBelowEmpty)
             {
@@ -569,53 +579,31 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                     npc.velocity.Y = 9f;
                 }
             }
-            else
-            {
-                if (npc.directionY < 0 && npc.velocity.Y > 0f) { npc.velocity.Y -= moveInterval; }
-                if (npc.velocity.Y < -maxSpeedY) { npc.velocity.Y = -maxSpeedY; }
-            }
-
-
-            if (!ignoreWet && npc.wet)
+            else if (!ignoreWet && npc.wet)
             {
                 npc.velocity.Y -= moveInterval;
                 if (npc.velocity.Y < -maxSpeedY * 0.75f) { npc.velocity.Y = -maxSpeedY * 0.75f; }
             }
+            else
+            {
+                npc.velocity.Y = 0f;
+            }
 
 
-            if (npc.collideY)
+            if (!tileBelowEmpty)
             {
                 npc.velocity.Y = npc.oldVelocity.Y * -0.25f;
-                if (npc.velocity.Y > 0f && npc.velocity.Y < 1f) { npc.velocity.Y = 1f; }
                 if (npc.velocity.Y < 0f && npc.velocity.Y > -1f) { npc.velocity.Y = -1f; }
             }
 
+            Player player = Main.player[npc.target];
             if (!tileBelowEmpty && npc.target > -1 && Main.player[npc.target].active && !Main.player[npc.target].dead && Math.Abs(Main.player[npc.target].Center.X - npc.Center.X) < 50) //force a hover
             {
                 if (Math.Abs(npc.velocity.X) > 0.3f) npc.velocity.X *= 0.9f;
                 if (Math.Abs(npc.velocity.Y) > 0.3f) npc.velocity.Y *= 0.9f;
             }
             else
-            if (npc.direction == -1 && npc.velocity.X > -maxSpeedX)
-            {
-                npc.velocity.X -= moveInterval * 0.5f;
-                if (npc.velocity.X > maxSpeedX) { npc.velocity.X -= 0.1f; }
-                else
-                    if (npc.velocity.X > 0f) { npc.velocity.X += 0.05f; }
-                if (npc.velocity.X < -maxSpeedX) { npc.velocity.X = -maxSpeedX; }
-            }
-            else
-            if (npc.direction == 1 && npc.velocity.X < maxSpeedX)
-            {
-                npc.velocity.X += moveInterval * 0.5f;
-                if (npc.velocity.X < -maxSpeedX) { npc.velocity.X += 0.1f; }
-                else
-                    if (npc.velocity.X < 0f) { npc.velocity.X -= 0.05f; }
-                if (npc.velocity.X > maxSpeedX) { npc.velocity.X = maxSpeedX; }
-            }
-
-
-            if (npc.directionY == -1 && (double)npc.velocity.Y > -hoverMaxSpeed)
+            if (player.Center.Y - npc.Center.Y < 0 && (double)npc.velocity.Y > -hoverMaxSpeed)
             {
                 npc.velocity.Y -= hoverInterval;
                 if ((double)npc.velocity.Y > hoverMaxSpeed) { npc.velocity.Y -= 0.05f; }
@@ -624,13 +612,31 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                 if ((double)npc.velocity.Y < -hoverMaxSpeed) { npc.velocity.Y = -hoverMaxSpeed; }
             }
             else
-            if (npc.directionY == 1 && (double)npc.velocity.Y < hoverMaxSpeed)
+            if (player.Center.Y - npc.Center.Y > 0 && (double)npc.velocity.Y < hoverMaxSpeed)
             {
                 npc.velocity.Y += hoverInterval;
                 if ((double)npc.velocity.Y < -hoverMaxSpeed) { npc.velocity.Y += 0.05f; }
                 else
                 if (npc.velocity.Y < 0f) { npc.velocity.Y -= hoverInterval - 0.01f; }
                 if ((double)npc.velocity.Y > hoverMaxSpeed) { npc.velocity.Y = hoverMaxSpeed; }
+            }
+
+            if (player.Center.X - npc.Center.X < 0 && npc.velocity.X > -maxSpeedX)
+            {
+                npc.velocity.X -= moveInterval * 0.5f;
+                if (npc.velocity.X > maxSpeedX) { npc.velocity.X -= 0.1f; }
+                else
+                    if (npc.velocity.X > 0f) { npc.velocity.X += 0.05f; }
+                if (npc.velocity.X < -maxSpeedX) { npc.velocity.X = -maxSpeedX; }
+            }
+            else
+            if (player.Center.X - npc.Center.X > 0 && npc.velocity.X < maxSpeedX)
+            {
+                npc.velocity.X += moveInterval * 0.5f;
+                if (npc.velocity.X < -maxSpeedX) { npc.velocity.X += 0.1f; }
+                else
+                    if (npc.velocity.X < 0f) { npc.velocity.X -= 0.05f; }
+                if (npc.velocity.X > maxSpeedX) { npc.velocity.X = maxSpeedX; }
             }
         }
 

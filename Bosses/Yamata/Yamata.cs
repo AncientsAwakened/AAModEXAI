@@ -342,14 +342,6 @@ namespace AAModEXAI.Bosses.Yamata
             bool foundTarget = TargetClosest();
             if (foundTarget)
             {
-                for (int p = 0; p < Main.maxPlayers; p++)
-                {
-                    Player t = Main.player[p];
-                    if (t.active && !t.dead)
-                    {
-                        Main.player[p].AddBuff(ModLoader.GetMod("AAMod").BuffType("YamataGravity"), 10, true);
-                    }
-                }
                 NoFlyCountDown--;
                 if (!NoFly4U && NoFlyCountDown <= 0 && !AAWorld.downedYamata)
                 {

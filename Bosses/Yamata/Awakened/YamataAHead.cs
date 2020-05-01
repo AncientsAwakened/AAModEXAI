@@ -80,32 +80,6 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
 
         public override void AI()
         {
-            if (npc.life <= npc.lifeMax / 2 && !spawnHaruka)
-			{
-				spawnHaruka = true;
-				if (AAWorld.downedYamata)
-				{
-					if (Main.netMode != 1)
-					{
-						AAModEXAI.Chat(AAMod.Lang.BossChat("YamataA14"), new Color(72, 78, 117), true);
-					}
-					if (Main.netMode != 1)
-					{
-						AAModEXAI.Chat(AAMod.Lang.BossChat("YamataA15"), new Color(146, 30, 68), true);
-					}
-					AAModGlobalNPC.SpawnBoss(Main.player[npc.target], base.mod.NPCType("HarukaY"), false, 0, 0, "", false);
-					return;
-				}
-				if (Main.netMode != 1)
-				{
-					AAModEXAI.Chat(AAMod.Lang.BossChat("YamataA16"), new Color(146, 30, 68), true);
-				}
-				if (Main.netMode != 1)
-				{
-					AAModEXAI.Chat(AAMod.Lang.BossChat("YamataA17"), new Color(72, 78, 117), true);
-				}
-				AAModGlobalNPC.SpawnBoss(Main.player[npc.target], base.mod.NPCType("HarukaY"), false, 0, 0, "", false);
-			}
             if (Body == null)
             {
                 NPC npcBody = Main.npc[(int)npc.ai[0]];
@@ -185,12 +159,6 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                         internalAI[3] = 1;
                         if (Main.netMode != 1)
                             Projectile.NewProjectile(npc.Center, Vector2.Zero, mod.ProjectileType("YamataHarukaProj"), npc.damage / 4, 0f, Main.myPlayer, npc.target);
-
-
-                        if (npc.life <= npc.lifeMax / 2 && !spawnHaruka)
-                        {
-                            spawnHaruka = true;
-                        }
                     }
                     if (++internalAI[2] > 60)
                     {

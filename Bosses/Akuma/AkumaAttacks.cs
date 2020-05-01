@@ -33,6 +33,16 @@ namespace AAMod
             Projectile.NewProjectile(vector2.X, vector2.Y, 0, num115 * 1.5f, projType, npc.damage / 4, 0, player.whoAmI, 0f, 0.5f + ((float)Main.rand.NextDouble() * 0.3f));
         }
 
+        public static void SpawnLung(Player player, Mod mod, bool isAwakened)
+        {
+            if (Main.netMode != 1)
+            {
+                int npcID = NPC.NewNPC((int)player.Center.X, (int)player.Center.Y, mod.NPCType(isAwakened ? "AwakenedLung" : "AncientLung"), 0);
+                Main.npc[npcID].Center = player.Center - new Vector2(MathHelper.Lerp(-100f, 100f, (float)Main.rand.NextDouble()), 600f);
+                Main.npc[npcID].netUpdate2 = true; Main.npc[npcID].netUpdate = true;
+            }
+        }
+
         public static void Eruption(NPC npc, Mod mod)
         {
             Player player = Main.player[npc.target];

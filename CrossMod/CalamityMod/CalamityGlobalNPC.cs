@@ -49,14 +49,14 @@ namespace AAModEXAI
 
                 if(npc.type == mod.NPCType("SupremeRajah")) CalamityDR = 0.6f;
 
-                if(npc.type == mod.NPCType("AbyssGrip")) CalamityDR = 0.15f;
-                if(npc.type == mod.NPCType("BlazeGrip")) CalamityDR = 0.15f;
-                if(npc.type == mod.NPCType("FuryAshe")) CalamityDR = 0.15f;
-                if(npc.type == mod.NPCType("WrathHaruka")) CalamityDR = 0.15f;
+                if(npc.type == mod.NPCType("AbyssGrip")) CalamityDR = 0.1f;
+                if(npc.type == mod.NPCType("BlazeGrip")) CalamityDR = 0.1f;
+                if(npc.type == mod.NPCType("FuryAshe")) CalamityDR = 0.07f;
+                if(npc.type == mod.NPCType("WrathHaruka")) CalamityDR = 0.07f;
                 if(npc.type == mod.NPCType("Shen")) CalamityDR = 0.1f;
                 if(npc.type == mod.NPCType("ShenA")) CalamityDR = 0.05f;
-                if(npc.type == mod.NPCType("FuryAsheOrbiter")) CalamityDR = 0.15f;
-                if(npc.type == mod.NPCType("Shenling")) CalamityDR = 0.1f;
+                if(npc.type == mod.NPCType("FuryAsheOrbiter")) CalamityDR = 0.1f;
+                if(npc.type == mod.NPCType("Shenling")) CalamityDR = 0.05f;
 
                 if(npc.type == mod.NPCType("YamataA")) CalamityDR = 0.5f;
                 if(npc.type == mod.NPCType("YamataAHead")) CalamityDR = 0.5f;

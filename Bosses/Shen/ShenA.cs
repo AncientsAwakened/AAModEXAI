@@ -342,8 +342,8 @@ namespace AAModEXAI.Bosses.Shen
                         npc.ai[2] = 0;
                         if (Main.netMode != 1)
                         {
-                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(Math.PI / 2), mod.ProjectileType("ShenFireballAccel"), npc.damage / 4, 0f, Main.myPlayer, 0.01f, 0f);
-                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(-Math.PI / 2), mod.ProjectileType("ShenFireballAccel"), npc.damage / 4, 0f, Main.myPlayer, 0.01f, 0f);
+                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(Math.PI / 2), mod.ProjectileType("ShenFireballAccel"), npc.damage / 4, 0f, Main.myPlayer, 0.01f, 0.01f);
+                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(-Math.PI / 2), mod.ProjectileType("ShenFireballAccel"), npc.damage / 4, 0f, Main.myPlayer, 0.01f, -0.01f);
                         }
                     }
                     if (++npc.ai[1] > 40)
@@ -444,8 +444,8 @@ namespace AAModEXAI.Bosses.Shen
                         if (Main.netMode != 1)
                         {
                             const float ai0 = 0.004f;
-                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(Math.PI / 2), mod.ProjectileType("ShenFireballAccel"), npc.damage / 4, 0f, Main.myPlayer, ai0);
-                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(-Math.PI / 2), mod.ProjectileType("ShenFireballAccel"), npc.damage / 4, 0f, Main.myPlayer, ai0);
+                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(Math.PI / 2), mod.ProjectileType("ShenFireballAccel"), npc.damage / 4, 0f, Main.myPlayer, ai0, -ai0);
+                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(-Math.PI / 2), mod.ProjectileType("ShenFireballAccel"), npc.damage / 4, 0f, Main.myPlayer, ai0, ai0);
                         }
                     }
                     if (npc.ai[1] <= 1)
