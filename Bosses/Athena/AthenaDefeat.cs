@@ -118,7 +118,7 @@ namespace AAModEXAI.Bosses.Athena
                             if (npc.ai[0] >= 1200)
                             {
                                 if (Main.netMode != 1) BaseUtility.Chat(AAMod.Lang.BossChat("AthenaDefeat9"), Color.CornflowerBlue);
-                                AAModGlobalNPC.SpawnBoss(Main.player[npc.target], mod.NPCType("Olympian.AthenaA"), false, npc.Center);
+                                AAModGlobalNPC.SpawnBoss(Main.player[npc.target], mod.NPCType("AthenaA"), false, npc.Center);
 
                                 int b = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0f, 0f, mod.ProjectileType("ShockwaveBoom"), 0, 1, Main.myPlayer);
                                 Main.projectile[b].Center = npc.Center;

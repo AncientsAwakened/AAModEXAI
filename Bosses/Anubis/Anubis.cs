@@ -413,7 +413,7 @@ namespace AAModEXAI.Bosses.Anubis
                     if (Main.netMode != 1 && deathtimer > 240)
                     {
                         if (Main.netMode != 1) BaseUtility.Chat(AAMod.Lang.BossChat("AnubisFalse"), Color.Gold);
-                        int a = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("TownNPCs.Anubis"));
+                        int a = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<AAMod.NPCs.TownNPCs.Anubis>());
                         Main.npc[a].Center = npc.Center;
                         npc.active = false;
                     }
@@ -440,17 +440,17 @@ namespace AAModEXAI.Bosses.Anubis
                 if (!AAWorld.AnubisAwakened)
                 {
                     AAWorld.AnubisAwakened = true;
-                    NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType("Forsaken.FATransition"));
+                    NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType("FATransition"));
                 }
                 else
                 {
-                    NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType("Forsaken.FATransition"));
+                    NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType("FATransition"));
                 }
                 return;
             }
             else
             {
-                NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType("TownNPCs.Anubis"));
+                NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, ModContent.NPCType<AAMod.NPCs.TownNPCs.Anubis>());
             }
 
             if (Main.rand.Next(10) == 0)

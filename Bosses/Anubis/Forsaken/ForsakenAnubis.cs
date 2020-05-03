@@ -563,7 +563,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
 
         public override void NPCLoot()
         {
-            NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType("TownNPCs.Anubis"));
+            NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, ModContent.NPCType<AAMod.NPCs.TownNPCs.Anubis>());
 
             if (!AAWorld.downedAnubisA)
             {

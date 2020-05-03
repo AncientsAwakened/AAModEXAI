@@ -561,7 +561,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
 
         public override void BossLoot(ref string name, ref int potionType)
         {
-            if (NPC.AnyNPCs(mod.NPCType("Haruka.Haruka")))
+            if (NPC.AnyNPCs(mod.NPCType("Haruka")))
             {
                 potionType = 0;
             }
