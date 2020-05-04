@@ -36,6 +36,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 			npc.noTileCollide = true;
 			npc.HitSound = SoundID.NPCHit1;
 			npc.DeathSound = SoundID.NPCDeath1;
+			npc.GetGlobalNPC<CalamityGlobalNPC>().CalamityDR = 0.1f;
 		}
 		public override bool PreAI()
 		{

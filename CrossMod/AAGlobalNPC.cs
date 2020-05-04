@@ -10,6 +10,7 @@ namespace AAModEXAI
         {
             if(npc.type == ModLoader.GetMod("AAMod").NPCType("Athena"))
             {
+                npc.boss = false;
                 npc.active = false;
                 npc.life = 0;
                 if(Main.netMode != 1)
@@ -23,6 +24,7 @@ namespace AAModEXAI
             }
             if(npc.type == ModLoader.GetMod("AAMod").NPCType("AthenaA"))
             {
+                npc.boss = false;
                 npc.active = false;
                 npc.life = 0;
                 if(Main.netMode != 1)
@@ -36,6 +38,7 @@ namespace AAModEXAI
             }
             if(npc.type == ModLoader.GetMod("AAMod").NPCType("Greed"))
             {
+                npc.boss = false;
                 npc.active = false;
                 npc.life = 0;
                 if(Main.netMode != 1)
@@ -47,8 +50,23 @@ namespace AAModEXAI
                 npc.netUpdate = true;
                 return false;
             }
+            if(npc.type == ModLoader.GetMod("AAMod").NPCType("Anubis") && npc.boss)
+            {
+                npc.boss = false;
+                npc.active = false;
+                npc.life = 0;
+                if(Main.netMode != 1)
+                {
+                    int id = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("Anubis"));
+                    Main.npc[id].position = npc.position;
+                    npc.netUpdate = true;
+                }
+                npc.netUpdate = true;
+                return false;
+            }
             if(npc.type == ModLoader.GetMod("AAMod").NPCType("ForsakenAnubis"))
             {
+                npc.boss = false;
                 npc.active = false;
                 npc.life = 0;
                 if(Main.netMode != 1)
@@ -62,6 +80,7 @@ namespace AAModEXAI
             }
             if(npc.type == ModLoader.GetMod("AAMod").NPCType("Ashe"))
             {
+                npc.boss = false;
                 npc.active = false;
                 npc.life = 0;
                 if(Main.netMode != 1)
@@ -75,6 +94,7 @@ namespace AAModEXAI
             }
             if(npc.type == ModLoader.GetMod("AAMod").NPCType("Haruka"))
             {
+                npc.boss = false;
                 npc.active = false;
                 npc.life = 0;
                 if(Main.netMode != 1)
@@ -88,6 +108,7 @@ namespace AAModEXAI
             }
             if(npc.type == ModLoader.GetMod("AAMod").NPCType("Akuma"))
             {
+                npc.boss = false;
                 npc.active = false;
                 npc.life = 0;
                 if(Main.netMode != 1)
@@ -101,6 +122,8 @@ namespace AAModEXAI
             }
             if(npc.type == ModLoader.GetMod("AAMod").NPCType("AkumaA"))
             {
+                npc.boss = false;
+                
                 npc.active = false;
                 npc.life = 0;
                 if(Main.netMode != 1)
@@ -114,6 +137,7 @@ namespace AAModEXAI
             }
             if(npc.type == ModLoader.GetMod("AAMod").NPCType("DaybringerHead"))
             {
+                npc.boss = false;
                 npc.active = false;
                 npc.life = 0;
                 if(Main.netMode != 1)
@@ -127,6 +151,7 @@ namespace AAModEXAI
             }
             if(npc.type == ModLoader.GetMod("AAMod").NPCType("NightcrawlerHead"))
             {
+                npc.boss = false;
                 npc.active = false;
                 npc.life = 0;
                 if(Main.netMode != 1)
@@ -140,6 +165,7 @@ namespace AAModEXAI
             }
             if(npc.type == ModLoader.GetMod("AAMod").NPCType("GreedA"))
             {
+                npc.boss = false;
                 npc.active = false;
                 npc.life = 0;
                 if(Main.netMode != 1)
@@ -153,6 +179,7 @@ namespace AAModEXAI
             }
             if(npc.type == ModLoader.GetMod("AAMod").NPCType("SupremeRajah"))
             {
+                npc.boss = false;
                 npc.active = false;
                 npc.life = 0;
                 if(Main.netMode != 1)
@@ -166,6 +193,7 @@ namespace AAModEXAI
             }
             if(npc.type == ModLoader.GetMod("AAMod").NPCType("Shen"))
             {
+                npc.boss = false;
                 npc.active = false;
                 npc.life = 0;
                 if(Main.netMode != 1)
@@ -179,6 +207,7 @@ namespace AAModEXAI
             }
             if(npc.type == ModLoader.GetMod("AAMod").NPCType("ShenA"))
             {
+                npc.boss = false;
                 npc.active = false;
                 npc.life = 0;
                 if(Main.netMode != 1)
@@ -192,6 +221,7 @@ namespace AAModEXAI
             }
             if(npc.type == ModLoader.GetMod("AAMod").NPCType("YamataA"))
             {
+                npc.boss = false;
                 npc.active = false;
                 npc.life = 0;
                 if(Main.netMode != 1)
@@ -205,6 +235,7 @@ namespace AAModEXAI
             }
             if(npc.type == ModLoader.GetMod("AAMod").NPCType("Yamata"))
             {
+                npc.boss = false;
                 npc.active = false;
                 npc.life = 0;
                 if(Main.netMode != 1)
@@ -218,6 +249,7 @@ namespace AAModEXAI
             }
             if(npc.type == ModLoader.GetMod("AAMod").NPCType("Zero"))
             {
+                npc.boss = false;
                 npc.active = false;
                 npc.life = 0;
                 if(Main.netMode != 1)
@@ -231,6 +263,7 @@ namespace AAModEXAI
             }
             if(npc.type == ModLoader.GetMod("AAMod").NPCType("ZeroProtocol"))
             {
+                npc.boss = false;
                 npc.active = false;
                 npc.life = 0;
                 if(Main.netMode != 1)

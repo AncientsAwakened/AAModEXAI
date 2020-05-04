@@ -32,7 +32,7 @@ namespace AAModEXAI.Bosses.Athena.Olympian
             npc.npcSlots = 1000;
             npc.aiStyle = -1;
             npc.lifeMax = 110000;
-            npc.defense = 70;
+            npc.defense = 80;
             npc.damage = 110;
             npc.knockBackResist = 0f;
             npc.noGravity = true;
@@ -52,6 +52,8 @@ namespace AAModEXAI.Bosses.Athena.Olympian
 
         public float[] internalAI = new float[4];
 
+        public float poschange = 1;
+
         public override void SendExtraAI(BinaryWriter writer)
         {
             base.SendExtraAI(writer);
@@ -61,6 +63,7 @@ namespace AAModEXAI.Bosses.Athena.Olympian
                 writer.Write(internalAI[1]);
                 writer.Write(internalAI[2]);
                 writer.Write(internalAI[3]);
+                writer.Write(poschange);
             }
         }
 
@@ -73,6 +76,7 @@ namespace AAModEXAI.Bosses.Athena.Olympian
                 internalAI[1] = reader.ReadFloat();
                 internalAI[2] = reader.ReadFloat();
                 internalAI[3] = reader.ReadFloat();
+                poschange = reader.ReadFloat();
             }
         }
 
@@ -100,7 +104,7 @@ namespace AAModEXAI.Bosses.Athena.Olympian
                     if (!AliveCheck(player))
                         break;
                     targetPos = player.Center;
-                    targetPos.X += 500 * (npc.Center.X < targetPos.X ? -1 : 1);
+                    targetPos.X += 500 * poschange;
                     
                     for(int pos = -200; pos < 200; pos += 50)
                     {
@@ -112,7 +116,15 @@ namespace AAModEXAI.Bosses.Athena.Olympian
                     }
                     MoveToVector2(targetPos);
 
-                    BaseAI.ShootPeriodic(npc, player.position, player.width, player.height, mod.ProjectileType("AthenaMagic"), ref npc.ai[1], 50, npc.damage / 3, 10, true);
+                    if(Math.Abs(npc.Center.X - targetPos.X) + Math.Abs(npc.Center.Y - targetPos.Y) < 70f)
+                    {
+                        int proj = BaseAI.ShootPeriodic(npc, player.position, player.width, player.height, mod.ProjectileType("AthenaMagic"), ref npc.ai[1], 30, npc.damage / 2, 10, false);
+                        if(proj > -1)
+                        {
+                            poschange = -poschange;
+                            Teleport(2);
+                        }
+                    }
 
                     if (internalAI[3]++ >= 250 && Main.netMode != 1)
                     {
@@ -146,6 +158,7 @@ namespace AAModEXAI.Bosses.Athena.Olympian
                     if (npc.ai[2]++ > 560)
                     {
                         Teleport(1);
+                        poschange = npc.Center.X - player.Center.X > 0? 1 : -1;
                         npc.ai[0]++;
                         npc.ai[1] = 0;
                         npc.ai[2] = 0;
@@ -156,7 +169,7 @@ namespace AAModEXAI.Bosses.Athena.Olympian
                     if (!AliveCheck(player))
                         break;
                     targetPos = player.Center;
-                    targetPos.X += 500 * (npc.Center.X < targetPos.X ? -1 : 1);
+                    targetPos.X += 500 * poschange;
 
                     for(int pos = -200; pos < 200; pos += 50)
                     {
@@ -169,7 +182,16 @@ namespace AAModEXAI.Bosses.Athena.Olympian
 
                     MoveToVector2(targetPos);
 
-                    BaseAI.ShootPeriodic(npc, player.position, player.width, player.height, mod.ProjectileType("SwiftwindStrikeSpear"), ref npc.ai[1], 100, npc.damage / 3, 10, true);
+                    if(Math.Abs(npc.Center.X - targetPos.X) + Math.Abs(npc.Center.Y - targetPos.Y) < 70f)
+                    {
+                        int proj2 = BaseAI.ShootPeriodic(npc, player.position, player.width, player.height, mod.ProjectileType("SwiftwindStrikeSpear"), ref npc.ai[1], 30, npc.damage / 2, 10, false);
+
+                        if(proj2 > -1)
+                        {
+                            poschange = -poschange;
+                            Teleport(2);
+                        }
+                    }
 
                     if (npc.ai[2]++ > 400)
                     {
@@ -231,7 +253,7 @@ namespace AAModEXAI.Bosses.Athena.Olympian
                         }
                         else
                         {
-                            Teleport(2);
+                            Teleport(3);
                             npc.ai[0]++;
                             npc.ai[1] = 0;
                             npc.ai[2] = 0;
@@ -291,6 +313,7 @@ namespace AAModEXAI.Bosses.Athena.Olympian
                     break;
 
                 case 5: //dashing
+                    npc.spriteDirection = npc.velocity.X > 0 ? -1 : 1;
                     if (++npc.ai[1] > 240 || (Math.Sign(npc.velocity.X) > 0 ? npc.Center.X > player.Center.X + 900 : npc.Center.X < player.Center.X - 900))
                     {
                         npc.ai[1] = 0;
@@ -306,6 +329,8 @@ namespace AAModEXAI.Bosses.Athena.Olympian
                     }
                     break;
                 default:
+                    npc.spriteDirection = npc.direction;
+                    poschange = npc.Center.X - player.Center.X > 0? 1 : -1;
                     npc.ai[0] = 0;
                     goto case 0;
 
@@ -391,6 +416,13 @@ namespace AAModEXAI.Bosses.Athena.Olympian
             {
                 Vector2 targetPos = Main.player[npc.target].Center;
                 targetPos.X += 500 * (npc.Center.X < targetPos.X ? 1 : -1);
+                targetPos.Y -= 200;
+                npc.position = targetPos;
+            }
+            else if (where == 2)
+            {
+                Vector2 targetPos = Main.player[npc.target].Center;
+                targetPos.X += 500 * poschange;
                 targetPos.Y -= 200;
                 npc.position = targetPos;
             }

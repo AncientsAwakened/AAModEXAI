@@ -42,6 +42,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
 			npc.noGravity = true;
 			npc.boss = false;
 			npc.value = (float)Item.sellPrice(0, 0, 0, 0);
+			npc.GetGlobalNPC<CalamityGlobalNPC>().CalamityDR = 0.1f;
 		}
 
 		// Token: 0x0600177E RID: 6014 RVA: 0x001038B0 File Offset: 0x00101AB0

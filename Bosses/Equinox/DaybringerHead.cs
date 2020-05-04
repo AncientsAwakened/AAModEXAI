@@ -64,6 +64,8 @@ namespace AAModEXAI.Bosses.Equinox
                     writer.Write(internalAI[5]);
                     writer.Write(internalAI[6]);
                     writer.Write(internalAI[7]);
+
+                    writer.Write(probeCounter);
                     
                     writer.Write(preShootingSun);
                     writer.Write(preDeathRay);
@@ -90,6 +92,8 @@ namespace AAModEXAI.Bosses.Equinox
                     internalAI[5] = reader.ReadFloat(); //VelocitySave
                     internalAI[6] = reader.ReadFloat(); //VelocitySave
                     internalAI[7] = reader.ReadFloat();
+
+                    probeCounter = reader.ReadInt();
                     
                     preShootingSun = reader.ReadBoolean();
                     preDeathRay = reader.ReadBoolean();
@@ -254,6 +258,11 @@ namespace AAModEXAI.Bosses.Equinox
             }
             
             Player target = Main.player[npc.target];
+
+            if (!isHead && NPC.CountNPCS(ModContent.NPCType<Equiprobe>()) < 15)
+            {
+                SpawnProbe();
+            }
             
             if (npc.type == mod.NPCType("NightcrawlerHead"))
             {
@@ -347,7 +356,8 @@ namespace AAModEXAI.Bosses.Equinox
                             if (Main.netMode != 1)
                             {
                                 Vector2 speed = Vector2.Normalize(new Vector2(1f, 0f).RotatedBy(Main.npc[i].rotation + 3.1415f)) * 8f;
-                                Projectile.NewProjectile(Main.npc[i].Center.X, Main.npc[i].Center.Y, speed.X, speed.Y, mod.ProjectileType("NightclawerDeathraySmall"), npc.damage / 2, 0, Main.myPlayer, 0, i);
+                                Projectile.NewProjectile(Main.npc[i].Center.X, Main.npc[i].Center.Y, speed.X, speed.Y, mod.ProjectileType("NightclawerDeathraySmall"), npc.damage / 2, 0, Main.myPlayer, 1f, i);
+                                Projectile.NewProjectile(Main.npc[i].Center.X, Main.npc[i].Center.Y, -speed.X, -speed.Y, mod.ProjectileType("NightclawerDeathraySmall"), npc.damage / 2, 0, Main.myPlayer, -1f, i);
                             }
                         }
                     }
@@ -604,7 +614,7 @@ namespace AAModEXAI.Bosses.Equinox
                     {
                         for(int playerid = 0; playerid < 255; playerid++)
                         {
-                            if(Main.player[playerid].active && !Main.player[playerid].dead && Main.player[playerid] != null && Main.player[playerid].ownedProjectileCounts[mod.ProjectileType("DaybringerStars")] <= 0)
+                            if(Main.player[playerid].active && !Main.player[playerid].dead && Main.player[playerid] != null)
                             {
                                 Projectile.NewProjectile(Main.player[playerid].Center.X + Main.rand.Next(-5, 5) * 40f, Main.player[playerid].Center.Y + Main.rand.Next(-5, 5) * 40f, 0, 0, mod.ProjectileType("NightclawerCloud"), npc.damage / 6, 0, 255);
                             }
@@ -901,6 +911,24 @@ namespace AAModEXAI.Bosses.Equinox
             }
             BaseDrawing.DrawTexture(spritebatch, tex, 0, npc, Color.White); //GetAuraAlpha());				
             return false;
+        }
+
+        public int probeCounter = -1;
+        public void SpawnProbe()
+        {
+			if(probeCounter == -1)
+				probeCounter = 500 + Main.rand.Next(750);
+			if(Main.netMode == NetmodeID.MultiplayerClient || npc.whoAmI % 3 != 0) return;
+			probeCounter = Math.Max(0, probeCounter - 1);
+            if (probeCounter <= 0)
+            {
+				probeCounter = 500 + Main.rand.Next(750);
+				if(BaseAI.GetNPCs(npc.Center, mod.NPCType("Equiprobe"), 8000f).Length < 6)
+				{
+					int npcID = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("Equiprobe"), 0);
+					Main.npc[npcID].netUpdate = true;
+				}
+            }
         }
     }
 }

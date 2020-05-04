@@ -220,7 +220,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
 
         public override void AI()
         {
-            if((npc.ai[0] == 4 && NPC.CountNPCS(mod.NPCType("ZeroEcho")) > 0 && !Counterattack) || isCharging)
+            if((NPC.CountNPCS(mod.NPCType("ZeroEcho")) > 0) || isCharging || npc.ai[0] == 2)
             {
                 npc.chaseable = false;
                 npc.defense = 9999;

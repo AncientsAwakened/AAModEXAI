@@ -27,7 +27,7 @@ namespace AAModEXAI.Bosses.Anubis
             npc.damage = 40;
             npc.HitSound = SoundID.NPCHit49;
             npc.DeathSound = SoundID.NPCDeath51;
-            npc.knockBackResist = 0.7f;
+            npc.knockBackResist = 0f;
             npc.alpha = 255;
             npc.noGravity = true;
         }

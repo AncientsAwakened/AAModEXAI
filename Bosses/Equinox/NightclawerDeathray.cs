@@ -44,10 +44,10 @@ namespace AAModEXAI.Bosses.Equinox
             }
             if (Main.npc[(int)projectile.ai[1]].active && (Main.npc[(int)projectile.ai[1]].type == mod.NPCType("NightcrawlerBody")) && !Main.dayTime)
             {
-                if (projectile.ai[0] == 0)
+                if (projectile.ai[0] != 0)
                 {
                     Vector2 speed = Vector2.Normalize(new Vector2(1f, 0f).RotatedBy(Main.npc[(int)projectile.ai[1]].rotation + 3.1415f)) * 8f;
-                    projectile.velocity = speed;
+                    projectile.velocity = speed * projectile.ai[0];
                     projectile.position += 30 * projectile.velocity;
                     projectile.position += 10 * projectile.velocity.RotatedBy(Main.npc[(int)projectile.ai[1]].spriteDirection > 0 ? -Math.PI / 2 : Math.PI / 2);
                 }

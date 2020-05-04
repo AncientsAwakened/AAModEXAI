@@ -171,7 +171,7 @@ namespace AAModEXAI.Bosses.FeudalFungus
 
             npc.rotation = 0;
 
-            if (internalAI[4] ++ > 90 && Main.expertMode && Main.netMode != 1)
+            if (internalAI[4] ++ > 20 && Main.expertMode && Main.netMode != 1)
             {
                 internalAI[4] = 0;
                 Vector2 pos = new Vector2(player.Center.X + Main.rand.Next(70, 150) * (Main.rand.Next(2) == 0? 1: -1), player.Center.Y + Main.rand.Next(70, 150) * (Main.rand.Next(2) == 0? 1: -1));

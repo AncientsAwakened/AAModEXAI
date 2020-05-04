@@ -24,7 +24,6 @@ namespace AAModEXAI.Bosses.Athena.Olympian
 			projectile.hostile = true;
 			projectile.melee = true;
 			projectile.penetrate = 1;
-			projectile.timeLeft = 30;
 			projectile.alpha = 20;
             projectile.tileCollide = false;
 			projectile.ignoreWater = true;
@@ -41,6 +40,14 @@ namespace AAModEXAI.Bosses.Athena.Olympian
                 if (projectile.frame > 2)
                 {
                     projectile.frame = 0;
+                }
+            }
+            for(int i = 0; i < 200; i++)
+            {
+                if(Main.player[i].active && Main.player[i].statLife > 0 && Collision.CanHit(projectile.position, projectile.width, projectile.height, Main.player[i].position, Main.player[i].width, Main.player[i].height))
+                {
+                    projectile.Kill();
+                    return;
                 }
             }
         }

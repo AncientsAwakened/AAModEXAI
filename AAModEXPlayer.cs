@@ -22,6 +22,12 @@ namespace AAModEXAI
         public bool YamataGravity = false;
         public bool YamataAGravity = false;
 
+        public override void OnEnterWorld(Player player)
+		{
+			Main.NewText("WARNING: SUPER AAMOD AI Detected. It will influence your playthrough seriously. If you are a new AA player, it is not recommended to experience it. ", 67, 110, 238, false);
+            Main.NewText("GLHF.", 67, 110, 238, false);
+		}
+
         public override void ResetEffects()
         {
             AkumaPain = false;
@@ -46,7 +52,10 @@ namespace AAModEXAI
                     player.lifeRegen *= 2;
                 }
             }
+        }
 
+        public override void PostUpdateRunSpeeds()
+		{
             if (YamataGravity || YamataAGravity)
             {
                 if (player.mount.CanFly)
@@ -66,7 +75,8 @@ namespace AAModEXAI
                     player.maxRunSpeed *= .58f;
                 }
             }
-        }
+		}
+
         public override void UpdateBiomes()
         {
             AAMod.AAPlayer modPlayer = player.GetModPlayer<AAMod.AAPlayer>();
@@ -115,6 +125,9 @@ namespace AAModEXAI
 
         public override void PostUpdate()
         {
+            bool revenge = (bool)ModSupport.GetModWorldConditions("CalamityMod", "CalamityWorld", "revenge", false, true);
+            bool Death = (bool)ModSupport.GetModWorldConditions("CalamityMod", "CalamityWorld", "death", false, true);
+
             if (NPC.AnyNPCs(ModContent.NPCType<AkumaTransition>()))
             {
                 int n = BaseAI.GetNPC(player.Center, ModContent.NPCType<AkumaTransition>(), -1);
@@ -138,6 +151,12 @@ namespace AAModEXAI
             if (NPC.AnyNPCs(ModContent.NPCType<YamataA>()))
             {
                 player.AddBuff(ModContent.BuffType<YamataAGravity>(), 10, true);
+            }
+
+            if (revenge && (NPC.AnyNPCs(ModContent.NPCType<Shen>()) || NPC.AnyNPCs(ModContent.NPCType<ShenA>())))
+            {
+                player.AddBuff(ModContent.BuffType<YamataAGravity>(), 10, true);
+                player.AddBuff(ModContent.BuffType<BlazingPain>(), 10, true);
             }
         }
 	}

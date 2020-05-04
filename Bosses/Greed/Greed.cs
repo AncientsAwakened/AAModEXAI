@@ -31,6 +31,12 @@ namespace AAModEXAI.Bosses.Greed
             npc.damage = 35;
             npc.defense = 25;
             npc.lifeMax = 50000;
+            if(NPC.downedMoonlord)
+            {
+                npc.damage = 70;
+                npc.defense = 80;
+                npc.lifeMax = 100000;
+            }
             npc.value = Item.buyPrice(0, 5, 0, 0);
             npc.knockBackResist = 0f;
             npc.aiStyle = -1;

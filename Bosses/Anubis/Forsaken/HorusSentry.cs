@@ -27,7 +27,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
             npc.damage = 60;
             npc.HitSound = SoundID.NPCHit49;
             npc.DeathSound = SoundID.NPCDeath51;
-            npc.knockBackResist = 0.7f;
+            npc.knockBackResist = 0f;
             npc.alpha = 255;
             npc.noGravity = true;
         }
@@ -96,6 +96,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
             if (npc.ai[0] > 500)
             {
                 npc.frame.Y = FrameHeight * 1;
+                npc.ai[0] = 0;
             }
         }
 

@@ -48,14 +48,14 @@ namespace AAModEXAI.Bosses.Athena.Olympian
             {
                 Vector2 tPos;
                 npc.ai[1] = 0;
-                tPos.X = player.Center.X;
-                tPos.Y = player.Center.Y - 70;
-                npc.velocity.X += npc.DirectionTo(tPos).X * Vector2.Distance(npc.Center, tPos) / 600 / 2;
-                npc.velocity.Y += npc.DirectionTo(tPos).Y * Vector2.Distance(npc.Center, tPos) / 600 / 2 * 3;
+                tPos.X = player.Center.X - 70;
+                tPos.Y = player.Center.Y;
+                npc.velocity.X += npc.DirectionTo(tPos).X * Vector2.Distance(npc.Center, tPos) / 600 / 2 * 3;
+                npc.velocity.Y += npc.DirectionTo(tPos).Y * Vector2.Distance(npc.Center, tPos) / 600 / 2;
             }
             else
             {
-                npc.velocity.Y -= npc.ai[1];
+                npc.velocity.X -= npc.ai[1];
                 npc.ai[1]++;
                 if (npc.ai[1] > 40 && Main.netMode != 1)
                 {

@@ -130,7 +130,7 @@ namespace AAModEXAI.Bosses.Greed
             {
                 if (internalAI[5] == 0)
                 {
-                    BaseAI.ShootPeriodic(npc, player.position, player.width, player.height, mod.ProjectileType("GreedCoin"), ref internalAI[4], 30, npc.damage / 4, 10, false);
+                    BaseAI.ShootPeriodic(npc, player.position, player.width, player.height, mod.ProjectileType("GreedCoinA"), ref internalAI[4], 30, npc.damage / 4, 10, false);
                 }
                 else
                 {
@@ -279,12 +279,12 @@ namespace AAModEXAI.Bosses.Greed
             if ((int)internalAI[0] == 3)
             {
                 speed = 22f;
-                acceleration = 0.38f;
+                acceleration = 0.40f;
             }
             else
             {
                 speed = 18f;
-                acceleration = 0.12f;
+                acceleration = 0.28f;
             }
 
             Vector2 npcCenter = new Vector2(npc.position.X + npc.width * 0.5f, npc.position.Y + npc.height * 0.5f);

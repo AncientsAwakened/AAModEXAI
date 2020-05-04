@@ -8,14 +8,12 @@ namespace AAModEXAI.Bosses.Shen
 	// Token: 0x02000420 RID: 1056
 	public class ShenFireballAccel : ModProjectile
 	{
-		// Token: 0x060018D4 RID: 6356 RVA: 0x00119223 File Offset: 0x00117423
 		public override void SetStaticDefaults()
 		{
 			base.DisplayName.SetDefault("Fireball");
 			Main.projFrames[projectile.type] = 4;
 		}
 
-		// Token: 0x060018D5 RID: 6357 RVA: 0x00119248 File Offset: 0x00117448
 		public override void PostAI()
 		{
 			int frameCounter = projectile.frameCounter;
@@ -31,13 +29,11 @@ namespace AAModEXAI.Bosses.Shen
 			}
 		}
 
-		// Token: 0x060018D6 RID: 6358 RVA: 0x00049C74 File Offset: 0x00047E74
 		public override Color? GetAlpha(Color lightColor)
 		{
 			return new Color?(Color.White);
 		}
 
-		// Token: 0x060018D7 RID: 6359 RVA: 0x001192A8 File Offset: 0x001174A8
 		public override void SetDefaults()
 		{
 			projectile.width = 40;

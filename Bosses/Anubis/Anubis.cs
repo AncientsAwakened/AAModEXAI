@@ -24,6 +24,12 @@ namespace AAModEXAI.Bosses.Anubis
             npc.damage = 35;
             npc.defense = 40;
             npc.lifeMax = 30000;
+            if(NPC.downedMoonlord)
+            {
+                npc.damage = 70;
+                npc.defense = 80;
+                npc.lifeMax = 100000;
+            }
             npc.HitSound = SoundID.NPCHit1;
             npc.DeathSound = SoundID.NPCDeath6;
             npc.knockBackResist = 0f;
@@ -214,23 +220,18 @@ namespace AAModEXAI.Bosses.Anubis
                     {
                         CombatText.NewText(npc.Hitbox, Color.Gold, AAMod.Lang.BossChat("AnubisCombat3"), true);
 
-                        if (Main.rand.Next(2) == 0 && npc.life < npc.lifeMax * (2/3))
+                        if (Main.rand.Next(2) == 0)
                         {
                             if (npc.life < npc.lifeMax / 3)
                             {
                                 int a = Projectile.NewProjectile(npc.position, Vector2.Zero, mod.ProjectileType("EyeSummon"), 0, 0, Main.myPlayer, npc.Center.X - 200, npc.Center.Y);
-                                Main.npc[a].Center = npc.Center;
                                 int b = Projectile.NewProjectile(npc.position, Vector2.Zero, mod.ProjectileType("EyeSummon"), 0, 0, Main.myPlayer, npc.Center.X + 200, npc.Center.Y);
-                                Main.npc[b].Center = npc.Center;
                                 int c = Projectile.NewProjectile(npc.position, Vector2.Zero, mod.ProjectileType("EyeSummon"), 0, 0, Main.myPlayer, npc.Center.X, npc.Center.Y - 200);
-                                Main.npc[c].Center = npc.Center;
                             }
                             else
                             {
                                 int a = Projectile.NewProjectile(npc.position, Vector2.Zero, mod.ProjectileType("EyeSummon"), 0, 0, Main.myPlayer, npc.Center.X - 200, npc.Center.Y);
-                                Main.npc[a].Center = npc.Center;
                                 int b = Projectile.NewProjectile(npc.position, Vector2.Zero, mod.ProjectileType("EyeSummon"), 0, 0, Main.myPlayer, npc.Center.X + 200, npc.Center.Y);
-                                Main.npc[b].Center = npc.Center;
                             }
                         }
                         else

@@ -33,6 +33,12 @@ namespace AAModEXAI.Bosses.Athena
             npc.lifeMax = 40000;
             npc.defense = 20;
             npc.damage = 90;
+            if(NPC.downedMoonlord)
+            {
+                npc.damage = 100;
+                npc.defense = 45;
+                npc.lifeMax = 80000;
+            }
             npc.knockBackResist = 0f;
             npc.noGravity = true;
             npc.HitSound = SoundID.NPCHit1;

@@ -50,7 +50,7 @@ namespace AAModEXAI.Bosses.Anubis
         {
             for (int i = 0; i < 1000; i++)
             {
-                if (Main.projectile[i].active && Main.projectile[i].CanReflect())
+                if (Main.projectile[i].active && Main.projectile[i].friendly && !Main.projectile[i].hostile)
                 {
                     Rectangle hitbox = Main.projectile[i].Hitbox;
                     if (myRect.Intersects(hitbox))

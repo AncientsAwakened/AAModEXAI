@@ -22,7 +22,7 @@ namespace AAModEXAI.Bosses.Equinox
             projectile.tileCollide = false;
             projectile.ignoreWater = true;
             projectile.penetrate = -1;
-			projectile.timeLeft = 400;
+			projectile.timeLeft = 700;
         }
 
         public override void AI()
@@ -36,7 +36,7 @@ namespace AAModEXAI.Bosses.Equinox
             
             const int aislotHomingCooldown = 0;
             const int homingDelay = 15;
-            const float desiredFlySpeedInPixelsPerFrame = 12f;
+            const float desiredFlySpeedInPixelsPerFrame = 14f;
             const float amountOfFramesToLerpBy = 30; // minimum of 1, please keep in full numbers even though it's a float!
 
             projectile.ai[aislotHomingCooldown]++;

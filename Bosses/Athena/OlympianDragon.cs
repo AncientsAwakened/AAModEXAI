@@ -36,7 +36,7 @@ namespace AAModEXAI.Bosses.Athena
 
         public override bool PreAI()
         {
-            if (!NPC.AnyNPCs(mod.NPCType("Athena")) || !NPC.AnyNPCs(mod.NPCType("AthenaA")))
+            if (!NPC.AnyNPCs(mod.NPCType("Athena")) && !NPC.AnyNPCs(mod.NPCType("AthenaA")))
             {
                 npc.velocity *= .95f;
                 if (npc.alpha != 0)

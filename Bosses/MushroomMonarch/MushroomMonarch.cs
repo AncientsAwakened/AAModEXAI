@@ -287,39 +287,33 @@ namespace AAModEXAI.Bosses.MushroomMonarch
 
         public override void ModifyHitByProjectile(Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
-            if(Main.rand.Next(5) == 0)
+            if(Main.rand.Next(10) == 0)
             {
-                if(Main.rand.Next(10) == 0)
+                int i = Item.NewItem((int)npc.Center.X, (int)npc.Center.Y, 16, 16, 5, 1, false, 0, false, false);
+                if (Main.netMode == 1 && i > 0)
                 {
-                    int i = Item.NewItem((int)npc.Center.X, (int)npc.Center.Y, 16, 16, 5, 1, false, 0, false, false);
-                    if (Main.netMode == 1 && i > 0)
-                    {
-                        NetMessage.SendData(21, -1, -1, null, i, 1f, 0f, 0f, 0, 0, 0);
-                    }
+                    NetMessage.SendData(21, -1, -1, null, i, 1f, 0f, 0f, 0, 0, 0);
                 }
-                else
-                {
-                    Projectile.NewProjectile(npc.Center, new Vector2(0f, 0f), mod.ProjectileType("FakeMonarchMushroom"), 0, 0);
-                }
+            }
+            else
+            {
+                Projectile.NewProjectile(npc.Center, new Vector2(0f, 0f), mod.ProjectileType("FakeMonarchMushroom"), 0, 0);
             }
         }
 
         public override void ModifyHitByItem(Player player, Item item, ref int damage, ref float knockback, ref bool crit)
         {
-            if(Main.rand.Next(5) == 0)
+            if(Main.rand.Next(10) == 0)
             {
-                if(Main.rand.Next(10) == 0)
+                int i = Item.NewItem((int)npc.Center.X, (int)npc.Center.Y, 16, 16, 5, 1, false, 0, false, false);
+                if (Main.netMode == 1 && i > 0)
                 {
-                    int i = Item.NewItem((int)npc.Center.X, (int)npc.Center.Y, 16, 16, 5, 1, false, 0, false, false);
-                    if (Main.netMode == 1 && i > 0)
-                    {
-                        NetMessage.SendData(21, -1, -1, null, i, 1f, 0f, 0f, 0, 0, 0);
-                    }
+                    NetMessage.SendData(21, -1, -1, null, i, 1f, 0f, 0f, 0, 0, 0);
                 }
-                else
-                {
-                    Projectile.NewProjectile(npc.Center, new Vector2(0f, 0f), mod.ProjectileType("FakeMonarchMushroom"), 0, 0);
-                }
+            }
+            else
+            {
+                Projectile.NewProjectile(npc.Center, new Vector2(0f, 0f), mod.ProjectileType("FakeMonarchMushroom"), 0, 0);
             }
         }
         

@@ -175,7 +175,7 @@ namespace AAModEXAI.Bosses.Toad
                 bool tileCheck1 = Main.tile[(int)(tile1.X / 16), (int)(tile1.Y / 16)].active() && Main.tileSolid[Main.tile[(int)(tile1.X / 16), (int)(tile1.Y / 16)].type];
                 bool tileCheck2 = Main.tile[(int)(tile2.X / 16), (int)(tile2.Y / 16)].active() && Main.tileSolid[Main.tile[(int)(tile2.X / 16), (int)(tile2.Y / 16)].type];
                 bool tiletele = TeleCooldown == 0 && !npc.noTileCollide && ((tileCheckabove && npc.collideY) || (tileCheckleft && npc.collideX) || (tileCheckright && npc.collideX) || ((tileCheck1 || tileCheck2) && (npc.collideX || npc.collideY)));
-                if (dist > 400 || tiletele)
+                if (dist > 1000 || tiletele)
                 {
                     npc.alpha += 3;
                     if (npc.alpha >= 255)
