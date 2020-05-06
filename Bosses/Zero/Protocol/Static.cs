@@ -70,5 +70,13 @@ namespace AAModEXAI.Bosses.Zero.Protocol
             Main.PlaySound(ModLoader.GetMod("AAMod").GetLegacySoundSlot(SoundType.Custom, "Sounds/Sounds/Glitch"), (int)projectile.Center.X, (int)projectile.Center.Y);
             return true;
         }
+
+        public override void ModifyHitPlayer(Player target, ref int damage, ref bool crit)
+		{
+			if (Main.rand.Next(7) == 0)
+			{
+				target.AddBuff(mod.BuffType("Unstable"), 180, true);
+			}
+		}
     }
 }

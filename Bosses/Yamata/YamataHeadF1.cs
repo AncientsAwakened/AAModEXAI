@@ -242,6 +242,10 @@ namespace AAModEXAI.Bosses.Yamata
             if (npc.life <= 0)
             {
                 CombatText.NewText(npc.getRect(), new Color(45, 46, 70), AAMod.Lang.BossChat("YamataHead"), true, true);
+                if(Main.netMode != 1)
+                {
+                    Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity), mod.ProjectileType("Yanker"), npc.damage / 2, 0f, Main.myPlayer);
+                }
             }
         }
 

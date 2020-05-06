@@ -21,6 +21,8 @@ namespace AAModEXAI
         public bool AkumaPain = false;
         public bool YamataGravity = false;
         public bool YamataAGravity = false;
+        public bool Yanked = false;
+        public bool Unstable = false;
 
         public override void OnEnterWorld(Player player)
 		{
@@ -33,6 +35,8 @@ namespace AAModEXAI
             AkumaPain = false;
             YamataGravity = false;
             YamataAGravity = false;
+            Yanked = false;
+            Unstable = false;
         }
 
         public override void UpdateBadLifeRegen()
@@ -73,7 +77,21 @@ namespace AAModEXAI
                 {
                     player.moveSpeed *= .58f;
                     player.maxRunSpeed *= .58f;
+                    player.accRunSpeed *= .58f;
                 }
+            }
+
+            if (Unstable)
+            {
+                bool flag = player.controlLeft;
+                bool flag1 = player.controlUp || player.controlJump;
+                player.controlLeft = player.controlRight;
+                player.controlRight = flag;
+                player.controlUp = player.controlDown;
+                player.controlJump = player.controlDown;
+                player.controlDown = flag1;
+                
+                player.moveSpeed *= Utils.NextFloat(Main.rand, 0.25f, 2f);
             }
 		}
 
@@ -125,38 +143,43 @@ namespace AAModEXAI
 
         public override void PostUpdate()
         {
-            bool revenge = (bool)ModSupport.GetModWorldConditions("CalamityMod", "CalamityWorld", "revenge", false, true);
-            bool Death = (bool)ModSupport.GetModWorldConditions("CalamityMod", "CalamityWorld", "death", false, true);
 
-            if (NPC.AnyNPCs(ModContent.NPCType<AkumaTransition>()))
+            if (NPC.AnyNPCs(mod.NPCType("AkumaTransition")))
             {
-                int n = BaseAI.GetNPC(player.Center, ModContent.NPCType<AkumaTransition>(), -1);
+                int n = BaseAI.GetNPC(player.Center, mod.NPCType("AkumaTransition"), -1);
                 NPC akuma = Main.npc[n];
 
                 if (akuma.ai[0] >= 660)
                 {
-                    player.AddBuff(ModContent.BuffType<BlazingPain>(), 2);
+                    player.AddBuff(mod.BuffType("BlazingPain"), 2);
                 }
             }
-            else if (NPC.AnyNPCs(ModContent.NPCType<AkumaA>()))
+            else if (NPC.AnyNPCs(mod.NPCType("AkumaA")))
             {
-                player.AddBuff(ModContent.BuffType<BlazingPain>(), 2);
+                player.AddBuff(mod.BuffType("BlazingPain"), 2);
             }
 
-            if (NPC.AnyNPCs(ModContent.NPCType<Yamata>()))
+            if (NPC.AnyNPCs(mod.NPCType("Yamata")))
             {
-                player.AddBuff(ModContent.BuffType<YamataGravity>(), 10, true);
+                player.AddBuff(mod.BuffType("YamataGravity"), 10);
             }
 
-            if (NPC.AnyNPCs(ModContent.NPCType<YamataA>()))
+            if (NPC.AnyNPCs(mod.NPCType("YamataA")))
             {
-                player.AddBuff(ModContent.BuffType<YamataAGravity>(), 10, true);
+                player.AddBuff(mod.BuffType("YamataAGravity"), 10);
             }
 
-            if (revenge && (NPC.AnyNPCs(ModContent.NPCType<Shen>()) || NPC.AnyNPCs(ModContent.NPCType<ShenA>())))
+            
+            if (ModSupport.GetMod("CalamityMod") != null)
             {
-                player.AddBuff(ModContent.BuffType<YamataAGravity>(), 10, true);
-                player.AddBuff(ModContent.BuffType<BlazingPain>(), 10, true);
+                bool revenge = (bool)ModSupport.GetModWorldConditions("CalamityMod", "CalamityWorld", "revenge", false, true);
+                bool Death = (bool)ModSupport.GetModWorldConditions("CalamityMod", "CalamityWorld", "death", false, true);
+
+                if (revenge && (NPC.AnyNPCs(ModContent.NPCType<Shen>()) || NPC.AnyNPCs(ModContent.NPCType<ShenA>())))
+                {
+                    player.AddBuff(mod.BuffType("YamataAGravity"), 10);
+                    player.AddBuff(mod.BuffType("BlazingPain"), 10);
+                }
             }
         }
 	}
