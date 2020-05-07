@@ -883,5 +883,13 @@ namespace AAModEXAI.Bosses.Zero.Protocol
                 }
             }
         }
+
+        public override void ModifyHitPlayer(Player target, ref int damage, ref bool crit)
+		{
+			if (Main.rand.Next(2) == 0)
+			{
+				target.AddBuff(mod.BuffType("Unstable"), 360, true);
+			}
+		}
     }
 }

@@ -40,6 +40,14 @@ namespace AAModEXAI.Bosses.Zero.Protocol
             return target.hurtCooldowns[1] == 0;
         }
 
+        public override void ModifyHitPlayer(Player target, ref int damage, ref bool crit)
+		{
+			if (Main.rand.Next(7) == 0)
+			{
+				target.AddBuff(mod.BuffType("Unstable"), 180, true);
+			}
+		}
+
         public override void AI()
         {
             projectile.hide = false;

@@ -93,5 +93,13 @@ namespace AAModEXAI.Bosses.Zero.Protocol
                 Main.dust[num88].velocity += projectile.DirectionTo(Main.dust[num88].position) * 8f;
             }
         }
+
+        public override void ModifyHitPlayer(Player target, ref int damage, ref bool crit)
+		{
+			if (Main.rand.Next(7) == 0)
+			{
+				target.AddBuff(mod.BuffType("Unstable"), 180, true);
+			}
+		}
     }
 }

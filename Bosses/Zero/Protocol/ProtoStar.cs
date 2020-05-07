@@ -235,5 +235,13 @@ namespace AAModEXAI.Bosses.Zero.Protocol
 			origin = Vector2.Zero;
 			color = Color.Transparent;
         }
+
+        public override void ModifyHitPlayer(Player target, ref int damage, ref bool crit)
+		{
+			if (Main.rand.Next(7) == 0)
+			{
+				target.AddBuff(mod.BuffType("Unstable"), 180, true);
+			}
+		}
     }
 }
