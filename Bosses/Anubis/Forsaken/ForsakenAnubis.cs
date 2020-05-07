@@ -72,6 +72,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
 
         public override void AI()
         {
+
             int TeleportCount = 0;
 
             if (npc.life < (int)(npc.lifeMax * .75f))
@@ -95,6 +96,13 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
             }
 
             Player player = Main.player[npc.target];
+            
+            int anubis = BaseAI.GetNPC(player.Center, ModContent.NPCType<AAMod.NPCs.TownNPCs.Anubis>(), -1);
+            if(anubis > -1)
+            {
+                Main.npc[anubis].life = 0;
+                Main.npc[anubis].active = false;
+            }
 
             if (player.Center.X < npc.Center.X)
             {

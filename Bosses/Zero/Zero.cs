@@ -392,7 +392,7 @@ namespace AAModEXAI.Bosses.Zero
                 npc.TargetClosest();
                 if (player.dead || !player.active || Math.Abs(npc.position.X - Main.player[npc.target].position.X) > 6000f || Math.Abs(npc.position.Y - Main.player[npc.target].position.Y) > 6000f)
                 {
-                    npc.Transform(mod.NPCType("ZeroDeactivated"));
+                    npc.Transform(ModLoader.GetMod("AAMod").NPCType("ZeroDeactivated"));
                 }
                 return;
             }

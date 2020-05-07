@@ -743,8 +743,19 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
         public void Attack(NPC npc)
 		{
 			Player player = Main.player[npc.target];
-			bool flag = Main.rand.Next(4) == 0;
-            if (internalAI[1] == 1f)
+            if (internalAI[1] == 0f)
+			{
+                if (internalAI[0] == 320f || internalAI[0] == 340f || internalAI[0] == 360f || internalAI[0] == 380f)
+				{
+					int num = Main.expertMode ? 20 : 14;
+					for (int i = 0; i < num; i++)
+					{
+						AkumaAttacks.Dragonfire(npc, base.mod, true);
+					}
+					return;
+				}
+            }
+            else if (internalAI[1] == 1f)
 			{
 				if (internalAI[0] == 350f)
 				{
@@ -757,6 +768,18 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 					{
 						double num7 = num5 + num6 * (double)j;
 						Projectile.NewProjectile(npc.Center.X, npc.Center.Y, num4 * (float)Math.Sin(num7) * 2f, num4 * (float)Math.Cos(num7) * 2f, ModContent.ProjectileType<AkumaABomb>(), this.damage, 3f, Main.myPlayer, 0f, 0f);
+					}
+					return;
+				}
+			}
+            else if (internalAI[1] == 2f)
+			{
+				int num8 = Main.expertMode ? 20 : 15;
+				if (internalAI[0] == 330f || internalAI[0] == 360f || internalAI[0] == 390f)
+				{
+					for (int k = 0; k < num8; k++)
+					{
+						AkumaAttacks.Eruption(npc, mod);
 					}
 					return;
 				}

@@ -23,6 +23,11 @@ namespace AAModEXAI
 			instance = null;
 		}
 
+        public override void PostSetupContent()
+        {
+            WeakReferences.PerformModSupport();
+        }
+
 		public static void Chat(string s, Color color, bool sync = true)
         {
             Chat(s, color.R, color.G, color.B, sync);

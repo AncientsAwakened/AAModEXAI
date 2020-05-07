@@ -75,13 +75,11 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                         reflectvelocity.Normalize();
                         reflectvelocity *= vector.Length();
                         reflectvelocity += vector * 20f;
-                        reflectvelocity.Normalize();
-                        reflectvelocity *= vector.Length();
                         Main.projectile[i].damage /= 2;
                         Main.projectile[i].penetrate = 1;
-                        AAMod.AAGlobalProjectile globalproj = Main.projectile[i].GetGlobalProjectile<AAMod.AAGlobalProjectile>();
-                        globalproj.reflectvelocity = reflectvelocity;
-                        globalproj.isReflecting = true;
+                        Main.projectile[i].GetGlobalProjectile<AAModEXAIGlobalProjectile>().reflectvelocity = reflectvelocity;
+                        Main.projectile[i].GetGlobalProjectile<AAModEXAIGlobalProjectile>().isReflecting = true;
+                        Main.projectile[i].GetGlobalProjectile<AAModEXAIGlobalProjectile>().ReflectConter = 180;
                     }
                 }
             }

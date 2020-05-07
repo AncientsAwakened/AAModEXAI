@@ -249,6 +249,7 @@ namespace AAModEXAI
             }
             if(npc.type == ModLoader.GetMod("AAMod").NPCType("Zero"))
             {
+                AAWorld.downedZero = true;
                 npc.boss = false;
                 npc.active = false;
                 npc.life = 0;

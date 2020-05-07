@@ -84,6 +84,13 @@ namespace AAModEXAI.Bosses.Anubis
 
             Player player = Main.player[npc.target];
 
+            int anubis = BaseAI.GetNPC(player.Center, ModContent.NPCType<AAMod.NPCs.TownNPCs.Anubis>(), -1);
+            if(anubis > -1)
+            {
+                Main.npc[anubis].life = 0;
+                Main.npc[anubis].active = false;
+            }
+
             if (player.Center.X < npc.Center.X)
             {
                 npc.direction = npc.spriteDirection = 1;
