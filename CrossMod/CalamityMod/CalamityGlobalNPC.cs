@@ -54,7 +54,7 @@ namespace AAModEXAI
                 if(npc.type == mod.NPCType("FuryAshe")) CalamityDR = 0.04f;
                 if(npc.type == mod.NPCType("WrathHaruka")) CalamityDR = 0.04f;
                 if(npc.type == mod.NPCType("Shen")) CalamityDR = 0.04f;
-                if(npc.type == mod.NPCType("ShenA")) CalamityDR = 0.03f;
+                if(npc.type == mod.NPCType("ShenA")) CalamityDR = 0.015f;
                 if(npc.type == mod.NPCType("FuryAsheOrbiter")) CalamityDR = 0.05f;
                 if(npc.type == mod.NPCType("Shenling")) CalamityDR = 0.02f;
 
@@ -134,7 +134,8 @@ namespace AAModEXAI
 			{
                 if (npc.type > 580 && npc.modNPC.mod == ModLoader.GetMod("AAModEXAI"))
                 {
-                    if (projectile.type > 714 && projectile.modProjectile.mod == ModLoader.GetMod("CalamityMod"))
+                    Player player = Main.player[projectile.owner];
+                    if ((projectile.type > 714 && projectile.modProjectile.mod == ModLoader.GetMod("CalamityMod")) || (player.inventory[player.selectedItem].type > 3930 && player.inventory[player.selectedItem].modItem.mod == ModLoader.GetMod("CalamityMod")))
                     {
                         damage = (int)(damage * CalamityDR * (NPC.downedPlantBoss? 0.8f : 1f) * (NPC.downedMoonlord? 0.7f : 1f));
                     }
