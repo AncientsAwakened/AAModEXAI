@@ -1,4 +1,3 @@
-using AAMod.NPCs.Enemies.Sky;
 using AAMod;
 
 namespace AAModEXAI.Bosses.Athena
