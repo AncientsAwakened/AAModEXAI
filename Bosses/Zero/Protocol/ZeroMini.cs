@@ -99,10 +99,11 @@ namespace AAModEXAI.Bosses.Zero.Protocol
                 npc.velocity *= 0;
                 if(Main.netMode != 1)
                 {
-                    Projectile.NewProjectile(npc.Center + new Vector2(30, 30), new Vector2(10, 10), mod.ProjectileType("EchoRay"), npc.damage / 3, 0f, Main.myPlayer, 6.2831855f / 750f, npc.whoAmI);
-                    Projectile.NewProjectile(npc.Center + new Vector2(-30, 30), new Vector2(-10, 10), mod.ProjectileType("EchoRay"), npc.damage / 3, 0f, Main.myPlayer, 6.2831855f / 750f, npc.whoAmI);
-                    Projectile.NewProjectile(npc.Center + new Vector2(30, -30), new Vector2(10, -10), mod.ProjectileType("EchoRay"), npc.damage / 3, 0f, Main.myPlayer, 6.2831855f / 750f, npc.whoAmI);
-                    Projectile.NewProjectile(npc.Center + new Vector2(-30, -30), new Vector2(-10, -10), mod.ProjectileType("EchoRay"), npc.damage / 3, 0f, Main.myPlayer, 6.2831855f / 750f, npc.whoAmI);
+                    int direction = Main.rand.Next(2) == 0? 1:-1;
+                    Projectile.NewProjectile(npc.Center + new Vector2(30, 30), new Vector2(10, 10), mod.ProjectileType("EchoRay"), npc.damage / 3, 0f, Main.myPlayer, direction * 6.2831855f / 750f, npc.whoAmI);
+                    Projectile.NewProjectile(npc.Center + new Vector2(-30, 30), new Vector2(-10, 10), mod.ProjectileType("EchoRay"), npc.damage / 3, 0f, Main.myPlayer, direction * 6.2831855f / 750f, npc.whoAmI);
+                    Projectile.NewProjectile(npc.Center + new Vector2(30, -30), new Vector2(10, -10), mod.ProjectileType("EchoRay"), npc.damage / 3, 0f, Main.myPlayer, direction * 6.2831855f / 750f, npc.whoAmI);
+                    Projectile.NewProjectile(npc.Center + new Vector2(-30, -30), new Vector2(-10, -10), mod.ProjectileType("EchoRay"), npc.damage / 3, 0f, Main.myPlayer, direction * 6.2831855f / 750f, npc.whoAmI);
                 }
                 npc.ai[0] = 3;
                 npc.ai[1] = 0;

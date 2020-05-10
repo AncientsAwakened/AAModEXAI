@@ -98,7 +98,15 @@ namespace AAModEXAI.Bosses.Zero.Protocol
             if (projectile.scale > num801)
                 projectile.scale = num801;
             float num804 = projectile.velocity.ToRotation();
-            num804 += projectile.ai[0];
+            if(Main.npc[ai1].type == mod.NPCType("ZeroProtocol"))
+            {
+                Player player = Main.player[Main.npc[ai1].target];
+                num804 += projectile.ai[0] * (Main.npc[ai1].DirectionTo(player.Center).ToRotation() - Main.npc[ai1].rotation > 0? -1 : 1);
+            }
+            else
+            {
+                num804 += projectile.ai[0];
+            }
             projectile.rotation = num804 - 1.57079637f;
             projectile.velocity = num804.ToRotationVector2();
             float num805 = 3f;
@@ -109,7 +117,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
                 samplingPoint = vector78.Value;
             }
             float[] array3 = new float[(int)num805];
-            Collision.LaserScan(samplingPoint, projectile.velocity, num806 * projectile.scale, 3000f, array3);
+            for (int i = 0; i < array3.Length; i++) array3[i] = 4000f;
             float num807 = 0f;
             int num3;
             for (int num808 = 0; num808 < array3.Length; num808 = num3 + 1)

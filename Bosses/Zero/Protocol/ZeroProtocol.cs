@@ -32,7 +32,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
         public override void SetDefaults()
         {
             npc.lifeMax = 600000;
-			npc.damage = 150;
+			npc.damage = 200;
 			npc.defense = 70;
             npc.knockBackResist = 0f;
             npc.width = 170;
@@ -220,7 +220,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
 
         public override void AI()
         {
-            if((NPC.CountNPCS(mod.NPCType("ZeroEcho")) > 0) || isCharging || npc.ai[0] == 2)
+            if((NPC.CountNPCS(mod.NPCType("ZeroEcho")) > 0) || isCharging || npc.ai[0] == 2 || npc.ai[0] == 4)
             {
                 npc.chaseable = false;
                 npc.defense = 9999;
@@ -512,8 +512,13 @@ namespace AAModEXAI.Bosses.Zero.Protocol
                         {
                             if (Main.netMode != 1) AAModEXAI.Chat(AAMod.Lang.BossChat("ZeroAwakened11"), Color.Red.R, Color.Red.G, Color.Red.B);
                             if (ShootDir == new Vector2(0,0)) ShootDir = npc.DirectionTo(player.Center);
-                            Projectile.NewProjectile(npc.Center + 60f * ShootDir, 10f * ShootDir, mod.ProjectileType("EchoRay"), 100, 3f, Main.myPlayer, 0, npc.whoAmI);
+                            Projectile.NewProjectile(npc.Center + 60f * ShootDir, 10f * ShootDir, mod.ProjectileType("EchoRay"), npc.damage, 3f, Main.myPlayer, 6.2831855f / 450f, npc.whoAmI);
                             npc.ai[3] = 1f;
+                        }
+                        else if(npc.ai[1] > 100 && npc.ai[1] < 190)
+                        {
+                            npc.ai[3] = 0f;
+                            npc.rotation += (npc.DirectionTo(player.Center).ToRotation() - npc.rotation > 0? -1 : 1) * 6.2831855f / 450f;
                         }
                         else
                         {
@@ -528,6 +533,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
                                 NPC.NewNPC((int)player.Center.X + 50 * Main.rand.Next(4, 6) * (Main.rand.Next(2) == 0? -1:1), (int)player.Center.Y + 50 * Main.rand.Next(4, 6) * (Main.rand.Next(2) == 0? -1:1), mod.NPCType("ZeroMini"));
                             }
                             npc.rotation = npc.DirectionTo(player.Center).ToRotation() + (float)Math.PI/2;
+                            if(npc.rotation > 2 * Math.PI) npc.rotation -= 6.2831855f;
                             ShootDir = npc.DirectionTo(player.Center);
                         }
 

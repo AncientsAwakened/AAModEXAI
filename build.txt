@@ -1,5 +1,5 @@
 displayName = Super Ancients Awakened
-author = Alphakip and Cerberus
+author = Alphakip
 hideCode = true
 includeSource = false
 modReferences = AAMod

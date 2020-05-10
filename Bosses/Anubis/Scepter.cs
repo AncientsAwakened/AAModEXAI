@@ -69,7 +69,14 @@ namespace AAModEXAI.Bosses.Anubis
                         Vector2 reflectvelocity = new Vector2(Main.rand.Next(-100, 101), Main.rand.Next(-100, 101));
                         reflectvelocity.Normalize();
                         reflectvelocity *= vector.Length();
-                        reflectvelocity += vector * 15f;
+                        reflectvelocity += vector * 20f;
+                        reflectvelocity.Normalize();
+                        reflectvelocity *= vector.Length();
+                        if(reflectvelocity.Length() < 20f)
+                        {
+                            reflectvelocity.Normalize();
+                            reflectvelocity *= 20f;
+                        }
                         Main.projectile[i].damage /= 2;
                         Main.projectile[i].penetrate = 1;
 
