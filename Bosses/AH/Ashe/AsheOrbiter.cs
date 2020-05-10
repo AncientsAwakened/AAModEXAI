@@ -85,7 +85,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
             if (body == -1) return;
 
             NPC ashe = Main.npc[body];
-            if (ashe == null || ashe.life <= 0 || !ashe.active || ashe.type != mod.NPCType("Ashe")) { npc.active = false; return; }
+            if (ashe == null || ashe.life <= 0 || !ashe.active || ashe.type != mod.NPCType("Ashe") || ashe.type != mod.NPCType("AsheA")) { npc.active = false; return; }
 
             for (int m = npc.oldPos.Length - 1; m > 0; m--)
             {

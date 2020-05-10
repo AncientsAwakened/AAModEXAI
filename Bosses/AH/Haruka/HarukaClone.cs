@@ -53,7 +53,16 @@ namespace AAModEXAI.Bosses.AH.Haruka
                 npc.life = 0;
                 npc.active = false;
             }
-            if(((Haruka)Haruka.modNPC).internalAI[0] != 4)
+            bool despawn = false;
+            if(Haruka.type = mod.NPCType("Haruka"))
+            {
+                despawn = ((Haruka)Haruka.modNPC).internalAI[0] != 4;
+            }
+            else if(Haruka.type = mod.NPCType("HarukaY"))
+            {
+                despawn = ((HarukaY)Haruka.modNPC).internalAI[0] != 4;
+            }
+            if(despawn)
             {
                 npc.boss = false;
                 npc.life = 0;

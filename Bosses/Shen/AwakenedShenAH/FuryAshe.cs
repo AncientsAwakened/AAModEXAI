@@ -82,7 +82,7 @@ namespace AAModEXAI.Bosses.Shen.AwakenedShenAH
 
                     MoveToPoint(wantedVelocity);
 
-                    BaseAI.ShootPeriodic(npc, player.Center + new Vector2(Main.rand.Next(-10, 10), Main.rand.Next(-10, 10)), player.width, player.height, mod.ProjectileType("DiscordianInferno"), ref npc.ai[2], 22, npc.damage / 4, 14, false);
+                    BaseAI.ShootPeriodic(npc, player.Center + new Vector2(Main.rand.Next(-10, 10), Main.rand.Next(-10, 10)), player.width, player.height, mod.ProjectileType("DiscordianInferno"), ref npc.ai[2], 5, npc.damage / 4, 14, false);
                     if (npc.ai[1]++ > (Main.expertMode ? 180 : 280))
                     {
                         AIChange();
@@ -136,32 +136,32 @@ namespace AAModEXAI.Bosses.Shen.AwakenedShenAH
                 case 6: //prepare for fishron dash
                     if (!AliveCheck(player))
                         break;
-                    targetPos = player.Center + player.DirectionTo(npc.Center) * 600;
+                    targetPos = player.Center + player.DirectionTo(npc.Center) * 600f;
                     Movement(targetPos, 0.8f);
-                    if (++npc.ai[1] > 20)
+                    if (++npc.ai[1] > 10)
                     {
                         npc.ai[0]++;
                         npc.ai[1] = 0;
                         npc.velocity = npc.DirectionTo(player.Center) * (npc.life < npc.lifeMax/3 ? 50:40);
-                        if(npc.velocity.Length() < 40f)
-                        {
-                            npc.velocity = Vector2.Normalize(npc.DirectionTo(targetPos)) * (npc.life < npc.lifeMax/3 ? 50:40);
-                        }
                     }
                     break;
 
                 case 7: //dashing
-                    if (++npc.ai[2] > 3)
+                    if (Math.Sqrt(npc.velocity.X * npc.velocity.X + npc.velocity.Y * npc.velocity.Y) < 20f)
+                    {
+                        npc.velocity = Vector2.Normalize(npc.velocity) * 20f;
+                    }
+                    if (++npc.ai[2] > 1)
                     {
                         npc.ai[2] = 0;
                         if (Main.netMode != 1)
                         {
                             const float ai0 = 0.01f;
-                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(Math.PI / 2), mod.ProjectileType("ShenFireballAccel"), npc.damage / 4, 0f, Main.myPlayer, ai0);
-                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(-Math.PI / 2), mod.ProjectileType("ShenFireballAccel"), npc.damage / 4, 0f, Main.myPlayer, ai0);
+                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(Math.PI / 2), mod.ProjectileType("ShenFireballAccel"), npc.damage / 2, 0f, Main.myPlayer, ai0);
+                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(-Math.PI / 2), mod.ProjectileType("ShenFireballAccel"), npc.damage / 2, 0f, Main.myPlayer, ai0);
                         }
                     }
-                    if (++npc.ai[1] > 40)
+                    if (++npc.ai[1] > 60)
                     {
                         npc.ai[1] = 0;
                         npc.ai[2] = 0;
@@ -202,7 +202,7 @@ namespace AAModEXAI.Bosses.Shen.AwakenedShenAH
                     }
                     if (npc.ai[1] > 100)
                     {
-                        MoveToPoint(player.Center + new Vector2((player.velocity.X > 0? 1 : -1) * 600, -400));
+                        MoveToPoint(player.Center + new Vector2((player.velocity.X > 0? 1 : -1) * 400, -200));
                     }
                     else
                     {
@@ -210,7 +210,7 @@ namespace AAModEXAI.Bosses.Shen.AwakenedShenAH
                     }
                     if (npc.life > npc.lifeMax / 3 || npc.ai[1] < 100)
                     {
-                        BaseAI.ShootPeriodic(npc, player.Center, player.width, player.height, mod.ProjectileType("FuryAsheFire"), ref npc.ai[2], npc.life < npc.lifeMax * 0.666f ? 30 : 60, npc.damage / 4, 8, false);
+                        BaseAI.ShootPeriodic(npc, player.Center, player.width, player.height, mod.ProjectileType("FuryAsheFire"), ref npc.ai[2], npc.life < npc.lifeMax * 0.666f ? 20 : 40, npc.damage / 4, 8, false);
                     }
                     if (npc.ai[1]++ > (Main.expertMode ? 180 : 280))
                     {

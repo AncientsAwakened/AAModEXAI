@@ -114,7 +114,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
                     {
                         if (npc.ai[1] > 60 && npc.ai[1] <= 180)
                         {
-                            BaseAI.ShootPeriodic(npc, player.Center, player.width, player.height, mod.ProjectileType("AsheFlamethrower"), ref npc.ai[2], 5, npc.damage / 4, 24, false);
+                            BaseAI.ShootPeriodic(npc, player.Center, player.width, player.height, mod.ProjectileType("AsheFlamethrower"), ref npc.ai[2], 5, npc.damage / 4, 20, false);
                         }
                     }
 
@@ -137,32 +137,32 @@ namespace AAModEXAI.Bosses.AH.Ashe
                 case 6: //prepare for fishron dash
                     if (!AliveCheck(player))
                         break;
-                    targetPos = player.Center + player.DirectionTo(npc.Center) * 600;
+                    targetPos = player.Center + player.DirectionTo(npc.Center) * 600f;
                     Movement(targetPos, 0.8f);
-                    if (++npc.ai[1] > 20)
+                    if (++npc.ai[1] > 10)
                     {
                         npc.ai[0]++;
                         npc.ai[1] = 0;
                         npc.velocity = npc.DirectionTo(player.Center) * (npc.life < npc.lifeMax/3 ? 50:40);
-                        if(npc.velocity.Length() < 40f)
-                        {
-                            npc.velocity = Vector2.Normalize(npc.DirectionTo(targetPos)) * (npc.life < npc.lifeMax/3 ? 50:40);
-                        }
                     }
                     break;
 
                 case 7: //dashing
-                    if (++npc.ai[2] > 3)
+                    if (Math.Sqrt(npc.velocity.X * npc.velocity.X + npc.velocity.Y * npc.velocity.Y) < 20f)
+                    {
+                        npc.velocity = Vector2.Normalize(npc.velocity) * 20f;
+                    }
+                    if (++npc.ai[2] > 1)
                     {
                         npc.ai[2] = 0;
                         if (Main.netMode != 1)
                         {
                             const float ai0 = 0.01f;
-                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(Math.PI / 2), mod.ProjectileType("AsheSpell"), npc.damage / 4, 0f, Main.myPlayer, ai0);
-                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(-Math.PI / 2), mod.ProjectileType("AsheSpell"), npc.damage / 4, 0f, Main.myPlayer, ai0);
+                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(Math.PI / 2), mod.ProjectileType("AsheSpell"), npc.damage / 2, 0f, Main.myPlayer, ai0);
+                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(-Math.PI / 2), mod.ProjectileType("AsheSpell"), npc.damage / 2, 0f, Main.myPlayer, ai0);
                         }
                     }
-                    if (++npc.ai[1] > 40)
+                    if (++npc.ai[1] > 60)
                     {
                         npc.ai[1] = 0;
                         npc.ai[2] = 0;
@@ -203,7 +203,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
                     }
                     if (npc.ai[1] > 100)
                     {
-                        MoveToPoint(player.Center + new Vector2((player.velocity.X > 0? 1 : -1) * 600, -400));
+                        MoveToPoint(player.Center + new Vector2((player.velocity.X > 0? 1 : -1) * 400, -200));
                     }
                     else
                     {
@@ -211,7 +211,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
                     }
                     if (npc.life > npc.lifeMax / 3 || npc.ai[1] < 100)
                     {
-                        BaseAI.ShootPeriodic(npc, player.Center, player.width, player.height, mod.ProjectileType("AsheFire"), ref npc.ai[2], npc.life < npc.lifeMax * 0.666f ? 30 : 60, npc.damage / 4, 8, false);
+                        BaseAI.ShootPeriodic(npc, player.Center, player.width, player.height, mod.ProjectileType("AsheFire"), ref npc.ai[2], npc.life < npc.lifeMax * 0.666f ? 20 : 40, npc.damage / 4, 8, false);
                     }
                     if (npc.ai[1]++ > (Main.expertMode ? 180 : 280))
                     {
