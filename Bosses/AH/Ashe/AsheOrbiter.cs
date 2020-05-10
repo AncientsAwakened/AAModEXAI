@@ -4,8 +4,10 @@ using Microsoft.Xna.Framework.Graphics;
 using System.IO;
 using Terraria;
 using Terraria.ID;
+using AAModEXAI.Bosses.Akuma.Awakened;
 
-using Terraria.ModLoader;using AAMod;
+using Terraria.ModLoader;
+using AAMod;
 
 namespace AAModEXAI.Bosses.AH.Ashe
 {
@@ -81,11 +83,16 @@ namespace AAModEXAI.Bosses.AH.Ashe
             {
                 int npcID = BaseAI.GetNPC(npc.Center, mod.NPCType("Ashe"), 120f, null);
                 if (npcID >= 0) body = npcID;
+                else
+                {
+                    npcID = BaseAI.GetNPC(npc.Center, ModContent.NPCType<AsheA>(), 120f, null);
+                    if (npcID >= 0) body = npcID;
+                }
             }
             if (body == -1) return;
 
             NPC ashe = Main.npc[body];
-            if (ashe == null || ashe.life <= 0 || !ashe.active || ashe.type != mod.NPCType("Ashe") || ashe.type != mod.NPCType("AsheA")) { npc.active = false; return; }
+            if (ashe == null || ashe.life <= 0 || !ashe.active || (ashe.type != mod.NPCType("Ashe") && ashe.type != ModContent.NPCType<AsheA>())) { npc.active = false; return; }
 
             for (int m = npc.oldPos.Length - 1; m > 0; m--)
             {
