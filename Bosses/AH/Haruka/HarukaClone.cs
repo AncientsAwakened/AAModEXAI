@@ -3,6 +3,7 @@ using Terraria.ID;
 using Microsoft.Xna.Framework;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework.Graphics;
+using AAModEXAI.Bosses.Yamata.Awakened;
 using AAMod;
 
 namespace AAModEXAI.Bosses.AH.Haruka
@@ -54,11 +55,11 @@ namespace AAModEXAI.Bosses.AH.Haruka
                 npc.active = false;
             }
             bool despawn = false;
-            if(Haruka.type = mod.NPCType("Haruka"))
+            if(Haruka.type == mod.NPCType("Haruka"))
             {
                 despawn = ((Haruka)Haruka.modNPC).internalAI[0] != 4;
             }
-            else if(Haruka.type = mod.NPCType("HarukaY"))
+            else if(Haruka.type == mod.NPCType("HarukaY"))
             {
                 despawn = ((HarukaY)Haruka.modNPC).internalAI[0] != 4;
             }

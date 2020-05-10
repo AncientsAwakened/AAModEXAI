@@ -8,11 +8,9 @@ using AAMod;
 
 namespace AAModEXAI.Bosses.Yamata.Awakened
 {
-	// Token: 0x020003F7 RID: 1015
 	[AutoloadBossHead]
 	public class HarukaY : Haruka
 	{
-		// Token: 0x0600177C RID: 6012 RVA: 0x00103757 File Offset: 0x00101957
 		public override void SetStaticDefaults()
 		{
 			base.DisplayName.SetDefault("Haruka Yamata");
@@ -20,7 +18,6 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
 			NPCID.Sets.TechnicallyABoss[npc.type] = true;
 		}
 
-		// Token: 0x0600177D RID: 6013 RVA: 0x00103790 File Offset: 0x00101990
 		public override void SetDefaults()
 		{
 			npc.width = 50;
@@ -45,7 +42,6 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
 			npc.GetGlobalNPC<CalamityGlobalNPC>().CalamityDR = 0.1f;
 		}
 
-		// Token: 0x0600177E RID: 6014 RVA: 0x001038B0 File Offset: 0x00101AB0
 		public override void PostAI()
 		{
 			Player player = Main.player[npc.target];
@@ -96,13 +92,11 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
 			}
 		}
 
-		// Token: 0x0600177F RID: 6015 RVA: 0x00103A37 File Offset: 0x00101C37
 		public override bool CheckActive()
 		{
 			return !NPC.AnyNPCs(ModContent.NPCType<YamataAHead>());
 		}
 
-		// Token: 0x06001780 RID: 6016 RVA: 0x00103A48 File Offset: 0x00101C48
 		public override void NPCLoot()
 		{
 			npc.value = 0f;
@@ -123,20 +117,17 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
 			}
 		}
 
-		// Token: 0x06001781 RID: 6017 RVA: 0x00103B22 File Offset: 0x00101D22
 		public override void BossLoot(ref string name, ref int potionType)
 		{
 			potionType = 0;
 		}
 
-		// Token: 0x06001782 RID: 6018 RVA: 0x00103B27 File Offset: 0x00101D27
 		public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
 		{
 			npc.lifeMax = (int)((float)npc.lifeMax * 0.6f * bossLifeScale);
 			npc.damage = (int)((float)npc.damage * 0.9f);
 		}
 
-		// Token: 0x0400043B RID: 1083
 		public int body = -1;
 	}
 }
