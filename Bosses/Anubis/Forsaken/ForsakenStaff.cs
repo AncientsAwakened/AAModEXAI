@@ -82,7 +82,6 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                             reflectvelocity.Normalize();
                             reflectvelocity *= 20f;
                         }
-                        Main.projectile[i].damage /= 2;
                         Main.projectile[i].penetrate = 1;
                         Main.projectile[i].GetGlobalProjectile<AAModEXAIGlobalProjectile>().reflectvelocity = reflectvelocity;
                         Main.projectile[i].GetGlobalProjectile<AAModEXAIGlobalProjectile>().isReflecting = true;

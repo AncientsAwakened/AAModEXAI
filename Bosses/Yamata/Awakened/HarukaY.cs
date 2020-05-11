@@ -74,7 +74,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
 			}
 			if (body == -1)
 			{
-				int npcid = BaseAI.GetNPC(npc.Center, base.mod.NPCType("YamataA"), -1f, null);
+				int npcid = BaseAI.GetNPC(npc.Center, mod.NPCType("YamataA"), -1f, null);
 				if (npcid >= 0)
 				{
 					body = npcid;
@@ -85,7 +85,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
 				return;
 			}
 			NPC npc2 = Main.npc[body];
-			if (npc2 == null || npc2.life <= 0 || !npc2.active || npc2.type != base.mod.NPCType("YamataA"))
+			if (npc2 == null || npc2.life <= 0 || !npc2.active || npc2.type != mod.NPCType("YamataA"))
 			{
 				BaseAI.KillNPCWithLoot(npc);
 				return;

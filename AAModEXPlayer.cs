@@ -95,52 +95,6 @@ namespace AAModEXAI
             }
 		}
 
-        public override void UpdateBiomes()
-        {
-            AAMod.AAPlayer modPlayer = player.GetModPlayer<AAMod.AAPlayer>();
-
-            modPlayer.ZoneMire = AAWorld.mireTiles > 100 || BaseAI.GetNPC(player.Center, ModContent.NPCType<Yamata>(), 5000) != -1 || BaseAI.GetNPC(player.Center, ModContent.NPCType<YamataA>(), 5000) != -1;
-            modPlayer.ZoneInferno = AAWorld.infernoTiles > 100 || BaseAI.GetNPC(player.Center, ModContent.NPCType<Akuma>(), 5000) != -1 || BaseAI.GetNPC(player.Center, ModContent.NPCType<AkumaA>(), 5000) != -1;
-            modPlayer.ZoneVoid = (AAWorld.voidTiles > 20 && player.ZoneSkyHeight) || BaseAI.GetNPC(player.Center, ModContent.NPCType<Zero>(), 5000) != -1 || BaseAI.GetNPC(player.Center, ModContent.NPCType<ZeroProtocol>(), 5000) != -1;
-        }
-
-		public override void UpdateBiomeVisuals()
-        {
-            AAMod.AAPlayer modPlayer = player.GetModPlayer<AAMod.AAPlayer>();
-
-            bool Underground = player.Center.Y > Main.worldSurface * 16;
-
-            bool useAthena = NPC.AnyNPCs(ModContent.NPCType<AthenaA>());
-            bool useShenA = NPC.AnyNPCs(ModContent.NPCType<ShenA>());
-            bool useShen = NPC.AnyNPCs(ModContent.NPCType<Shen>()) && !useShenA;
-            bool useAkuma = NPC.AnyNPCs(ModContent.NPCType<AkumaA>());
-            bool useYamata = NPC.AnyNPCs(ModContent.NPCType<YamataAHead>());
-            bool useAnu = NPC.AnyNPCs(ModContent.NPCType<ForsakenAnubis>());
-            bool useMire = (modPlayer.ZoneMire || modPlayer.MoonAltar) && !useYamata && !useShen && !useShenA && !useAnu;
-            bool useInferno = (modPlayer.ZoneInferno || modPlayer.SunAltar) && !useAkuma && !useShen && !useShenA && !useAnu;
-            bool useVoid = (modPlayer.ZoneVoid || modPlayer.VoidUnit) && !useShen && !useShenA && !useAnu;
-
-            player.ManageSpecialBiomeVisuals("AAMod:AnubisSky", useAnu);
-            player.ManageSpecialBiomeVisuals("AAMod:AthenaSky", useAthena);
-            player.ManageSpecialBiomeVisuals("AAMod:ShenSky", useShen);
-            player.ManageSpecialBiomeVisuals("AAMod:ShenASky", useShenA);
-            player.ManageSpecialBiomeVisuals("AAMod:AkumaSky", useAkuma);
-            player.ManageSpecialBiomeVisuals("AAMod:YamataSky", useYamata);
-
-            if (!Underground)
-            {
-                player.ManageSpecialBiomeVisuals("AAMod:InfernoSky", useInferno);
-                player.ManageSpecialBiomeVisuals("AAMod:MireSky", useMire);
-            }
-
-            if (Main.UseHeatDistortion)
-            {
-                player.ManageSpecialBiomeVisuals("HeatDistortion", useAkuma || useInferno);
-            }
-
-            player.ManageSpecialBiomeVisuals("AAMod:VoidSky", useVoid);
-        }
-
         public override void PostUpdate()
         {
 

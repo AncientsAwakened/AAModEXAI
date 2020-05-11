@@ -107,7 +107,7 @@ namespace AAModEXAI.Bosses.Akuma
                         AAModGlobalNPC.SpawnBoss(player, mod.NPCType("AkumaA"), false, npc.Center, "", false);
                         if (Main.netMode != 1) BaseUtility.Chat(AAMod.Lang.BossChat("AkumaTransition4"), Color.Magenta.R, Color.Magenta.G, Color.Magenta.B);
 
-                        int b = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0f, 0f, mod.ProjectileType("ShockwaveBoom"), 0, 1, Main.myPlayer, 0, 0);
+                        int b = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0f, 0f, ModLoader.GetMod("AAMod").ProjectileType("ShockwaveBoom"), 0, 1, Main.myPlayer, 0, 0);
                         Main.projectile[b].Center = npc.Center;
 
                         npc.netUpdate = true;
@@ -200,7 +200,7 @@ namespace AAModEXAI.Bosses.Akuma
 					if (Main.netMode != 1) BaseUtility.Chat(AAMod.Lang.BossChat("AkumaTransition4"), Color.Magenta.R, Color.Magenta.G, Color.Magenta.B);
 					if (Main.netMode != 1) BaseUtility.Chat(AAMod.Lang.BossChat("AkumaTransition5"), Color.DeepSkyBlue.R, Color.DeepSkyBlue.G, Color.DeepSkyBlue.B);
 
-                    int b = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0f, 0f, mod.ProjectileType("ShockwaveBoom"), 0, 1, Main.myPlayer, 0, 0);
+                    int b = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0f, 0f, ModLoader.GetMod("AAMod").ProjectileType("ShockwaveBoom"), 0, 1, Main.myPlayer, 0, 0);
                     Main.projectile[b].Center = npc.Center;
 
                     npc.netUpdate = true;

@@ -696,11 +696,11 @@ namespace AAModEXAI.Bosses.Serpent
                 }
             }
 
-            if (internalAI[3]++ > 400 && NPC.CountNPCS(mod.NPCType("Enemies.Snow.SnakeHead")) < 3)
+            if (internalAI[3]++ > 400 && NPC.CountNPCS(mod.NPCType("SnakeHead")) < 3)
             {
-                for (int i = 0; i < 3 - NPC.CountNPCS(mod.NPCType("Enemies.Snow.SnakeHead")); i++)
+                for (int i = 0; i < 3 - NPC.CountNPCS(mod.NPCType("SnakeHead")); i++)
                 {
-                    AAModGlobalNPC.SpawnBoss(player, mod.NPCType("Enemies.Snow.SnakeHead"), false, 0, 0, "Snake", false);
+                    AAModGlobalNPC.SpawnBoss(player, mod.NPCType("SnakeHead"), false, 0, 0, "Snake", false);
                 }
                 internalAI[3] = 0;
             }
