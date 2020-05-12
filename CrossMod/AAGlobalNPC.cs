@@ -337,6 +337,168 @@ namespace AAModEXAI
                 npc.netUpdate = true;
                 return false;
             }
+            if(npc.type == mod.NPCType("Athena"))
+            {
+                if(!title)
+                {
+                    AAModEXAI.ShowTitle(npc, 2);
+                    title = true;
+                }
+                return base.PreAI(npc);
+            }
+            if(npc.type == mod.NPCType("AthenaA"))
+            {
+                if(!title)
+                {
+                    AAModEXAI.ShowTitle(npc, 5);
+                    title = true;
+                }
+                return base.PreAI(npc);
+            }
+            if(npc.type == mod.NPCType("Greed"))
+            {
+                if(!title)
+                {
+                    AAModEXAI.ShowTitle(npc, 3);
+                    title = true;
+                }
+                return base.PreAI(npc);
+            }
+            if(npc.type == mod.NPCType("Anubis"))
+            {
+                if(!title)
+                {
+                    AAModEXAI.ShowTitle(npc, 1);
+                    title = true;
+                }
+                return base.PreAI(npc);
+            }
+            if(npc.type == mod.NPCType("ForsakenAnubis"))
+            {
+                if(!title)
+                {
+                    AAModEXAI.ShowTitle(npc, 4);
+                    title = true;
+                }
+                return base.PreAI(npc);
+            }
+            if(npc.type == mod.NPCType("Ashe"))
+            {
+                if(!title)
+                {
+                    AAModEXAI.ShowSistersTitle(npc);
+                    title = true;
+                }
+                return base.PreAI(npc);
+            }
+            if(npc.type == mod.NPCType("Akuma"))
+            {
+                if(!title)
+                {
+                    AAModEXAI.ShowTitle(npc, 7);
+                    title = true;
+                }
+                return base.PreAI(npc);
+            }
+            if(npc.type == mod.NPCType("AkumaA"))
+            {
+                if(!title)
+                {
+                    AAModEXAI.ShowTitle(npc, 8);
+                    title = true;
+                }
+                return base.PreAI(npc);
+            }
+            if(npc.type == mod.NPCType("DaybringerHead"))
+            {
+                if(!title)
+                {
+                    AAModEXAI.ShowTitle(npc, 17);
+                    title = true;
+                }
+                return base.PreAI(npc);
+            }
+            if(npc.type == mod.NPCType("GreedA"))
+            {
+                if(!title)
+                {
+                    AAModEXAI.ShowTitle(npc, 6);
+                    title = true;
+                }
+                return base.PreAI(npc);
+            }
+            if(npc.type == mod.NPCType("SupremeRajah"))
+            {
+                if(!title)
+                {
+                    AAModEXAI.ShowTitle(npc, 13);
+                    title = true;
+                }
+                return base.PreAI(npc);
+            }
+            if(npc.type == mod.NPCType("Rajah"))
+            {
+                if(!title)
+                {
+                    AAModEXAI.ShowTitle(npc, 18);
+                    title = true;
+                }
+                return base.PreAI(npc);
+            }
+            if(npc.type == mod.NPCType("Shen"))
+            {
+                if(!title)
+                {
+                    AAModEXAI.ShowTitle(npc, 14);
+                    title = true;
+                }
+                return base.PreAI(npc);
+            }
+            if(npc.type == mod.NPCType("ShenA"))
+            {
+                if(!title)
+                {
+                    AAModEXAI.ShowTitle(npc, 15);
+                    title = true;
+                }
+                return base.PreAI(npc);
+            }
+            if(npc.type == mod.NPCType("YamataA"))
+            {
+                if(!title)
+                {
+                    AAModEXAI.ShowTitle(npc, 9);
+                    title = true;
+                }
+                return base.PreAI(npc);
+            }
+            if(npc.type == mod.NPCType("Yamata"))
+            {
+                if(!title)
+                {
+                    AAModEXAI.ShowTitle(npc, 10);
+                    title = true;
+                }
+                return base.PreAI(npc);
+            }
+            if(npc.type == mod.NPCType("Zero"))
+            {
+                if(!title)
+                {
+                    AAModEXAI.ShowTitle(npc, 11);
+                    title = true;
+                }
+                return base.PreAI(npc);
+            }
+            if(npc.type == mod.NPCType("ZeroProtocol"))
+            {
+                if(!title)
+                {
+                    AAModEXAI.ShowTitle(npc, 12);
+                    title = true;
+                }
+                return base.PreAI(npc);
+            }
             return base.PreAI(npc);
         }
     }
