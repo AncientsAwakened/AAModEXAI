@@ -204,16 +204,6 @@ namespace AAModEXAI.Bosses.AH.Haruka
             bool flag = player.dead || !player.active || Math.Abs(npc.position.X - Main.player[npc.target].position.X) > 6000f || Math.Abs(npc.position.Y - Main.player[npc.target].position.Y) > 6000f;
             if (Ashe == 0)
             {
-                if (npc.life < npc.lifeMax / 4)
-                {
-                    if (internalAI[9]++ >= 480 && AAWorld.downedSisters)
-                    {
-                        NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("HarukaFall"));
-                        npc.active = false;
-                        npc.netUpdate = true;
-                        return;
-                    }
-                }
                 if (flag)
                 {
                     npc.TargetClosest(false);

@@ -138,6 +138,34 @@ namespace AAModEXAI.Bosses.Yamata
                     int b = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0f, 0f, ModLoader.GetMod("AAMod").ProjectileType("ShockwaveBoom"), 0, 1, Main.myPlayer, 0, 0);
                     Main.projectile[b].Center = npc.Center;
 
+                    for(int proj = 0; proj < 1000; proj ++)
+                    {
+                        if (Main.projectile[proj].active && Main.projectile[proj].friendly && !Main.projectile[proj].hostile)
+                        {
+                            Main.projectile[proj].hostile = true;
+                            Main.projectile[proj].friendly = false;
+                            Vector2 vector = Main.projectile[proj].Center - npc.Center;
+                            vector.Normalize();
+                            Vector2 reflectvelocity = new Vector2(Main.rand.Next(-100, 101), Main.rand.Next(-100, 101));
+                            reflectvelocity.Normalize();
+                            reflectvelocity *= vector.Length();
+                            reflectvelocity += vector * 20f;
+                            reflectvelocity.Normalize();
+                            reflectvelocity *= vector.Length();
+                            if(reflectvelocity.Length() < 20f)
+                            {
+                                reflectvelocity.Normalize();
+                                reflectvelocity *= 20f;
+                            }
+
+                            Main.projectile[proj].penetrate = 1;
+
+                            Main.projectile[proj].GetGlobalProjectile<AAModEXAIGlobalProjectile>().reflectvelocity = reflectvelocity;
+                            Main.projectile[proj].GetGlobalProjectile<AAModEXAIGlobalProjectile>().isReflecting = true;
+                            Main.projectile[proj].GetGlobalProjectile<AAModEXAIGlobalProjectile>().ReflectConter = 180;
+                        }
+                    }
+
                     Main.PlaySound(ModLoader.GetMod("AAMod").GetLegacySoundSlot(SoundType.Custom, "Sounds/Sounds/YamataRoar"), npc.position);
                     Vector2 position = npc.Center + (Vector2.One * -20f);
                     int num84 = 40;
@@ -252,7 +280,33 @@ namespace AAModEXAI.Bosses.Yamata
                     {
                         AAModGlobalNPC.SpawnBoss(player, mod.NPCType("YamataA"), false, npc.Center, "", false);
                         if (Main.netMode != 1) BaseUtility.Chat(AAMod.Lang.BossChat("YamataTransition5"), Color.Magenta.R, Color.Magenta.G, Color.Magenta.B);
+                        for(int proj = 0; proj < 1000; proj ++)
+                        {
+                            if (Main.projectile[proj].active && Main.projectile[proj].friendly && !Main.projectile[proj].hostile)
+                            {
+                                Main.projectile[proj].hostile = true;
+                                Main.projectile[proj].friendly = false;
+                                Vector2 vector = Main.projectile[proj].Center - npc.Center;
+                                vector.Normalize();
+                                Vector2 reflectvelocity = new Vector2(Main.rand.Next(-100, 101), Main.rand.Next(-100, 101));
+                                reflectvelocity.Normalize();
+                                reflectvelocity *= vector.Length();
+                                reflectvelocity += vector * 20f;
+                                reflectvelocity.Normalize();
+                                reflectvelocity *= vector.Length();
+                                if(reflectvelocity.Length() < 20f)
+                                {
+                                    reflectvelocity.Normalize();
+                                    reflectvelocity *= 20f;
+                                }
 
+                                Main.projectile[proj].penetrate = 1;
+
+                                Main.projectile[proj].GetGlobalProjectile<AAModEXAIGlobalProjectile>().reflectvelocity = reflectvelocity;
+                                Main.projectile[proj].GetGlobalProjectile<AAModEXAIGlobalProjectile>().isReflecting = true;
+                                Main.projectile[proj].GetGlobalProjectile<AAModEXAIGlobalProjectile>().ReflectConter = 180;
+                            }
+                        }
                         int b = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0f, 0f, ModLoader.GetMod("AAMod").ProjectileType("ShockwaveBoom"), 0, 1, Main.myPlayer, 0, 0);
                         Main.projectile[b].Center = npc.Center;
 

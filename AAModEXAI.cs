@@ -47,5 +47,29 @@ namespace AAModEXAI
                 if (sync && Main.netMode == 2) { NetMessage.BroadcastChatMessage(NetworkText.FromLiteral(s), new Color(colorR, colorG, colorB), -1); }
             }
         }
+
+        public static void ShowTitle(NPC npc, int ID)
+        {
+            if (AAConfigClient.Instance.AncientIntroText)
+            {
+                Projectile.NewProjectile(npc.Center, Vector2.Zero, ModContent.ProjectileType<AAMod.Title>(), 0, 0, Main.myPlayer, ID, 0);
+            }
+        }
+
+        public static void ShowTitle(Player player, int ID)
+        {
+            if (AAConfigClient.Instance.AncientIntroText)
+            {
+                Projectile.NewProjectile(player.Center, Vector2.Zero, ModContent.ProjectileType<AAMod.Title>(), 0, 0, Main.myPlayer, ID, 0);
+            }
+        }
+
+        public static void ShowSistersTitle(NPC npc)
+        {
+            if (AAConfigClient.Instance.AncientIntroText)
+            {
+                Projectile.NewProjectile(npc.Center, Vector2.Zero, ModContent.ProjectileType<AAMod.SistersTitle>(), 0, 0, Main.myPlayer, 16, 0);
+            }
+        }
 	}
 }

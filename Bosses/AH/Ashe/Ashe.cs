@@ -54,11 +54,6 @@ namespace AAModEXAI.Bosses.AH.Ashe
 
         public override void AI()
         {
-            if (!title)
-            {
-                AAMod.ShowSistersTitle(npc);
-                title = true;
-            }
             Player player = Main.player[npc.target];
 
             Vector2 wantedVelocity = player.Center - new Vector2(pos, 250);

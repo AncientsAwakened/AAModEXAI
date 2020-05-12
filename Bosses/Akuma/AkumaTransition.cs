@@ -104,6 +104,34 @@ namespace AAModEXAI.Bosses.Akuma
                     else
                     if (npc.ai[0] >= 600 && !NPC.AnyNPCs(mod.NPCType("AkumaA")))
                     {
+                        for(int proj = 0; proj < 1000; proj ++)
+                        {
+                            if (Main.projectile[proj].active && Main.projectile[proj].friendly && !Main.projectile[proj].hostile)
+                            {
+                                Main.projectile[proj].hostile = true;
+                                Main.projectile[proj].friendly = false;
+                                Vector2 vector = Main.projectile[proj].Center - npc.Center;
+                                vector.Normalize();
+                                Vector2 reflectvelocity = new Vector2(Main.rand.Next(-100, 101), Main.rand.Next(-100, 101));
+                                reflectvelocity.Normalize();
+                                reflectvelocity *= vector.Length();
+                                reflectvelocity += vector * 20f;
+                                reflectvelocity.Normalize();
+                                reflectvelocity *= vector.Length();
+                                if(reflectvelocity.Length() < 20f)
+                                {
+                                    reflectvelocity.Normalize();
+                                    reflectvelocity *= 20f;
+                                }
+
+                                Main.projectile[proj].penetrate = 1;
+
+                                Main.projectile[proj].GetGlobalProjectile<AAModEXAIGlobalProjectile>().reflectvelocity = reflectvelocity;
+                                Main.projectile[proj].GetGlobalProjectile<AAModEXAIGlobalProjectile>().isReflecting = true;
+                                Main.projectile[proj].GetGlobalProjectile<AAModEXAIGlobalProjectile>().ReflectConter = 180;
+                            }
+                        }
+
                         AAModGlobalNPC.SpawnBoss(player, mod.NPCType("AkumaA"), false, npc.Center, "", false);
                         if (Main.netMode != 1) BaseUtility.Chat(AAMod.Lang.BossChat("AkumaTransition4"), Color.Magenta.R, Color.Magenta.G, Color.Magenta.B);
 
@@ -196,6 +224,33 @@ namespace AAModEXAI.Bosses.Akuma
 				}else
 				if (npc.ai[0] >= 1200 && !NPC.AnyNPCs(mod.NPCType("AkumaA")))
 				{
+                    for(int proj = 0; proj < 1000; proj ++)
+                    {
+                        if (Main.projectile[proj].active && Main.projectile[proj].friendly && !Main.projectile[proj].hostile)
+                        {
+                            Main.projectile[proj].hostile = true;
+                            Main.projectile[proj].friendly = false;
+                            Vector2 vector = Main.projectile[proj].Center - npc.Center;
+                            vector.Normalize();
+                            Vector2 reflectvelocity = new Vector2(Main.rand.Next(-100, 101), Main.rand.Next(-100, 101));
+                            reflectvelocity.Normalize();
+                            reflectvelocity *= vector.Length();
+                            reflectvelocity += vector * 20f;
+                            reflectvelocity.Normalize();
+                            reflectvelocity *= vector.Length();
+                            if(reflectvelocity.Length() < 20f)
+                            {
+                                reflectvelocity.Normalize();
+                                reflectvelocity *= 20f;
+                            }
+
+                            Main.projectile[proj].penetrate = 1;
+
+                            Main.projectile[proj].GetGlobalProjectile<AAModEXAIGlobalProjectile>().reflectvelocity = reflectvelocity;
+                            Main.projectile[proj].GetGlobalProjectile<AAModEXAIGlobalProjectile>().isReflecting = true;
+                            Main.projectile[proj].GetGlobalProjectile<AAModEXAIGlobalProjectile>().ReflectConter = 180;
+                        }
+                    }
 					AAModGlobalNPC.SpawnBoss(player, mod.NPCType("AkumaA"), false, npc.Center, "", false);
 					if (Main.netMode != 1) BaseUtility.Chat(AAMod.Lang.BossChat("AkumaTransition4"), Color.Magenta.R, Color.Magenta.G, Color.Magenta.B);
 					if (Main.netMode != 1) BaseUtility.Chat(AAMod.Lang.BossChat("AkumaTransition5"), Color.DeepSkyBlue.R, Color.DeepSkyBlue.G, Color.DeepSkyBlue.B);
