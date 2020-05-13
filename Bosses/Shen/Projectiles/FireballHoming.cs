@@ -8,7 +8,7 @@ namespace AAModEXAI.Bosses.Shen.Projectiles
 {
     public class FireballHomingR : ModProjectile
     {
-        public override string Texture => "AAMod/NPCs/Bosses/Shen/Projectiles/FireballHomingR";
+        public override string Texture => "AAModEXAI/Bosses/Shen/Projectiles/FireballHomingR";
 
         public override void SetStaticDefaults()
         {
@@ -106,7 +106,7 @@ namespace AAModEXAI.Bosses.Shen.Projectiles
 
     public class FireballHomingB : ModProjectile
     {
-        public override string Texture => "AAMod/NPCs/Bosses/Shen/Projectiles/FireballHomingB";
+        public override string Texture => "AAModEXAI/Bosses/Shen/Projectiles/FireballHomingB";
 
         public override void SetStaticDefaults()
         {

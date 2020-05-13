@@ -648,7 +648,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                 {
                     Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, ModLoader.GetMod("AAMod").ItemType("AkumaAMask"));
                 }
-                npc.DropBossBags();
+                for(int i = 0; i < 10; i++) npc.DropBossBags();
                 return;
             }
             if (Main.netMode != 1) AAModEXAI.Chat(AAMod.Lang.BossChat("AkumaA12"), Color.DeepSkyBlue.R, Color.DeepSkyBlue.G, Color.DeepSkyBlue.B);
@@ -677,11 +677,11 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
             {
                 if (npc.ai[0] == 0 || npc.ai[0] == 1 || npc.ai[0] == 5 || npc.ai[0] == 9)
                 {
-                    AkumaTex = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Akuma/Awakened/AkumaA1");
+                    AkumaTex = mod.GetTexture("Bosses/Akuma/Awakened/AkumaA1");
                 }
                 else
                 {
-                    AkumaTex = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Akuma/Awakened/AkumaA");
+                    AkumaTex = mod.GetTexture("Bosses/Akuma/Awakened/AkumaA");
                 }
             }
 
@@ -849,7 +849,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
     [AutoloadBossHead]
     public class AkumaABody : AkumaA
     {
-        public override string Texture => "AAMod/NPCs/Bosses/Akuma/Awakened/AkumaABody";
+        public override string Texture => "AAModEXAI/Bosses/Akuma/Awakened/AkumaABody";
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Oni Akuma");

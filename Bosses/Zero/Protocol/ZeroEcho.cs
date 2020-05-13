@@ -9,7 +9,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
 {
     public class ZeroEcho : ModNPC
     {
-        public override string Texture => "AAMod/NPCs/Bosses/Zero/Protocol/ZeroProtocol";
+        public override string Texture => "AAModEXAI/Bosses/Zero/Protocol/ZeroProtocol";
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("3CH0");

@@ -123,6 +123,18 @@ namespace AAModEXAI
                 player.AddBuff(mod.BuffType("YamataAGravity"), 10);
             }
 
+            if (NPC.AnyNPCs(mod.NPCType("ShenA")))
+            {
+                int n = BaseAI.GetNPC(player.Center, mod.NPCType("ShenA"), -1);
+                NPC shen = Main.npc[n];
+
+                if (((ShenA)shen.modNPC).halfLifeAIChange)
+                {
+                    player.AddBuff(mod.BuffType("YamataAGravity"), 10);
+                    player.AddBuff(mod.BuffType("BlazingPain"), 10);
+                }
+            }
+
             
             if (ModSupport.GetMod("CalamityMod") != null)
             {

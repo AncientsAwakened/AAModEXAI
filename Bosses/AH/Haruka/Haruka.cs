@@ -159,7 +159,7 @@ namespace AAModEXAI.Bosses.AH.Haruka
                 NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("AHDeath"));
                 if (Main.expertMode)
                 {
-                    npc.DropBossBags();
+                    for(int i = 0; i < 10; i++) npc.DropBossBags();
                 }
             }
             if (!Main.expertMode)
@@ -1144,7 +1144,7 @@ namespace AAModEXAI.Bosses.AH.Haruka
         public override bool PreDraw(SpriteBatch spritebatch, Color dColor)
         {
             Texture2D glowTex = ModLoader.GetMod("AAMod").GetTexture("Glowmasks/Haruka_Glow");
-            Texture2D Slash = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/AH/Haruka/HarukaSlash");
+            Texture2D Slash = mod.GetTexture("Bosses/AH/Haruka/HarukaSlash");
             if (internalAI[0] == AISTATE_SPIN)
             {
                 if(strikebackproj > 0)

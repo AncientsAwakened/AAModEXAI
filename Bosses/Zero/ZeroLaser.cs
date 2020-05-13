@@ -135,8 +135,8 @@ namespace AAModEXAI.Bosses.Zero
                 return false;
             }
             Texture2D texture2D19 = Main.projectileTexture[projectile.type];
-            Texture2D texture2D20 = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Zero/ZeroLaser2");
-            Texture2D texture2D21 = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Zero/ZeroLaser3");
+            Texture2D texture2D20 = mod.GetTexture("Bosses/Zero/ZeroLaser2");
+            Texture2D texture2D21 = mod.GetTexture("Bosses/Zero/ZeroLaser3");
             float num223 = projectile.localAI[1];
             Color color44 = AAColor.COLOR_WHITEFADE1 * 0.9f;
             SpriteBatch arg_ABD8_0 = Main.spriteBatch;

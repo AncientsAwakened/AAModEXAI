@@ -136,8 +136,8 @@ namespace AAModEXAI.Bosses.Equinox
                 return false;
             }
             Texture2D texture2D19 = Main.projectileTexture[projectile.type];
-            Texture2D texture2D20 = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Equinox/NightclawerDeathray2");
-            Texture2D texture2D21 = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Equinox/NightclawerDeathray3");
+            Texture2D texture2D20 = mod.GetTexture("Bosses/Equinox/NightclawerDeathray2");
+            Texture2D texture2D21 = mod.GetTexture("Bosses/Equinox/NightclawerDeathray3");
             float num223 = projectile.localAI[1];
             Color color44 = new Color(255, 255, 255, 0) * 0.5f;
             SpriteBatch arg_ABD8_0 = Main.spriteBatch;
@@ -200,7 +200,7 @@ namespace AAModEXAI.Bosses.Equinox
 
     public class NightclawerDeathraySmall : NightclawerDeathray
     {
-        public override string Texture => "AAMod/NPCs/Bosses/Equinox/NightclawerDeathray";
+        public override string Texture => "AAModEXAI/Bosses/Equinox/NightclawerDeathray";
 
         public override void SetDefaults()
         {

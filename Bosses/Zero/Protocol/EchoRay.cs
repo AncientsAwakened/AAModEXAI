@@ -158,8 +158,8 @@ namespace AAModEXAI.Bosses.Zero.Protocol
                 return false;
             }
             Texture2D texture2D19 = Main.projectileTexture[projectile.type];
-            Texture2D texture2D20 = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Zero/Protocol/EchoRayBody");
-            Texture2D texture2D21 = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Zero/Protocol/EchoRayEnd");
+            Texture2D texture2D20 = mod.GetTexture("Bosses/Zero/Protocol/EchoRayBody");
+            Texture2D texture2D21 = mod.GetTexture("Bosses/Zero/Protocol/EchoRayEnd");
             float num223 = projectile.localAI[1];
             Color color44 = AAColor.Oblivion * 0.9f;
             SpriteBatch arg_ABD8_0 = Main.spriteBatch;

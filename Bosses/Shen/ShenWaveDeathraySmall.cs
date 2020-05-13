@@ -3,22 +3,19 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Enums;
-using Terraria.ModLoader;using AAMod;
+using Terraria.ModLoader;
+using AAMod;
 
-namespace AAModEXAI.Bosses.Shen.GripsShen
+namespace AAModEXAI.Bosses.Shen
 {
-    public class BlazeGripRay : ModProjectile
+    public class ShenWaveDeathraySmall : ModProjectile
     {
-        public override string Texture => "AAModEXAI/Bosses/Shen/GripsShen/BlazeGripRay";
-        private const float maxTime = 300;
-        public float maxScale = 1f;
-        private float timer = 0;
-
-        public NPC centerNPC;
+        public override string Texture => "AAModEXAI/Bosses/Shen/ShenDeathray";
+        private const float maxTime = 60;
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Blaze Grip Deathray");
+            DisplayName.SetDefault("Discordian Deathray");
         }
 
         public override void SetDefaults()
@@ -33,126 +30,56 @@ namespace AAModEXAI.Bosses.Shen.GripsShen
             cooldownSlot = 1;
         }
 
-        public override bool CanHitPlayer(Player target)
+        public override bool CanDamage()
         {
-            return projectile.scale >= 1f;
+            return false;
         }
-
-        public int proj = 0;
 
         public override void AI()
         {
-            Vector2? vector78 = null;
             if (projectile.velocity.HasNaNs() || projectile.velocity == Vector2.Zero)
             {
                 projectile.velocity = -Vector2.UnitY;
             }
-
-            timer++;
-
-            if(proj == 0)
+            if (Main.npc[(int)projectile.ai[1]].active && Main.npc[(int)projectile.ai[1]].type == mod.NPCType("ShenSoul"))
             {
-                for(int i = 0; i<1000; i++)
-                {
-                    if(Main.projectile[i].type == mod.ProjectileType("BlazeBomb"))
-                    {
-                        proj = Main.projectile[i].whoAmI;
-                    }
-                } 
+                projectile.Center = Main.npc[(int)projectile.ai[1]].Center;
             }
-
-            float raydirection = 1f;
-            
-            if(proj != 0)
+            else
             {
-                if(Main.projectile[proj].active && Main.projectile[proj].modProjectile is BlazeBomb)
-                {
-                    projectile.Center = Main.projectile[proj].position + new Vector2(Main.projectile[proj].width/2, Main.projectile[proj].height/2);
-
-                    /* 
-                    Vector2 dir = Vector2.Normalize(Main.player[centerNPC.target].Center - Main.projectile[proj].Center);
-                    if (dir.Y < 0f)
-                    {
-                        raydirection = -1f;
-                    }
-                    */
-
-                    raydirection = Main.player[centerNPC.target].Center.ToRotation() - Main.projectile[proj].Center.ToRotation() > 0? 1f:-1f;
-
-                    //projectile.velocity = Vector2.Normalize(projectile.velocity);
-                    projectile.position += 30 * projectile.velocity;
-                    projectile.position += 10 * projectile.velocity.RotatedBy(Main.npc[proj].spriteDirection > 0 ? -Math.PI / 2 : Math.PI / 2);
-                }
-                else
-                {
-                    if(projectile.localAI[0] < 290)projectile.localAI[0] = 290;
-                }
+                projectile.Kill();
+                return;
             }
-            else if(timer < 100)
-            {
-                centerNPC = Main.npc[(int)projectile.ai[1]];
-                if (centerNPC.active && centerNPC.modNPC is BlazeGrip)
-                {
-                    projectile.Center = Main.npc[(int)projectile.ai[1]].Center;
-
-                    Vector2 dir = Vector2.Normalize(Main.player[centerNPC.target].Center - centerNPC.Center);
-                    if (dir.Y < 0f)
-                    {
-                        raydirection = -1f;
-                    }
-
-                    /* 
-                    float baseSpeed = (float)Math.Sqrt((dir.X * dir.X) + (dir.Y * dir.Y));
-                    double startAngle = Math.Atan2(dir.X, dir.Y);
-                    double deltaAngle = 45f * 0.0174f;
-                    double offsetAngle = startAngle + (deltaAngle * projectile.ai[0]);
-                    Vector2 shootdir = new Vector2(baseSpeed * (float)Math.Sin(offsetAngle), baseSpeed * (float)Math.Cos(offsetAngle));
-                    
-
-                    projectile.velocity = Vector2.Normalize(shootdir);
-                    */
-                    projectile.position += 30 * projectile.velocity;
-                    projectile.position += 10 * projectile.velocity.RotatedBy(Main.npc[(int)projectile.ai[1]].spriteDirection > 0 ? -Math.PI / 2 : Math.PI / 2);
-                }
-                else
-                {
-                    if(projectile.localAI[0] < 290)projectile.localAI[0] = 290;
-                }
-            }
-            
             if (projectile.velocity.HasNaNs() || projectile.velocity == Vector2.Zero)
             {
                 projectile.velocity = -Vector2.UnitY;
             }
-            if (projectile.localAI[0] == 0f && maxScale >= 1)
+            if (projectile.localAI[0] == 0f)
             {
-                Main.PlaySound(29, (int)projectile.position.X, (int)projectile.position.Y, 104, 1f, 0f);
+                Main.PlaySound(29, (int)Main.player[Main.myPlayer].Center.X, (int)Main.player[Main.myPlayer].Center.Y, 104, 1f, 0f);
             }
-            float num801 = maxScale;
+            float num801 = 0.5f;
             projectile.localAI[0] += 1f;
             if (projectile.localAI[0] >= maxTime)
             {
                 projectile.Kill();
                 return;
             }
-            projectile.scale = (float)Math.Sin(projectile.localAI[0] * 3.14159274f / maxTime) * 10f * num801;
+            projectile.scale = (float)Math.Sin(projectile.localAI[0] * 3.14159274f / maxTime) * 2.5f * num801;
             if (projectile.scale > num801)
             {
                 projectile.scale = num801;
             }
             float num804 = projectile.velocity.ToRotation();
-            num804 += 6.2831855f / 750f * raydirection;
+            //timer += projectile.ai[0];
+            //num804 += (float)Math.Cos(timer) * 0.014f * Math.Sign(projectile.ai[0]);
             projectile.rotation = num804 - 1.57079637f;
             projectile.velocity = num804.ToRotationVector2();
             float num805 = 3f;
-            float num806 = projectile.width;
-            Vector2 samplingPoint = projectile.Center;
-            if (vector78.HasValue)
-            {
-                samplingPoint = vector78.Value;
-            }
             float[] array3 = new float[(int)num805];
-            Collision.LaserScan(samplingPoint, projectile.velocity, num806 * projectile.scale, 2400f, array3);
+            //Collision.LaserScan(samplingPoint, projectile.velocity, num806 * projectile.scale, 3000f, array3);
+            for (int i = 0; i < array3.Length; i++)
+                array3[i] = 3000f;
             float num807 = 0f;
             int num3;
             for (int num808 = 0; num808 < array3.Length; num808 = num3 + 1)
@@ -186,6 +113,12 @@ namespace AAModEXAI.Bosses.Shen.GripsShen
             //Utils.PlotTileLine(projectile.Center, projectile.Center + projectile.velocity * projectile.localAI[1], (float)projectile.width * projectile.scale, new Utils.PerLinePoint(DelegateMethods.CastLight));
         }
 
+        public override void Kill(int timeLeft)
+        {
+            if (Main.netMode != 1)
+                Projectile.NewProjectile(projectile.Center, projectile.velocity, mod.ProjectileType("ShenWaveDeathray"), projectile.damage, projectile.knockBack, projectile.owner, projectile.ai[0], projectile.ai[1]);
+        }
+
         public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
         {
             if (projectile.velocity == Vector2.Zero)
@@ -193,8 +126,8 @@ namespace AAModEXAI.Bosses.Shen.GripsShen
                 return false;
             }
             Texture2D texture2D19 = Main.projectileTexture[projectile.type];
-            Texture2D texture2D20 = mod.GetTexture("Bosses/Shen/GripsShen/BlazeGripRay2");
-            Texture2D texture2D21 = mod.GetTexture("Bosses/Shen/GripsShen/BlazeGripRay3");
+            Texture2D texture2D20 = mod.GetTexture("Bosses/Shen/ShenDeathray2");
+            Texture2D texture2D21 = mod.GetTexture("Bosses/Shen/ShenDeathray3");
             float num223 = projectile.localAI[1];
             Color color44 = new Color(255, 255, 255, 0) * 0.9f;
             SpriteBatch arg_ABD8_0 = Main.spriteBatch;

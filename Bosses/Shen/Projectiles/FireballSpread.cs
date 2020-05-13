@@ -6,7 +6,7 @@ namespace AAModEXAI.Bosses.Shen.Projectiles
 {
     public class FireballSpreadR : ModProjectile
     {
-        public override string Texture => "AAMod/NPCs/Bosses/Shen/Projectiles/FireballSpreadR";
+        public override string Texture => "AAModEXAI/Bosses/Shen/Projectiles/FireballSpreadR";
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Fireball");
@@ -74,7 +74,7 @@ namespace AAModEXAI.Bosses.Shen.Projectiles
 
     public class FireballSpreadB : ModProjectile
     {
-        public override string Texture => "AAMod/NPCs/Bosses/Shen/Projectiles/FireballSpreadB";
+        public override string Texture => "AAModEXAI/Bosses/Shen/Projectiles/FireballSpreadB";
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Fireball");

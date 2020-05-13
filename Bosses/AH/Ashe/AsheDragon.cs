@@ -370,7 +370,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
 
     public class AsheDragonArms : AsheDragon
     {
-        public override string Texture => "AAMod/NPCs/Bosses/AH/Ashe/AsheDragonArms";
+        public override string Texture => "AAModEXAI/Bosses/AH/Ashe/AsheDragonArms";
 
         public override void SetStaticDefaults()
         {
@@ -517,7 +517,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
 
     public class AsheDragonBody : AsheDragon
     {
-        public override string Texture => "AAMod/NPCs/Bosses/AH/Ashe/AsheDragonBody";
+        public override string Texture => "AAModEXAI/Bosses/AH/Ashe/AsheDragonBody";
 
         public override void SetStaticDefaults()
         {
@@ -658,7 +658,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
 
     public class AsheDragonBody1 : AsheDragon
     {
-        public override string Texture => "AAMod/NPCs/Bosses/AH/Ashe/AsheDragonBody1";
+        public override string Texture => "AAModEXAI/Bosses/AH/Ashe/AsheDragonBody1";
 
         public override void SetStaticDefaults()
         {
@@ -798,7 +798,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
 
     public class AsheDragonBody2 : AsheDragon
     {
-        public override string Texture => "AAMod/NPCs/Bosses/AH/Ashe/AsheDragonBody2";
+        public override string Texture => "AAModEXAI/Bosses/AH/Ashe/AsheDragonBody2";
 
         public override void SetStaticDefaults()
         {
@@ -938,7 +938,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
 
     public class AsheDragonTail : AsheDragon
     {
-        public override string Texture => "AAMod/NPCs/Bosses/AH/Ashe/AsheDragonTail";
+        public override string Texture => "AAModEXAI/Bosses/AH/Ashe/AsheDragonTail";
 
         public override void SetStaticDefaults()
         {

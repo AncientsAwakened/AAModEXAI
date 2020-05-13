@@ -196,7 +196,7 @@ namespace AAModEXAI.Bosses.Equinox
 
                 Utils.DrawLaser(
                     spritebatch,
-                    ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Equinox/DayBringerBlast_Beam"),
+                    mod.GetTexture("Bosses/Equinox/DayBringerBlast_Beam"),
                     start - Main.screenPosition,
                     end - Main.screenPosition,
                     new Vector2(projectile.ai[1]),

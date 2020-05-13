@@ -87,7 +87,7 @@ namespace AAModEXAI.Bosses.Hydra
         public override bool PreDraw(SpriteBatch sb, Color dColor)
         {
             Texture2D tex = Main.npcTexture[npc.type];
-            Texture2D tex2 = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Hydra/HarukaShade_Glow");
+            Texture2D tex2 = mod.GetTexture("Bosses/Hydra/HarukaShade_Glow");
             BaseDrawing.DrawTexture(sb, tex, 0, npc.position, npc.width, npc.height, npc.scale, npc.rotation, npc.direction, 3, npc.frame, npc.GetAlpha(dColor));
             if (npc.ai[1] >= 60 && npc.ai[1] < 240)
             {

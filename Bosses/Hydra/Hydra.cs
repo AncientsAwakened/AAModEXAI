@@ -76,7 +76,7 @@ namespace AAModEXAI.Bosses.Hydra
             }
             if (Main.expertMode)
             {
-                npc.DropBossBags();
+                for(int i = 0; i < 10; i++) npc.DropBossBags();
             }
             npc.value = 0f;
             npc.boss = false;

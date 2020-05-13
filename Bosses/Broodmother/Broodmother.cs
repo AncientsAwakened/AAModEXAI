@@ -117,7 +117,7 @@ namespace AAModEXAI.Bosses.Broodmother
             }
             if (Main.expertMode)
             {
-                npc.DropBossBags();
+                for(int i = 0; i < 10; i++) npc.DropBossBags();
             }
             else
             {
@@ -138,12 +138,12 @@ namespace AAModEXAI.Bosses.Broodmother
         {
             if (FrameTex == 0)
             {
-                Tex = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Broodmother/Broodmother");
+                Tex = mod.GetTexture("Bosses/Broodmother/Broodmother");
                 Glow = ModLoader.GetMod("AAMod").GetTexture("Glowmasks/Broodmother_Glow");
             }
             else
             {
-                Tex = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Broodmother/Broodmother0");
+                Tex = mod.GetTexture("Bosses/Broodmother/Broodmother0");
                 Glow = ModLoader.GetMod("AAMod").GetTexture("Glowmasks/Broodmother0_Glow");
             }			
 

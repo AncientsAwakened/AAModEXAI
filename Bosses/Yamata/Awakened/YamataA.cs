@@ -197,7 +197,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
 
                 BaseAI.DropItem(npc, ModLoader.GetMod("AAMod").ItemType("YamataATrophy"), 1, 1, 15, true);
                 
-                npc.DropBossBags();
+                for(int i = 0; i < 10; i++) npc.DropBossBags();
                 AAWorld.downedYamata = true;
                 if (Main.rand.Next(50) == 0 && AAWorld.downedShen)
                 {
@@ -719,7 +719,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
             Color GlowColor = AAColor.COLOR_WHITEFADE1;
             if (head != null && head.active && head.modNPC != null && (head.modNPC is YamataAHead || head.modNPC is YamataAHeadF))
             {
-                Texture2D neckTex2D = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Yamata/Awakened/YamataANeck");
+                Texture2D neckTex2D = mod.GetTexture("Bosses/Yamata/Awakened/YamataANeck");
                 Vector2 connector = head.Center;
                 Vector2 neckOrigin = new Vector2(npc.Center.X, npc.Center.Y - 110 * npc.scale);
                 float chainsPerUse = 0.05f;
@@ -747,7 +747,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
         public override void PostDraw(SpriteBatch sb, Color dColor)
         {
             Color lightColor = npc.GetAlpha(BaseDrawing.GetLightColor(npc.Center));
-            BaseDrawing.DrawTexture(sb, ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Yamata/Awakened/YamataATail"), 0, npc.position + new Vector2(0f, npc.gfxOffY) + bottomVisualOffset + new Vector2(0, -32), npc.width, npc.height, npc.scale, npc.rotation, npc.spriteDirection, Main.npcFrameCount[npc.type], frameBottom, lightColor, false);
+            BaseDrawing.DrawTexture(sb, mod.GetTexture("Bosses/Yamata/Awakened/YamataATail"), 0, npc.position + new Vector2(0f, npc.gfxOffY) + bottomVisualOffset + new Vector2(0, -32), npc.width, npc.height, npc.scale, npc.rotation, npc.spriteDirection, Main.npcFrameCount[npc.type], frameBottom, lightColor, false);
             if (legs != null && legs.Length == 4)
             {
                 legs[2].DrawLeg(sb, npc); //back legs

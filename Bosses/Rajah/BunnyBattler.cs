@@ -10,7 +10,7 @@ namespace AAModEXAI.Bosses.Rajah
 {
     public class BunnyBattler : ModNPC
     {
-        public override string Texture => "AAMod/NPCs/Bosses/Rajah/BunnyBattler";
+        public override string Texture => "AAModEXAI/Bosses/Rajah/BunnyBattler";
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Rabbid Rabbit");
@@ -143,7 +143,7 @@ namespace AAModEXAI.Bosses.Rajah
 
     public class BunnyBattler2 : BunnyBattler
     {
-        public override string Texture => "AAMod/NPCs/Bosses/Rajah/BunnyBattler";
+        public override string Texture => "AAModEXAI/Bosses/Rajah/BunnyBattler";
         public override void SetDefaults()
         {
             base.SetDefaults();

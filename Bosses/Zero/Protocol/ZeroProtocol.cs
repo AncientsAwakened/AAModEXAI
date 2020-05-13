@@ -125,7 +125,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
                 {
                     Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, ModLoader.GetMod("AAMod").ItemType("EXSoul"));
                 }
-                npc.DropBossBags();
+                for(int i = 0; i < 10; i++) npc.DropBossBags();
                 return;
             }
         }
@@ -191,12 +191,12 @@ namespace AAModEXAI.Bosses.Zero.Protocol
             else { auraPercent -= 0.1f; auraDirection = auraPercent <= 0f; }
 
             Texture2D tex = Main.npcTexture[npc.type];
-            Texture2D afterimage = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Zero/Protocol/ZeroTrail");
+            Texture2D afterimage = mod.GetTexture("Bosses/Zero/Protocol/ZeroTrail");
             Texture2D glowTex = ModLoader.GetMod("AAMod").GetTexture("Glowmasks/ZeroProtocol_Glow");
             if (isCharging)
             {
-                tex = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Zero/Protocol/ZeroProtocolCharge");
-                afterimage = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Zero/Protocol/ZeroProtocolChargeTrail");
+                tex = mod.GetTexture("Bosses/Zero/Protocol/ZeroProtocolCharge");
+                afterimage = mod.GetTexture("Bosses/Zero/Protocol/ZeroProtocolChargeTrail");
                 glowTex = ModLoader.GetMod("AAMod").GetTexture("Glowmasks/ZeroProtocol_Glow");
             }
             

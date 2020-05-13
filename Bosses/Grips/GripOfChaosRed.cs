@@ -56,7 +56,7 @@ namespace AAModEXAI.Bosses.Grips
                 AAWorld.downedGrips = true;
                 if (Main.expertMode)
                 {
-                    npc.DropBossBags();
+                    for(int i = 0; i < 10; i++) npc.DropBossBags();
                 }
             }
             else

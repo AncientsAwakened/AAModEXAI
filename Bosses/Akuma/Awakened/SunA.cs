@@ -32,8 +32,8 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
         public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
         {
             Rectangle SunFrame = new Rectangle(0, 0, 64, 64);
-            BaseDrawing.DrawTexture(spriteBatch, ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Akuma/Awakened/SunA1"), 0, npc.position + new Vector2(0, npc.gfxOffY), npc.width, npc.height, npc.scale, -npc.rotation, npc.spriteDirection, 1, SunFrame, AAColor.COLOR_WHITEFADE1, true);
-            BaseDrawing.DrawTexture(spriteBatch, ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Akuma/Awakened/SunA"), 0, npc.position + new Vector2(0, npc.gfxOffY), npc.width, npc.height, npc.scale, npc.rotation, npc.spriteDirection, 1, SunFrame, AAColor.COLOR_WHITEFADE1, true);
+            BaseDrawing.DrawTexture(spriteBatch, mod.GetTexture("Bosses/Akuma/Awakened/SunA1"), 0, npc.position + new Vector2(0, npc.gfxOffY), npc.width, npc.height, npc.scale, -npc.rotation, npc.spriteDirection, 1, SunFrame, AAColor.COLOR_WHITEFADE1, true);
+            BaseDrawing.DrawTexture(spriteBatch, mod.GetTexture("Bosses/Akuma/Awakened/SunA"), 0, npc.position + new Vector2(0, npc.gfxOffY), npc.width, npc.height, npc.scale, npc.rotation, npc.spriteDirection, 1, SunFrame, AAColor.COLOR_WHITEFADE1, true);
             return false;
         }
 

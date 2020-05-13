@@ -541,7 +541,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
                 NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("AHDeath"));
                 if (Main.expertMode)
                 {
-                    npc.DropBossBags();
+                    for(int i = 0; i < 10; i++) npc.DropBossBags();
                 }
             }
             if (!Main.expertMode)
@@ -709,10 +709,10 @@ namespace AAModEXAI.Bosses.AH.Ashe
             Texture2D Tex = Main.npcTexture[npc.type];
             Texture2D Glow = ModLoader.GetMod("AAMod").GetTexture("Glowmasks/Ashe_Glow");
 
-            Texture2D RingTex = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/AH/Ashe/AsheRing1");
-            Texture2D RingTex1 = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/AH/Ashe/AsheRing2");
-            Texture2D RitualTex = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/AH/Ashe/AsheRitual");
-            Texture2D ShieldTex = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/AH/Ashe/AsheShield");
+            Texture2D RingTex = mod.GetTexture("Bosses/AH/Ashe/AsheRing1");
+            Texture2D RingTex1 = mod.GetTexture("Bosses/AH/Ashe/AsheRing2");
+            Texture2D RitualTex = mod.GetTexture("Bosses/AH/Ashe/AsheRitual");
+            Texture2D ShieldTex = mod.GetTexture("Bosses/AH/Ashe/AsheShield");
 
             int blue = GameShaders.Armor.GetShaderIdFromItemId(ItemID.LivingOceanDye);
             int red = GameShaders.Armor.GetShaderIdFromItemId(ItemID.LivingFlameDye);

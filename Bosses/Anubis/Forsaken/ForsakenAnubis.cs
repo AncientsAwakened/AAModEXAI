@@ -648,7 +648,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
 
             if (Main.expertMode)
             {
-                npc.DropBossBags();
+                for(int i = 0; i < 10; i++) npc.DropBossBags();
             }
             else
             {

@@ -9,7 +9,7 @@ namespace AAModEXAI.Bosses.Greed
 {
     public class GreedTransition : ModNPC
     {
-        public override string Texture => "AAMod/NPCs/Bosses/Greed/GreedSpawn";
+        public override string Texture => "AAModEXAI/Bosses/Greed/GreedSpawn";
 
         public override void SetStaticDefaults()
         {
@@ -155,7 +155,7 @@ namespace AAModEXAI.Bosses.Greed
         public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
         {
             Rectangle SunFrame = new Rectangle(0, 0, 70, 70);
-            BaseDrawing.DrawTexture(spriteBatch, ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Greed/GreedSpawn"), 0, npc.position + new Vector2(0, npc.gfxOffY), npc.width, npc.height, npc.scale, 0, npc.spriteDirection, 4, SunFrame, npc.GetAlpha(AAColor.COLOR_WHITEFADE1), true);
+            BaseDrawing.DrawTexture(spriteBatch, mod.GetTexture("Bosses/Greed/GreedSpawn"), 0, npc.position + new Vector2(0, npc.gfxOffY), npc.width, npc.height, npc.scale, 0, npc.spriteDirection, 4, SunFrame, npc.GetAlpha(AAColor.COLOR_WHITEFADE1), true);
             return false;
         }
     }

@@ -86,8 +86,8 @@ namespace AAModEXAI.Bosses.Zero
         public override bool PreDraw(SpriteBatch spritebatch, Color lightColor)
         {
             Texture2D Tex = Main.projectileTexture[projectile.type];
-            Texture2D Tex2 = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Zero/RiftZ2");
-            Texture2D Tex3 = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Zero/RiftZ3");
+            Texture2D Tex2 = mod.GetTexture("Bosses/Zero/RiftZ2");
+            Texture2D Tex3 = mod.GetTexture("Bosses/Zero/RiftZ3");
             Rectangle frame = BaseDrawing.GetFrame(projectile.frame, Tex.Width, Tex.Height, 0, 0);
             Rectangle frame1 = BaseDrawing.GetFrame(projectile.frame, Tex2.Width, Tex2.Height, 0, 0);
             Rectangle frame2 = BaseDrawing.GetFrame(projectile.frame, Tex3.Width, Tex3.Height, 0, 0);

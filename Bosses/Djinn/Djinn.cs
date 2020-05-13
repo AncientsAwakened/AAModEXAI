@@ -558,15 +558,15 @@ namespace AAModEXAI.Bosses.Djinn
             }
             else
             {
-                npc.DropBossBags();
+                for(int i = 0; i < 10; i++) npc.DropBossBags();
             }
         }
         public override bool PreDraw(SpriteBatch spriteBatch, Color drawColor)
         {
             Texture2D CurrentTex;
             Texture2D texture = Main.npcTexture[npc.type];
-            Texture2D MudaMuda = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Djinn/DesertDjinnMudaMuda");
-            Texture2D Punch = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Djinn/DesertDjinnPunch");
+            Texture2D MudaMuda = mod.GetTexture("Bosses/Djinn/DesertDjinnMudaMuda");
+            Texture2D Punch = mod.GetTexture("Bosses/Djinn/DesertDjinnPunch");
 
             if (internalAI[0] == 1 || !Main.player[npc.target].ZoneDesert)
             {

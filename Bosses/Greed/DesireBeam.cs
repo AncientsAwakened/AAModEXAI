@@ -109,8 +109,8 @@ namespace AAModEXAI.Bosses.Greed
                 return false;
             }
             Texture2D texture2D19 = Main.projectileTexture[projectile.type];
-            Texture2D texture2D20 = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Greed/DesireBeam_Beam");
-            Texture2D texture2D21 = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Greed/DesireBeam_End");
+            Texture2D texture2D20 = mod.GetTexture("Bosses/Greed/DesireBeam_Beam");
+            Texture2D texture2D21 = mod.GetTexture("Bosses/Greed/DesireBeam_End");
             float num228 = LaserLength;
             Color color44 = Color.White * 0.8f;
             Texture2D arg_AF99_1 = texture2D19;

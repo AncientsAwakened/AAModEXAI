@@ -196,7 +196,7 @@ namespace AAModEXAI.Bosses.Zero
 
                 Utils.DrawLaser(
                     spritebatch,
-                    ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Zero/ZeroBlast_Beam"),
+                    mod.GetTexture("Bosses/Zero/ZeroBlast_Beam"),
                     start - Main.screenPosition,
                     end - Main.screenPosition,
                     new Vector2(projectile.ai[1]),

@@ -254,17 +254,17 @@ namespace AAModEXAI.Bosses.Zero
         public override bool PreDraw(SpriteBatch spritebatch, Color dColor)
         {
             Texture2D glowTex = ModLoader.GetMod("AAMod").GetTexture("Glowmasks/Zero_Glow");
-            Texture2D Shield = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Zero/ZeroShield");
-            Texture2D Ring = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Zero/ZeroShieldRing");
+            Texture2D Shield = mod.GetTexture("Bosses/Zero/ZeroShield");
+            Texture2D Ring = mod.GetTexture("Bosses/Zero/ZeroShieldRing");
             Texture2D RingGlow = ModLoader.GetMod("AAMod").GetTexture("Glowmasks/ZeroShieldRing_Glow");
-            Texture2D normalAni = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Zero/Zer01");
-            Texture2D normalGlow = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Zero/Zer01_Glow");
-            Texture2D switchOneAni = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Zero/Zer01to2");
-            Texture2D switchOneGlow = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Zero/Zer01to2_Glow");
-            Texture2D openAni = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Zero/Zer02");
-            Texture2D openGlow = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Zero/Zer02_Glow");
-            Texture2D switchTwoAni = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Zero/Zer02to1");
-            Texture2D switchTwoGlow = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Zero/Zer02to1_Glow");
+            Texture2D normalAni = mod.GetTexture("Bosses/Zero/Zer01");
+            Texture2D normalGlow = mod.GetTexture("Bosses/Zero/Zer01_Glow");
+            Texture2D switchOneAni = mod.GetTexture("Bosses/Zero/Zer01to2");
+            Texture2D switchOneGlow = mod.GetTexture("Bosses/Zero/Zer01to2_Glow");
+            Texture2D openAni = mod.GetTexture("Bosses/Zero/Zer02");
+            Texture2D openGlow = mod.GetTexture("Bosses/Zero/Zer02_Glow");
+            Texture2D switchTwoAni = mod.GetTexture("Bosses/Zero/Zer02to1");
+            Texture2D switchTwoGlow = mod.GetTexture("Bosses/Zero/Zer02to1_Glow");
             Vector2 drawCenter = new Vector2(npc.Center.X, npc.Center.Y);
             if (npc.ai[1] == 0)
             {

@@ -8,7 +8,7 @@ namespace AAModEXAI.Bosses.Athena
 {
     public class SeraphHerald : ModNPC
 	{
-        public override string Texture => "AAMod/NPCs/Bosses/Athena/SeraphA";
+        public override string Texture => "AAModEXAI/Bosses/Athena/SeraphA";
 
         public override void SetDefaults()
         {

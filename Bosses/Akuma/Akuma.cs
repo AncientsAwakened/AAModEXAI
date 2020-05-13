@@ -467,7 +467,7 @@ namespace AAModEXAI.Bosses.Akuma
         public override bool PreDraw(SpriteBatch spriteBatch, Color drawColor)
         {
             Texture2D texture = Main.npcTexture[npc.type];
-            Texture2D attackAni = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Akuma/Akuma");
+            Texture2D attackAni = mod.GetTexture("Bosses/Akuma/Akuma");
             if (fireAttack == false)
             {
                 spriteBatch.Draw(texture, npc.Center - Main.screenPosition, npc.frame, drawColor, npc.rotation, npc.frame.Size() / 2, npc.scale, npc.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
@@ -581,7 +581,7 @@ namespace AAModEXAI.Bosses.Akuma
     [AutoloadBossHead]
     public class AkumaBody : Akuma
     {
-        public override string Texture => "AAMod/NPCs/Bosses/Akuma/AkumaBody";
+        public override string Texture => "AAModEXAI/Bosses/Akuma/AkumaBody";
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Akuma, Draconian Demon");

@@ -72,12 +72,12 @@ namespace AAModEXAI.Bosses.Shen
             Texture2D Tex = Main.projectileTexture[projectile.type];
             if (projectile.ai[0] == 1)
             {
-                Tex = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Shen/ShenDeathBoomR");
+                Tex = mod.GetTexture("Bosses/Shen/ShenDeathBoomR");
             }
             else
             if (projectile.ai[0] == 1)
             {
-                Tex = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Shen/ShenDeathBoomB");
+                Tex = mod.GetTexture("Bosses/Shen/ShenDeathBoomB");
             }
             BaseDrawing.DrawTexture(spriteBatch, Tex, 0, projectile.position, projectile.width, projectile.height, projectile.scale, projectile.rotation, 0, 7, frame, projectile.GetAlpha(Color.White), true);
             return false;

@@ -1134,7 +1134,7 @@ namespace AAModEXAI.Bosses.Shen.AwakenedShenAH
         {
             Texture2D glowTex = ModLoader.GetMod("AAMod").GetTexture("Glowmasks/WrathHaruka_Glow");
 
-            Texture2D Slash = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/AH/Haruka/HarukaSlash");
+            Texture2D Slash = mod.GetTexture("Bosses/AH/Haruka/HarukaSlash");
             if (internalAI[0] == AISTATE_SPIN)
             {
                 if(strikebackproj > 0)

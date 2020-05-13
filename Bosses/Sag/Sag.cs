@@ -483,7 +483,7 @@ namespace AAModEXAI.Bosses.Sag
             }
             else
             {
-                npc.DropBossBags();
+                for(int i = 0; i < 10; i++) npc.DropBossBags();
             }
         }
 

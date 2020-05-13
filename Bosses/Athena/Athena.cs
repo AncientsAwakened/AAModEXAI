@@ -598,7 +598,7 @@ namespace AAModEXAI.Bosses.Athena
 
             if (Main.expertMode)
             {
-                npc.DropBossBags();
+                for(int i = 0; i < 10; i++) npc.DropBossBags();
             }
             else
             {
@@ -620,7 +620,7 @@ namespace AAModEXAI.Bosses.Athena
 
         public override bool PreDraw(SpriteBatch sb, Color dColor)
         {
-            Texture2D tex = internalAI[2] != 1 ? ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Athena/SassyBitch") : Main.npcTexture[npc.type];
+            Texture2D tex = internalAI[2] != 1 ? mod.GetTexture("Bosses/Athena/SassyBitch") : Main.npcTexture[npc.type];
             Color lightColor = BaseDrawing.GetLightColor(npc.Center);
 
             if (npc.ai[2] == 1)
@@ -634,7 +634,7 @@ namespace AAModEXAI.Bosses.Athena
 
     public class AthenaFlee : ModNPC
     {
-        public override string Texture => "AAMod/NPCs/Bosses/Athena/Athena";
+        public override string Texture => "AAModEXAI/Bosses/Athena/Athena";
 
         public override void SetStaticDefaults()
         {

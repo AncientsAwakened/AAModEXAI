@@ -203,7 +203,7 @@ namespace AAModEXAI.Bosses.FeudalFungus
             }
             if (Main.expertMode)
             {
-                npc.DropBossBags();
+                for(int i = 0; i < 10; i++) npc.DropBossBags();
             }
             else
             {

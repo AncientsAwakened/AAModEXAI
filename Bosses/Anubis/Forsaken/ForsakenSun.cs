@@ -32,8 +32,8 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
         public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
         {
             Rectangle SunFrame = new Rectangle(0, 0, 64, 64);
-            BaseDrawing.DrawTexture(spriteBatch, ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Anubis/Forsaken/ForsakenSun1"), 0, npc.position + new Vector2(0, npc.gfxOffY), npc.width, npc.height, npc.scale, -npc.rotation, npc.spriteDirection, 1, SunFrame, npc.GetAlpha(AAColor.COLOR_WHITEFADE1), true);
-            BaseDrawing.DrawTexture(spriteBatch, ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Anubis/Forsaken/ForsakenSun"), 0, npc.position + new Vector2(0, npc.gfxOffY), npc.width, npc.height, npc.scale, npc.rotation, npc.spriteDirection, 1, SunFrame, npc.GetAlpha(AAColor.COLOR_WHITEFADE1), true);
+            BaseDrawing.DrawTexture(spriteBatch, mod.GetTexture("Bosses/Anubis/Forsaken/ForsakenSun1"), 0, npc.position + new Vector2(0, npc.gfxOffY), npc.width, npc.height, npc.scale, -npc.rotation, npc.spriteDirection, 1, SunFrame, npc.GetAlpha(AAColor.COLOR_WHITEFADE1), true);
+            BaseDrawing.DrawTexture(spriteBatch, mod.GetTexture("Bosses/Anubis/Forsaken/ForsakenSun"), 0, npc.position + new Vector2(0, npc.gfxOffY), npc.width, npc.height, npc.scale, npc.rotation, npc.spriteDirection, 1, SunFrame, npc.GetAlpha(AAColor.COLOR_WHITEFADE1), true);
             return false;
         }
 

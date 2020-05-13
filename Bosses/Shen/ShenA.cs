@@ -25,7 +25,7 @@ namespace AAModEXAI.Bosses.Shen
             base.SetDefaults();
             npc.damage = 260;
 			npc.defense = 240;
-            npc.lifeMax = 1000000;
+            npc.lifeMax = 2000000;
             npc.value = Item.sellPrice(1, 0, 0, 0);
             bossBag = ModLoader.GetMod("AAMod").ItemType("ShenCache");
             music = ModLoader.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/ShenA");
@@ -59,8 +59,19 @@ namespace AAModEXAI.Bosses.Shen
             }
         }
 
+        public NPC Head1;
+        public NPC Head2;
+        public NPC Head3;
+        public NPC Head4;
+        public NPC Head5;
+        public NPC Head6;
+
+        public bool halfLifeAIChange = false;
+        public bool ShootAkumaProj = false;
+
         public override void AI()
         {
+            halfLifeAIChange = npc.life <= npc.lifeMax * .5f;
             Main.dayTime = false;
             Main.time = 18000;
 
@@ -103,6 +114,7 @@ namespace AAModEXAI.Bosses.Shen
                     npc.alpha += 4;
                 }
                 npc.dontTakeDamage = true;
+                halfLifeAIChange = false;
             }
             else
             {
@@ -162,30 +174,66 @@ namespace AAModEXAI.Bosses.Shen
                         npc.TargetClosest();
                     if (!AliveCheck(Main.player[npc.target]))
                         break;
-                    targetPos = player.Center;
-                    targetPos.X += 600 * (npc.Center.X < targetPos.X ? -1 : 1);
-                    Movement(targetPos, 1f);
-                    if (++npc.ai[2] > 240)
+                    if(halfLifeAIChange)
                     {
-                        Roar(roarTimerMax, false);
-                        npc.ai[0]++;
-                        npc.ai[1] = 0;
-                        npc.ai[2] = 0;
-                        npc.ai[3] = npc.Center.X < player.Center.X ? 0 : (float)Math.PI;
-                        npc.netUpdate = true;
-                        npc.velocity.X = 2 * (npc.Center.X < player.Center.X ? -1 : 1);
-                        npc.velocity.Y *= 0.2f;
-                        if (Main.netMode != 1)
-                            Projectile.NewProjectile(npc.Center, Vector2.UnitX.RotatedBy(npc.ai[3]), mod.ProjectileType("ShenDeathray"), npc.damage / 3, 0f, Main.myPlayer, 0, npc.whoAmI);
+                        
+                        targetPos = player.Center;
+                        targetPos.X += 600 * (npc.Center.X < targetPos.X ? -1 : 1);
+
+                        Movement(targetPos, 1f);
+
+                        SoulCheck();
+
+                        if (++npc.ai[2] > 480)
+                        {
+                            Roar(roarTimerMax, false);
+                            npc.ai[0]++;
+                            npc.ai[1] = 0;
+                            npc.ai[2] = 0;
+                            npc.ai[3] = npc.Center.X < player.Center.X ? 0 : (float)Math.PI;
+                            npc.netUpdate = true;
+                            npc.velocity.X = 2 * (npc.Center.X < player.Center.X ? -1 : 1);
+                            npc.velocity.Y *= 0.2f;
+                            if (Main.netMode != 1)
+                                Projectile.NewProjectile(npc.Center, Vector2.UnitX.RotatedBy(npc.ai[3]), mod.ProjectileType("ShenDeathray"), npc.damage * 2, 0f, Main.myPlayer, 0, npc.whoAmI);
+                        }
+                        if (++npc.ai[1] > 60)
+                        {
+                            npc.ai[1] = 0;
+                            Roar(roarTimerMax, false);
+                            npc.netUpdate = true;
+                            if (Main.netMode != 1)
+                                for (int i = -2; i <= 2; i++)
+                                    Projectile.NewProjectile(npc.Center, 30 * Vector2.UnitX.RotatedBy(Math.PI / 4 * i) * (npc.Center.X < player.Center.X ? -1 : 1), mod.ProjectileType("ShenFireballSpread"), npc.damage / 4, 0f, Main.myPlayer, 20, 20 + 60);
+                        }
                     }
-                    if (++npc.ai[1] > 60)
+                    else
                     {
-                        npc.ai[1] = 0;
-                        Roar(roarTimerMax, false);
-                        npc.netUpdate = true;
-                        if (Main.netMode != 1)
-                            for (int i = -2; i <= 2; i++)
-                                Projectile.NewProjectile(npc.Center, 30 * Vector2.UnitX.RotatedBy(Math.PI / 4 * i) * (npc.Center.X < player.Center.X ? -1 : 1), mod.ProjectileType("ShenFireballSpread"), npc.damage / 4, 0f, Main.myPlayer, 20, 20 + 60);
+                        targetPos = player.Center;
+                        targetPos.X += 600 * (npc.Center.X < targetPos.X ? -1 : 1);
+                        Movement(targetPos, 1f);
+                        if (++npc.ai[2] > 240)
+                        {
+                            Roar(roarTimerMax, false);
+                            npc.ai[0]++;
+                            npc.ai[1] = 0;
+                            npc.ai[2] = 0;
+                            npc.ai[3] = npc.Center.X < player.Center.X ? 0 : (float)Math.PI;
+                            npc.netUpdate = true;
+                            npc.velocity.X = 2 * (npc.Center.X < player.Center.X ? -1 : 1);
+                            npc.velocity.Y *= 0.2f;
+                            if (Main.netMode != 1)
+                                Projectile.NewProjectile(npc.Center, Vector2.UnitX.RotatedBy(npc.ai[3]), mod.ProjectileType("ShenDeathray"), npc.damage * 2, 0f, Main.myPlayer, 0, npc.whoAmI);
+                        }
+                        if (++npc.ai[1] > 60)
+                        {
+                            npc.ai[1] = 0;
+                            Roar(roarTimerMax, false);
+                            npc.netUpdate = true;
+                            if (Main.netMode != 1)
+                                for (int i = -2; i <= 2; i++)
+                                    Projectile.NewProjectile(npc.Center, 30 * Vector2.UnitX.RotatedBy(Math.PI / 4 * i) * (npc.Center.X < player.Center.X ? -1 : 1), mod.ProjectileType("ShenFireballSpread"), npc.damage / 4, 0f, Main.myPlayer, 20, 20 + 60);
+                        }
                     }
                     break;
 
@@ -203,21 +251,37 @@ namespace AAModEXAI.Bosses.Shen
                     if (!AliveCheck(player))
                         break;
                     targetPos = player.Center;
-                    targetPos.X += 800 * (npc.Center.X < targetPos.X ? -1 : 1);
-                    targetPos.Y -= 800;
-                    Movement(targetPos, 1.2f);
-                    if (++npc.ai[1] > 180 || Math.Abs(npc.Center.Y - targetPos.Y) < 100) //initiate dash
+                    targetPos.X += 400 * (npc.Center.X < targetPos.X ? -1 : 1);
+                    targetPos.Y -= 400;
+                    Movement(targetPos, 1.3f);
+                    if (halfLifeAIChange)
+                    {
+                        targetPos.X += 1200 * (npc.Center.X < targetPos.X ? -1 : 1);
+                        targetPos.Y -= 1200;
+                        Tele(targetPos);
+                        npc.ai[1] = 70;
+                        if (++npc.ai[1] > 70) //initiate dash
+                        {
+                            npc.ai[0]++;
+                            npc.ai[1] = 0;
+                            npc.netUpdate = true;
+                            npc.velocity = player.velocity + (player.Center - npc.Center) / 30f;
+                        }
+                        npc.rotation = 0;
+                        break;
+                    }
+                    if (++npc.ai[1] > 70 && Math.Abs(npc.Center.Y - targetPos.Y) < 100) //initiate dash
                     {
                         npc.ai[0]++;
                         npc.ai[1] = 0;
                         npc.netUpdate = true;
-                        npc.velocity = npc.DirectionTo(player.Center) * 45;
+                        npc.velocity = player.velocity + (player.Center - npc.Center) / 10f;
                     }
                     npc.rotation = 0;
                     break;
 
                 case 3: //dashing
-                    if (npc.Center.Y > player.Center.Y + 700 || Math.Abs(npc.Center.X - player.Center.X) > 1500)
+                    if (npc.Center.Y > player.Center.Y + 1000 || Math.Abs(npc.Center.X - player.Center.X) > 2500)
                     {
                         npc.velocity.Y *= 0.5f;
                         npc.ai[1] = 0;
@@ -261,30 +325,97 @@ namespace AAModEXAI.Bosses.Shen
                     break;
 
                 case 5: //dashing, leave trail of vertical deathrays
-                    if (npc.ai[3] == 0 && --npc.ai[2] < 0) //spawn rays on first dash only
+                    if(halfLifeAIChange)
                     {
-                        npc.ai[2] = 4;
-                        if (Main.netMode != 1)
+                        if (npc.ai[1] == 0)
                         {
-                            Projectile.NewProjectile(npc.Center, Vector2.UnitY, mod.ProjectileType("ShenDeathrayVertical"), npc.damage / 4, 0f, Main.myPlayer, 0f, npc.whoAmI);
-                            Projectile.NewProjectile(npc.Center, -Vector2.UnitY, mod.ProjectileType("ShenDeathrayVertical"), npc.damage / 4, 0f, Main.myPlayer, 0f, npc.whoAmI);
+                            ShootAkumaProj = false;
                         }
+                        if (npc.ai[3] == 1 && --npc.ai[2] < 0)
+                        {
+                            npc.ai[2] = 4;
+                            if (Main.netMode != 1)
+                            {
+                                Projectile.NewProjectile(npc.Center, Vector2.UnitY, mod.ProjectileType("ShenDeathrayVertical"), npc.damage / 4, 0f, Main.myPlayer, 0f, npc.whoAmI);
+                                Projectile.NewProjectile(npc.Center, -Vector2.UnitY, mod.ProjectileType("ShenDeathrayVertical"), npc.damage / 4, 0f, Main.myPlayer, 0f, npc.whoAmI);
+                            }
+                        }
+                        if (!ShootAkumaProj && (player.position.X > npc.position.X + 30f && npc.position.X + npc.width > player.position.X + player.width + 30f))
+                        {
+                            if(player.Center.Y < npc.Center.Y)
+                            {
+                                if (Main.netMode != 1)
+                                {
+                                    for (int i = 0; i * 20 < npc.width; i++)
+                                    {
+                                        Vector2 vel = -5f * Vector2.UnitY;
+                                        vel.X += Main.rand.NextFloat(-1f, 1f);
+                                        vel.Y += Main.rand.NextFloat(-.5f, .5f);
+                                        vel *= 8f;
+                                        Vector2 ShootPos = new Vector2(npc.position.X + i * 20, npc.Center.Y);
+                                        Projectile.NewProjectile(ShootPos, vel, mod.ProjectileType("DiscordianInferno"), npc.damage / 4, 0f, Main.myPlayer);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (Main.netMode != 1)
+                                {
+                                    for (int i = 0; i * 10 < npc.width; i++)
+                                    {
+                                        Vector2 vel = 4f * Vector2.UnitY;
+                                        vel.X += Main.rand.NextFloat(-1f, 1f);
+                                        vel.Y += Main.rand.NextFloat(-1f, 1f);
+                                        Vector2 ShootPos = new Vector2(npc.position.X + i * 20, npc.Center.Y);
+                                        Projectile.NewProjectile(ShootPos, vel, mod.ProjectileType("AkumaRock"), npc.damage / 4, 0f, Main.myPlayer);
+                                    }
+                                }
+                            }
+                            ShootAkumaProj = true;
+                        }
+                        if (++npc.ai[1] > 240 || (Math.Sign(npc.velocity.X) > 0 ? npc.Center.X > player.Center.X + 900 : npc.Center.X < player.Center.X - 900))
+                        {
+                            Roar(roarTimerMax, false);
+                            npc.ai[1] = 0;
+                            npc.ai[2] = 0;
+                            if (++npc.ai[3] >= 4)
+                            {
+                                npc.ai[0]++;
+                                npc.ai[3] = 0;
+                            }
+                            else
+                                npc.ai[0]--;
+                            npc.netUpdate = true;
+                        }
+                        Dashing = true;
                     }
-                    if (++npc.ai[1] > 240 || (Math.Sign(npc.velocity.X) > 0 ? npc.Center.X > player.Center.X + 900 : npc.Center.X < player.Center.X - 900))
+                    else
                     {
-                        Roar(roarTimerMax, false);
-                        npc.ai[1] = 0;
-                        npc.ai[2] = 0;
-                        if (++npc.ai[3] >= 3) //repeat dash three times
+                        if (npc.ai[3] == 0 && --npc.ai[2] < 0) //spawn rays on first dash only
                         {
-                            npc.ai[0]++;
-                            npc.ai[3] = 0;
+                            npc.ai[2] = 4;
+                            if (Main.netMode != 1)
+                            {
+                                Projectile.NewProjectile(npc.Center, Vector2.UnitY, mod.ProjectileType("ShenDeathrayVertical"), npc.damage / 4, 0f, Main.myPlayer, 0f, npc.whoAmI);
+                                Projectile.NewProjectile(npc.Center, -Vector2.UnitY, mod.ProjectileType("ShenDeathrayVertical"), npc.damage / 4, 0f, Main.myPlayer, 0f, npc.whoAmI);
+                            }
                         }
-                        else
-                            npc.ai[0]--;
-                        npc.netUpdate = true;
+                        if (++npc.ai[1] > 240 || (Math.Sign(npc.velocity.X) > 0 ? npc.Center.X > player.Center.X + 900 : npc.Center.X < player.Center.X - 900))
+                        {
+                            Roar(roarTimerMax, false);
+                            npc.ai[1] = 0;
+                            npc.ai[2] = 0;
+                            if (++npc.ai[3] >= 3) //repeat dash three times
+                            {
+                                npc.ai[0]++;
+                                npc.ai[3] = 0;
+                            }
+                            else
+                                npc.ai[0]--;
+                            npc.netUpdate = true;
+                        }
+                        Dashing = true;
                     }
-                    Dashing = true;
                     break;
 
                 case 6: //fly at player, spit mega balls
@@ -403,6 +534,10 @@ namespace AAModEXAI.Bosses.Shen
                     targetPos = player.Center;
                     targetPos.X += 700 * (npc.Center.X < targetPos.X ? -1 : 1);
                     Movement(targetPos, 0.7f);
+                    if(halfLifeAIChange)
+                    {
+                        SoulCheck();
+                    }
                     if (++npc.ai[2] > 40)
                     {
                         Roar(roarTimerMax, false);
@@ -554,7 +689,7 @@ namespace AAModEXAI.Bosses.Shen
                         NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("ShenDefeat"));
                     }
 
-                    npc.DropBossBags();
+                    for(int i = 0; i < 10; i++) npc.DropBossBags();
                 }
             }
                 
@@ -760,12 +895,168 @@ namespace AAModEXAI.Bosses.Shen
             return Text;
         }
 
+        public override bool StrikeNPC(ref double damage, int defense, ref float knockback, int hitDirection, ref bool crit)
+        {
+            if(npc.life <= npc.lifeMax * .5f)
+            {
+                damage *= .8f;
+                if(npc.ai[0] == 0)
+                {
+                    damage = 1.0;
+                }
+            }
+            return false;
+        }
+
+        public void Tele(Vector2 tele)
+        {
+            npc.Center = tele;
+
+            int pieCut = 20;
+            for (int m = 0; m < pieCut; m++)
+            {
+                int dustID = Dust.NewDust(new Vector2(npc.Center.X - 1, npc.Center.Y - 1), 2, 2, ModLoader.GetMod("AAMod").DustType("DiscordLight"), 0f, 0f, 100, Color.White, 1f);
+                Main.dust[dustID].velocity = BaseUtility.RotateVector(default, new Vector2(6f, 0f), m / (float)pieCut * 6.28f);
+                Main.dust[dustID].noLight = false;
+                Main.dust[dustID].noGravity = true;
+            }
+            for (int m = 0; m < pieCut; m++)
+            {
+                int dustID = Dust.NewDust(new Vector2(npc.Center.X - 1, npc.Center.Y - 1), 2, 2, ModLoader.GetMod("AAMod").DustType("DiscordLight"), 0f, 0f, 100, Color.White, 1.5f);
+                Main.dust[dustID].velocity = BaseUtility.RotateVector(default, new Vector2(9f, 0f), m / (float)pieCut * 6.28f);
+                Main.dust[dustID].noLight = false;
+                Main.dust[dustID].noGravity = true;
+            }
+        }
+
+        public void SoulCheck()
+        {
+            if (Main.netMode != 1)
+            {
+                if (Head1 == null || !Head1.active || Head1.life == 0)
+                {
+                    Head1 = Main.npc[NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("ShenSoul"), 0)];
+                    ((ShenSoul)Head1.modNPC).internalAI[0] = npc.whoAmI;
+                    ((ShenSoul)Head1.modNPC).internalAI[1] = 100f;
+                    ((ShenSoul)Head1.modNPC).internalAI[2] = - 600f;
+                    ((ShenSoul)Head1.modNPC).internalAI[3] = 3;
+                    Head1.netUpdate = true;
+                }
+                if (Head2 == null || !Head2.active || Head2.life == 0)
+                {
+                    Head2 = Main.npc[NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("ShenSoul"), 0)];
+                    ((ShenSoul)Head2.modNPC).internalAI[0] = npc.whoAmI;
+                    ((ShenSoul)Head2.modNPC).internalAI[1] = 50f;
+                    ((ShenSoul)Head2.modNPC).internalAI[2] = - 400f;
+                    ((ShenSoul)Head2.modNPC).internalAI[3] = 2;
+                    Head2.netUpdate = true;
+                }
+                if (Head3 == null || !Head3.active || Head3.life == 0)
+                {
+                    Head3 = Main.npc[NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("ShenSoul"), 0)];
+                    ((ShenSoul)Head3.modNPC).internalAI[0] = npc.whoAmI;
+                    ((ShenSoul)Head3.modNPC).internalAI[1] = 0;
+                    ((ShenSoul)Head3.modNPC).internalAI[2] = - 200f;
+                    ((ShenSoul)Head3.modNPC).internalAI[3] = 1;
+                    Head3.netUpdate = true;
+                }
+                if (Head4 == null || !Head4.active || Head4.life == 0)
+                {
+                    Head4 = Main.npc[NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("ShenSoul"), 0)];
+                    ((ShenSoul)Head4.modNPC).internalAI[0] = npc.whoAmI;
+                    ((ShenSoul)Head4.modNPC).internalAI[1] = 0;
+                    ((ShenSoul)Head4.modNPC).internalAI[2] = 200f;
+                    ((ShenSoul)Head4.modNPC).internalAI[3] = 1;
+                    Head4.netUpdate = true;
+                }
+                if (Head5 == null || !Head5.active || Head5.life == 0)
+                {
+                    Head5 = Main.npc[NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("ShenSoul"), 0)];
+                    ((ShenSoul)Head5.modNPC).internalAI[0] = npc.whoAmI;
+                    ((ShenSoul)Head5.modNPC).internalAI[1] = 50f;
+                    ((ShenSoul)Head5.modNPC).internalAI[2] = 400f;
+                    ((ShenSoul)Head5.modNPC).internalAI[3] = 2;
+                    Head5.netUpdate = true;
+                }
+                if (Head6 == null || !Head6.active || Head6.life == 0)
+                {
+                    Head6 = Main.npc[NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("ShenSoul"), 0)];
+                    ((ShenSoul)Head6.modNPC).internalAI[0] = npc.whoAmI;
+                    ((ShenSoul)Head6.modNPC).internalAI[1] = 100f;
+                    ((ShenSoul)Head6.modNPC).internalAI[2] = 600f;
+                    ((ShenSoul)Head6.modNPC).internalAI[3] = 3;
+                    Head6.netUpdate = true;
+                }
+                if (Head1 != null && Head2 != null && Head3 != null && Head4 != null && Head5 != null && Head6 != null)
+                {
+                    ((ShenSoul)Head1.modNPC).internalAI[3] = 3;
+                    ((ShenSoul)Head2.modNPC).internalAI[3] = 2;
+                    ((ShenSoul)Head3.modNPC).internalAI[3] = 1;
+                    ((ShenSoul)Head4.modNPC).internalAI[3] = 1;
+                    ((ShenSoul)Head5.modNPC).internalAI[3] = 2;
+                    ((ShenSoul)Head6.modNPC).internalAI[3] = 3;
+                }
+            }
+            else
+            {
+                int[] npcs = BaseAI.GetNPCs(npc.Center, -1, default, 200f, null);
+                if (npcs != null && npcs.Length > 0)
+                {
+                    foreach (int npcID in npcs)
+                    {
+                        NPC npc2 = Main.npc[npcID];
+                        if (npc2 != null)
+                        {
+                            if (Head1 == null && npc2.type == mod.NPCType("ShenSoul") && ((ShenSoul)npc2.modNPC).internalAI[0] == npc.whoAmI)
+                            {
+                                Head1 = npc2;
+                            }
+                            else
+                            if (Head2 == null && npc2.type == mod.NPCType("ShenSoul") && ((ShenSoul)npc2.modNPC).internalAI[0] == npc.whoAmI)
+                            {
+                                Head2 = npc2;
+                            }
+                            else
+                            if (Head3 == null && npc2.type == mod.NPCType("ShenSoul") && ((ShenSoul)npc2.modNPC).internalAI[0] == npc.whoAmI)
+                            {
+                                Head3 = npc2;
+                            }
+                            else
+                            if (Head4 == null && npc2.type == mod.NPCType("ShenSoul") && ((ShenSoul)npc2.modNPC).internalAI[0] == npc.whoAmI)
+                            {
+                                Head4 = npc2;
+                            }
+                            else
+                            if (Head5 == null && npc2.type == mod.NPCType("ShenSoul") && ((ShenSoul)npc2.modNPC).internalAI[0] == npc.whoAmI)
+                            {
+                                Head5 = npc2;
+                            }
+                            else
+                            if (Head6 == null && npc2.type == mod.NPCType("ShenSoul") && ((ShenSoul)npc2.modNPC).internalAI[0] == npc.whoAmI)
+                            {
+                                Head6 = npc2;
+                            }
+                        }
+                    }
+                    if (Head1 != null && Head2 != null && Head3 != null && Head4 != null && Head5 != null && Head6 != null)
+                    {
+                        ((ShenSoul)Head1.modNPC).internalAI[3] = 3;
+                        ((ShenSoul)Head2.modNPC).internalAI[3] = 2;
+                        ((ShenSoul)Head3.modNPC).internalAI[3] = 1;
+                        ((ShenSoul)Head4.modNPC).internalAI[3] = 1;
+                        ((ShenSoul)Head5.modNPC).internalAI[3] = 2;
+                        ((ShenSoul)Head6.modNPC).internalAI[3] = 3;
+                    }
+                }
+            }
+        }
+
         public override bool PreDraw(SpriteBatch sb, Color drawColor)
         {
             Texture2D currentTex = Main.npcTexture[npc.type];
-            Texture2D currentWingTex1 = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Shen/ShenWingBack");
-            Texture2D currentWingTex2 = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Shen/ShenWingFront");
-            Texture2D glowTex = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Shen/ShenA_Glow");
+            Texture2D currentWingTex1 = mod.GetTexture("Bosses/Shen/ShenWingBack");
+            Texture2D currentWingTex2 = mod.GetTexture("Bosses/Shen/ShenWingFront");
+            Texture2D glowTex = mod.GetTexture("Bosses/Shen/ShenA_Glow");
 
             //offset
             npc.position.Y += 130f;

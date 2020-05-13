@@ -16,7 +16,7 @@ namespace AAModEXAI.Bosses.Rajah
     [AutoloadBossHead]
     public class Rajah : ModNPC
     {
-        public override string Texture => "AAMod/NPCs/Bosses/Rajah/Rajah";
+        public override string Texture => "AAModEXAI/Bosses/Rajah/Rajah";
         public int damage = 0;
 
         public override void SetStaticDefaults()
@@ -1072,7 +1072,7 @@ namespace AAModEXAI.Bosses.Rajah
                 }
                 if (Main.expertMode)
                 {
-                    npc.DropBossBags();
+                    for(int i = 0; i < 10; i++) npc.DropBossBags();
                 }
                 else
                 {
@@ -1103,7 +1103,7 @@ namespace AAModEXAI.Bosses.Rajah
                 }
                 else
                 {
-                    npc.DropBossBags();
+                    for(int i = 0; i < 10; i++) npc.DropBossBags();
                 }
             }
             AAWorld.downedRajah = true;
@@ -1133,14 +1133,14 @@ namespace AAModEXAI.Bosses.Rajah
             string Supreme = isSupreme ? "Supreme/Supreme" : "";
             if (internalAI[1] == 0)
             {
-                RajahTex = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Rajah/" + Supreme + "Rajah" + IsRoaring + "_Fly");
+                RajahTex = mod.GetTexture("Bosses/Rajah/" + Supreme + "Rajah" + IsRoaring + "_Fly");
                 Glow = ModLoader.GetMod("AAMod").GetTexture("Glowmasks/Rajah" + IsRoaring + "_Fly_Glow");
                 SupremeGlow = ModLoader.GetMod("AAMod").GetTexture("Glowmasks/SupremeRajah" + IsRoaring + "_Fly_Glow");
                 SupremeEyes = ModLoader.GetMod("AAMod").GetTexture("Glowmasks/SupremeRajah" + IsRoaring + "_Fly_Eyes");
             }
             else
             {
-                RajahTex = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Rajah/" + Supreme + "Rajah" + IsRoaring);
+                RajahTex = mod.GetTexture("Bosses/Rajah/" + Supreme + "Rajah" + IsRoaring);
                 Glow = ModLoader.GetMod("AAMod").GetTexture("Glowmasks/Rajah" + IsRoaring + "_Glow");
                 SupremeGlow = ModLoader.GetMod("AAMod").GetTexture("Glowmasks/SupremeRajah" + IsRoaring + "_Glow");
                 SupremeEyes = ModLoader.GetMod("AAMod").GetTexture("Glowmasks/SupremeRajah" + IsRoaring + "_Eyes");
@@ -1178,7 +1178,7 @@ namespace AAModEXAI.Bosses.Rajah
             BaseDrawing.DrawTexture(spriteBatch, RajahTex, 0, npc.position, npc.width, npc.height, npc.scale, npc.rotation, npc.direction, 8, npc.frame, drawColor, true);
             if (npc.ai[3] == 6) //If Rabbits Wrath
             {
-                ArmTex = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Rajah/Supreme/RabbitsWrath");
+                ArmTex = mod.GetTexture("Bosses/Rajah/Supreme/RabbitsWrath");
                 Rectangle WeaponRectangle = new Rectangle(0, WeaponFrame, 300, 220);
                 BaseDrawing.DrawTexture(spriteBatch, ArmTex, 0, npc.position, npc.width, npc.height, npc.scale, npc.rotation, npc.direction, 8, WeaponRectangle, drawColor, true);
             }
@@ -1202,7 +1202,7 @@ namespace AAModEXAI.Bosses.Rajah
             return false;
         }
 
-        public override string BossHeadTexture => "AAMod/NPCs/Bosses/Rajah/Rajah_Head_Boss";
+        public override string BossHeadTexture => "AAModEXAI/Bosses/Rajah/Rajah_Head_Boss";
 
         public void MoveToPoint(Vector2 point)
         {
@@ -1229,7 +1229,7 @@ namespace AAModEXAI.Bosses.Rajah
     [AutoloadBossHead]
     public class SupremeRajah : Rajah
     {
-        public override string Texture => "AAMod/NPCs/Bosses/Rajah/Supreme/SupremeRajah";
+        public override string Texture => "AAModEXAI/Bosses/Rajah/Supreme/SupremeRajah";
 
         public override void SetStaticDefaults()
         {
@@ -1250,6 +1250,6 @@ namespace AAModEXAI.Bosses.Rajah
             npc.value = Item.sellPrice(3, 0, 0, 0);
             music = ModLoader.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/RajahTheme");
         }
-        public override string BossHeadTexture => "AAMod/NPCs/Bosses/Rajah/SupremeRajah_Head_Boss";
+        public override string BossHeadTexture => "AAModEXAI/Bosses/Rajah/SupremeRajah_Head_Boss";
     }
 }

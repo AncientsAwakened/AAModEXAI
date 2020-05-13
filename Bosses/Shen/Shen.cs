@@ -732,7 +732,7 @@ namespace AAModEXAI.Bosses.Shen
                 AAModGlobalNPC.SpawnBoss(player, mod.NPCType("BlazeGrip"), false, 0, 0);
                 Main.PlaySound(SoundID.Roar, player.position, 0);
             }
-            if (npc.life <= npc.lifeMax * .4f && !SpawnGrips && isAwakened)
+            if (npc.life <= npc.lifeMax * .5f && !SpawnGrips && isAwakened)
             {
                 SpawnGrips = true;
 
@@ -829,8 +829,8 @@ namespace AAModEXAI.Bosses.Shen
 
         public override bool PreDraw(SpriteBatch sb, Color drawColor)
         {
-            Texture2D currentTex = npc.spriteDirection == 1 ? ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Shen/ShenDoragonBlue") : Main.npcTexture[npc.type];
-            Texture2D currentWingTex = npc.spriteDirection == 1 ? ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Shen/ShenDoragonBlueWings") : ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Shen/ShenDoragonWings");
+            Texture2D currentTex = npc.spriteDirection == 1 ? mod.GetTexture("Bosses/Shen/ShenDoragonBlue") : Main.npcTexture[npc.type];
+            Texture2D currentWingTex = npc.spriteDirection == 1 ? mod.GetTexture("Bosses/Shen/ShenDoragonBlueWings") : mod.GetTexture("Bosses/Shen/ShenDoragonWings");
 
             //offset
             npc.position.Y += 130f;

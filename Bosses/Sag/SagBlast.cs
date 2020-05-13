@@ -196,7 +196,7 @@ namespace AAModEXAI.Bosses.Sag
 
                 Utils.DrawLaser(
                     spritebatch,
-                    ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Sag/SagBlast_Beam"),
+                    mod.GetTexture("Bosses/Sag/SagBlast_Beam"),
                     start - Main.screenPosition,
                     end - Main.screenPosition,
                     new Vector2(projectile.ai[1]),

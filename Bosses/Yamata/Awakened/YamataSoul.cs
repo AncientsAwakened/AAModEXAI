@@ -65,7 +65,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
 
         public override bool PreDraw(SpriteBatch spritebatch, Color dColor)
         {
-            Texture2D glowTex = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Yamata/Awakened/YamataSoul");
+            Texture2D glowTex = mod.GetTexture("Bosses/Yamata/Awakened/YamataSoul");
             if (auraDirection) { auraPercent += 0.1f; auraDirection = auraPercent < 1f; }
             else { auraPercent -= 0.1f; auraDirection = auraPercent <= 0f; }
             BaseDrawing.DrawTexture(spritebatch, Main.npcTexture[npc.type], 0, npc, dColor);

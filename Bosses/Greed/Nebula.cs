@@ -49,17 +49,17 @@ namespace AAModEXAI.Bosses.Greed
         {
             if (projectile.ai[0] == 0)
             {
-                t = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Greed/NebulaA");
+                t = mod.GetTexture("Bosses/Greed/NebulaA");
                 c = Color.HotPink;
             }
             else if (projectile.ai[0] == 1)
             {
-                t = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Greed/NebulaD");
+                t = mod.GetTexture("Bosses/Greed/NebulaD");
                 c = Color.Blue;
             }
             else
             {
-                t = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Greed/NebulaH");
+                t = mod.GetTexture("Bosses/Greed/NebulaH");
                 c = Color.Red;
             }
         }

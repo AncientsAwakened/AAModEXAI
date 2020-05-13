@@ -82,7 +82,7 @@ namespace AAModEXAI.Bosses.Shen.AwakenedShenAH
 
                     MoveToPoint(wantedVelocity);
 
-                    BaseAI.ShootPeriodic(npc, player.Center + new Vector2(Main.rand.Next(-10, 10), Main.rand.Next(-10, 10)), player.width, player.height, mod.ProjectileType("DiscordianInferno"), ref npc.ai[2], 5, npc.damage / 4, 14, false);
+                    BaseAI.ShootPeriodic(npc, player.Center + new Vector2(Main.rand.Next(-10, 10), Main.rand.Next(-10, 10)), player.width, player.height, mod.ProjectileType("DiscordianInferno"), ref npc.ai[2], 18, npc.damage / 4, 16, false);
                     if (npc.ai[1]++ > (Main.expertMode ? 180 : 280))
                     {
                         AIChange();
@@ -663,10 +663,10 @@ namespace AAModEXAI.Bosses.Shen.AwakenedShenAH
             Texture2D Tex = Main.npcTexture[npc.type];
             Texture2D Glow = ModLoader.GetMod("AAMod").GetTexture("Glowmasks/FuryAshe_Glow");
 
-            Texture2D RingTex = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/AH/Ashe/AsheRing1");
-            Texture2D RingTex1 = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/AH/Ashe/AsheRing2");
-            Texture2D RitualTex = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/AH/Ashe/AsheRitual");
-            Texture2D ShieldTex = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/AH/Ashe/AsheShield");
+            Texture2D RingTex = mod.GetTexture("Bosses/AH/Ashe/AsheRing1");
+            Texture2D RingTex1 = mod.GetTexture("Bosses/AH/Ashe/AsheRing2");
+            Texture2D RitualTex = mod.GetTexture("Bosses/AH/Ashe/AsheRitual");
+            Texture2D ShieldTex = mod.GetTexture("Bosses/AH/Ashe/AsheShield");
 
             int blue = GameShaders.Armor.GetShaderIdFromItemId(ItemID.LivingOceanDye);
             int red = GameShaders.Armor.GetShaderIdFromItemId(ItemID.LivingFlameDye);

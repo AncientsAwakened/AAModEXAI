@@ -4,13 +4,14 @@ using Terraria.ID;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.ModLoader;
-using Terraria.Audio;using AAMod;
+using Terraria.Audio;
+using AAMod;
 
 namespace AAModEXAI.Bosses.Shen
 {
     public class Shenling : ModNPC
 	{
-        public override string Texture => "AAMod/NPCs/Bosses/Shen/Shenling";
+        public override string Texture => "AAModEXAI/Bosses/Shen/Shenling";
 
 
         public override void SetStaticDefaults()
@@ -390,7 +391,7 @@ namespace AAModEXAI.Bosses.Shen
 
     public class ShenlingBody1 : Shenling
     {
-        public override string Texture => "AAMod/NPCs/Bosses/Shen/ShenlingBody1";
+        public override string Texture => "AAModEXAI/Bosses/Shen/ShenlingBody1";
 
         public override void SetStaticDefaults()
         {
@@ -521,7 +522,7 @@ namespace AAModEXAI.Bosses.Shen
 
     public class ShenlingBody2 : Shenling
     {
-        public override string Texture => "AAMod/NPCs/Bosses/Shen/ShenlingBody2";
+        public override string Texture => "AAModEXAI/Bosses/Shen/ShenlingBody2";
 
         public override void SetStaticDefaults()
         {
@@ -652,7 +653,7 @@ namespace AAModEXAI.Bosses.Shen
 
     public class ShenlingTail : Shenling
     {
-        public override string Texture => "AAMod/NPCs/Bosses/Shen/ShenlingTail";
+        public override string Texture => "AAModEXAI/Bosses/Shen/ShenlingTail";
 
         public override void SetStaticDefaults()
         {

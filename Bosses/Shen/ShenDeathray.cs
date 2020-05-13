@@ -9,7 +9,7 @@ namespace AAModEXAI.Bosses.Shen
 {
     public class ShenDeathray : ModProjectile
     {
-        public override string Texture => "AAMod/NPCs/Bosses/Shen/ShenDeathray";
+        public override string Texture => "AAModEXAI/Bosses/Shen/ShenDeathray";
         private const float maxTime = 120;
 
         public override void SetStaticDefaults()
@@ -43,6 +43,10 @@ namespace AAModEXAI.Bosses.Shen
             if (Main.npc[(int)projectile.ai[1]].active && Main.npc[(int)projectile.ai[1]].type == mod.NPCType("ShenA"))
             {
                 projectile.Center = Main.npc[(int)projectile.ai[1]].Center + Vector2.UnitX.RotatedBy(Main.npc[(int)projectile.ai[1]].ai[3]) * 250 + Main.rand.NextVector2Circular(5, 5);
+            }
+            else if (Main.npc[(int)projectile.ai[1]].active && Main.npc[(int)projectile.ai[1]].type == mod.NPCType("ShenSoul"))
+            {
+                projectile.Center = Main.npc[(int)projectile.ai[1]].Center;
             }
             else
             {
@@ -122,8 +126,8 @@ namespace AAModEXAI.Bosses.Shen
                 return false;
             }
             Texture2D texture2D19 = Main.projectileTexture[projectile.type];
-            Texture2D texture2D20 = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Shen/ShenDeathray2");
-            Texture2D texture2D21 = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Shen/ShenDeathray3");
+            Texture2D texture2D20 = mod.GetTexture("Bosses/Shen/ShenDeathray2");
+            Texture2D texture2D21 = mod.GetTexture("Bosses/Shen/ShenDeathray3");
             float num223 = projectile.localAI[1];
             Color color44 = new Color(255, 255, 255, 0) * 0.9f;
             SpriteBatch arg_ABD8_0 = Main.spriteBatch;
@@ -186,7 +190,7 @@ namespace AAModEXAI.Bosses.Shen
 
     public class ShenDeathrayVertical : ModProjectile
     {
-        public override string Texture => "AAMod/NPCs/Bosses/Shen/ShenDeathray";
+        public override string Texture => "AAModEXAI/Bosses/Shen/ShenDeathray";
 
         private const float maxTime = 600;
 
@@ -303,8 +307,8 @@ namespace AAModEXAI.Bosses.Shen
                 return false;
             }
             Texture2D texture2D19 = Main.projectileTexture[projectile.type];
-            Texture2D texture2D20 = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Shen/ShenDeathray2");
-            Texture2D texture2D21 = ModLoader.GetMod("AAMod").GetTexture("NPCs/Bosses/Shen/ShenDeathray3");
+            Texture2D texture2D20 = mod.GetTexture("Bosses/Shen/ShenDeathray2");
+            Texture2D texture2D21 = mod.GetTexture("Bosses/Shen/ShenDeathray3");
             float num223 = projectile.localAI[1];
             Color color44 = new Color(255, 255, 255, 0) * 0.9f;
             SpriteBatch arg_ABD8_0 = Main.spriteBatch;
