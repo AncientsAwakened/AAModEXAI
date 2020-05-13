@@ -43,7 +43,7 @@ namespace AAModEXAI.Bosses.Shen
             }
             if (Main.npc[(int)projectile.ai[1]].active && Main.npc[(int)projectile.ai[1]].type == mod.NPCType("ShenSoul"))
             {
-                projectile.Center = Main.npc[(int)projectile.ai[1]].Center;
+                projectile.Center = Main.npc[(int)projectile.ai[1]].Center + Main.npc[(int)projectile.ai[1]].direction * new Vector2(Main.npc[(int)projectile.ai[1]].width / 2, 0);
             }
             else
             {

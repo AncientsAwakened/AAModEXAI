@@ -25,7 +25,7 @@ namespace AAModEXAI.Bosses.Shen
             base.SetDefaults();
             npc.damage = 260;
 			npc.defense = 240;
-            npc.lifeMax = 2000000;
+            npc.lifeMax = 1500000;
             npc.value = Item.sellPrice(1, 0, 0, 0);
             bossBag = ModLoader.GetMod("AAMod").ItemType("ShenCache");
             music = ModLoader.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/ShenA");
@@ -265,7 +265,7 @@ namespace AAModEXAI.Bosses.Shen
                             npc.ai[0]++;
                             npc.ai[1] = 0;
                             npc.netUpdate = true;
-                            npc.velocity = player.velocity + (player.Center - npc.Center) / 30f;
+                            npc.velocity = player.velocity + (player.Center - npc.Center) / 40f;
                         }
                         npc.rotation = 0;
                         break;
@@ -331,7 +331,7 @@ namespace AAModEXAI.Bosses.Shen
                         {
                             ShootAkumaProj = false;
                         }
-                        if (npc.ai[3] == 1 && --npc.ai[2] < 0)
+                        if (npc.ai[3] == 3 && --npc.ai[2] < 0)
                         {
                             npc.ai[2] = 4;
                             if (Main.netMode != 1)
@@ -378,7 +378,7 @@ namespace AAModEXAI.Bosses.Shen
                             Roar(roarTimerMax, false);
                             npc.ai[1] = 0;
                             npc.ai[2] = 0;
-                            if (++npc.ai[3] >= 4)
+                            if (++npc.ai[3] >= 6)
                             {
                                 npc.ai[0]++;
                                 npc.ai[3] = 0;
