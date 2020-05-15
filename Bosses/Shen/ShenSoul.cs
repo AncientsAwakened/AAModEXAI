@@ -20,6 +20,10 @@ namespace AAModEXAI.Bosses.Shen
 
         public override void SetDefaults()
         {
+            npc.width = 82;
+            npc.height = 48;
+            npc.HitSound = SoundID.NPCHit52;
+			npc.DeathSound = SoundID.NPCDeath55;
             npc.npcSlots = 0;
             npc.value = BaseUtility.CalcValue(0, 0, 0, 0);
             npc.aiStyle = -1;
@@ -60,38 +64,44 @@ namespace AAModEXAI.Bosses.Shen
         }
         public override void AI()
         {
-            if (internalAI[3] > 0)
+            if (internalAI[3] > 0 || AAGlobalProjectile.AnyProjectiles(mod.ProjectileType("ShenWaveDeathray")) || AAGlobalProjectile.AnyProjectiles(mod.ProjectileType("ShenWaveDeathraySmall")))
             {
                 npc.TargetClosest(false);
+                npc.rotation = 0;
                 npc.velocity *= .2f;
                 NPC shen = Main.npc[(int)internalAI[0]];
-                int shotdirection = npc.direction = Main.player[shen.target].Center.X > shen.Center.X? 1 : -1;
+                int shotdirection = npc.spriteDirection = npc.direction;
                 if(internalAI[4] == 0)
                 {
+                    npc.spriteDirection = npc.direction = shen.direction;
+                    shotdirection = npc.direction;
                     npc.Center = new Vector2(shen.Center.X + internalAI[1] * shotdirection, shen.Center.Y + internalAI[2]);
                 }
                 if(shen.ai[0] == 0 && shen.ai[2] == 240 && Main.netMode != 1)
                 {
                     float ai0 = (float)Math.PI * 2 / 300 * (internalAI[3] == 2 ? 1 : -1) * Math.Sign(internalAI[2]);
-                            Projectile.NewProjectile(npc.Center, Vector2.UnitX * shotdirection, mod.ProjectileType("ShenWaveDeathraySmall"), npc.damage, 0f, Main.myPlayer, ai0, npc.whoAmI);
+                            Projectile.NewProjectile(npc.Center + npc.direction * new Vector2(npc.width / 2, 0), Vector2.UnitX * shotdirection, mod.ProjectileType("ShenWaveDeathraySmall"), npc.damage, 0f, Main.myPlayer, ai0, npc.whoAmI);
                     internalAI[4] = 1;
                     npc.netUpdate = true;
                 }
                 if(shen.ai[0] == 13 && shen.ai[1] == internalAI[3] * 120 - 30)
                 {
                     if (Main.netMode != 1)
-                        Projectile.NewProjectile(npc.Center, npc.DirectionTo(Main.player[shen.target].Center), mod.ProjectileType("ShenWaveDeathraySmall"), npc.damage / 4, 0f, Main.myPlayer, 0f, npc.whoAmI);
+                        Projectile.NewProjectile(npc.Center + npc.direction * new Vector2(npc.width / 2, 0), npc.DirectionTo(Main.player[shen.target].Center), mod.ProjectileType("ShenWaveDeathraySmall"), npc.damage / 4, 0f, Main.myPlayer, 0f, npc.whoAmI);
+                }
+                if(shen.ai[0] == 13 && shen.ai[1] == 30)
+                {
                     internalAI[4] = 1;
                     npc.netUpdate = true;
                 }
                 if(shen.ai[0] != 0 && shen.ai[0] != 1 && shen.ai[0] != 13)
                 {
                     internalAI[3] = 0;
-                    internalAI[4] = 0;
                     npc.netUpdate = true;
                 }
                 return;
             }
+            internalAI[4] = 0;
             AI86();
             Lighting.AddLight(npc.Center, AAColor.Shen3.R / 255, AAColor.Shen3.G / 255, AAColor.Shen3.B / 255);
             AAAI.AIShadowflameGhost(npc, ref npc.ai, false, 660f, 0.3f, 15f, 0.2f, 8f, 5f, 10f, 0.4f, 0.4f, 0.95f, 5f);
@@ -138,7 +148,7 @@ namespace AAModEXAI.Bosses.Shen
 
         public override bool PreDraw(SpriteBatch spritebatch, Color dColor)
         {
-            if(internalAI[3] == 0)
+            if(internalAI[3] == 0 && internalAI[4] == 0)
             {
                 if (npc.velocity.X < 0f)
                 {

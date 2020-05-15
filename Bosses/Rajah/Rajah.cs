@@ -116,29 +116,29 @@ namespace AAModEXAI.Bosses.Rajah
         {
             if (npc.life < (npc.lifeMax * .85f)) //The lower the health, the more damage is done
             {
-                return isSupreme ? 12f : 10f;
+                return isSupreme ? 15f : 11f;
             }
             if (npc.life < (npc.lifeMax * .7f))
             {
-                return isSupreme ? 13f : 11f;
+                return isSupreme ? 16f : 12f;
             }
             if (npc.life < (npc.lifeMax * .65f))
             {
-                return isSupreme ? 14f : 12f;
+                return isSupreme ? 17f : 13f;
             }
             if (npc.life < (npc.lifeMax * .4f))
             {
-                return isSupreme ? 15f : 13f;
+                return isSupreme ? 18f : 14f;
             }
             if (npc.life < (npc.lifeMax * .25f))
             {
-                return isSupreme ? 16f : 14f;
+                return isSupreme ? 19f : 15f;
             }
             if (npc.life < (npc.lifeMax * .1f))
             {
-                return isSupreme ? 16f : 15f;
+                return isSupreme ? 20f : 16f;
             }
-            return isSupreme ? 11f : 9f;
+            return isSupreme ? 14f : 10f;
         }
 
         private bool SayLine = false;
@@ -473,9 +473,10 @@ namespace AAModEXAI.Bosses.Rajah
                     {
                         internalAI[3] = 0;
                         int Rocket = isSupreme ? mod.ProjectileType("RajahRocketEXR") : mod.ProjectileType("RajahRocket");
-                        Vector2 dir = Vector2.Normalize(player.Center - WeaponPos);
-                        dir *= ProjSpeed();
-                        Projectile.NewProjectile(WeaponPos.X, WeaponPos.Y, dir.X, dir.Y, Rocket, damage, 5, Main.myPlayer);
+                        Vector2 shoot = PredictPlayerMovement(ProjSpeed(), player);
+                        shoot.Normalize();
+                        shoot *= ProjSpeed();
+                        Projectile.NewProjectile(WeaponPos.X, WeaponPos.Y, shoot.X, shoot.Y, Rocket, damage, 5, Main.myPlayer);
                         npc.netUpdate = true;
                     }
                 }
@@ -484,7 +485,8 @@ namespace AAModEXAI.Bosses.Rajah
                     int carrots = isSupreme ? 5 : 3;
                     int carrotType = isSupreme ? mod.ProjectileType("CarrotEXR") : mod.ProjectileType("CarrotHostile");
                     float spread = 45f * 0.0174f * .5f;
-                    Vector2 dir = Vector2.Normalize(player.Center - WeaponPos);
+                    Vector2 dir = PredictPlayerMovement(ProjSpeed() + (isSupreme? 3 : 1), player);
+                    dir.Normalize();
                     dir *= ProjSpeed() + (isSupreme? 3 : 1);
                     float baseSpeed = (float)Math.Sqrt((dir.X * dir.X) + (dir.Y * dir.Y));
                     double startAngle = Math.Atan2(dir.X, dir.Y) - .1d;
@@ -505,8 +507,8 @@ namespace AAModEXAI.Bosses.Rajah
                     int Javelin = isSupreme ? mod.ProjectileType("BaneTEXR") : mod.ProjectileType("BaneR");
                     if (internalAI[3] == (isSupreme ? 40 : 60))
                     {
-                        float time = (player.Center - WeaponPos).Length() / ProjSpeed();
-                        Vector2 dir = Vector2.Normalize(player.Center + (isSupreme? player.velocity * time : Vector2.Zero) - WeaponPos);
+                        Vector2 dir = PredictPlayerMovement(ProjSpeed(), player);
+                        dir.Normalize();
                         dir *= ProjSpeed();
                         Projectile.NewProjectile(WeaponPos.X, WeaponPos.Y, dir.X, dir.Y, Javelin, damage, 5, Main.myPlayer);
                     }
@@ -521,7 +523,8 @@ namespace AAModEXAI.Bosses.Rajah
                     if (internalAI[3] > 20)
                     {
                         internalAI[3] = 0;
-                        Vector2 dir = Vector2.Normalize(player.Center - WeaponPos);
+                        Vector2 dir = PredictPlayerMovement(ProjSpeed() + 3f, player);
+                        dir.Normalize();
                         dir *= ProjSpeed() + 3f;
                         Projectile.NewProjectile(WeaponPos.X, WeaponPos.Y, dir.X, dir.Y, mod.ProjectileType("ExcalihareR"), damage, 5, Main.myPlayer);
                         npc.netUpdate = true;
@@ -531,9 +534,9 @@ namespace AAModEXAI.Bosses.Rajah
                 {
                     int Arrows = Main.rand.Next(2, 4);
                     float spread = 45f * 0.0174f * .3f;
-                    float time = (player.Center - WeaponPos).Length() / ProjSpeed();
-                    Vector2 dir = Vector2.Normalize(player.Center + (isSupreme? player.velocity * time : Vector2.Zero) - WeaponPos);
-                    dir *= ProjSpeed() + (isSupreme? 3 : 1);
+                    Vector2 dir = PredictPlayerMovement(ProjSpeed(), player);
+                    dir.Normalize();
+                    dir *= ProjSpeed();
                     float baseSpeed = (float)Math.Sqrt((dir.X * dir.X) + (dir.Y * dir.Y));
                     double startAngle = Math.Atan2(dir.X, dir.Y) - .1d;
                     double deltaAngle = spread / (Arrows * 2);
@@ -554,11 +557,12 @@ namespace AAModEXAI.Bosses.Rajah
                     if (internalAI[3] > 5)
                     {
                         internalAI[3] = 0;
-                        Vector2 vector12 = new Vector2(player.Center.X, player.Center.Y);
+                        Vector2 ShootPos = player.Center + new Vector2(player.velocity.X / 10f * ((npc.ai[2] / 60) % 20) * 600f / 14f, 0);
+                        Vector2 vector12 = ShootPos;
                         float num75 = 14f;
                         for (int num120 = 0; num120 < 3; num120++)
                         {
-                            Vector2 vector2 = player.Center + new Vector2(-(float)Main.rand.Next(0, 401) * player.direction, -600f);
+                            Vector2 vector2 = ShootPos + new Vector2(-(float)Main.rand.Next(0, 401) * player.direction, -600f);
                             vector2.Y -= 120 * num120;
                             Vector2 vector13 = vector12 - vector2;
                             if (vector13.Y < 0f)
@@ -1223,6 +1227,30 @@ namespace AAModEXAI.Bosses.Rajah
                 target.wingTime = 0;
                 target.velocity.Y = 1f;
             }
+        }
+
+        public Vector2 PredictPlayerMovement(float speed, Player player)
+        {
+            Vector2 npctoplayer = player.Center - npc.Center;
+            float playerspeed = (float)Math.Sqrt(player.velocity.X * player.velocity.X + player.velocity.Y * player.velocity.Y);
+            float distance = (float)Math.Sqrt(npctoplayer.X * npctoplayer.X + npctoplayer.Y * npctoplayer.Y);
+            float deg = player.velocity.ToRotation() - npctoplayer.ToRotation();
+            float speedtoplayer = 2f * speed * (float)Math.Cos(deg) + 2f * (float)Math.Sqrt(speed * speed * Math.Cos(deg) * Math.Cos(deg) + speed * speed - playerspeed * playerspeed);
+            float movetime = distance / speedtoplayer;
+            
+            
+            if(speed <= playerspeed)
+            {
+                float newspeed = playerspeed + 10f;
+                speedtoplayer = 2f * newspeed * (float)Math.Cos(deg) + 2f * (float)Math.Sqrt(newspeed * newspeed * Math.Cos(deg) * Math.Cos(deg) + newspeed * newspeed - playerspeed * playerspeed);
+                movetime = distance / speedtoplayer;
+                Vector2 velocity = player.velocity + npctoplayer / movetime;
+                velocity.Normalize();
+                velocity *= speed;
+                return velocity;
+            }
+
+            return player.velocity + npctoplayer / movetime;
         }
     }
 

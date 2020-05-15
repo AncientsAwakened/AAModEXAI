@@ -11,7 +11,7 @@ using AAModEXAI.Bosses.Yamata.Awakened;
 using AAModEXAI.Bosses.Zero;
 using AAModEXAI.Bosses.Zero.Protocol;
 using AAModEXAI.Bosses.Anubis.Forsaken;
-
+using System;
 using AAMod;
 
 namespace AAModEXAI
@@ -95,8 +95,21 @@ namespace AAModEXAI
             }
 		}
 
+        public override void PostUpdateMiscEffects()
+		{
+            if (player.endurance > .5f)
+			{
+                float enduranceboost = player.endurance / .5f;
+                player.endurance = 1f - (float)Math.Pow(.5f, enduranceboost);
+			}
+        }
+
         public override void PostUpdate()
         {
+            if(player.endurance >= 1f)
+            {
+                player.endurance = .8f;
+            }
 
             if (NPC.AnyNPCs(mod.NPCType("AkumaTransition")))
             {
