@@ -105,9 +105,10 @@ namespace AAModEXAI.Bosses.Shen
             AI86();
             Lighting.AddLight(npc.Center, AAColor.Shen3.R / 255, AAColor.Shen3.G / 255, AAColor.Shen3.B / 255);
             AAAI.AIShadowflameGhost(npc, ref npc.ai, false, 660f, 0.3f, 15f, 0.2f, 8f, 5f, 10f, 0.4f, 0.4f, 0.95f, 5f);
-            if (!NPC.AnyNPCs(ModContent.NPCType<ShenA>()))
+            if (!NPC.AnyNPCs(mod.NPCType("ShenA")))
             {
                 npc.life = 0;
+                npc.active = false;
             }
             if (npc.alpha != 0)
             {

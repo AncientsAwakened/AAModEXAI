@@ -501,5 +501,15 @@ namespace AAModEXAI
             }
             return base.PreAI(npc);
         }
+
+        public override bool StrikeNPC(NPC npc, ref double damage, int defense, ref float knockback, int hitDirection, ref bool crit)
+		{
+            if(damage > npc.lifeMax * .05f)
+            {
+                damage = Main.DamageVar(npc.lifeMax * .01f);;
+                return false;
+            }
+            return true;
+        }
     }
 }

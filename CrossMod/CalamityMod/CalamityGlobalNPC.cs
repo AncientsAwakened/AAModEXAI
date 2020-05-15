@@ -35,6 +35,7 @@ namespace AAModEXAI
                 if(npc.type == mod.NPCType("Akuma")) CalamityDR = 0.1f;
                 if(npc.type == mod.NPCType("AwakenedLung")) CalamityDR = 0.07f;
                 if(npc.type == mod.NPCType("AncientLung")) CalamityDR = 0.1f;
+                if(npc.type == mod.NPCType("AsheA")) CalamityDR = 0.04f;
 
                 if(npc.type == mod.NPCType("AthenaA")) CalamityDR = 0.5f;
                 if(npc.type == mod.NPCType("Seraph")) CalamityDR = 0.5f;
@@ -68,6 +69,7 @@ namespace AAModEXAI
                 if(npc.type == mod.NPCType("YamataHeadF")) CalamityDR = 0.08f;
                 if(npc.type == mod.NPCType("YamataHeadF1")) CalamityDR = 0.08f;
                 if(npc.type == mod.NPCType("YamataHeadF2")) CalamityDR = 0.08f;
+                if(npc.type == mod.NPCType("HarukaY")) CalamityDR = 0.04f;
 
                 if(npc.type == mod.NPCType("ZeroEcho")) CalamityDR = 0.04f;
                 if(npc.type == mod.NPCType("ZeroMini")) CalamityDR = 0.04f;

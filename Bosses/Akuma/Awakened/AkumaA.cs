@@ -664,7 +664,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 
         public override void ModifyHitByProjectile(Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
-            if (projectile.penetrate > 1)
+            if (projectile.penetrate > 1 || projectile.penetrate == -1)
             {
                 damage = (int)(damage * .5f);
             }

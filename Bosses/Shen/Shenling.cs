@@ -513,6 +513,10 @@ namespace AAModEXAI.Bosses.Shen
             {
                 damage = (int)(damage * .2f);
             }
+            else if(projectile.penetrate == -1 && projectile.minion)
+            {
+                damage = (int)(damage * .7f);
+            }
             else if (projectile.penetrate >= 1)
             {
                 projectile.damage *= (int).2;
@@ -644,6 +648,10 @@ namespace AAModEXAI.Bosses.Shen
             {
                 damage = (int)(damage * .2f);
             }
+            else if(projectile.penetrate == -1 && projectile.minion)
+            {
+                damage = (int)(damage * .7f);
+            }
             else if (projectile.penetrate >= 1)
             {
                 projectile.damage *= (int).2;
@@ -774,6 +782,10 @@ namespace AAModEXAI.Bosses.Shen
             if (projectile.penetrate == -1 && !projectile.minion)
             {
                 damage = (int)(damage * .2f);
+            }
+            else if(projectile.penetrate == -1 && projectile.minion)
+            {
+                damage = (int)(damage * .7f);
             }
             else if (projectile.penetrate >= 1)
             {

@@ -266,6 +266,10 @@ namespace AAModEXAI.Bosses.Yamata
             {
                 damage = (int)(damage * .2f);
             }
+            else if(projectile.penetrate == -1 && projectile.minion)
+            {
+                damage = (int)(damage * .7f);
+            }
             else if (projectile.penetrate >= 1)
             {
                 projectile.damage *= (int).2;

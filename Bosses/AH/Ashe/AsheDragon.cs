@@ -502,6 +502,10 @@ namespace AAModEXAI.Bosses.AH.Ashe
             {
                 damage = (int)(damage * .2f);
             }
+            else if(projectile.penetrate == -1 && projectile.minion)
+            {
+                damage = (int)(damage * .7f);
+            }
             else if (projectile.penetrate >= 1)
             {
                 projectile.damage *= (int).2;
@@ -641,6 +645,10 @@ namespace AAModEXAI.Bosses.AH.Ashe
             if (projectile.penetrate == -1 && !projectile.minion)
             {
                 damage = (int)(damage * .2f);
+            }
+            else if(projectile.penetrate == -1 && projectile.minion)
+            {
+                damage = (int)(damage * .7f);
             }
 
             else if (projectile.penetrate >= 1)
@@ -783,6 +791,10 @@ namespace AAModEXAI.Bosses.AH.Ashe
             {
                 damage = (int)(damage * .2f);
             }
+            else if(projectile.penetrate == -1 && projectile.minion)
+            {
+                damage = (int)(damage * .7f);
+            }
             else if (projectile.penetrate >= 1)
             {
                 projectile.damage *= (int).2;
@@ -922,6 +934,10 @@ namespace AAModEXAI.Bosses.AH.Ashe
             if (projectile.penetrate == -1 && !projectile.minion)
             {
                 damage = (int)(damage * .2f);
+            }
+            else if(projectile.penetrate == -1 && projectile.minion)
+            {
+                damage = (int)(damage * .7f);
             }
             else if (projectile.penetrate >= 1)
             {
@@ -1069,6 +1085,10 @@ namespace AAModEXAI.Bosses.AH.Ashe
             if (projectile.penetrate == -1 && !projectile.minion)
             {
                 damage = (int)(damage * .2f);
+            }
+            else if(projectile.penetrate == -1 && projectile.minion)
+            {
+                damage = (int)(damage * .7f);
             }
             else if (projectile.penetrate >= 1)
             {
