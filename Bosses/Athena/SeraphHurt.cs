@@ -5,6 +5,7 @@ using Terraria.ModLoader;
 
 using Terraria.Localization;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Athena
 {
@@ -48,7 +49,7 @@ namespace AAModEXAI.Bosses.Athena
 
             npc.ai[0]++;
 
-            if (npc.ai[0] == 120 && Main.netMode != 1)
+            if (npc.ai[0] == 120 && Main.netMode != NetmodeID.MultiplayerClient)
             {
                 npc.netUpdate = true;
             }
@@ -57,7 +58,7 @@ namespace AAModEXAI.Bosses.Athena
                 CombatText.NewText(npc.Hitbox, Color.CadetBlue, SeraphBitching(), true);
                 npc.netUpdate = true;
             }
-            if (npc.ai[0] >= 240 && npc.dontTakeDamage && Main.netMode != 1)
+            if (npc.ai[0] >= 240 && npc.dontTakeDamage && Main.netMode != NetmodeID.MultiplayerClient)
             {
                 npc.dontTakeDamage = false;
                 npc.netUpdate = true;
@@ -90,7 +91,7 @@ namespace AAModEXAI.Bosses.Athena
 
                 Vector2 Acropolis = new Vector2(Origin.X + (80 * 16), Origin.Y + (79 * 16));
 
-                if (Vector2.Distance(npc.Center, Acropolis) > 90 * 16 && Main.netMode != 1)
+                if (Vector2.Distance(npc.Center, Acropolis) > 90 * 16 && Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     for (int a = 0; a < 8; a++)
                     {

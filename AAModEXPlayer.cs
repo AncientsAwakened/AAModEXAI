@@ -13,6 +13,7 @@ using AAModEXAI.Bosses.Zero.Protocol;
 using AAModEXAI.Bosses.Anubis.Forsaken;
 using System;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI
 {

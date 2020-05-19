@@ -5,6 +5,7 @@ using Terraria.ModLoader;
 using Terraria.ID;
 using Microsoft.Xna.Framework.Graphics;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Athena.Olympian
 {
@@ -60,7 +61,7 @@ namespace AAModEXAI.Bosses.Athena.Olympian
                 }
             }
             npc.ai[0] += 1f;
-            if (npc.ai[0] % 30f == 0f && npc.ai[0] < 180f && Main.netMode != 1)
+            if (npc.ai[0] % 30f == 0f && npc.ai[0] < 180f && Main.netMode != NetmodeID.MultiplayerClient)
             {
                 int[] array4 = new int[5];
                 Vector2[] array5 = new Vector2[5];

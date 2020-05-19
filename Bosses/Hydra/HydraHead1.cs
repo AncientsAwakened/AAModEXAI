@@ -9,6 +9,7 @@ using Terraria.Audio;
 using System.IO;
 using AAMod.NPCs.Enemies.Mire;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Hydra
 {
@@ -113,7 +114,7 @@ namespace AAModEXAI.Bosses.Hydra
 
             if (!NPC.AnyNPCs(mod.NPCType("Hydra")))
             {
-                if (Main.netMode != 1) //force a kill to prevent 'ghosting'
+                if (Main.netMode != NetmodeID.MultiplayerClient) //force a kill to prevent 'ghosting'
                 {
                     npc.life = 0;
                     npc.checkDead();
@@ -128,7 +129,7 @@ namespace AAModEXAI.Bosses.Hydra
 
             if (!bodyNPC.active)
             {
-                if (Main.netMode != 1) //force a kill to prevent 'ghosting'
+                if (Main.netMode != NetmodeID.MultiplayerClient) //force a kill to prevent 'ghosting'
                 {
                     npc.life = 0;
                     npc.checkDead();
@@ -166,7 +167,7 @@ namespace AAModEXAI.Bosses.Hydra
                 damage = npc.damage / 2;
             }
 
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 npc.ai[1]++;
 
@@ -232,7 +233,7 @@ namespace AAModEXAI.Bosses.Hydra
 
         public override void PostAI()
         {
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 Player player = Main.player[npc.target];
                 bool Red = Head == 5 || Head == 8;

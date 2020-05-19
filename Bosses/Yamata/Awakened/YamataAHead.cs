@@ -6,6 +6,7 @@ using System.IO;
 using Terraria.ID;
 
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Yamata.Awakened
 {
@@ -96,7 +97,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
 
             if (!Body.npc.active)
             {
-                if (Main.netMode != 1) //force a kill to prevent 'ghost hands'
+                if (Main.netMode != NetmodeID.MultiplayerClient) //force a kill to prevent 'ghost hands'
                 {
                     npc.life = 0;
                     npc.checkDead();
@@ -157,13 +158,13 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                     if (internalAI[3] == 0)
                     {
                         internalAI[3] = 1;
-                        if (Main.netMode != 1)
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
                             Projectile.NewProjectile(npc.Center, Vector2.Zero, mod.ProjectileType("YamataHarukaProj"), npc.damage / 4, 0f, Main.myPlayer, npc.target);
                     }
                     if (++internalAI[2] > 60)
                     {
                         internalAI[2] = 0;
-                        if (Main.netMode != 1)
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
                             Projectile.NewProjectile(npc.Center, Vector2.UnitY * 5, mod.ProjectileType("YamataAShockBomb"), npc.damage / 6, 0f, Main.myPlayer, npc.target);
                     }
                     if (++internalAI[1] > 180)
@@ -193,7 +194,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                     if (++internalAI[2] > 20)
                     {
                         internalAI[2] = 0;
-                        if (Main.netMode != 1)
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
                             Projectile.NewProjectile(npc.Center, npc.DirectionTo(Main.player[npc.target].Center) * 5f, mod.ProjectileType("YamataAVenom2"), npc.damage / 6, 0f, Main.myPlayer);
                     }
                     if (++internalAI[1] > 240)
@@ -209,7 +210,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                     if (++internalAI[2] > 60)
                     {
                         internalAI[2] = 0;
-                        if (Main.netMode != 1)
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
                             Projectile.NewProjectile(npc.Center, npc.DirectionTo(Main.player[npc.target].Center) * 7f, mod.ProjectileType("YamataABomb"), npc.damage / 6, 0f, Main.myPlayer);
                     }
                     if (++internalAI[1] > 180)
@@ -228,7 +229,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                 case 4: //shoot direct aim deathrays
                     if (internalAI[1] == npc.ai[3] * 60 - 30)
                     {
-                        if (Main.netMode != 1)
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
                             Projectile.NewProjectile(npc.Center, npc.DirectionTo(Main.player[npc.target].Center), mod.ProjectileType("YamataDeathraySmall"), npc.damage / 4, 0f, Main.myPlayer, 0f, npc.whoAmI);
                     }
                     if (++internalAI[1] > 360)
@@ -246,7 +247,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                     if (++internalAI[2] > 90)
                     {
                         internalAI[2] = 0;
-                        if (Main.netMode != 1)
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
                             for (int i = -1; i <= 1; i++)
                             Projectile.NewProjectile(npc.Center, npc.DirectionTo(Main.player[npc.target].Center).RotatedBy(MathHelper.ToRadians(i * 5)) * 5f, mod.ProjectileType("YamataAVenom2"), npc.damage / 6, 0f, Main.myPlayer);
                     }
@@ -279,7 +280,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                     if (--internalAI[2] < 0)
                     {
                         internalAI[2] = 120;
-                        if (Main.netMode != 1)
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
                             Projectile.NewProjectile(npc.Center, npc.DirectionTo(Main.player[npc.target].Center) * 7f, mod.ProjectileType("YamataABomb"), npc.damage / 6, 0f, Main.myPlayer);
                     }
                     if (++internalAI[1] > 360)

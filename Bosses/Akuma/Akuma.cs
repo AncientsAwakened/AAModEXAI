@@ -7,6 +7,7 @@ using Terraria.ModLoader;
 
 using System.IO;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Akuma
 {
@@ -81,7 +82,7 @@ namespace AAModEXAI.Bosses.Akuma
         public override void SendExtraAI(BinaryWriter writer)
         {
             base.SendExtraAI(writer);
-            if (Main.netMode == 2 || Main.dedServ)
+            if (Main.netMode == NetmodeID.Server || Main.dedServ)
             {
                 writer.Write(internalAI[0]);
                 writer.Write(internalAI[1]);
@@ -93,7 +94,7 @@ namespace AAModEXAI.Bosses.Akuma
         public override void ReceiveExtraAI(BinaryReader reader)
         {
             base.ReceiveExtraAI(reader);
-            if (Main.netMode == 1)
+            if (Main.netMode == NetmodeID.MultiplayerClient)
             {
                 internalAI[0] = reader.ReadFloat();
                 internalAI[1] = reader.ReadFloat();
@@ -169,7 +170,7 @@ namespace AAModEXAI.Bosses.Akuma
                     if (weakness == false)
                     {
                         weakness = true;
-                        if (Main.netMode != 1) AAModEXAI.Chat(AAMod.Lang.BossChat("Akuma1"), new Color(180, 41, 32));
+                        if (Main.netMode != NetmodeID.MultiplayerClient) AAModEXAI.Chat(AAMod.Lang.BossChat("Akuma1"), new Color(180, 41, 32));
                     }
                 }
                 else if (!npc.HasBuff(BuffID.Wet))
@@ -206,7 +207,7 @@ namespace AAModEXAI.Bosses.Akuma
                 else
                     npc.ai[3] = 0;
             }
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 if (npc.ai[0] == 0)
                 {
@@ -347,18 +348,18 @@ namespace AAModEXAI.Bosses.Akuma
             {
                 if (loludided == false)
                 {
-                    if (Main.netMode != 1) AAModEXAI.Chat(AAMod.Lang.BossChat("Akuma2"), new Color(180, 41, 32));
+                    if (Main.netMode != NetmodeID.MultiplayerClient) AAModEXAI.Chat(AAMod.Lang.BossChat("Akuma2"), new Color(180, 41, 32));
                     loludided = true;
                 }
                 npc.velocity.Y = npc.velocity.Y + 1f;
-                if (npc.position.Y - npc.height - npc.velocity.Y >= Main.maxTilesY && Main.netMode != 1) { BaseAI.KillNPC(npc); npc.netUpdate2 = true; }
+                if (npc.position.Y - npc.height - npc.velocity.Y >= Main.maxTilesY && Main.netMode != NetmodeID.MultiplayerClient) { BaseAI.KillNPC(npc); npc.netUpdate2 = true; }
             }
 
             if (Main.player[npc.target].dead || Math.Abs(npc.position.X - Main.player[npc.target].position.X) > 6000f || Math.Abs(npc.position.Y - Main.player[npc.target].position.Y) > 6000f)
             {
                 if (loludided == false)
                 {
-                    if (Main.netMode != 1) AAModEXAI.Chat(AAMod.Lang.BossChat("Akuma3"), new Color(180, 41, 32));
+                    if (Main.netMode != NetmodeID.MultiplayerClient) AAModEXAI.Chat(AAMod.Lang.BossChat("Akuma3"), new Color(180, 41, 32));
                     loludided = true;
                 }
                 npc.velocity.Y = npc.velocity.Y - 1f;
@@ -410,7 +411,7 @@ namespace AAModEXAI.Bosses.Akuma
             {
                 if (!QuoteSaid && sayQuote)
                 {
-                    if (Main.netMode != 1) AAModEXAI.Chat((!Quote1) ? AAMod.Lang.BossChat("Akuma4") : AAMod.Lang.BossChat("Akuma5"), new Color(180, 41, 32));
+                    if (Main.netMode != NetmodeID.MultiplayerClient) AAModEXAI.Chat((!Quote1) ? AAMod.Lang.BossChat("Akuma4") : AAMod.Lang.BossChat("Akuma5"), new Color(180, 41, 32));
                     QuoteSaid = true;
                     Quote1 = true;
                 }
@@ -429,7 +430,7 @@ namespace AAModEXAI.Bosses.Akuma
                 if (!QuoteSaid && sayQuote)
                 {
                     if (!Quote3 || Main.rand.Next(4) == 0)
-                        if (Main.netMode != 1) AAModEXAI.Chat((!Quote3) ? AAMod.Lang.BossChat("Akuma7") : AAMod.Lang.BossChat("Akuma8"), new Color(180, 41, 32));
+                        if (Main.netMode != NetmodeID.MultiplayerClient) AAModEXAI.Chat((!Quote3) ? AAMod.Lang.BossChat("Akuma7") : AAMod.Lang.BossChat("Akuma8"), new Color(180, 41, 32));
                     QuoteSaid = true;
                     Quote3 = true;
                 }
@@ -443,7 +444,7 @@ namespace AAModEXAI.Bosses.Akuma
                 if (!QuoteSaid && sayQuote)
                 {
                     if (!Quote5 || Main.rand.Next(4) == 0)
-                        if (Main.netMode != 1) AAModEXAI.Chat((!Quote5) ? AAMod.Lang.BossChat("Akuma13") : AAMod.Lang.BossChat("Akuma14"), new Color(180, 41, 32));
+                        if (Main.netMode != NetmodeID.MultiplayerClient) AAModEXAI.Chat((!Quote5) ? AAMod.Lang.BossChat("Akuma13") : AAMod.Lang.BossChat("Akuma14"), new Color(180, 41, 32));
                     QuoteSaid = true;
                     Quote5 = true;
                 }
@@ -489,11 +490,11 @@ namespace AAModEXAI.Bosses.Akuma
             {
                 if (!AAWorld.downedAkuma)
                 {
-                    if (Main.netMode != 1) BaseUtility.Chat(AAMod.Lang.BossChat("Akuma11"), Color.DarkOrange.R, Color.DarkOrange.G, Color.DarkOrange.B, false);
+                    if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("Akuma11"), Color.DarkOrange.R, Color.DarkOrange.G, Color.DarkOrange.B, false);
                 }
                 string[] lootTable = { "AkumaTerratool", "DayStorm", "LungStaff", "MorningGlory", "RadiantDawn", "Solar", "SunSpear", "ReignOfFire", "DaybreakArrow", "Daycrusher", "Dawnstrike", "SunStorm", "SunStaff", "DragonSlasher" };
                 AAAI.DownedBoss(npc, mod, lootTable, AAWorld.downedAkuma, true, ModLoader.GetMod("AAMod").ItemType("CrucibleScale"), 20, 30, false, false, true, 0, ModLoader.GetMod("AAMod").ItemType("AkumaTrophy"), false);
-                if (Main.netMode != 1) AAModEXAI.Chat(AAMod.Lang.BossChat("Akuma12"), new Color(180, 41, 32));
+                if (Main.netMode != NetmodeID.MultiplayerClient) AAModEXAI.Chat(AAMod.Lang.BossChat("Akuma12"), new Color(180, 41, 32));
 
             }
             if (Main.expertMode)
@@ -625,14 +626,14 @@ namespace AAModEXAI.Bosses.Akuma
             }
 
 
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 if (!Main.npc[(int)npc.ai[1]].active || Main.npc[(int)npc.ai[3]].type != mod.NPCType("Akuma"))
                 {
                     npc.life = 0;
                     npc.HitEffect(0, 10.0);
                     npc.active = false;
-                    NetMessage.SendData(28, -1, -1, null, npc.whoAmI, -1f, 0.0f, 0.0f, 0, 0, 0);
+                    NetMessage.SendData(MessageID.StrikeNPC, -1, -1, null, npc.whoAmI, -1f, 0.0f, 0.0f, 0, 0, 0);
                 }
             }
 

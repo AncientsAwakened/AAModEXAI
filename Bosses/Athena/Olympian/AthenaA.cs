@@ -7,6 +7,7 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework.Graphics;
 using System.IO;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Athena.Olympian
 {
@@ -88,7 +89,7 @@ namespace AAModEXAI.Bosses.Athena.Olympian
             }
             Player player = Main.player[npc.target];
 
-            if (internalAI[2] == 0 && npc.life < npc.lifeMax / 3 && Main.netMode != 1)
+            if (internalAI[2] == 0 && npc.life < npc.lifeMax / 3 && Main.netMode != NetmodeID.MultiplayerClient)
             {
                 NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType("AthenaDark"));
                 NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType("AthenaLight"));
@@ -126,7 +127,7 @@ namespace AAModEXAI.Bosses.Athena.Olympian
                         }
                     }
 
-                    if (internalAI[3]++ >= 250 && Main.netMode != 1)
+                    if (internalAI[3]++ >= 250 && Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         int Choice = Main.rand.Next(2);
                         if (Choice == 0)
@@ -551,7 +552,7 @@ namespace AAModEXAI.Bosses.Athena.Olympian
                 npc.TargetClosest();
                 if (player.dead || !player.active || Math.Abs(Vector2.Distance(npc.position, player.position)) > 6000 || !modPlayer.ZoneAcropolis || Vector2.Distance(Acropolis, player.position) > 1500)
                 {
-                    if (Main.netMode != 1) BaseUtility.Chat(AAMod.Lang.BossChat("AthenaA1"), Color.CornflowerBlue);
+                    if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("AthenaA1"), Color.CornflowerBlue);
                     int p = NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType("AthenaFlee"));
                     Main.npc[p].Center = npc.Center;
                     npc.active = false;
@@ -651,7 +652,7 @@ namespace AAModEXAI.Bosses.Athena.Olympian
             }
             else
             {
-                if (Main.netMode != 1) BaseUtility.Chat(AAMod.Lang.BossChat("AthenaA2"), Color.CornflowerBlue);
+                if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("AthenaA2"), Color.CornflowerBlue);
                 int p = NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType("AthenaFlee"));
                 Main.npc[p].Center = npc.Center;
             }

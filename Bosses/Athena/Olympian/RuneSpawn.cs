@@ -5,6 +5,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Athena.Olympian
 {
@@ -62,7 +63,7 @@ namespace AAModEXAI.Bosses.Athena.Olympian
 
         public override void Kill(int timeleft)
         {
-			Main.PlaySound(2, (int)projectile.position.X, (int)projectile.position.Y, 14);
+			Main.PlaySound(SoundID.Item, (int)projectile.position.X, (int)projectile.position.Y, 14);
             int p = NPC.NewNPC((int)projectile.Center.X, (int)projectile.Center.Y, mod.NPCType("OwlRuneCharged"));
             Main.npc[p].Center = projectile.Center;
             for (int num468 = 0; num468 < 10; num468++)

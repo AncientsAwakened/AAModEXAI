@@ -10,6 +10,7 @@ using AAMod.Items.Boss.Rajah;
 using Terraria.Graphics.Shaders;
 using AAModEXAI.Bosses.Rajah.Supreme;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Rajah
 {
@@ -159,7 +160,7 @@ namespace AAModEXAI.Bosses.Rajah
             StaffPos = new Vector2(npc.Center.X + (npc.direction == 1 ? 78 : -78), npc.Center.Y - 9);
             if (Roaring) roarTimer--;
 
-            if (Main.netMode != 1 && npc.type == mod.NPCType("SupremeRajah") && isSupreme == false)
+            if (Main.netMode != NetmodeID.MultiplayerClient && npc.type == mod.NPCType("SupremeRajah") && isSupreme == false)
             {
                 isSupreme = true;
                 npc.netUpdate = true;
@@ -167,13 +168,13 @@ namespace AAModEXAI.Bosses.Rajah
 
             if (isSupreme)
             {
-                if (npc.ai[3] != 0 && !DefenseLine && !AAWorld.downedRajahsRevenge && Main.netMode != 1)
+                if (npc.ai[3] != 0 && !DefenseLine && !AAWorld.downedRajahsRevenge && Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     DefenseLine = true;
                     BaseUtility.Chat(AAMod.Lang.BossChat("SupremeRajahChat"), Color.MediumPurple);
 
                 }
-                if (npc.life <= npc.lifeMax / 7 && !SayLine && Main.netMode != 1)
+                if (npc.life <= npc.lifeMax / 7 && !SayLine && Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     SayLine = true;
                     string Name;
@@ -185,7 +186,7 @@ namespace AAModEXAI.Bosses.Rajah
                     }
                     else
                     {
-                        if (Main.netMode != 0)
+                        if (Main.netMode != NetmodeID.SinglePlayer)
                         {
                             Name = "Terrarians";
                         }
@@ -198,7 +199,7 @@ namespace AAModEXAI.Bosses.Rajah
                             Name = Main.LocalPlayer.name;
                         }
                     }
-                    if (Main.netMode != 1) BaseUtility.Chat(AAMod.Lang.BossChat("Rajah5") + Name.ToUpper() + AAMod.Lang.BossChat("Rajah6"), 107, 137, 179);
+                    if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("Rajah5") + Name.ToUpper() + AAMod.Lang.BossChat("Rajah6"), 107, 137, 179);
                     music = ModLoader.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/LastStand");
                 }
             }
@@ -211,16 +212,16 @@ namespace AAModEXAI.Bosses.Rajah
                 {
                     if (isSupreme)
                     {
-                        if (Main.netMode != 1) BaseUtility.Chat(AAMod.Lang.BossChat("Rajah7"), 107, 137, 179);
-                        if (Main.netMode != 1)
+                        if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("Rajah7"), 107, 137, 179);
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
                         {
                             Projectile.NewProjectile(npc.position, npc.velocity, mod.ProjectileType("SupremeRajahBookIt"), damage, 0, Main.myPlayer);
                         }
                     }
                     else
                     {
-                        if (Main.netMode != 1) BaseUtility.Chat(AAMod.Lang.BossChat("Rajah2"), 107, 137, 179);
-                        if (Main.netMode != 1)
+                        if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("Rajah2"), 107, 137, 179);
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
                         {
                             Projectile.NewProjectile(npc.position, npc.velocity, mod.ProjectileType("RajahBookIt"), damage, 0, Main.myPlayer);
                         }
@@ -237,8 +238,8 @@ namespace AAModEXAI.Bosses.Rajah
                 npc.TargetClosest(true);
                 if (Math.Abs(npc.Center.X - Main.player[npc.target].Center.X) + Math.Abs(npc.Center.Y - Main.player[npc.target].Center.Y) > 10000)
                 {
-                    if (Main.netMode != 1) BaseUtility.Chat(AAMod.Lang.BossChat("Rajah3"), 107, 137, 179);
-                    if (Main.netMode != 1)
+                    if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("Rajah3"), 107, 137, 179);
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         if (isSupreme)
                         {
@@ -368,7 +369,7 @@ namespace AAModEXAI.Bosses.Rajah
                 npc.TargetClosest(true);
             }
 
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 npc.ai[2]++;
                 internalAI[3]++;
@@ -386,7 +387,7 @@ namespace AAModEXAI.Bosses.Rajah
                 {
                     Roar(roarTimerMax);
                 }
-                if (Main.netMode != 1)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     internalAI[3] = 0;
                     npc.ai[2] = 0;
@@ -409,7 +410,7 @@ namespace AAModEXAI.Bosses.Rajah
                 npc.netUpdate = true;
             }
 
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 if (npc.ai[3] == 0) //Minion Phase
                 {
@@ -1062,7 +1063,7 @@ namespace AAModEXAI.Bosses.Rajah
                 else
                 {
                     string Name;
-                    if (Main.netMode != 0)
+                    if (Main.netMode != NetmodeID.SinglePlayer)
                     {
                         Name = "Terrarians";
                     }
@@ -1070,7 +1071,7 @@ namespace AAModEXAI.Bosses.Rajah
                     {
                         Name = Main.LocalPlayer.name;
                     }
-                    if (Main.netMode != 1) BaseUtility.Chat(AAMod.Lang.BossChat("Rajah8") + Name + AAMod.Lang.BossChat("Rajah9"), 107, 137, 179, true);
+                    if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("Rajah8") + Name + AAMod.Lang.BossChat("Rajah9"), 107, 137, 179, true);
                     int p = Projectile.NewProjectile(npc.position, npc.velocity, mod.ProjectileType("SupremeRajahLeave"), 100, 0, Main.myPlayer);
                     Main.projectile[p].Center = npc.Center;
                 }
@@ -1091,7 +1092,7 @@ namespace AAModEXAI.Bosses.Rajah
                 int bunnyKills = NPC.killCount[Item.NPCtoBanner(NPCID.Bunny)];
                 if (bunnyKills >= 100)
                 {
-                    if (Main.netMode != 1) BaseUtility.Chat(AAMod.Lang.BossChat("Rajah4"), 107, 137, 179, true);
+                    if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("Rajah4"), 107, 137, 179, true);
                 }
                 Projectile.NewProjectile(npc.position, npc.velocity, mod.ProjectileType("RajahBookIt"), 100, 0, Main.myPlayer);
                 if (!Main.expertMode)

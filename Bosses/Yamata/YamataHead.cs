@@ -8,6 +8,7 @@ using AAModEXAI.Bosses.Yamata.Awakened;
 using System.IO;
 using Microsoft.Xna.Framework.Graphics;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Yamata
 {
@@ -127,7 +128,7 @@ namespace AAModEXAI.Bosses.Yamata
 				return;
             if (!Body.active)
             {
-                if (Main.netMode != 1) //force a kill to prevent 'ghost hands'
+                if (Main.netMode != NetmodeID.MultiplayerClient) //force a kill to prevent 'ghost hands'
                 {
                     npc.life = 0;
                     npc.checkDead();
@@ -234,7 +235,7 @@ namespace AAModEXAI.Bosses.Yamata
                 {
                     if (attackTimer == 40)
                     {
-                        Main.PlaySound(2, (int)npc.Center.X, (int)npc.Center.Y, 20);
+                        Main.PlaySound(SoundID.Item, (int)npc.Center.X, (int)npc.Center.Y, 20);
                         int proj2 = Projectile.NewProjectile(npc.Center.X + Main.rand.Next(-20, 20), npc.Center.Y + Main.rand.Next(-20, 20), npc.velocity.X * 2f, npc.velocity.Y * 2f, mod.ProjectileType("YamataBomb"), projDamage, 0, Main.myPlayer);
                         Main.projectile[proj2].damage = projDamage;
                         attackTimer = 0;
@@ -250,10 +251,10 @@ namespace AAModEXAI.Bosses.Yamata
                 {
                     if (attackTimer == 8 || attackTimer == 16 || attackTimer == 24 || attackTimer == 32 || attackTimer == 40 || attackTimer == 48 || attackTimer == 56 || attackTimer == 64 || attackTimer == 72 || attackTimer == 79)
                     {
-                        Main.PlaySound(2, (int)npc.Center.X, (int)npc.Center.Y, 20);
+                        Main.PlaySound(SoundID.Item, (int)npc.Center.X, (int)npc.Center.Y, 20);
                         for (int i = 0; i < 5; ++i)
                         {
-                            if (Main.netMode != 1)
+                            if (Main.netMode != NetmodeID.MultiplayerClient)
                             {
                                 Projectile.NewProjectile(PlayerDistance.X, PlayerDistance.Y, PlayerPosX * 2f, PlayerPosY * 2f, mod.ProjectileType("YamataBreath"), projDamage, 0f, Main.myPlayer);
                             }
@@ -300,7 +301,7 @@ namespace AAModEXAI.Bosses.Yamata
                 if (!QuoteSaid && sayQuote)
                 {
                     laughTimer = 120;
-                    if (Main.netMode != 1) AAModEXAI.Chat((!Quote1) ? AAMod.Lang.BossChat("YamataHead1") : AAMod.Lang.BossChat("YamataHead2"), new Color(45, 46, 70));
+                    if (Main.netMode != NetmodeID.MultiplayerClient) AAModEXAI.Chat((!Quote1) ? AAMod.Lang.BossChat("YamataHead1") : AAMod.Lang.BossChat("YamataHead2"), new Color(45, 46, 70));
                     QuoteSaid = true;
                     Quote1 = true;
                 }
@@ -311,7 +312,7 @@ namespace AAModEXAI.Bosses.Yamata
                 if (!QuoteSaid && sayQuote)
                 {
                     laughTimer = 120;
-                    if (Main.netMode != 1) AAModEXAI.Chat((!Quote3) ? AAMod.Lang.BossChat("YamataHead3") : AAMod.Lang.BossChat("YamataHead4"), new Color(45, 46, 70));
+                    if (Main.netMode != NetmodeID.MultiplayerClient) AAModEXAI.Chat((!Quote3) ? AAMod.Lang.BossChat("YamataHead3") : AAMod.Lang.BossChat("YamataHead4"), new Color(45, 46, 70));
                     QuoteSaid = true;
                     Quote3 = true;
                 }
@@ -322,7 +323,7 @@ namespace AAModEXAI.Bosses.Yamata
                 if (!QuoteSaid && sayQuote)
                 {
                     laughTimer = 120;
-                    if (Main.netMode != 1) AAModEXAI.Chat((!Quote3) ? AAMod.Lang.BossChat("YamataHead5") : AAMod.Lang.BossChat("YamataHead6"), new Color(45, 46, 70));
+                    if (Main.netMode != NetmodeID.MultiplayerClient) AAModEXAI.Chat((!Quote3) ? AAMod.Lang.BossChat("YamataHead5") : AAMod.Lang.BossChat("YamataHead6"), new Color(45, 46, 70));
                     QuoteSaid = true;
                     Quote3 = true;
                 }
@@ -333,7 +334,7 @@ namespace AAModEXAI.Bosses.Yamata
                 if (!QuoteSaid && sayQuote)
                 {
                     laughTimer = 120;
-                    if (Main.netMode != 1) AAModEXAI.Chat((!Quote4) ? (AAMod.Lang.BossChat("YamataHead7") + (player.Male ? AAMod.Lang.BossChat("male2") : AAMod.Lang.BossChat("fimale2")) + AAMod.Lang.BossChat("YamataHead8")) : AAMod.Lang.BossChat("YamataHead9"), new Color(45, 46, 70));
+                    if (Main.netMode != NetmodeID.MultiplayerClient) AAModEXAI.Chat((!Quote4) ? (AAMod.Lang.BossChat("YamataHead7") + (player.Male ? AAMod.Lang.BossChat("male2") : AAMod.Lang.BossChat("fimale2")) + AAMod.Lang.BossChat("YamataHead8")) : AAMod.Lang.BossChat("YamataHead9"), new Color(45, 46, 70));
                     QuoteSaid = true;
                     Quote4 = true;
                 }

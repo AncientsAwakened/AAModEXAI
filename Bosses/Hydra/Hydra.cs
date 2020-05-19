@@ -8,6 +8,7 @@ using Terraria.ModLoader;
 
 using System.IO;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Hydra
 {
@@ -94,7 +95,7 @@ namespace AAModEXAI.Bosses.Hydra
 
 		public void HandleHeads()
 		{
-			if(Main.netMode != 1)
+			if(Main.netMode != NetmodeID.MultiplayerClient)
 			{
 				if(!HeadsSpawned)
 				{
@@ -236,7 +237,7 @@ namespace AAModEXAI.Bosses.Hydra
 
             if (HeadsSpawned && noHeads)
             {
-                if (Main.netMode != 1)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     npc.life = 0;
                     npc.checkDead();
@@ -252,7 +253,7 @@ namespace AAModEXAI.Bosses.Hydra
         public override void SendExtraAI(BinaryWriter writer)
         {
             base.SendExtraAI(writer);
-            if (Main.netMode == 2 || Main.dedServ)
+            if (Main.netMode == NetmodeID.Server || Main.dedServ)
             {
                 writer.Write(internalAI[0]);
                 writer.Write(headindex[0]);
@@ -264,7 +265,7 @@ namespace AAModEXAI.Bosses.Hydra
         public override void ReceiveExtraAI(BinaryReader reader)
         {
             base.ReceiveExtraAI(reader);
-            if (Main.netMode == 1)
+            if (Main.netMode == NetmodeID.MultiplayerClient)
             {
                 internalAI[0] = reader.ReadFloat();
                 headindex[0] = reader.ReadInt();
@@ -303,7 +304,7 @@ namespace AAModEXAI.Bosses.Hydra
         public void AIMovementRunAway()
         {
             npc.alpha += 2;
-            if (Main.netMode != 1) internalAI[0] += 2;
+            if (Main.netMode != NetmodeID.MultiplayerClient) internalAI[0] += 2;
             if (internalAI[0] >= 255)
             {
                 npc.active = false;

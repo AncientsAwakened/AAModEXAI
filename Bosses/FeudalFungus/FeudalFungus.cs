@@ -7,6 +7,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.FeudalFungus
 {
@@ -133,7 +134,7 @@ namespace AAModEXAI.Bosses.FeudalFungus
 
             npc.noTileCollide = true;
 
-            if (Main.netMode != 1 && internalAI[1] != AISTATE_SHOOT)
+            if (Main.netMode != NetmodeID.MultiplayerClient && internalAI[1] != AISTATE_SHOOT)
 			{
                 internalAI[0]++;
                 if (internalAI[0] >= 180)
@@ -155,7 +156,7 @@ namespace AAModEXAI.Bosses.FeudalFungus
             else if (internalAI[1] == AISTATE_SHOOT)
             {
                 BaseAI.AISpaceOctopus(npc, ref npc.ai, player.Center, 0.15f, 4f, 170, 56f, null);
-                if (Main.netMode != 1)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     internalAI[0]++;
                 }
@@ -171,7 +172,7 @@ namespace AAModEXAI.Bosses.FeudalFungus
 
             npc.rotation = 0;
 
-            if (internalAI[4] ++ > 20 && Main.expertMode && Main.netMode != 1)
+            if (internalAI[4] ++ > 20 && Main.expertMode && Main.netMode != NetmodeID.MultiplayerClient)
             {
                 internalAI[4] = 0;
                 Vector2 pos = new Vector2(player.Center.X + Main.rand.Next(70, 150) * (Main.rand.Next(2) == 0? 1: -1), player.Center.Y + Main.rand.Next(70, 150) * (Main.rand.Next(2) == 0? 1: -1));

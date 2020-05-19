@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ModLoader;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Akuma
 {
@@ -57,7 +58,7 @@ namespace AAModEXAI.Bosses.Akuma
 
         public override void Kill(int timeLeft)
         {
-            Main.PlaySound(2, (int)projectile.position.X, (int)projectile.position.Y, 20);
+            Main.PlaySound(SoundID.Item, (int)projectile.position.X, (int)projectile.position.Y, 20);
             float spread = 45f * 0.0174f;
             double startAngle = Math.Atan2(projectile.velocity.X, projectile.velocity.Y) - (spread / 2);
             double deltaAngle = spread / 8f;

@@ -1,6 +1,7 @@
 using Terraria;
 using Terraria.ModLoader;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Toad
 {
@@ -30,7 +31,7 @@ namespace AAModEXAI.Bosses.Toad
 
         public override void AI()
         {
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 npc.ai[0]++;
             }

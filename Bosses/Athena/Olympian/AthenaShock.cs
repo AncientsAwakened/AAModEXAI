@@ -6,6 +6,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Utilities;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Athena.Olympian
 {

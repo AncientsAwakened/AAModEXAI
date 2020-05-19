@@ -7,6 +7,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Anubis
 {
@@ -36,7 +37,7 @@ namespace AAModEXAI.Bosses.Anubis
 
         public override void HitEffect(int hitDirection, double damage)
 		{
-			if (Main.netMode == 2) { return; }
+			if (Main.netMode == NetmodeID.Server) { return; }
 			for (int m = 0; m < (npc.life <= 0 ? 30 : 8); m++)
 			{
 				Dust.NewDust(npc.position, npc.width, npc.height, DustID.GoldCoin, npc.velocity.X * 0.2f, npc.velocity.Y * 0.2f, 100, Color.White, 1.1f);

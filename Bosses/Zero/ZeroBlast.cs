@@ -5,6 +5,7 @@ using Terraria.ModLoader;
 using System;
 
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Zero
 {
@@ -41,7 +42,7 @@ namespace AAModEXAI.Bosses.Zero
 
         public override void AI()
         {
-            //if (Main.netMode != 1) BaseUtility.Chat("time: "+ projectile.timeLeft + "ai[0]: \n" + projectile.ai[0] + " | ai[1]: \n" + projectile.ai[1]);
+            //if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat("time: "+ projectile.timeLeft + "ai[0]: \n" + projectile.ai[0] + " | ai[1]: \n" + projectile.ai[1]);
             if (projectile.ai[0] < chargeTime) //spindown
             {
                 AICharge();
@@ -119,7 +120,7 @@ namespace AAModEXAI.Bosses.Zero
                 projectile.ai[1] = 1.7f;
                 projectile.scale = 1.2f;
 
-                Main.PlaySound(2, (int)projectile.position.X, (int)projectile.position.Y, 33, 0.4f, 0.2f);
+                Main.PlaySound(SoundID.Item, (int)projectile.position.X, (int)projectile.position.Y, 33, 0.4f, 0.2f);
             }
             //damage fall off once per 2 frames
             if (projectile.damage > 1 && projectile.timeLeft % 2 == 0) projectile.damage -= 1;

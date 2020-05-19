@@ -4,6 +4,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using System;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Akuma.Awakened
 {
@@ -59,7 +60,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 
             if (++projectile.localAI[0] == 52)
             {
-                if (Main.netMode != 1)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                     Projectile.NewProjectile(projectile.Center, Vector2.UnitY * 4, mod.ProjectileType("AkumaRock"), projectile.damage, 0, Main.myPlayer);
             }
 

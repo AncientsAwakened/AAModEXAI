@@ -3,6 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Broodmother
 {
@@ -41,7 +42,7 @@ namespace AAModEXAI.Bosses.Broodmother
                 if (++projectile.frame > 3)
                 {
 					projectile.frame = 3;
-                    if(Main.netMode != 1) 
+                    if(Main.netMode != NetmodeID.MultiplayerClient) 
 						projectile.Kill();
                 }
             }			

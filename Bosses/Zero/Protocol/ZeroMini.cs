@@ -4,6 +4,7 @@ using Terraria.ModLoader;
 
 using Terraria.Graphics.Shaders;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Zero.Protocol
 {
@@ -75,7 +76,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
                 npc.ai[1] ++;
                 if(npc.ai[1] % 180 == 60)
                 {
-                    if(Main.netMode != 1)
+                    if(Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         Projectile.NewProjectile(new Vector2(npc.Center.X, npc.Center.Y), new Vector2(0f, -14f), mod.ProjectileType("ProtoStar"), npc.damage/2, 3);
                         Projectile.NewProjectile(new Vector2(npc.Center.X, npc.Center.Y), new Vector2(0f, 14f), mod.ProjectileType("ProtoStar"), npc.damage/2, 3);
@@ -85,7 +86,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
                 }
                 if(npc.ai[1] % 180 == 120)
                 {
-                    if(Main.netMode != 1)
+                    if(Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         Projectile.NewProjectile(new Vector2(npc.Center.X, npc.Center.Y), new Vector2(10f, -10f), mod.ProjectileType("ProtoStar"), npc.damage/2, 3);
                         Projectile.NewProjectile(new Vector2(npc.Center.X, npc.Center.Y), new Vector2(-10f, -10f), mod.ProjectileType("ProtoStar"), npc.damage/2, 3);
@@ -97,7 +98,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
             else if(npc.ai[0] == 2)
             {
                 npc.velocity *= 0;
-                if(Main.netMode != 1)
+                if(Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     int direction = Main.rand.Next(2) == 0? 1:-1;
                     Projectile.NewProjectile(npc.Center + new Vector2(30, 30), new Vector2(10, 10), mod.ProjectileType("EchoRay"), npc.damage / 3, 0f, Main.myPlayer, direction * 6.2831855f / 750f, npc.whoAmI);

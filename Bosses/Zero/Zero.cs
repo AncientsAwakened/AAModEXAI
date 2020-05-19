@@ -7,6 +7,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Zero
 {
@@ -69,23 +70,23 @@ namespace AAModEXAI.Bosses.Zero
 
         public override void HitEffect(int hitDirection, double damage)
         {
-            if (npc.life <= (int)(npc.lifeMax * .66f) && !RespawnArms1 && Main.netMode != 1)
+            if (npc.life <= (int)(npc.lifeMax * .66f) && !RespawnArms1 && Main.netMode != NetmodeID.MultiplayerClient)
             {
                 WeaponCount += 1;
                 npc.ai[1] = 0;
                 RespawnArms1 = true;
 
                 RespawnArms();
-                if (Main.netMode != 1) AAModEXAI.Chat(AAMod.Lang.BossChat("ZeroBoss10"), Color.Red, false);
+                if (Main.netMode != NetmodeID.MultiplayerClient) AAModEXAI.Chat(AAMod.Lang.BossChat("ZeroBoss10"), Color.Red, false);
                 npc.netUpdate = true;
             }
-            if (npc.life <= (int)(npc.lifeMax * .33f) && !RespawnArms2 && Main.netMode != 1)
+            if (npc.life <= (int)(npc.lifeMax * .33f) && !RespawnArms2 && Main.netMode != NetmodeID.MultiplayerClient)
             {
                 WeaponCount += 1;
                 npc.ai[1] = 0;
                 RespawnArms2 = true;
                 RespawnArms();
-                if (Main.netMode != 1) AAModEXAI.Chat(AAMod.Lang.BossChat("ZeroBoss10"), Color.Red, false);
+                if (Main.netMode != NetmodeID.MultiplayerClient) AAModEXAI.Chat(AAMod.Lang.BossChat("ZeroBoss10"), Color.Red, false);
                 npc.netUpdate = true;
             }
 
@@ -102,7 +103,7 @@ namespace AAModEXAI.Bosses.Zero
                 Gore.NewGore(npc.position, npc.velocity, mod.GetGoreSlot("Gores/ZeroGore3"), 1f);
                 if (!Main.expertMode)
                 {
-                    if (Main.netMode != 1) AAModEXAI.Chat(AAMod.Lang.BossChat("ZeroBoss2"), Color.Red.R, Color.Red.G, Color.Red.B);
+                    if (Main.netMode != NetmodeID.MultiplayerClient) AAModEXAI.Chat(AAMod.Lang.BossChat("ZeroBoss2"), Color.Red.R, Color.Red.G, Color.Red.B);
                 }
             }
         }
@@ -119,7 +120,7 @@ namespace AAModEXAI.Bosses.Zero
                    NPC.AnyNPCs(mod.NPCType("NovaFocus")) ||
                    NPC.AnyNPCs(mod.NPCType("GenocideCannon"));
 
-            if (Main.netMode != 1 && !hasArms)
+            if (Main.netMode != NetmodeID.MultiplayerClient && !hasArms)
             {
                 npc.ai[0] = 10f;
 
@@ -144,7 +145,7 @@ namespace AAModEXAI.Bosses.Zero
             {
                 npc.DropLoot(ModLoader.GetMod("AAMod").ItemType("ApocalyptitePlate"), 2, 4);
 
-                if (Main.netMode != 1) AAModEXAI.Chat(AAMod.Lang.BossChat("ZeroBoss1"), Color.Red.R, Color.Red.G, Color.Red.B);
+                if (Main.netMode != NetmodeID.MultiplayerClient) AAModEXAI.Chat(AAMod.Lang.BossChat("ZeroBoss1"), Color.Red.R, Color.Red.G, Color.Red.B);
                 if (AAWorld.downedZero)
                 {
                     int z = NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType("ZeroProtocol"), 0, 0, 0, 0, 0, npc.target);
@@ -193,7 +194,7 @@ namespace AAModEXAI.Bosses.Zero
             {
                 if (!AAWorld.downedZero)
                 {
-                    if (Main.netMode != 1) BaseUtility.Chat(AAMod.Lang.BossChat("ZeroBoss3"), Color.PaleVioletRed);
+                    if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("ZeroBoss3"), Color.PaleVioletRed);
                 }
                 AAWorld.downedZero = true;
                 npc.DropLoot(ModLoader.GetMod("AAMod").ItemType("ApocalyptitePlate"), 2, 4);
@@ -317,7 +318,7 @@ namespace AAModEXAI.Bosses.Zero
         public override void SendExtraAI(BinaryWriter writer)
         {
             base.SendExtraAI(writer);
-            if (Main.netMode == 2 || Main.dedServ)
+            if (Main.netMode == NetmodeID.Server || Main.dedServ)
             {
                 writer.Write(internalAI[0]);
                 writer.Write(internalAI[1]);
@@ -331,7 +332,7 @@ namespace AAModEXAI.Bosses.Zero
         public override void ReceiveExtraAI(BinaryReader reader)
         {
             base.ReceiveExtraAI(reader);
-            if (Main.netMode == 1)
+            if (Main.netMode == NetmodeID.MultiplayerClient)
             {
                 internalAI[0] = reader.ReadFloat();
                 internalAI[1] = reader.ReadFloat();
@@ -368,7 +369,7 @@ namespace AAModEXAI.Bosses.Zero
 
             npc.TargetClosest();
 
-            if (Main.netMode != 1 && internalAI[3] == 0 && npc.ai[1] == 0)
+            if (Main.netMode != NetmodeID.MultiplayerClient && internalAI[3] == 0 && npc.ai[1] == 0)
             {
                 RespawnArms();
                 npc.netUpdate = true;
@@ -399,14 +400,14 @@ namespace AAModEXAI.Bosses.Zero
             }
             else
             {
-                if (Main.netMode != 1)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     Distance = 160f;
                     npc.netUpdate = true;
                 }
             }
 
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 AAWorld.zeroUS = false;
             }
@@ -465,7 +466,7 @@ namespace AAModEXAI.Bosses.Zero
                 npc.dontTakeDamage = false;
                 npc.chaseable = true;
                 npc.damage = 160;
-                if (Main.netMode != 1)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     npc.ai[2]++;
                 }
@@ -486,11 +487,11 @@ namespace AAModEXAI.Bosses.Zero
                         float Speed = 16f;
                         Vector2 vector8 = new Vector2(npc.position.X + (npc.width / 2), npc.position.Y + (npc.height / 2));
                         int type = mod.ProjectileType("ZeroBeam1");
-                        Main.PlaySound(2, (int)npc.position.X, (int)npc.position.Y, 33);
+                        Main.PlaySound(SoundID.Item, (int)npc.position.X, (int)npc.position.Y, 33);
                         float rotation = (float)Math.Atan2(vector8.Y - (player.position.Y + (player.height * 0.5f)), vector8.X - (player.position.X + (player.width * 0.5f)));
                         Projectile.NewProjectile(vector8.X, vector8.Y, (float)(Math.Cos(rotation) * Speed * -1), (float)(Math.Sin(rotation) * Speed * -1), type, damage, 0f, 0);
                     }
-                    if (npc.ai[2] >= 141 && Main.netMode != 1)
+                    if (npc.ai[2] >= 141 && Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         npc.ai[2] = 0;
                         npc.ai[3] = 3;
@@ -503,7 +504,7 @@ namespace AAModEXAI.Bosses.Zero
                         Main.PlaySound(SoundID.Item74, (int)npc.position.X, (int)npc.position.Y);
                         Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0 + Main.rand.Next(-14, 14), 0 + Main.rand.Next(-14, 14), mod.ProjectileType("ZeroRocket"), damage, 3); //Originally 85 damage
                     }
-                    if (npc.ai[2] >= 151 && Main.netMode != 1)
+                    if (npc.ai[2] >= 151 && Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         npc.ai[2] = 0;
                         npc.ai[3] = 3;
@@ -545,7 +546,7 @@ namespace AAModEXAI.Bosses.Zero
                             }
                         }
                     }
-                    if (npc.ai[2] >= 180 && Main.netMode != 1)
+                    if (npc.ai[2] >= 180 && Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         npc.ai[2] = 0;
                         npc.ai[3] = 3;
@@ -670,7 +671,7 @@ namespace AAModEXAI.Bosses.Zero
                             Projectile.NewProjectile(npc.Center, new Vector2(-8f, 8f), mod.ProjectileType("ZeroLaser"), damage, 3);
                             Projectile.NewProjectile(npc.Center, new Vector2(-8f, -8f), mod.ProjectileType("ZeroLaser"), damage, 3);
                         }
-                        if (Main.netMode != 1)
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
                         {
                             if (npc.ai[2] >= 320)
                             {
@@ -681,7 +682,7 @@ namespace AAModEXAI.Bosses.Zero
                         }
                     }
 
-                    if (Main.netMode != 1)
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         if (npc.ai[2] >= 400)
                         {

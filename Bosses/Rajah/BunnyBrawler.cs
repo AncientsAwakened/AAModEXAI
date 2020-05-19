@@ -6,6 +6,7 @@ using System.IO;
 
 using Microsoft.Xna.Framework.Graphics;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Rajah
 {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using AAMod;
+using Terraria.ID;
 
 namespace AAMod
 {

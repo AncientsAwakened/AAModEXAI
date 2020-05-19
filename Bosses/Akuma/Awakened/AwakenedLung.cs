@@ -7,6 +7,7 @@ using Terraria.ModLoader;
 using Terraria.Audio;
 
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Akuma.Awakened
 {
@@ -74,7 +75,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                 else
                     npc.ai[3] = 0;
             }
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 if (npc.ai[0] == 0)
                 {
@@ -231,7 +232,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
             if (!Main.dayTime)
             {
                 npc.velocity.Y = npc.velocity.Y - 1f;
-                if (npc.position.Y - npc.height - npc.velocity.Y >= Main.maxTilesY && Main.netMode != 1) { BaseAI.KillNPC(npc); npc.netUpdate2 = true; }
+                if (npc.position.Y - npc.height - npc.velocity.Y >= Main.maxTilesY && Main.netMode != NetmodeID.MultiplayerClient) { BaseAI.KillNPC(npc); npc.netUpdate2 = true; }
             }
 
             
@@ -340,14 +341,14 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 
             AAAI.DustOnNPCSpawn(npc, ModLoader.GetMod("AAMod").DustType("AkumaADust"), 2, 12);
 
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 if (!Main.npc[(int)npc.ai[1]].active || Main.npc[(int)npc.ai[3]].type != mod.NPCType("AwakenedLung"))
                 {
                     npc.life = 0;
                     npc.HitEffect(0, 10.0);
                     npc.active = false;
-                    NetMessage.SendData(28, -1, -1, null, npc.whoAmI, -1f, 0.0f, 0.0f, 0, 0, 0);
+                    NetMessage.SendData(MessageID.StrikeNPC, -1, -1, null, npc.whoAmI, -1f, 0.0f, 0.0f, 0, 0, 0);
                 }
             }
 
@@ -441,14 +442,14 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                 npc.timeLeft = 300;
             AAAI.DustOnNPCSpawn(npc, ModLoader.GetMod("AAMod").DustType("AkumaADust"), 2, 12);
 
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 if (!Main.npc[(int)npc.ai[1]].active || Main.npc[(int)npc.ai[3]].type != mod.NPCType("AwakenedLung"))
                 {
                     npc.life = 0;
                     npc.HitEffect(0, 10.0);
                     npc.active = false;
-                    NetMessage.SendData(28, -1, -1, null, npc.whoAmI, -1f, 0.0f, 0.0f, 0, 0, 0);
+                    NetMessage.SendData(MessageID.StrikeNPC, -1, -1, null, npc.whoAmI, -1f, 0.0f, 0.0f, 0, 0, 0);
                 }
             }
 

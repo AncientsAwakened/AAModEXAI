@@ -6,6 +6,7 @@ using Terraria.ModLoader;
 using System;
 using System.IO;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Anubis.Forsaken
 {
@@ -140,7 +141,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
             {
                 if (internalAI[2] == 0)
                 {
-                    if (Main.netMode != 1)
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         for (int m = 0; m < RuneCount; m++)
                         {
@@ -246,7 +247,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                         CombatText.NewText(npc.Hitbox, Color.ForestGreen, AAMod.Lang.BossChat("FAnubisCombat"), true);
                     }
 
-                    if (npc.ai[1] == 10 && Main.netMode != 1)
+                    if (npc.ai[1] == 10 && Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         if (Main.rand.Next(2) == 0)
                         {
@@ -346,7 +347,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                         Max = 4;
                     }
 
-                    if (npc.ai[1] > 120 &&  Main.netMode != 1)
+                    if (npc.ai[1] > 120 &&  Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         float rotation = 2f * (float)Math.PI / Max;
                         Vector2 vel = npc.velocity;
@@ -636,7 +637,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
 
             if (!AAWorld.downedAnubisA)
             {
-                if (Main.netMode != 1) BaseUtility.Chat(AAMod.Lang.BossChat("FAnubisWin"), Color.ForestGreen);
+                if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("FAnubisWin"), Color.ForestGreen);
             }
 
             AAWorld.downedAnubisA = true;
@@ -673,9 +674,9 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                 if (!player.active || player.dead || Vector2.Distance(npc.Center, player.Center) > 5000f || !player.ZoneDesert)
                 {
                     deathtimer++;
-                    if (Main.netMode != 1 && deathtimer > 240)
+                    if (Main.netMode != NetmodeID.MultiplayerClient && deathtimer > 240)
                     {
-                        if (Main.netMode != 1) BaseUtility.Chat(AAMod.Lang.BossChat("FAnubis"), Color.ForestGreen);
+                        if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("FAnubis"), Color.ForestGreen);
                         int a = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<AAMod.NPCs.TownNPCs.Anubis>());
                         Main.npc[a].Center = npc.Center;
                         npc.active = false;

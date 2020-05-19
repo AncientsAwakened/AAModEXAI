@@ -3,6 +3,7 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI
 {
@@ -16,7 +17,7 @@ namespace AAModEXAI
             {
                 npc.boss = false;
                 npc.life = 0;
-                if(Main.netMode != 1)
+                if(Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     int id = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("Athena"));
                     Main.npc[id].position = npc.position;
@@ -31,7 +32,7 @@ namespace AAModEXAI
             {
                 npc.boss = false;
                 npc.life = 0;
-                if(Main.netMode != 1)
+                if(Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     int id = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("AthenaA"));
                     Main.npc[id].position = npc.position;
@@ -46,7 +47,7 @@ namespace AAModEXAI
             {
                 npc.boss = false;
                 npc.life = 0;
-                if(Main.netMode != 1)
+                if(Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     int id = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("Greed"));
                     Main.npc[id].position = npc.position;
@@ -61,7 +62,7 @@ namespace AAModEXAI
             {
                 npc.boss = false;
                 npc.life = 0;
-                if(Main.netMode != 1)
+                if(Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     int id = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("Anubis"));
                     Main.npc[id].position = npc.position;
@@ -76,7 +77,7 @@ namespace AAModEXAI
             {
                 npc.boss = false;
                 npc.life = 0;
-                if(Main.netMode != 1)
+                if(Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     int id = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("ForsakenAnubis"));
                     Main.npc[id].position = npc.position;
@@ -91,7 +92,7 @@ namespace AAModEXAI
             {
                 npc.boss = false;
                 npc.life = 0;
-                if(Main.netMode != 1)
+                if(Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     int id = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("Ashe"));
                     Main.npc[id].position = npc.position;
@@ -106,7 +107,7 @@ namespace AAModEXAI
             {
                 npc.boss = false;
                 npc.life = 0;
-                if(Main.netMode != 1)
+                if(Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     int id = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("Haruka"));
                     Main.npc[id].position = npc.position;
@@ -120,7 +121,7 @@ namespace AAModEXAI
             {
                 npc.boss = false;
                 npc.life = 0;
-                if(Main.netMode != 1)
+                if(Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     int id = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("Akuma"));
                     Main.npc[id].position = npc.position;
@@ -135,7 +136,7 @@ namespace AAModEXAI
             {
                 npc.boss = false;
                 npc.life = 0;
-                if(Main.netMode != 1)
+                if(Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     int id = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("AkumaA"));
                     Main.npc[id].position = npc.position;
@@ -150,7 +151,7 @@ namespace AAModEXAI
             {
                 npc.boss = false;
                 npc.life = 0;
-                if(Main.netMode != 1)
+                if(Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     int id = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("DaybringerHead"));
                     Main.npc[id].position = npc.position;
@@ -165,7 +166,7 @@ namespace AAModEXAI
             {
                 npc.boss = false;
                 npc.life = 0;
-                if(Main.netMode != 1)
+                if(Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     int id = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("NightcrawlerHead"));
                     Main.npc[id].position = npc.position;
@@ -179,7 +180,7 @@ namespace AAModEXAI
             {
                 npc.boss = false;
                 npc.life = 0;
-                if(Main.netMode != 1)
+                if(Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     int id = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("GreedA"));
                     Main.npc[id].position = npc.position;
@@ -194,7 +195,7 @@ namespace AAModEXAI
             {
                 npc.boss = false;
                 npc.life = 0;
-                if(Main.netMode != 1)
+                if(Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     int id = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("SupremeRajah"));
                     Main.npc[id].position = npc.position;
@@ -209,7 +210,7 @@ namespace AAModEXAI
             {
                 npc.boss = false;
                 npc.life = 0;
-                if(Main.netMode != 1)
+                if(Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     int id = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("Rajah"));
                     Main.npc[id].position = npc.position;
@@ -224,7 +225,7 @@ namespace AAModEXAI
             {
                 npc.boss = false;
                 npc.life = 0;
-                if(Main.netMode != 1)
+                if(Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     int id = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("Shen"));
                     Main.npc[id].position = npc.position;
@@ -239,7 +240,7 @@ namespace AAModEXAI
             {
                 npc.boss = false;
                 npc.life = 0;
-                if(Main.netMode != 1)
+                if(Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     int id = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("ShenA"));
                     Main.npc[id].position = npc.position;
@@ -254,7 +255,7 @@ namespace AAModEXAI
             {
                 npc.boss = false;
                 npc.life = 0;
-                if(Main.netMode != 1)
+                if(Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     int id = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("YamataA"));
                     Main.npc[id].position = npc.position;
@@ -269,7 +270,7 @@ namespace AAModEXAI
             {
                 npc.boss = false;
                 npc.life = 0;
-                if(Main.netMode != 1)
+                if(Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     int id = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("Yamata"));
                     Main.npc[id].position = npc.position;
@@ -284,7 +285,7 @@ namespace AAModEXAI
             {
                 npc.boss = false;
                 npc.life = 0;
-                if(Main.netMode != 1)
+                if(Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     int id = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("Zero"));
                     Main.npc[id].position = npc.position;
@@ -326,7 +327,7 @@ namespace AAModEXAI
                         Main.projectile[proj].GetGlobalProjectile<AAModEXAIGlobalProjectile>().ReflectConter = 180;
                     }
                 }
-                if(Main.netMode != 1)
+                if(Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     int id = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("ZeroProtocol"));
                     Main.npc[id].position = npc.position;

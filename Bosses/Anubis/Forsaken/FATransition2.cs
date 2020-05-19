@@ -3,6 +3,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Anubis.Forsaken
 {
@@ -40,7 +41,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
             npc.dontTakeDamage = true;
 
             npc.ai[3] = 39;
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 music = ModLoader.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/silence");
                 if (npc.velocity.Y == 0)

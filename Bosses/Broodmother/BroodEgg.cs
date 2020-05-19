@@ -6,6 +6,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Broodmother
 {
@@ -80,7 +81,7 @@ namespace AAModEXAI.Bosses.Broodmother
             {
                 npc.Transform(mod.NPCType("Broodmini"));
             }
-            if (Main.netMode != 1 && npc.velocity.Y == 0f && Math.Abs(npc.velocity.X) < 0.2 && npc.ai[3] >= hatchTimer * 0.75)
+            if (Main.netMode != NetmodeID.MultiplayerClient && npc.velocity.Y == 0f && Math.Abs(npc.velocity.X) < 0.2 && npc.ai[3] >= hatchTimer * 0.75)
             {
                 float wiggleAmount = npc.ai[3] - (hatchTimer * 0.75f);
                 wiggleAmount /= hatchTimer * 0.25f;

@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ModLoader;using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Shen
 {
@@ -50,7 +51,7 @@ namespace AAModEXAI.Bosses.Shen
             if (++projectile.localAI[0] > 60)
             {
                 projectile.localAI[0] = 0;
-                if (Main.netMode != 1)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     Vector2 vel = Vector2.Normalize(projectile.velocity);
                     const float ai = 0.015f;
@@ -74,7 +75,7 @@ namespace AAModEXAI.Bosses.Shen
                 int dustIndex = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, ModLoader.GetMod("AAMod").DustType("Discord"), 0f, 0f, 100, default, 2f);
                 Main.dust[dustIndex].velocity *= 1.4f;
             }
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 Vector2 vel = Vector2.Normalize(projectile.velocity);
                 const float ai = 0.015f;

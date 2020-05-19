@@ -4,6 +4,7 @@ using Terraria.ModLoader;
 using Terraria.ID;
 using Terraria.DataStructures;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.MushroomMonarch
 {
@@ -124,7 +125,7 @@ namespace AAModEXAI.Bosses.MushroomMonarch
                     Main.PlaySound(SoundID.Item2, projectile.position);
                     Main.player[i].HealEffect(-15, false);
                     Main.player[i].statLife -= 15;
-                    NetMessage.SendData(66, -1, -1, null, i, -5, 0f, 0f, 0, 0, 0);
+                    NetMessage.SendData(MessageID.SpiritHeal, -1, -1, null, i, -5, 0f, 0f, 0, 0, 0);
                     if (Main.player[i].statLife <= 0)
                     {
                         Main.player[i].KillMe(PlayerDeathReason.ByProjectile(i, projectile.whoAmI), 1000.0, 0, false);

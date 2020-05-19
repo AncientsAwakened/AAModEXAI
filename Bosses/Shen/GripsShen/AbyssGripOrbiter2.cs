@@ -7,6 +7,7 @@ using Terraria.ModLoader;
 using Terraria.Graphics.Shaders;
 
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Shen.GripsShen
 {

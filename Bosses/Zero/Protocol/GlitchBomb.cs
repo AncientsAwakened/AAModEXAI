@@ -4,6 +4,7 @@ using System;
 using Terraria;
 using Terraria.ModLoader;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Zero.Protocol
 {
@@ -69,7 +70,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
 
         public override void Kill(int timeLeft)
         {
-            if (Main.netMode != 2)
+            if (Main.netMode != NetmodeID.Server)
             {
                 for (int m = 0; m < 6; m++)
                 {

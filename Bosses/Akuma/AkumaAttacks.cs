@@ -3,6 +3,7 @@ using Terraria.ModLoader;
 using System;
 using Terraria;
 using AAMod;
+using Terraria.ID;
 
 namespace AAMod
 {
@@ -35,7 +36,7 @@ namespace AAMod
 
         public static void SpawnLung(Player player, Mod mod, bool isAwakened)
         {
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 int npcID = NPC.NewNPC((int)player.Center.X, (int)player.Center.Y, mod.NPCType(isAwakened ? "AwakenedLung" : "AncientLung"), 0);
                 Main.npc[npcID].Center = player.Center - new Vector2(MathHelper.Lerp(-100f, 100f, (float)Main.rand.NextDouble()), 600f);

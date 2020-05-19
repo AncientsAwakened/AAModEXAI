@@ -8,6 +8,7 @@ using Terraria.ModLoader;
 using AAMod.Dusts;
 using System.IO;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Equinox
 {
@@ -186,7 +187,7 @@ namespace AAModEXAI.Bosses.Equinox
         {
             int damage = Main.expertMode? (npc.damage/ 2) : npc.damage;
             bool isHead = npc.type == mod.NPCType("DaybringerHead") || npc.type == mod.NPCType("NightcrawlerHead");
-            if (Main.netMode != 1 && !initCustom)
+            if (Main.netMode != NetmodeID.MultiplayerClient && !initCustom)
             {
                 initCustom = true;
                 internalAI[7] += npc.whoAmI % 7 * 12; //so it doesn't pew all at once
@@ -219,7 +220,7 @@ namespace AAModEXAI.Bosses.Equinox
 
             if (wormStronger)
             {
-                if(Main.netMode == 0) 
+                if(Main.netMode == NetmodeID.SinglePlayer) 
                 {
                     npc.width = 136;
                     npc.height = 136;
@@ -354,7 +355,7 @@ namespace AAModEXAI.Bosses.Equinox
                     {
                         if (Main.npc[i].active && Main.npc[i].type == mod.NPCType("NightcrawlerBody") && Main.npc[i].realLife == npc.whoAmI)
                         {
-                            if (Main.netMode != 1)
+                            if (Main.netMode != NetmodeID.MultiplayerClient)
                             {
                                 Vector2 speed = Vector2.Normalize(new Vector2(1f, 0f).RotatedBy(Main.npc[i].rotation + 3.1415f)) * 8f;
                                 Projectile.NewProjectile(Main.npc[i].Center.X, Main.npc[i].Center.Y, speed.X, speed.Y, mod.ProjectileType("NightclawerDeathraySmall"), damage/ 2, 0, Main.myPlayer, 1f, i);
@@ -407,7 +408,7 @@ namespace AAModEXAI.Bosses.Equinox
                     if(Math.Abs(npc.Center.X - targetpos.X) + Math.Abs(npc.Center.Y - targetpos.Y) < 100f)
                     {
                         internalAI[4] = 2f;
-                        if(Main.netMode != 1)
+                        if(Main.netMode != NetmodeID.MultiplayerClient)
                         {
                             for (int i = 0; i < Main.maxNPCs; i+= 3)
                             {
@@ -426,7 +427,7 @@ namespace AAModEXAI.Bosses.Equinox
                     if(Math.Abs(npc.Center.X - targetpos.X) + Math.Abs(npc.Center.Y - targetpos.Y) < 100f)
                     {
                         internalAI[4] = 1f;
-                        if(Main.netMode != 1)
+                        if(Main.netMode != NetmodeID.MultiplayerClient)
                         {
                             for (int i = 0; i < Main.maxNPCs; i+= 3)
                             {
@@ -439,7 +440,7 @@ namespace AAModEXAI.Bosses.Equinox
                         }
                     }
                 }
-                if (internalAI[3] % 200 == 60 && Main.netMode != 1)
+                if (internalAI[3] % 200 == 60 && Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     Vector2 speed = Vector2.Normalize(npc.velocity) * 8f;
                     Projectile.NewProjectile(npc.Center.X, npc.Center.Y, speed.X, speed.Y, mod.ProjectileType("DaybringerSun"), damage/ 2, 1, 255);
@@ -493,7 +494,7 @@ namespace AAModEXAI.Bosses.Equinox
             npc.spriteDirection = 1;
             prevWormStronger = wormStronger;
 
-            if (npc.type == mod.NPCType("NightcrawlerHead") && NPC.CountNPCS(mod.NPCType("NCCloud")) < CloudCount && CloudCooldown > 0 && Main.netMode != 1)
+            if (npc.type == mod.NPCType("NightcrawlerHead") && NPC.CountNPCS(mod.NPCType("NCCloud")) < CloudCount && CloudCooldown > 0 && Main.netMode != NetmodeID.MultiplayerClient)
             {
                 CloudCooldown--;
 
@@ -549,7 +550,7 @@ namespace AAModEXAI.Bosses.Equinox
                             }
                         }
                     }
-                    if(internalAI[0] % 120 == 30 && Main.netMode != 1)
+                    if(internalAI[0] % 120 == 30 && Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         for (int i = 0; i < Main.maxNPCs; i += 1)
                         {
@@ -562,7 +563,7 @@ namespace AAModEXAI.Bosses.Equinox
                             }
                         }
                     }
-                    if(internalAI[0] % 120 == 60 && Main.netMode != 1)
+                    if(internalAI[0] % 120 == 60 && Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         for (int i = 0; i < Main.maxNPCs; i+=2)
                         {
@@ -590,7 +591,7 @@ namespace AAModEXAI.Bosses.Equinox
                 if(isHead && npc.type == mod.NPCType("NightcrawlerHead"))
                 {
                     internalAI[1] += 1f;
-                    if (Main.netMode != 1 && CloudCooldown <= 0)
+                    if (Main.netMode != NetmodeID.MultiplayerClient && CloudCooldown <= 0)
                     {
                         for(int i = 0; i < 200; i++)
                         {
@@ -606,12 +607,12 @@ namespace AAModEXAI.Bosses.Equinox
                         for (int m = 0; m < CloudCount; m++)
                         {
                             int n = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("NCCloud"), 0, 0, 0, 0, rotation * m);
-                            if (Main.netMode == 2 && n < 200)
+                            if (Main.netMode == NetmodeID.Server && n < 200)
                                 NetMessage.SendData(23, -1, -1, null, n);
                         }
                     }
 
-                    if(internalAI[1] % 150 == 0 && Main.netMode != 1)
+                    if(internalAI[1] % 150 == 0 && Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         for(int playerid = 0; playerid < 255; playerid++)
                         {
@@ -622,7 +623,7 @@ namespace AAModEXAI.Bosses.Equinox
                         }
                     }
                     
-                    if(internalAI[1] % 380 == 90 && Main.netMode != 1)
+                    if(internalAI[1] % 380 == 90 && Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         for (int i = 0; i < Main.maxNPCs; i+= 1)
                         {
@@ -637,7 +638,7 @@ namespace AAModEXAI.Bosses.Equinox
                     }
 
                     
-                    if(internalAI[1] % 120 == 90 && Main.netMode != 1)
+                    if(internalAI[1] % 120 == 90 && Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         for (int i = 0; i < Main.maxNPCs; i++)
                         {

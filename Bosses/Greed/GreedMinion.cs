@@ -8,6 +8,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Greed
 {
@@ -68,7 +69,7 @@ namespace AAModEXAI.Bosses.Greed
 
             if (npc.ai[2] == 0)
             {
-                if (Main.netMode != 1)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     npc.ai[2]++;
                 }
@@ -128,7 +129,7 @@ namespace AAModEXAI.Bosses.Greed
                     npc.noTileCollide = true;
                     BaseAI.AISkull(npc, ref internalAI, false, 6, 350, 0.14f, .2f);
 
-                    if (Main.netMode != 1)
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         int p;
                         if (MinionType == 8) //Demonite
@@ -185,7 +186,7 @@ namespace AAModEXAI.Bosses.Greed
                 shadowDodge = shadowDodgeTimer > 0;
                 if (shadowDodge)
                 {
-                    if (Main.netMode != 1)
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         if (!npc.dontTakeDamage)
                         {
@@ -203,7 +204,7 @@ namespace AAModEXAI.Bosses.Greed
                 }
                 else
                 {
-                    if (Main.netMode != 1)
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         if (npc.dontTakeDamage)
                         {
@@ -463,7 +464,7 @@ namespace AAModEXAI.Bosses.Greed
         {
             int pID = -1;
             if (damage == -1) { Projectile proj = new Projectile(); proj.SetDefaults(projType); damage = proj.damage; }
-            bool properSide = codable is NPC ? Main.netMode != 1 : codable is Projectile ? ((Projectile)codable).owner == Main.myPlayer : true;
+            bool properSide = codable is NPC ? Main.netMode != NetmodeID.MultiplayerClient : codable is Projectile ? ((Projectile)codable).owner == Main.myPlayer : true;
             if (properSide)
             {
                 Vector2 targetCenter = position + new Vector2(width * 0.5f, height * 0.5f);

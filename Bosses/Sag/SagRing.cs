@@ -6,6 +6,7 @@ using System;
 using ReLogic.Utilities;
 using Microsoft.Xna.Framework.Graphics;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Sag
 {

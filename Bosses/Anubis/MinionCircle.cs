@@ -4,6 +4,7 @@ using Terraria.ModLoader;
 
 using Microsoft.Xna.Framework.Graphics;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Anubis
 {
@@ -41,7 +42,7 @@ namespace AAModEXAI.Bosses.Anubis
                     npc.scale += .02f;
                 }
                 npc.rotation += .05f;
-                if (Main.netMode != 1)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     npc.ai[0]++;
                     if (npc.ai[0] >= 150)

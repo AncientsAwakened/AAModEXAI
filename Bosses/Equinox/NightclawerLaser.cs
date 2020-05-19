@@ -5,6 +5,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.Utilities;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Equinox
 {

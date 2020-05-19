@@ -5,6 +5,7 @@ using Terraria;
 using Terraria.Enums;
 using Terraria.ModLoader;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Yamata.Awakened
 {
@@ -55,7 +56,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
             }
             if (projectile.localAI[0] == 0f)
             {
-                Main.PlaySound(29, (int)Main.player[Main.myPlayer].Center.X, (int)Main.player[Main.myPlayer].Center.Y, 104, 1f, 0f);
+                Main.PlaySound(SoundID.Zombie, (int)Main.player[Main.myPlayer].Center.X, (int)Main.player[Main.myPlayer].Center.Y, 104, 1f, 0f);
             }
             float num801 = 0.5f;
             projectile.localAI[0] += 1f;
@@ -114,7 +115,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
 
         public override void Kill(int timeLeft)
         {
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
                 Projectile.NewProjectile(projectile.Center, projectile.velocity, mod.ProjectileType("YamataWaveDeathray"), projectile.damage, projectile.knockBack, projectile.owner, projectile.ai[0], projectile.ai[1]);
         }
 

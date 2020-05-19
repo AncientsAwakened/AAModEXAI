@@ -6,6 +6,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Zero
 {
@@ -61,7 +62,7 @@ namespace AAModEXAI.Bosses.Zero
         public override void HitEffect(int hitDirection, double damage)
         {
             bool flag = npc.life <= 0 || (!npc.active && NPC.AnyNPCs(mod.NPCType("Zero")));
-            if (flag && Main.netMode != 1)
+            if (flag && Main.netMode != NetmodeID.MultiplayerClient)
             {
                 int ind = NPC.NewNPC((int)(npc.position.X + (double)(npc.width / 2)), (int)npc.position.Y + (npc.height / 2), mod.NPCType("TeslaHand"), npc.whoAmI, npc.ai[0], npc.ai[1], npc.ai[2], npc.ai[3], npc.target);
                 Main.npc[ind].Center = npc.Center;
@@ -100,13 +101,13 @@ namespace AAModEXAI.Bosses.Zero
             while (rotValue > (float)Math.PI * 2f) rotValue -= (float)Math.PI * 2f;
             npc.Center = BaseUtility.RotateVector(zero.Center, zero.Center + new Vector2(((Zero)zero.modNPC).Distance, 0f), rotValue);
 
-            if (Main.netMode != 1) { npc.ai[2]++; }
+            if (Main.netMode != NetmodeID.MultiplayerClient) { npc.ai[2]++; }
 
             Player player = Main.player[zero.target];
 
             int aiTimerFire = Main.expertMode ? 190 : 250;
 
-            if (Main.netMode != 1) { npc.ai[2]++; }
+            if (Main.netMode != NetmodeID.MultiplayerClient) { npc.ai[2]++; }
 
             if (npc.ai[2] >= aiTimerFire)
             {

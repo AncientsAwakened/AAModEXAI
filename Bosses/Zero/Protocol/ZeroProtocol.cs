@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.IO;
 using Terraria.Graphics.Shaders;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Zero.Protocol
 {
@@ -107,7 +108,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
             {
                 if (!AAWorld.downedZero)
                 {
-                    if (Main.netMode != 1) BaseUtility.Chat(AAMod.Lang.BossChat("ZeroAwakened1"), Color.PaleVioletRed);
+                    if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("ZeroAwakened1"), Color.PaleVioletRed);
                     Item.NewItem((int)npc.Center.X, (int)npc.Center.Y, npc.width, npc.height, ModLoader.GetMod("AAMod").ItemType("ZeroRune"));
                 }
 
@@ -152,7 +153,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
         {
             if (Counter[0] > 3000 && npc.ai[0] != 4 && npc.ai[0] != 2 && !isCharging)
             {
-                if (Main.netMode != 1)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     Teleport(Main.rand.Next(2) == 0? 1:2);
                     npc.ai[0] = 4;
@@ -178,7 +179,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
             }
             if (npc.life <= 0 && !Main.expertMode)
             {
-                if (Main.netMode != 1) AAModEXAI.Chat(AAMod.Lang.BossChat("ZeroAwakened4"), Color.Red.R, Color.Red.G, Color.Red.B);
+                if (Main.netMode != NetmodeID.MultiplayerClient) AAModEXAI.Chat(AAMod.Lang.BossChat("ZeroAwakened4"), Color.Red.R, Color.Red.G, Color.Red.B);
             }
         }
 
@@ -270,7 +271,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
                 npc.ai[3] = 0;
             }
 
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 AAWorld.zeroUS = false;
             }
@@ -349,7 +350,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
                             Teleport(3);
                             if (npc.life > npc.lifeMax / 2)
                             {
-                                if(Main.netMode != 1)
+                                if(Main.netMode != NetmodeID.MultiplayerClient)
                                 {
                                     if (Main.rand.Next(2) == 0)
                                     {
@@ -385,7 +386,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
                             }
                             else
                             {
-                                if(Main.netMode != 1)
+                                if(Main.netMode != NetmodeID.MultiplayerClient)
                                 {
                                     int dirX = player.velocity.X > 0? 1:-1;
                                     int dirY = player.velocity.Y > 0? 1:-1;
@@ -427,7 +428,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
                         if (npc.ai[2] == (npc.life < npc.lifeMax / 2 ? 200 : 300))
                         {
                             Teleport(3);
-                            if(Main.netMode != 1)
+                            if(Main.netMode != NetmodeID.MultiplayerClient)
                             {
                                 int a = Projectile.NewProjectile(new Vector2(npc.Center.X, npc.Center.Y), new Vector2(0f, -12f), mod.ProjectileType("ProtoStar"), damage, 3);
                                 Main.projectile[a].Center = npc.Center + new Vector2(-100, 0);
@@ -510,7 +511,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
                         
                         if (npc.ai[1]++ == 100)
                         {
-                            if (Main.netMode != 1) AAModEXAI.Chat(AAMod.Lang.BossChat("ZeroAwakened11"), Color.Red.R, Color.Red.G, Color.Red.B);
+                            if (Main.netMode != NetmodeID.MultiplayerClient) AAModEXAI.Chat(AAMod.Lang.BossChat("ZeroAwakened11"), Color.Red.R, Color.Red.G, Color.Red.B);
                             if (ShootDir == new Vector2(0,0)) ShootDir = npc.DirectionTo(player.Center);
                             Projectile.NewProjectile(npc.Center + 60f * ShootDir, 10f * ShootDir, mod.ProjectileType("EchoRay"), npc.damage, 3f, Main.myPlayer, 6.2831855f / 450f, npc.whoAmI);
                             npc.ai[3] = 1f;
@@ -559,22 +560,22 @@ namespace AAModEXAI.Bosses.Zero.Protocol
                 if(npc.ai[2] == 10)
                 {
 
-                    if (Main.netMode != 1) AAModEXAI.Chat(AAMod.Lang.BossChat("ZeroAwakened8"), Color.Red.R, Color.Red.G, Color.Red.B);
-                    if (Main.netMode != 1) AAModEXAI.Chat(AAMod.Lang.BossChat("ZeroAwakened9"), Color.Red.R, Color.Red.G, Color.Red.B);
+                    if (Main.netMode != NetmodeID.MultiplayerClient) AAModEXAI.Chat(AAMod.Lang.BossChat("ZeroAwakened8"), Color.Red.R, Color.Red.G, Color.Red.B);
+                    if (Main.netMode != NetmodeID.MultiplayerClient) AAModEXAI.Chat(AAMod.Lang.BossChat("ZeroAwakened9"), Color.Red.R, Color.Red.G, Color.Red.B);
                 }
                 if(npc.ai[2] == 40)
                 {
-                    if (Main.netMode != 1) AAModEXAI.Chat(AAMod.Lang.BossChat("ZeroAwakened10"), Color.Red.R, Color.Red.G, Color.Red.B);
+                    if (Main.netMode != NetmodeID.MultiplayerClient) AAModEXAI.Chat(AAMod.Lang.BossChat("ZeroAwakened10"), Color.Red.R, Color.Red.G, Color.Red.B);
                 }
                 if(npc.ai[2] == 110)
                 {
-                    if (Main.netMode != 1) AAModEXAI.Chat(@"[Y]", Color.Red.R, Color.Red.G, Color.Red.B);
+                    if (Main.netMode != NetmodeID.MultiplayerClient) AAModEXAI.Chat(@"[Y]", Color.Red.R, Color.Red.G, Color.Red.B);
                 }
                 npc.rotation = npc.DirectionTo(player.Center).ToRotation() + (float)Math.PI/2;
                 if(npc.ai[2] % (npc.life < npc.lifeMax / 2? 60:80) == 20)
                 {
                     Teleport(3);
-                    if(Main.netMode != 1) NPC.NewNPC((int)player.Center.X + 50 * Main.rand.Next(4, 6) * (Main.rand.Next(2) == 0? -1:1), (int)player.Center.Y + 50 * Main.rand.Next(4, 6) * (Main.rand.Next(2) == 0? -1:1), mod.NPCType("ZeroMini"));
+                    if(Main.netMode != NetmodeID.MultiplayerClient) NPC.NewNPC((int)player.Center.X + 50 * Main.rand.Next(4, 6) * (Main.rand.Next(2) == 0? -1:1), (int)player.Center.Y + 50 * Main.rand.Next(4, 6) * (Main.rand.Next(2) == 0? -1:1), mod.NPCType("ZeroMini"));
                 }
                 Counterattack = false;
                 npc.ai[1] = 0f;
@@ -586,7 +587,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
                 npc.position = player.Center - new Vector2(0, 600);
                 npc.velocity *= 0;
 
-                if(npc.ai[2] == 240 && Main.netMode != 1)
+                if(npc.ai[2] == 240 && Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     NPC.NewNPC((int)player.Center.X, (int)player.Center.Y + 500, mod.NPCType("ZeroEcho"));
                     NPC.NewNPC((int)player.Center.X, (int)player.Center.Y - 500, mod.NPCType("ZeroEcho"));
@@ -654,7 +655,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
 
         private void AIChange()
         {
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 npc.ai[0] = Main.rand.Next(5);
                 npc.ai[1] = 0;
@@ -692,11 +693,11 @@ namespace AAModEXAI.Bosses.Zero.Protocol
                     {
                         if (player.dead || !player.active)
                         {
-                            if (Main.netMode != 1) AAModEXAI.Chat(AAMod.Lang.BossChat("ZeroAwakened6"), Color.Red.R, Color.Red.G, Color.Red.B);
+                            if (Main.netMode != NetmodeID.MultiplayerClient) AAModEXAI.Chat(AAMod.Lang.BossChat("ZeroAwakened6"), Color.Red.R, Color.Red.G, Color.Red.B);
                         }
                         else if (tooFar)
                         {
-                            if (Main.netMode != 1) AAModEXAI.Chat(AAMod.Lang.BossChat("ZeroAwakened7"), Color.Red.R, Color.Red.G, Color.Red.B);
+                            if (Main.netMode != NetmodeID.MultiplayerClient) AAModEXAI.Chat(AAMod.Lang.BossChat("ZeroAwakened7"), Color.Red.R, Color.Red.G, Color.Red.B);
                         }
                         PlayerDead = true;
                     }
@@ -708,7 +709,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
                     npc.ai[1] = 0;
                     npc.ai[2] = 0;
                     npc.ai[3] = 0;
-                    if (npc.position.Y + npc.height - npc.velocity.Y <= 0 && Main.netMode != 1) { BaseAI.KillNPC(npc); npc.netUpdate2 = true; }
+                    if (npc.position.Y + npc.height - npc.velocity.Y <= 0 && Main.netMode != NetmodeID.MultiplayerClient) { BaseAI.KillNPC(npc); npc.netUpdate2 = true; }
                     return false;
                 }
             }

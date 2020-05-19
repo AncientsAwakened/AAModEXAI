@@ -5,6 +5,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Akuma.Awakened
 {
@@ -49,7 +50,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
             {
                 npc.alpha -= 5;
             }
-            if (npc.ai[0]++ > 450 && Main.netMode != 1)
+            if (npc.ai[0]++ > 450 && Main.netMode != NetmodeID.MultiplayerClient)
             {
                 Main.PlaySound(SoundID.Item14, npc.position);
                 Vector2 position = npc.Center + (Vector2.One * -20f);

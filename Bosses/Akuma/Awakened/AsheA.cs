@@ -5,6 +5,7 @@ using Terraria.ModLoader;
 using System;
 using AAModEXAI.Bosses.AH.Ashe;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Akuma.Awakened
 {
@@ -61,13 +62,13 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 			Main.npc[num].velocity = npc.velocity;
 			if (!NPC.AnyNPCs(ModContent.NPCType<AkumaA>()))
 			{
-				if (Main.netMode != 1)
+				if (Main.netMode != NetmodeID.MultiplayerClient)
 				{
 					AAModEXAI.Chat(AAMod.Lang.BossChat("AkumaAAshe1"), new Color(102, 20, 48), true);
 				}
 				return;
 			}
-			if (Main.netMode != 1)
+			if (Main.netMode != NetmodeID.MultiplayerClient)
 			{
 				AAModEXAI.Chat(AAMod.Lang.BossChat("AkumaAAshe2"), new Color(102, 20, 48), true);
 			}

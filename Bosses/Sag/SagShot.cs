@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ModLoader;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Sag
 {
@@ -41,9 +42,9 @@ namespace AAModEXAI.Bosses.Sag
 		public bool spawnSound = false;
         public override void AI()
         {
-			if(Main.netMode != 2 && !spawnSound)
+			if(Main.netMode != NetmodeID.Server && !spawnSound)
 			{
-				Main.PlaySound(2, (int)projectile.position.X, (int)projectile.position.Y, 33);				
+				Main.PlaySound(SoundID.Item, (int)projectile.position.X, (int)projectile.position.Y, 33);				
 				spawnSound = true;
 			}
             projectile.rotation = projectile.velocity.ToRotation() + 1.57f;

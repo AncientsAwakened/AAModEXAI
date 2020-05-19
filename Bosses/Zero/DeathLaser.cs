@@ -5,6 +5,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Zero
 {
@@ -66,7 +67,7 @@ namespace AAModEXAI.Bosses.Zero
 
         public override void PostAI()
         {
-            if (Main.netMode != 1) a++;
+            if (Main.netMode != NetmodeID.MultiplayerClient) a++;
             if (a == 40)
             {
                 projectile.tileCollide = true;

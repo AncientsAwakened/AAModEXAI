@@ -3,6 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Athena.Olympian
 {
@@ -57,7 +58,7 @@ namespace AAModEXAI.Bosses.Athena.Olympian
             {
                 npc.velocity.X -= npc.ai[1];
                 npc.ai[1]++;
-                if (npc.ai[1] > 40 && Main.netMode != 1)
+                if (npc.ai[1] > 40 && Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     npc.active = false;
                     npc.netUpdate = true;

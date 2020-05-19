@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Zero.Protocol
 {
@@ -27,7 +28,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
         {
             if (Main.expertMode && !AAWorld.downedZero && !linesaid)
             {
-                if (Main.netMode != 1)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     AAModEXAI.Chat(AAMod.Lang.BossChat("ZeroDeath1"), Color.Red.R, Color.Red.G, Color.Red.B);
                     linesaid = true;
@@ -50,7 +51,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
         {
             if (!AAWorld.downedZero && Main.expertMode)
             {
-                if (Main.netMode != 1) AAModEXAI.Chat(AAMod.Lang.BossChat("ZeroDeath3"), Color.Red.R, Color.Red.G, Color.Red.B);
+                if (Main.netMode != NetmodeID.MultiplayerClient) AAModEXAI.Chat(AAMod.Lang.BossChat("ZeroDeath3"), Color.Red.R, Color.Red.G, Color.Red.B);
             }
             int p = Projectile.NewProjectile(projectile.Center, new Vector2(0f, 0f), mod.ProjectileType("ZeroDeath2"), 0, 0);
             Main.projectile[p].Center = projectile.Center;

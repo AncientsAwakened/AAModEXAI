@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Enums;
 using Terraria.ModLoader;using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Shen.GripsShen
 {
@@ -126,7 +127,7 @@ namespace AAModEXAI.Bosses.Shen.GripsShen
             }
             if (projectile.localAI[0] == 0f && maxScale >= 1)
             {
-                Main.PlaySound(29, (int)projectile.position.X, (int)projectile.position.Y, 104, 1f, 0f);
+                Main.PlaySound(SoundID.Zombie, (int)projectile.position.X, (int)projectile.position.Y, 104, 1f, 0f);
             }
             float num801 = maxScale;
             projectile.localAI[0] += 1f;

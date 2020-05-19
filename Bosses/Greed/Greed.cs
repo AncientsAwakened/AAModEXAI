@@ -8,6 +8,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Greed
 {
@@ -117,7 +118,7 @@ namespace AAModEXAI.Bosses.Greed
             }
 
 
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 internalAI[2]++;
                 internalAI[3]++;
@@ -179,7 +180,7 @@ namespace AAModEXAI.Bosses.Greed
                 else
                     npc.ai[3] = 0;
             }
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 if (npc.ai[0] == 0)
                 {
@@ -349,18 +350,18 @@ namespace AAModEXAI.Bosses.Greed
             {
                 if (loludided == false)
                 {
-                    if (Main.netMode != 1) BaseUtility.Chat(AAMod.Lang.BossChat("GreedFalse1"), Color.Goldenrod);
+                    if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("GreedFalse1"), Color.Goldenrod);
                     loludided = true;
                 }
                 npc.velocity.Y = npc.velocity.Y + 1f;
-                if (npc.position.Y - npc.height - npc.velocity.Y >= Main.maxTilesY && Main.netMode != 1) { BaseAI.KillNPC(npc); npc.netUpdate2 = true; }
+                if (npc.position.Y - npc.height - npc.velocity.Y >= Main.maxTilesY && Main.netMode != NetmodeID.MultiplayerClient) { BaseAI.KillNPC(npc); npc.netUpdate2 = true; }
             }
 
             if (Main.player[npc.target].dead || Math.Abs(npc.position.X - Main.player[npc.target].position.X) > 6000f || Math.Abs(npc.position.Y - Main.player[npc.target].position.Y) > 6000f)
             {
                 if (loludided == false)
                 {
-                    if (Main.netMode != 1) BaseUtility.Chat(AAMod.Lang.BossChat("GreedFalse2"), Color.Goldenrod);
+                    if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("GreedFalse2"), Color.Goldenrod);
                     loludided = true;
                 }
                 npc.velocity.Y = npc.velocity.Y - 1f;
@@ -721,14 +722,14 @@ namespace AAModEXAI.Bosses.Greed
             if (Main.player[npc.target].dead && npc.timeLeft > 300)
                 npc.timeLeft = 300;
 
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 if (!Main.npc[(int)npc.ai[3]].active || Main.npc[(int)npc.ai[3]].type != mod.NPCType("Greed"))
                 {
                     npc.life = 0;
                     npc.HitEffect(0, 10.0);
                     npc.active = false;
-                    NetMessage.SendData(28, -1, -1, null, npc.whoAmI, -1f, 0.0f, 0.0f, 0, 0, 0);
+                    NetMessage.SendData(MessageID.StrikeNPC, -1, -1, null, npc.whoAmI, -1f, 0.0f, 0.0f, 0, 0, 0);
                 }
             }
 

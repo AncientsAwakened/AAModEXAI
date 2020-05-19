@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria.ModLoader;
 using Terraria.Audio;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Shen
 {
@@ -92,7 +93,7 @@ namespace AAModEXAI.Bosses.Shen
                     npc.velocity.Y = npc.velocity.Y + num4;
                 }
             }
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
 
                 if (npc.ai[0] == 0f)
@@ -122,10 +123,10 @@ namespace AAModEXAI.Bosses.Shen
                         npc.netUpdate = true;
                     }
                     int num10 = mod.NPCType("ShenlingTail");
-                    if(Main.netMode != 1)
+                    if(Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         int num11 = NPC.NewNPC((int)(npc.position.X + npc.width / 2), (int)(npc.position.Y + npc.height), num10, npc.whoAmI, 0f, 0f, 0f, 0f, 255);
-                        if (Main.netMode == 2 && num11 < 200) NetMessage.SendData(23, -1, -1, null, num11);
+                        if (Main.netMode == NetmodeID.Server && num11 < 200) NetMessage.SendData(23, -1, -1, null, num11);
                         Main.npc[num11].ai[3] = npc.whoAmI;
                         Main.npc[num11].realLife = npc.whoAmI;
                         Main.npc[num11].ai[1] = num9;
@@ -445,7 +446,7 @@ namespace AAModEXAI.Bosses.Shen
             if (Main.player[npc.target].dead && npc.timeLeft > 300)
                 npc.timeLeft = 300;
 
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 if (!Main.npc[(int)npc.ai[1]].active)
                 {
@@ -580,7 +581,7 @@ namespace AAModEXAI.Bosses.Shen
             if (Main.player[npc.target].dead && npc.timeLeft > 300)
                 npc.timeLeft = 300;
 
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 if (!Main.npc[(int)npc.ai[1]].active)
                 {
@@ -715,7 +716,7 @@ namespace AAModEXAI.Bosses.Shen
             if (Main.player[npc.target].dead && npc.timeLeft > 300)
                 npc.timeLeft = 300;
 
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 if (!Main.npc[(int)npc.ai[1]].active)
                 {

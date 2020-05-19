@@ -7,6 +7,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using System.IO;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Grips
 {
@@ -135,7 +136,7 @@ namespace AAModEXAI.Bosses.Grips
             }
 
             bool forceChange = false;
-			if(Main.netMode != 1 && npc.ai[0] != 2 && npc.ai[0] != 3)
+			if(Main.netMode != NetmodeID.MultiplayerClient && npc.ai[0] != 2 && npc.ai[0] != 3)
 			{
 				int stopValue = 250;
 				npc.ai[3]++;
@@ -146,7 +147,7 @@ namespace AAModEXAI.Bosses.Grips
                 checkOver = true;
             if (npc.ai[0] == 1) //move to starting charge position
 			{ 
-                if (Main.netMode != 1 && checkOver)
+                if (Main.netMode != NetmodeID.MultiplayerClient && checkOver)
                 {
                     npc.ai[3] = 0;
                     for (int i = 0; i < 200; i++)
@@ -179,7 +180,7 @@ namespace AAModEXAI.Bosses.Grips
                 moveSpeed = 7f;
 				Vector2 point = targetPlayer.Center + offsetBasePoint + new Vector2(0f, -250f);
 				MoveToPoint(point);
-				if(Main.netMode != 1 && (Vector2.Distance(npc.Center, point) < 10f || forceChange))
+				if(Main.netMode != NetmodeID.MultiplayerClient && (Vector2.Distance(npc.Center, point) < 10f || forceChange))
 				{
 					npc.ai[0] = 2;
 					npc.ai[1] = targetPlayer.Center.X;
@@ -199,7 +200,7 @@ namespace AAModEXAI.Bosses.Grips
                 
                     Vector2 point = targetCenter - offsetBasePoint + new Vector2(0f, 250f);
 				MoveToPoint(point);
-				if(Main.netMode != 1 && Vector2.Distance(npc.Center, point) < 10f && internalAI[1] == 0 && internalAI[2] == 0 || (internalAI[2] >= 60))
+				if(Main.netMode != NetmodeID.MultiplayerClient && Vector2.Distance(npc.Center, point) < 10f && internalAI[1] == 0 && internalAI[2] == 0 || (internalAI[2] >= 60))
 				{
 					bool doubleDive = npc.life < npc.lifeMax / 2;
                     npc.ai[0] = doubleDive ? 3 : 0;
@@ -250,7 +251,7 @@ namespace AAModEXAI.Bosses.Grips
 				Vector2 targetCenter = new Vector2(npc.ai[1], npc.ai[2]);
 				Vector2 point = targetCenter + offsetBasePoint + new Vector2(0f, -250f);
 				MoveToPoint(point);
-				if(Main.netMode != 1 && Vector2.Distance(npc.Center, point) < 10f && internalAI[1] == 0 && internalAI[2] == 0 || (internalAI[2] >= 60))
+				if(Main.netMode != NetmodeID.MultiplayerClient && Vector2.Distance(npc.Center, point) < 10f && internalAI[1] == 0 && internalAI[2] == 0 || (internalAI[2] >= 60))
 				{
                     npc.ai[0] = 0;
                     npc.ai[1] = 0;
@@ -269,7 +270,7 @@ namespace AAModEXAI.Bosses.Grips
                 Vector2 targetCenter = new Vector2(npc.ai[1], npc.ai[2]);
                 Vector2 point = targetCenter - offsetBasePoint + new Vector2(0f, -250f);
                 MoveToPoint(point);
-                if (Main.netMode != 1 && Vector2.Distance(npc.Center, point) < 10f)
+                if (Main.netMode != NetmodeID.MultiplayerClient && Vector2.Distance(npc.Center, point) < 10f)
                 {
                     npc.ai[0] = 0;
                     npc.ai[1] = 0;
@@ -297,7 +298,7 @@ namespace AAModEXAI.Bosses.Grips
 				moveSpeed = 5f;
 				Vector2 point = targetPlayer.Center + offsetBasePoint;
 				MoveToPoint(point);
-				if(Main.netMode != 1 && (Vector2.Distance(npc.Center, point) < 50f || forceChange))
+				if(Main.netMode != NetmodeID.MultiplayerClient && (Vector2.Distance(npc.Center, point) < 50f || forceChange))
 				{
 					npc.ai[1]++;
 					if(npc.ai[1] > 150)

@@ -5,6 +5,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.Enums;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Akuma.Awakened
 {
@@ -68,7 +69,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
             }
             if (projectile.localAI[0] == 0f && maxScale >= 1)
             {
-                Main.PlaySound(29, (int)projectile.position.X, (int)projectile.position.Y, 104, 1f, 0f);
+                Main.PlaySound(SoundID.Zombie, (int)projectile.position.X, (int)projectile.position.Y, 104, 1f, 0f);
             }
             float num801 = maxScale;
             projectile.localAI[0] += 1f;
@@ -220,7 +221,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 
         public override void Kill(int timeLeft)
         {
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
                 Projectile.NewProjectile(projectile.Center, projectile.velocity, mod.ProjectileType("AkumaADeathray"), projectile.damage, projectile.knockBack, projectile.owner, projectile.ai[0], projectile.ai[1]);
             base.Kill(timeLeft);
         }

@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Terraria.Localization;
 
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI
 {
@@ -40,11 +41,11 @@ namespace AAModEXAI
         {
             if (!AAConfigClient.Instance.NoBossDialogue)
             {
-                if (Main.netMode == 0) { Main.NewText(s, colorR, colorG, colorB); }
+                if (Main.netMode == NetmodeID.SinglePlayer) { Main.NewText(s, colorR, colorG, colorB); }
                 else
-                if (Main.netMode == 1) { Main.NewText(s, colorR, colorG, colorB); }
+                if (Main.netMode == NetmodeID.MultiplayerClient) { Main.NewText(s, colorR, colorG, colorB); }
                 else //if(sync){ NetMessage.BroadcastChatMessage(NetworkText.FromLiteral(s), new Color(colorR, colorG, colorB), Main.myPlayer); } }else
-                if (sync && Main.netMode == 2) { NetMessage.BroadcastChatMessage(NetworkText.FromLiteral(s), new Color(colorR, colorG, colorB), -1); }
+                if (sync && Main.netMode == NetmodeID.Server) { NetMessage.BroadcastChatMessage(NetworkText.FromLiteral(s), new Color(colorR, colorG, colorB), -1); }
             }
         }
 

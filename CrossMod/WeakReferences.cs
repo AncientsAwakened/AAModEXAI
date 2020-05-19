@@ -5,6 +5,7 @@ using Terraria.ModLoader;
 using Terraria;
 
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI
 {

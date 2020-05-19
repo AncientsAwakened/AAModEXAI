@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Shen
 {
@@ -58,7 +59,7 @@ namespace AAModEXAI.Bosses.Shen
 		// Token: 0x060018DE RID: 6366 RVA: 0x0011947C File Offset: 0x0011767C
 		public override void Kill(int timeLeft)
 		{
-			if (Main.netMode != 1)
+			if (Main.netMode != NetmodeID.MultiplayerClient)
 			{
 				Vector2 vector = Vector2.Normalize(projectile.velocity);
 				for (int i = 0; i < 8; i++)

@@ -7,6 +7,7 @@ using System.IO;
 using Terraria.ID;
 using Microsoft.Xna.Framework.Graphics;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Yamata.Awakened
 {
@@ -100,7 +101,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
             }
             else
             {
-                if (Main.netMode != 1) //force a kill to prevent 'ghost hands'
+                if (Main.netMode != NetmodeID.MultiplayerClient) //force a kill to prevent 'ghost hands'
                 {
                     npc.life = 0;
                     npc.checkDead();
@@ -126,7 +127,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
 
                     if (internalAI[1] == 180 - 60)
                     {
-                        if (Main.netMode != 1)
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
                         {
                             float ai0 = (float)Math.PI * 2 / 300 * (npc.ai[3] == 2 ? 1 : -1) * Math.Sign(npc.ai[1]);
                             Projectile.NewProjectile(npc.Center, Vector2.UnitY, mod.ProjectileType("YamataWaveDeathraySmall"), npc.damage / 4, 0f, Main.myPlayer, ai0, npc.whoAmI);
@@ -145,7 +146,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                     if (++internalAI[3] > 20) 
                     {
                         internalAI[3] = 0;
-                        if (npc.ai[3] == 3 && Main.netMode != 1)
+                        if (npc.ai[3] == 3 && Main.netMode != NetmodeID.MultiplayerClient)
                         {
                             if (Math.Sign(npc.Center.X - targetPlayer.Center.X) != Math.Sign(npc.ai[1])) //outermost heads enrage at player if they walk away from underneath
                             {
@@ -172,7 +173,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                     if (internalAI[2] > 180)
                     {
                         internalAI[2] = 0;
-                        if (Main.netMode != 1)
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
                             Projectile.NewProjectile(npc.Center, npc.DirectionTo(targetPlayer.Center) * 5f, mod.ProjectileType("YamataAVenom2"), npc.damage / 5, 0f, Main.myPlayer);
                     }
                     if (++internalAI[1] > 240)
@@ -189,7 +190,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                     if (++internalAI[2] > 120)
                     {
                         internalAI[2] = 0;
-                        if (Main.netMode != 1)
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
                             Projectile.NewProjectile(npc.Center, npc.DirectionTo(targetPlayer.Center) * 20f, mod.ProjectileType("YamataABreath"), npc.damage / 5, 0f, Main.myPlayer);
                     }
                     if (++internalAI[1] > 180)
@@ -204,7 +205,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                 case 4: //shoot direct aim deathrays
                     if (internalAI[1] == npc.ai[3] * 60 - 30)
                     {
-                        if (Main.netMode != 1)
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
                             Projectile.NewProjectile(npc.Center, npc.DirectionTo(targetPlayer.Center), mod.ProjectileType("YamataDeathraySmall"), npc.damage / 4, 0f, Main.myPlayer, 0f, npc.whoAmI);
                     }
                     if (++internalAI[1] > 360)
@@ -223,7 +224,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                     if (internalAI[2] > 360)
                     {
                         internalAI[2] = 0;
-                        if (Main.netMode != 1)
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
                             Projectile.NewProjectile(npc.Center, Vector2.UnitY * 5, mod.ProjectileType("YamataAShockBomb"), npc.damage / 5, 0f, Main.myPlayer, npc.target);
                     }
                     if (++internalAI[1] > 420)
@@ -252,13 +253,13 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                     if (internalAI[2] > 120)
                     {
                         internalAI[2] = 0;
-                        if (Main.netMode != 1)
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
                             Projectile.NewProjectile(npc.Center, Vector2.UnitY * 10, mod.ProjectileType("AbyssalThunder"), npc.damage / 5, 0f, Main.myPlayer);
                     }
                     if (++internalAI[3] > 20) //outermost heads enrage at player if they walk away from underneath
                     {
                         internalAI[3] = 0;
-                        if (npc.ai[3] == 3 && Math.Sign(npc.Center.X - targetPlayer.Center.X) != Math.Sign(npc.ai[1]) && Main.netMode != 1)
+                        if (npc.ai[3] == 3 && Math.Sign(npc.Center.X - targetPlayer.Center.X) != Math.Sign(npc.ai[1]) && Main.netMode != NetmodeID.MultiplayerClient)
                             Projectile.NewProjectile(npc.Center, npc.DirectionTo(targetPlayer.Center) * 5f, mod.ProjectileType("YamataAVenom2"), npc.damage / 5, 0f, Main.myPlayer);
                     }
                     if (++internalAI[1] > 360)

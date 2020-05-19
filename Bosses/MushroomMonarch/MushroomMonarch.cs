@@ -5,6 +5,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.MushroomMonarch
 {
@@ -195,7 +196,7 @@ namespace AAModEXAI.Bosses.MushroomMonarch
             }
 
             
-			if(Main.netMode != 1)
+			if(Main.netMode != NetmodeID.MultiplayerClient)
 			{
                 if (internalAI[1] != AISTATE_FLY)
                 {
@@ -212,7 +213,7 @@ namespace AAModEXAI.Bosses.MushroomMonarch
 			if(internalAI[1] == AISTATE_WALK) //fighter
 			{
                 npc.noGravity = false;
-                if (Main.netMode != 1)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     internalAI[2]++;
                 }
@@ -290,9 +291,9 @@ namespace AAModEXAI.Bosses.MushroomMonarch
             if(Main.rand.Next(10) == 0)
             {
                 int i = Item.NewItem((int)npc.Center.X, (int)npc.Center.Y, 16, 16, 5, 1, false, 0, false, false);
-                if (Main.netMode == 1 && i > 0)
+                if (Main.netMode == NetmodeID.MultiplayerClient && i > 0)
                 {
-                    NetMessage.SendData(21, -1, -1, null, i, 1f, 0f, 0f, 0, 0, 0);
+                    NetMessage.SendData(MessageID.SyncItem, -1, -1, null, i, 1f, 0f, 0f, 0, 0, 0);
                 }
             }
             else
@@ -306,9 +307,9 @@ namespace AAModEXAI.Bosses.MushroomMonarch
             if(Main.rand.Next(10) == 0)
             {
                 int i = Item.NewItem((int)npc.Center.X, (int)npc.Center.Y, 16, 16, 5, 1, false, 0, false, false);
-                if (Main.netMode == 1 && i > 0)
+                if (Main.netMode == NetmodeID.MultiplayerClient && i > 0)
                 {
-                    NetMessage.SendData(21, -1, -1, null, i, 1f, 0f, 0f, 0, 0, 0);
+                    NetMessage.SendData(MessageID.SyncItem, -1, -1, null, i, 1f, 0f, 0f, 0, 0, 0);
                 }
             }
             else

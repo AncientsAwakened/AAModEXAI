@@ -5,6 +5,7 @@ using Terraria.ModLoader;
 
 using System.IO;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Anubis
 {
@@ -132,7 +133,7 @@ namespace AAModEXAI.Bosses.Anubis
 
             if (npc.life < npc.lifeMax / 3 && internalAI[2] == 0)
             {
-                if (Main.netMode != 1)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     for (int m = 0; m < LocustCount; m++)
                     {
@@ -418,9 +419,9 @@ namespace AAModEXAI.Bosses.Anubis
                 if (!player.active || player.dead || Vector2.Distance(npc.Center, player.Center) > 5000f || !player.ZoneDesert)
                 {
                     deathtimer++;
-                    if (Main.netMode != 1 && deathtimer > 240)
+                    if (Main.netMode != NetmodeID.MultiplayerClient && deathtimer > 240)
                     {
-                        if (Main.netMode != 1) BaseUtility.Chat(AAMod.Lang.BossChat("AnubisFalse"), Color.Gold);
+                        if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("AnubisFalse"), Color.Gold);
                         int a = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<AAMod.NPCs.TownNPCs.Anubis>());
                         Main.npc[a].Center = npc.Center;
                         npc.active = false;
@@ -677,7 +678,7 @@ namespace AAModEXAI.Bosses.Anubis
             npc.dontTakeDamage = true;
 
             npc.ai[3] = 39;
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 music = ModLoader.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/silence");
                 if (npc.velocity.Y == 0)
@@ -689,28 +690,28 @@ namespace AAModEXAI.Bosses.Anubis
                             if (internalAI[1] == 60)
                             {
                                 string s = Main.ActivePlayersCount > 1 ? AAMod.Lang.BossChat("AnubisGuys") : AAMod.Lang.BossChat("Anubisbud");
-                                if (Main.netMode != 1) BaseUtility.Chat(AAMod.Lang.BossChat("Anubis1") + s + AAMod.Lang.BossChat("Anubis2"), Color.Gold);
+                                if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("Anubis1") + s + AAMod.Lang.BossChat("Anubis2"), Color.Gold);
                             }
 
                             if (internalAI[1] == 150)
                             {
-                                if (Main.netMode != 1) BaseUtility.Chat(AAMod.Lang.BossChat("Anubis3"), Color.Gold);
+                                if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("Anubis3"), Color.Gold);
                             }
 
                             if (internalAI[1] == 240)
                             {
-                                if (Main.netMode != 1) BaseUtility.Chat(AAMod.Lang.BossChat("Anubis4"), Color.Gold);
+                                if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("Anubis4"), Color.Gold);
                             }
 
                             if (internalAI[1] == 320)
                             {
-                                if (Main.netMode != 1) BaseUtility.Chat(AAMod.Lang.BossChat("Anubis5"), Color.Gold);
+                                if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("Anubis5"), Color.Gold);
                             }
 
                             if (internalAI[1] >= 410)
                             {
                                 music = ModLoader.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/Anubis");
-                                if (Main.netMode != 1) BaseUtility.Chat(AAMod.Lang.BossChat("Anubis6"), Color.Gold);
+                                if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("Anubis6"), Color.Gold);
                                 internalAI[0] = 1;
                                 Teleport();
                                 npc.netUpdate = true;
@@ -719,7 +720,7 @@ namespace AAModEXAI.Bosses.Anubis
                         else
                         {
                             music = ModLoader.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/Anubis");
-                            if (Main.netMode != 1) BaseUtility.Chat(AAMod.Lang.BossChat("Anubis7"), Color.Gold);
+                            if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("Anubis7"), Color.Gold);
                             internalAI[0] = 1;
                             Teleport();
                             npc.netUpdate = true;

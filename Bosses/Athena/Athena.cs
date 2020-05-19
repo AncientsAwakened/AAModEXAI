@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.IO;
 using AAMod.NPCs.Enemies.Sky;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Athena
 {
@@ -140,7 +141,7 @@ namespace AAModEXAI.Bosses.Athena
                         npc.netUpdate = true;
                     }
 
-                    if (Main.netMode != 1)
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         if (!Seen)
                         {
@@ -272,7 +273,7 @@ namespace AAModEXAI.Bosses.Athena
 
                 music = ModLoader.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/Athena");
 
-                if (internalAI[0]++ > 300 && Main.netMode != 1)
+                if (internalAI[0]++ > 300 && Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     int pChoice = Main.rand.Next(2);
                     if (pChoice == 0)
@@ -284,14 +285,14 @@ namespace AAModEXAI.Bosses.Athena
 
                 if (internalAI[1] == 0) //Acropolis Phase
                 {
-                    if (Main.netMode != 1)
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         npc.ai[3]++;
                     }
 
                     if (Vector2.Distance(player.Center, Acropolis) > 1280)
                     {
-                        if (npc.ai[2] == 0 && Main.netMode != 1)
+                        if (npc.ai[2] == 0 && Main.netMode != NetmodeID.MultiplayerClient)
                         {
                             npc.ai[2] = 1;
                             npc.netUpdate = true;
@@ -300,7 +301,7 @@ namespace AAModEXAI.Bosses.Athena
                     }
                     else
                     {
-                        if (npc.ai[2] == 1 && Main.netMode != 1)
+                        if (npc.ai[2] == 1 && Main.netMode != NetmodeID.MultiplayerClient)
                         {
                             npc.ai[2] = 0;
                             npc.netUpdate = true;
@@ -310,7 +311,7 @@ namespace AAModEXAI.Bosses.Athena
 
                     if (npc.ai[3] > 600)
                     {
-                        if (Main.netMode != 1)
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
                         {
                             internalAI[1] = 1;
                             npc.ai[0] = 0;
@@ -324,13 +325,13 @@ namespace AAModEXAI.Bosses.Athena
                 }
                 else //Cloud Phase
                 {
-                    if (MoveVector2 == new Vector2(0, 0) && Main.netMode != 1)
+                    if (MoveVector2 == new Vector2(0, 0) && Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         MoveVector2 = CloudPick();
                         npc.netUpdate = true;
                     }
                     npc.ai[1]++;
-                    if (Main.netMode != 1)
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         if (npc.ai[1] == 300)
                         {
@@ -351,7 +352,7 @@ namespace AAModEXAI.Bosses.Athena
                     }
                     if (Vector2.Distance(npc.Center, MoveVector2) < 10)
                     {
-                        if (npc.ai[2] == 1 && Main.netMode != 1)
+                        if (npc.ai[2] == 1 && Main.netMode != NetmodeID.MultiplayerClient)
                         {
                             npc.ai[1] = 0;
                             npc.ai[2] = 0;
@@ -359,7 +360,7 @@ namespace AAModEXAI.Bosses.Athena
                         }
                         npc.velocity *= 0;
 
-                        if (npc.ai[1] % 200 == 0 && Main.netMode != 1)
+                        if (npc.ai[1] % 200 == 0 && Main.netMode != NetmodeID.MultiplayerClient)
                         {
                             int Choice = Main.rand.Next(2);
                             if (Choice == 0)
@@ -398,7 +399,7 @@ namespace AAModEXAI.Bosses.Athena
                     }
                     else
                     {
-                        if (npc.ai[2] == 0 && Main.netMode != 1)
+                        if (npc.ai[2] == 0 && Main.netMode != NetmodeID.MultiplayerClient)
                         {
                             npc.ai[2] = 1;
                             npc.netUpdate = true;
@@ -659,7 +660,7 @@ namespace AAModEXAI.Bosses.Athena
 
         public override void AI()
         {
-            if (Main.netMode != 1 && npc.ai[0]++ >= 120)
+            if (Main.netMode != NetmodeID.MultiplayerClient && npc.ai[0]++ >= 120)
             {
                 if (npc.ai[0] >= 120 && npc.ai[0] < 130)
                 {
@@ -675,7 +676,7 @@ namespace AAModEXAI.Bosses.Athena
                     npc.velocity.Y -= 0.5f;
                     if (npc.velocity.Y < -8f) npc.velocity.Y = -8f;
                 }
-                if (npc.position.Y + npc.velocity.Y <= 0f && Main.netMode != 1) { BaseAI.KillNPC(npc); npc.netUpdate = true; }
+                if (npc.position.Y + npc.velocity.Y <= 0f && Main.netMode != NetmodeID.MultiplayerClient) { BaseAI.KillNPC(npc); npc.netUpdate = true; }
             }
         }
 

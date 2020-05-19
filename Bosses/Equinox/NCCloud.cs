@@ -7,6 +7,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Equinox
 {
@@ -126,7 +127,7 @@ namespace AAModEXAI.Bosses.Equinox
                 npc.ai[1] = 0;
             }
 
-            if (npc.ai[1] == aiTimerFire && Main.netMode != 1)
+            if (npc.ai[1] == aiTimerFire && Main.netMode != NetmodeID.MultiplayerClient)
             {
                 Vector2 speed = new Vector2(1f, 0f).RotatedBy((float)(Main.rand.NextDouble() * 3.1415f)) * 6f;
                 Projectile.NewProjectile(npc.Center.X, npc.Center.Y, speed.X, speed.Y, mod.ProjectileType("NightcrawlerNothing"), npc.damage / 4, 0, Main.myPlayer);

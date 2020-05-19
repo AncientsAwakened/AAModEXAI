@@ -8,6 +8,7 @@ using Terraria.ModLoader;
 
 using System.IO;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Broodmother
 {
@@ -235,14 +236,14 @@ namespace AAModEXAI.Bosses.Broodmother
                     npc.velocity.Y -= 0.1f;
                     if (npc.velocity.Y > 15f) npc.velocity.Y = 15f;
                     npc.rotation = 0f;
-                    if(npc.position.Y + npc.velocity.Y <= 0f && Main.netMode != 1){ BaseAI.KillNPC(npc); npc.netUpdate = true; }
+                    if(npc.position.Y + npc.velocity.Y <= 0f && Main.netMode != NetmodeID.MultiplayerClient){ BaseAI.KillNPC(npc); npc.netUpdate = true; }
                 }
                 return;
             }
 
             int Minions = NPC.CountNPCS(mod.NPCType("BroodEgg")) + NPC.CountNPCS(mod.NPCType("Broodmini"));
 
-            if (Main.netMode != 1 && internalAI[0]++ >= 120)
+            if (Main.netMode != NetmodeID.MultiplayerClient && internalAI[0]++ >= 120)
             {
                 internalAI[0] = 0;
                 internalAI[1] = Minions < MaxMinions ? Main.rand.Next(4) : Main.rand.Next(3);
@@ -310,7 +311,7 @@ namespace AAModEXAI.Bosses.Broodmother
                     npc.localAI[2] = 0f;
                     Main.PlaySound(SoundID.Item34, npc.position);
                 }
-                if (Main.netMode != 1)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     internalAI[2]++;
                     if (internalAI[2] > 10f)
@@ -323,7 +324,7 @@ namespace AAModEXAI.Bosses.Broodmother
                         {
                             int j = (int) npc.position.Y / 16;
                             int i = (int) player.position.Y / 16;
-                            if(i > j && internalAI[2] % 90 == 0 && Main.netMode != 1)
+                            if(i > j && internalAI[2] % 90 == 0 && Main.netMode != NetmodeID.MultiplayerClient)
                             {
                                 for(int index = -2; index < 2; index++)
                                 {
@@ -364,7 +365,7 @@ namespace AAModEXAI.Bosses.Broodmother
             }
             else if (internalAI[1] == AISTATE_SPAWNEGGS)
             {
-                if (Main.netMode != 1)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     projectileTimer++;
                     if (projectileTimer >= projectileInterval && projectileTimer % 20 == 0)
@@ -384,7 +385,7 @@ namespace AAModEXAI.Bosses.Broodmother
             }
             else if (internalAI[1] == AISTATE_FIREBOMB)
             {
-                if (Main.netMode != 1) //only fire bombs when (attempting to) fly above the player
+                if (Main.netMode != NetmodeID.MultiplayerClient) //only fire bombs when (attempting to) fly above the player
                 {
                     projectileTimer++;
                     if (projectileTimer >= projectileInterval && projectileTimer % 10 == 0)

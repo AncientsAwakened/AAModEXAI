@@ -8,6 +8,7 @@ using System.IO;
 using Terraria.ID;
 using Microsoft.Xna.Framework.Graphics;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Yamata
 {
@@ -113,7 +114,7 @@ namespace AAModEXAI.Bosses.Yamata
             float playerDistance = targetPlayer == null ? 99999f : Vector2.Distance(targetPlayer.Center, npc.Center);
             if (!Body.npc.active)
             {
-                if (Main.netMode != 1) //force a kill to prevent 'ghost hands'
+                if (Main.netMode != NetmodeID.MultiplayerClient) //force a kill to prevent 'ghost hands'
                 {
                     npc.life = 0;
                     npc.checkDead();
@@ -160,7 +161,7 @@ namespace AAModEXAI.Bosses.Yamata
                 npc.Center = Body.npc.Center;
                 for (int i = 0; i < 5; ++i)
                 {
-                    Main.PlaySound(2, (int)npc.Center.X, (int)npc.Center.Y, 20);
+                    Main.PlaySound(SoundID.Item, (int)npc.Center.X, (int)npc.Center.Y, 20);
                     Vector2 dir = Vector2.Normalize(targetPlayer.Center - npc.Center);
                     dir *= 5f;
                     Projectile.NewProjectile(npc.Center.X, npc.Center.Y, dir.X, dir.Y, isAwakened ? mod.ProjectileType("YamataABreath") : mod.ProjectileType("YamataBreath"), npc.damage / 4, 0f, Main.myPlayer);
@@ -186,7 +187,7 @@ namespace AAModEXAI.Bosses.Yamata
                 return;
             }
 
-            if (Main.netMode != 1 && !YamataHead.EATTHELITTLEMAGGOT)
+            if (Main.netMode != NetmodeID.MultiplayerClient && !YamataHead.EATTHELITTLEMAGGOT)
             {
                 if (npc.alpha <= 0)
                 {
@@ -199,7 +200,7 @@ namespace AAModEXAI.Bosses.Yamata
                     fireAttack = true;
                     for (int i = 0; i < 5; ++i)
                     {
-                        Main.PlaySound(2, (int)npc.Center.X, (int)npc.Center.Y, 20);
+                        Main.PlaySound(SoundID.Item, (int)npc.Center.X, (int)npc.Center.Y, 20);
                         Vector2 dir = Vector2.Normalize(targetPlayer.Center - npc.Center);
                         dir *= 5f;
                         Projectile.NewProjectile(npc.Center.X, npc.Center.Y, dir.X, dir.Y, isAwakened ? mod.ProjectileType("YamataABreath") : mod.ProjectileType("YamataBreath"), npc.damage / 4, 0f, Main.myPlayer);
@@ -242,7 +243,7 @@ namespace AAModEXAI.Bosses.Yamata
             if (npc.life <= 0)
             {
                 CombatText.NewText(npc.getRect(), new Color(45, 46, 70), AAMod.Lang.BossChat("YamataHead"), true, true);
-                if(Main.netMode != 1)
+                if(Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity), mod.ProjectileType("Yanker"), npc.damage / 2, 0f, Main.myPlayer);
                 }

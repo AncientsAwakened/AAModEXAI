@@ -5,6 +5,7 @@ using Terraria.ModLoader;
 
 using Microsoft.Xna.Framework.Graphics;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Hydra
 { 
@@ -37,7 +38,7 @@ namespace AAModEXAI.Bosses.Hydra
         public override void AI()
         {
             npc.dontTakeDamage = true;
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 if (npc.velocity.Y == 0)
                 {

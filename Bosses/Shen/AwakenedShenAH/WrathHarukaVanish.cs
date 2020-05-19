@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Shen.AwakenedShenAH
 {

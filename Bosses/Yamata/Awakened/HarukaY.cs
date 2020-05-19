@@ -5,6 +5,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Yamata.Awakened
 {
@@ -105,13 +106,13 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
 			Main.npc[num].velocity = npc.velocity;
 			if (!NPC.AnyNPCs(ModContent.NPCType<YamataAHead>()))
 			{
-				if (Main.netMode != 1)
+				if (Main.netMode != NetmodeID.MultiplayerClient)
 				{
 					AAModEXAI.Chat(AAMod.Lang.BossChat("HarukaY1"), new Color(72, 78, 117), true);
 				}
 				return;
 			}
-			if (Main.netMode != 1)
+			if (Main.netMode != NetmodeID.MultiplayerClient)
 			{
 				AAModEXAI.Chat(AAMod.Lang.BossChat("HarukaY2"), new Color(72, 78, 117), true);
 			}

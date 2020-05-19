@@ -3,6 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Serpent
 {
@@ -26,7 +27,7 @@ namespace AAModEXAI.Bosses.Serpent
 
         public override bool PreKill(int timeLeft)
         {
-            Main.PlaySound(2, projectile.position, 50);
+            Main.PlaySound(SoundID.Item, projectile.position, 50);
             int pieCut = 20;
             for (int m = 0; m < pieCut; m++)
             {

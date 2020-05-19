@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 
 using Terraria.Graphics.Shaders;using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Shen.GripsShen
 {

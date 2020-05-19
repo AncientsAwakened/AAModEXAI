@@ -6,6 +6,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Serpent
 {
@@ -127,7 +128,7 @@ namespace AAModEXAI.Bosses.Serpent
                 npc.TargetClosest(true);
             }
             npc.velocity.Length();
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 if (internalAI[4] != 1)
                 {
@@ -316,7 +317,7 @@ namespace AAModEXAI.Bosses.Serpent
                         num54 = 20f;
                     }
                     npc.soundDelay = (int)num54;
-                    Main.PlaySound(15, (int)npc.position.X, (int)npc.position.Y, 1, 1f, 0f);
+                    Main.PlaySound(SoundID.Roar, (int)npc.position.X, (int)npc.position.Y, 1, 1f, 0f);
                 }
                 num52 = (float)Math.Sqrt(targetX * targetX + targetY * targetY);
                 float num55 = Math.Abs(targetX);
@@ -454,7 +455,7 @@ namespace AAModEXAI.Bosses.Serpent
 
         public override void FindFrame(int frameHeight)
         {
-            if (Main.netMode != 2 && !tongueFlick && Main.rand.Next(20) == 0)
+            if (Main.netMode != NetmodeID.Server && !tongueFlick && Main.rand.Next(20) == 0)
             {
                 tongueFlick = true;
             }
@@ -1036,7 +1037,7 @@ namespace AAModEXAI.Bosses.Serpent
                         num24 = 20f;
                     }
                     npc.soundDelay = (int)num24;
-                    Main.PlaySound(15, (int)npc.position.X, (int)npc.position.Y, 1, 1f, 0f);
+                    Main.PlaySound(SoundID.Roar, (int)npc.position.X, (int)npc.position.Y, 1, 1f, 0f);
                 }
                 num22 = (float)Math.Sqrt(num20 * num20 + num21 * num21);
                 float num25 = Math.Abs(num20);
@@ -1428,7 +1429,7 @@ namespace AAModEXAI.Bosses.Serpent
                         num24 = 20f;
                     }
                     npc.soundDelay = (int)num24;
-                    Main.PlaySound(15, (int)npc.position.X, (int)npc.position.Y, 1, 1f, 0f);
+                    Main.PlaySound(SoundID.Roar, (int)npc.position.X, (int)npc.position.Y, 1, 1f, 0f);
                 }
                 num22 = (float)Math.Sqrt(num20 * num20 + num21 * num21);
                 float num25 = Math.Abs(num20);

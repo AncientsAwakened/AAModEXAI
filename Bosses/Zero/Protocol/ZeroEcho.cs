@@ -4,6 +4,7 @@ using Terraria.ModLoader;
 
 using Terraria.Graphics.Shaders;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Zero.Protocol
 {
@@ -63,7 +64,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
             NPC zero = Main.npc[body];
             if (zero == null || zero.life <= 0 || !zero.active || zero.type != mod.NPCType("ZeroProtocol")) { npc.active = false; return; }
 
-            if (zero.ai[1] == 1f && Main.netMode != 1)
+            if (zero.ai[1] == 1f && Main.netMode != NetmodeID.MultiplayerClient)
             {
                 Projectile.NewProjectile(npc.Center + new Vector2(30, 30), new Vector2(10, 10), mod.ProjectileType("EchoRay"), 70, 0f, Main.myPlayer, 0, npc.whoAmI);
                 Projectile.NewProjectile(npc.Center + new Vector2(-30, 30), new Vector2(-10, 10), mod.ProjectileType("EchoRay"), 70, 0f, Main.myPlayer, 0, npc.whoAmI);

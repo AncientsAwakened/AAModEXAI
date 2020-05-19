@@ -5,6 +5,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using AAModEXAI.Bosses.Athena.Olympian;
 using AAMod;
+using Terraria.ID;
 
 namespace AAModEXAI.Bosses.Athena
 {
@@ -49,7 +50,7 @@ namespace AAModEXAI.Bosses.Athena
                     }
                 }
                 npc.alpha += 3;
-                if (npc.alpha >= 255 && Main.netMode != 1)
+                if (npc.alpha >= 255 && Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     npc.active = false;
                 }

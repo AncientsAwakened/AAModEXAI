@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.IO;
 using AAMod;
+using Terraria.ID;
 
 
 namespace AAModEXAI.Bosses.Shen
@@ -77,7 +78,7 @@ namespace AAModEXAI.Bosses.Shen
                     shotdirection = npc.direction;
                     npc.Center = new Vector2(shen.Center.X + internalAI[1] * shotdirection, shen.Center.Y + internalAI[2]);
                 }
-                if(shen.ai[0] == 0 && shen.ai[2] == 240 && Main.netMode != 1)
+                if(shen.ai[0] == 0 && shen.ai[2] == 240 && Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     float ai0 = (float)Math.PI * 2 / 300 * (internalAI[3] == 2 ? 1 : -1) * Math.Sign(internalAI[2]);
                             Projectile.NewProjectile(npc.Center + npc.direction * new Vector2(npc.width / 2, 0), Vector2.UnitX * shotdirection, mod.ProjectileType("ShenWaveDeathraySmall"), npc.damage, 0f, Main.myPlayer, ai0, npc.whoAmI);
@@ -86,7 +87,7 @@ namespace AAModEXAI.Bosses.Shen
                 }
                 if(shen.ai[0] == 13 && shen.ai[1] == internalAI[3] * 120 - 30)
                 {
-                    if (Main.netMode != 1)
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                         Projectile.NewProjectile(npc.Center + npc.direction * new Vector2(npc.width / 2, 0), npc.DirectionTo(Main.player[shen.target].Center), mod.ProjectileType("ShenWaveDeathraySmall"), npc.damage / 4, 0f, Main.myPlayer, 0f, npc.whoAmI);
                 }
                 if(shen.ai[0] == 13 && shen.ai[1] == 30)
