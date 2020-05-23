@@ -14,6 +14,7 @@ using AAModEXAI.Bosses.Anubis.Forsaken;
 using System;
 using AAMod;
 using Terraria.ID;
+using Microsoft.Xna.Framework;
 
 namespace AAModEXAI
 {
@@ -107,6 +108,16 @@ namespace AAModEXAI
 
         public override void PostUpdate()
         {
+            for (int spawnDust = 0; spawnDust < 88; spawnDust++)
+            {
+                double deg = 2d * Math.PI * Main.rand.NextDouble();
+                float longth = (float)(300f * Math.Sin(4 * deg));
+                Vector2 range = new Vector2(longth * (float)Math.Cos(deg), longth * (float)Math.Sin(deg));
+                int num935 = Dust.NewDust(player.Center + range - new Vector2(4, 4), 6, 6, 131, 0f, 0f, 0, default, 1f);
+                Main.dust[num935].noGravity = true;
+                Main.dust[num935].velocity = player.velocity;
+            }
+
             if(player.endurance >= 1f)
             {
                 player.endurance = .8f;

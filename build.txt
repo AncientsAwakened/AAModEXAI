@@ -3,5 +3,6 @@ author = Alphakip
 hideCode = true
 includeSource = false
 modReferences = AAMod
+dllReferences = 0Harmony
 version = 1.0
 homepage = https://discord.gg/MmpCpj4
