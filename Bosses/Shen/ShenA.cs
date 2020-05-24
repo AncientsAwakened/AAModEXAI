@@ -693,6 +693,36 @@ namespace AAModEXAI.Bosses.Shen
 
         public override void NPCLoot()
         {
+            if (Head1 != null || Head1.active || Head1.life > 0)
+            {
+                Head1.active = false;
+                Head1.life = 0;
+            }
+            if (Head2 != null || Head2.active || Head2.life > 0)
+            {
+                Head2.active = false;
+                Head2.life = 0;
+            }
+            if (Head3 != null || Head3.active || Head3.life > 0)
+            {
+                Head3.active = false;
+                Head3.life = 0;
+            }
+            if (Head4 != null || Head4.active || Head4.life > 0)
+            {
+                Head4.active = false;
+                Head4.life = 0;
+            }
+            if (Head5 != null || Head5.active || Head5.life > 0)
+            {
+                Head5.active = false;
+                Head5.life = 0;
+            }
+            if (Head6 != null || Head6.active || Head6.life > 0)
+            {
+                Head6.active = false;
+                Head6.life = 0;
+            }
             if (npc.type == mod.NPCType("ShenA"))
             {
                 if (Main.expertMode)
