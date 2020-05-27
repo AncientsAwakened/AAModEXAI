@@ -99,15 +99,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
             if (projectile.scale > num801)
                 projectile.scale = num801;
             float num804 = projectile.velocity.ToRotation();
-            if(Main.npc[ai1].type == mod.NPCType("ZeroProtocol"))
-            {
-                Player player = Main.player[Main.npc[ai1].target];
-                num804 += projectile.ai[0] * (Main.npc[ai1].DirectionTo(player.Center).ToRotation() - Main.npc[ai1].rotation > 0? -1 : 1);
-            }
-            else
-            {
-                num804 += projectile.ai[0];
-            }
+            num804 += projectile.ai[0];
             projectile.rotation = num804 - 1.57079637f;
             projectile.velocity = num804.ToRotationVector2();
             float num805 = 3f;

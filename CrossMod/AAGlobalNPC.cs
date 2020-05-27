@@ -468,7 +468,7 @@ namespace AAModEXAI
             {
                 if(!title)
                 {
-                    AAModEXAI.ShowTitle(npc, 9);
+                    AAModEXAI.ShowTitle(npc, 10);
                     title = true;
                 }
                 return base.PreAI(npc);
@@ -477,7 +477,7 @@ namespace AAModEXAI
             {
                 if(!title)
                 {
-                    AAModEXAI.ShowTitle(npc, 10);
+                    AAModEXAI.ShowTitle(npc, 9);
                     title = true;
                 }
                 return base.PreAI(npc);
