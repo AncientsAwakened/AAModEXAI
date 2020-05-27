@@ -3,5 +3,5 @@ author = Alphakip
 hideCode = true
 includeSource = false
 modReferences = AAMod
-version = 1.0.0.0
+version = 1.0.0.1
 homepage = https://discord.gg/MmpCpj4
