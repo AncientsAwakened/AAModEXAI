@@ -8,6 +8,8 @@ using System.IO;
 using AAMod;
 using Terraria.ID;
 
+using AAMod.Misc;
+using AAMod.Globals;
 
 namespace AAModEXAI.Bosses.Shen
 {
@@ -65,7 +67,7 @@ namespace AAModEXAI.Bosses.Shen
         }
         public override void AI()
         {
-            if (internalAI[3] > 0 || AAGlobalProjectile.AnyProjectiles(mod.ProjectileType("ShenWaveDeathray")) || AAGlobalProjectile.AnyProjectiles(mod.ProjectileType("ShenWaveDeathraySmall")))
+            if (internalAI[3] > 0 && (AAGlobalProjectile.AnyProjectiles(mod.ProjectileType("ShenWaveDeathray")) || AAGlobalProjectile.AnyProjectiles(mod.ProjectileType("ShenWaveDeathraySmall"))))
             {
                 npc.TargetClosest(false);
                 npc.rotation = 0;

@@ -6,6 +6,8 @@ using Terraria.ModLoader;
 using AAMod.Dusts;
 using AAMod;
 using Terraria.ID;
+using AAMod.Misc;
+using AAMod.Globals;
 
 namespace AAModEXAI.Bosses.Equinox
 {
@@ -57,7 +59,7 @@ namespace AAModEXAI.Bosses.Equinox
 				if(shootAI >= 90)
 				{
 					shootAI = 0;
-					int projType = !Main.dayTime ? mod.ProjType("Moonray") : mod.ProjType("Sunbeam");					
+					int projType = !Main.dayTime ? mod.ProjectileType("Moonray") : mod.ProjectileType("Sunbeam");					
 					if(Collision.CanHit(npc.position, npc.width, npc.height, player.position, player.width, player.height))
 						BaseAI.FireProjectile(player.Center, npc, projType, (int)(npc.damage * 0.25f), 0f, 2f);
 				}

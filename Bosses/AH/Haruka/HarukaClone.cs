@@ -5,7 +5,8 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework.Graphics;
 using AAModEXAI.Bosses.Yamata.Awakened;
 using AAMod;
-using Terraria.ID;
+using AAMod.Misc;
+using AAMod.Globals;
 
 namespace AAModEXAI.Bosses.AH.Haruka
 {

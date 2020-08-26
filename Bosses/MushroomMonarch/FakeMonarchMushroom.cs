@@ -5,6 +5,8 @@ using Terraria.ID;
 using Terraria.DataStructures;
 using AAMod;
 using Terraria.ID;
+using AAMod.Misc;
+using AAMod.Globals;
 
 namespace AAModEXAI.Bosses.MushroomMonarch
 {

@@ -9,6 +9,8 @@ using System.IO;
 using AAMod.NPCs.Enemies.Sky;
 using AAMod;
 using Terraria.ID;
+using AAMod.Misc;
+using AAMod.Globals;
 
 namespace AAModEXAI.Bosses.Athena
 {

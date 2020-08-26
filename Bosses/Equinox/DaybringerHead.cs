@@ -9,6 +9,8 @@ using AAMod.Dusts;
 using System.IO;
 using AAMod;
 using Terraria.ID;
+using AAMod.Misc;
+using AAMod.Globals;
 
 namespace AAModEXAI.Bosses.Equinox
 {
@@ -757,12 +759,10 @@ namespace AAModEXAI.Bosses.Equinox
             int otherWormAlive = nightcrawler ? mod.NPCType("DaybringerHead") : mod.NPCType("NightcrawlerHead");
             if (!nightcrawler)
             {
-                AAWorld.downedDB = true;
                 BaseAI.DropItem(npc, ModLoader.GetMod("AAMod").ItemType("DBTrophy"), 1, 1, 15, true);
             }
             else
             {
-                AAWorld.downedNC = true;
                 BaseAI.DropItem(npc, ModLoader.GetMod("AAMod").ItemType("NCTrophy"), 1, 1, 15, true);
             }
             if (NPC.CountNPCS(otherWormAlive) == 0)

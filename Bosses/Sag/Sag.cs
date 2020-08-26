@@ -9,6 +9,8 @@ using System.IO;
 using Terraria.Graphics.Shaders;
 using AAMod;
 using Terraria.ID;
+using AAMod.Misc;
+using AAMod.Globals;
 
 namespace AAModEXAI.Bosses.Sag
 {

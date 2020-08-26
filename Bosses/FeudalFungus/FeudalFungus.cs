@@ -8,6 +8,8 @@ using Terraria.ModLoader;
 
 using AAMod;
 using Terraria.ID;
+using AAMod.Misc;
+using AAMod.Globals;
 
 namespace AAModEXAI.Bosses.FeudalFungus
 {
@@ -189,7 +191,7 @@ namespace AAModEXAI.Bosses.FeudalFungus
         public void FireMagic(NPC npc, Vector2 velocity)
         {
             Player player = Main.player[npc.target];
-            BaseAI.ShootPeriodic(npc, player.position, player.width, player.height, mod.ProjType("Mushshot"), ref shootAI[0], 5, damage, 8f, false, new Vector2(20f, 15f));
+            BaseAI.ShootPeriodic(npc, player.position, player.width, player.height, mod.ProjectileType("Mushshot"), ref shootAI[0], 5, damage, 8f, false, new Vector2(20f, 15f));
         }
 
         public override void BossLoot(ref string name, ref int potionType)

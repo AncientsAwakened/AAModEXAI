@@ -6,6 +6,8 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using AAMod;
 using Terraria.ID;
+using AAMod.Misc;
+using AAMod.Globals;
 
 namespace AAModEXAI.Bosses.Anubis.Forsaken
 {
@@ -77,12 +79,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                         reflectvelocity *= vector.Length();
                         reflectvelocity += vector * 20f;
                         reflectvelocity.Normalize();
-                        reflectvelocity *= vector.Length();
-                        if(reflectvelocity.Length() < 20f)
-                        {
-                            reflectvelocity.Normalize();
-                            reflectvelocity *= 20f;
-                        }
+                        reflectvelocity *= 25f;
                         Main.projectile[i].penetrate = 1;
                         Main.projectile[i].GetGlobalProjectile<AAModEXAIGlobalProjectile>().reflectvelocity = reflectvelocity;
                         Main.projectile[i].GetGlobalProjectile<AAModEXAIGlobalProjectile>().isReflecting = true;

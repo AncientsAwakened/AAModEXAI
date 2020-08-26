@@ -4,6 +4,8 @@ using Terraria.ModLoader;
 using System;
 using AAMod;
 using Terraria.ID;
+using AAMod.Misc;
+using AAMod.Globals;
 
 namespace AAModEXAI.Bosses.Greed
 {

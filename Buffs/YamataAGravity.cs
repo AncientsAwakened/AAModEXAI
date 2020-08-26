@@ -1,5 +1,7 @@
 ﻿using Terraria;
 using Terraria.ModLoader;
+using AAMod.Misc;
+using AAMod.Globals;
 
 namespace AAModEXAI.Buffs
 {

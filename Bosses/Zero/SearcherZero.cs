@@ -7,6 +7,8 @@ using Terraria.ModLoader;
 using Terraria.Audio;
 using AAMod;
 using Terraria.ID;
+using AAMod.Misc;
+using AAMod.Globals;
 
 namespace AAModEXAI.Bosses.Zero
 {
@@ -56,7 +58,7 @@ namespace AAModEXAI.Bosses.Zero
                 if (shootAI >= 90)
                 {
                     shootAI = 0;
-                    int projType = mod.ProjType("DeathLaser");
+                    int projType = mod.ProjectileType("DeathLaser");
                     if (Collision.CanHit(npc.position, npc.width, npc.height, player.position, player.width, player.height))
                         BaseAI.FireProjectile(player.Center, npc, projType, (int)(npc.damage * 0.25f), 0f, 2f);
                 }

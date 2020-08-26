@@ -11,6 +11,8 @@ using Terraria.Graphics.Shaders;
 using AAModEXAI.Bosses.Rajah.Supreme;
 using AAMod;
 using Terraria.ID;
+using AAMod.Misc;
+using AAMod.Globals;
 
 namespace AAModEXAI.Bosses.Rajah
 {
@@ -168,7 +170,7 @@ namespace AAModEXAI.Bosses.Rajah
 
             if (isSupreme)
             {
-                if (npc.ai[3] != 0 && !DefenseLine && !AAWorld.downedRajahsRevenge && Main.netMode != NetmodeID.MultiplayerClient)
+                if (npc.ai[3] != 0 && !DefenseLine && !AAModEXAIWorld.downedRajahsRevenge && Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     DefenseLine = true;
                     BaseUtility.Chat(AAMod.Lang.BossChat("SupremeRajahChat"), Color.MediumPurple);
@@ -180,7 +182,7 @@ namespace AAModEXAI.Bosses.Rajah
                     string Name;
 
                     int bunnyKills = NPC.killCount[Item.NPCtoBanner(NPCID.Bunny)];
-                    if (bunnyKills >= 100 && !AAWorld.downedRajahsRevenge)
+                    if (bunnyKills >= 100 && !AAModEXAIWorld.downedRajahsRevenge)
                     {
                         Name = "MUDERER";
                     }
@@ -189,10 +191,6 @@ namespace AAModEXAI.Bosses.Rajah
                         if (Main.netMode != NetmodeID.SinglePlayer)
                         {
                             Name = "Terrarians";
-                        }
-                        else if (!AAWorld.downedRajahsRevenge)
-                        {
-                            Name = "Terrarian";
                         }
                         else
                         {
@@ -1055,7 +1053,7 @@ namespace AAModEXAI.Bosses.Rajah
                 Gore.NewGore(npc.Center, npc.velocity, mod.GetGoreSlot("Gores/SupremeRajahHelmet1"), 1f);
                 Gore.NewGore(npc.Center, npc.velocity, mod.GetGoreSlot("Gores/SupremeRajahHelmet2"), 1f);
                 Gore.NewGore(npc.Center, npc.velocity, mod.GetGoreSlot("Gores/SupremeRajahHelmet3"), 1f);
-                if (!AAWorld.downedRajahsRevenge)
+                if (!AAModEXAIWorld.downedRajahsRevenge)
                 {
                     int n = NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType("SupremeRajahDefeat"));
                     Main.npc[n].Center = npc.Center;

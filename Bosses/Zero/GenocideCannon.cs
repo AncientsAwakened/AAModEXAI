@@ -8,6 +8,8 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using AAMod;
 using Terraria.ID;
+using AAMod.Misc;
+using AAMod.Globals;
 
 namespace AAModEXAI.Bosses.Zero
 {
@@ -123,7 +125,7 @@ namespace AAModEXAI.Bosses.Zero
                     Vector2 fireTarget = npc.Center;
                     float rot = BaseUtility.RotationTo(npc.Center, player.Center);
                     fireTarget = BaseUtility.RotateVector(npc.Center, fireTarget, rot);
-                    BaseAI.FireProjectile(player.Center, fireTarget, mod.ProjType("GenocideRocket"), npc.damage / 2, 0f, 4f);
+                    BaseAI.FireProjectile(player.Center, fireTarget, mod.ProjectileType("GenocideRocket"), npc.damage / 2, 0f, 4f);
                 }
             }
 

@@ -7,7 +7,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria.Graphics.Shaders;
 using System.IO;
 using AAMod;
-using Terraria.ID;
+using AAMod.Misc;
+using AAMod.Globals;
 
 namespace AAModEXAI.Bosses.AH.Ashe
 {

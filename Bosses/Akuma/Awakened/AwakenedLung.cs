@@ -8,6 +8,8 @@ using Terraria.Audio;
 
 using AAMod;
 using Terraria.ID;
+using AAMod.Misc;
+using AAMod.Globals;
 
 namespace AAModEXAI.Bosses.Akuma.Awakened
 {

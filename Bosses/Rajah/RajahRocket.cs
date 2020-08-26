@@ -5,6 +5,8 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using AAMod;
 using Terraria.ID;
+using AAMod.Misc;
+using AAMod.Globals;
 
 namespace AAModEXAI.Bosses.Rajah
 {

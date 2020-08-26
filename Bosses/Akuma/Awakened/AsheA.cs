@@ -6,6 +6,8 @@ using System;
 using AAModEXAI.Bosses.AH.Ashe;
 using AAMod;
 using Terraria.ID;
+using AAMod.Misc;
+using AAMod.Globals;
 
 namespace AAModEXAI.Bosses.Akuma.Awakened
 {

@@ -7,6 +7,8 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using AAMod;
 using Terraria.ID;
+using AAMod.Misc;
+using AAMod.Globals;
 
 namespace AAModEXAI.Bosses.Zero
 {
@@ -115,7 +117,7 @@ namespace AAModEXAI.Bosses.Zero
                     {
                         Main.PlaySound(SoundID.Item41, npc.Center);
                     }
-                    BaseAI.ShootPeriodic(npc, player.position, player.width, player.height, mod.ProjType("OmegaBullet"), ref npc.ai[3], 6, (int)(npc.damage * .75f), 10, true);
+                    BaseAI.ShootPeriodic(npc, player.position, player.width, player.height, mod.ProjectileType("OmegaBullet"), ref npc.ai[3], 6, (int)(npc.damage * .75f), 10, true);
                 }
                 if (npc.ai[2] > 360)
                 {

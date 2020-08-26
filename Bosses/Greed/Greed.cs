@@ -9,6 +9,8 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using AAMod;
 using Terraria.ID;
+using AAMod.Misc;
+using AAMod.Globals;
 
 namespace AAModEXAI.Bosses.Greed
 {
@@ -448,7 +450,7 @@ namespace AAModEXAI.Bosses.Greed
         public override void BossLoot(ref string name, ref int potionType)
         {
             potionType = ItemID.GreaterHealingPotion;   //boss drops
-            AAWorld.downedSerpent = true;
+            AAWorld.downedGreed = true;
         }
 
         public override bool? DrawHealthBar(byte hbPosition, ref float scale, ref Vector2 position)
