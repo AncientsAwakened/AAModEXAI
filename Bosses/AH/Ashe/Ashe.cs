@@ -6,10 +6,10 @@ using Terraria.ModLoader;
 
 using Terraria.Graphics.Shaders;
 using System;
-using System.IO;
+using System.IO;using AAMod;
+using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
-using AAMod;
 
 namespace AAModEXAI.Bosses.AH.Ashe
 {
@@ -302,7 +302,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
                     float RunepositionY = Runeposition.Y;
                     if(Main.netMode != NetmodeID.MultiplayerClient)
                     {
-                        int id = NPC.NewNPC((int)RunepositionX, (int)RunepositionY, mod.NPCType("AsheRune"), 0, RunepositionX, RunepositionY, npc.damage, npc.whoAmI, player.whoAmI);
+                        int id = NPC.NewNPC((int)RunepositionX, (int)RunepositionY, mod.NPCType("AsheRune"), 0, RunepositionX, RunepositionY, npc.damage / 4, npc.whoAmI, player.whoAmI);
                         if (Main.netMode == NetmodeID.Server && id < 200) NetMessage.SendData(23, -1, -1, null, id);
                     }
                     npc.ai[2] = 0;

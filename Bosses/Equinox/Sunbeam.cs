@@ -1,7 +1,8 @@
 ﻿using Terraria;
+using AAMod;
+using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
-using AAMod;
 
 namespace AAModEXAI.Bosses.Equinox
 {

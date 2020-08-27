@@ -5,11 +5,11 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.IO;
+using AAMod;
 using Terraria.ID;
 
 using AAMod.Misc;
 using AAMod.Globals;
-using AAMod;
 
 namespace AAModEXAI.Bosses.Shen
 {
@@ -40,8 +40,6 @@ namespace AAModEXAI.Bosses.Shen
 
         public float[] internalAI = new float[5];
 
-        public float count = 0f;
-
         public override void SendExtraAI(BinaryWriter writer)
         {
             base.SendExtraAI(writer);
@@ -69,7 +67,7 @@ namespace AAModEXAI.Bosses.Shen
         }
         public override void AI()
         {
-            if (internalAI[3] > 0 || (AAGlobalProjectile.AnyProjectiles(mod.ProjectileType("ShenWaveDeathray")) || AAGlobalProjectile.AnyProjectiles(mod.ProjectileType("ShenWaveDeathraySmall"))))
+            if (internalAI[3] > 0 && (AAGlobalProjectile.AnyProjectiles(mod.ProjectileType("ShenWaveDeathray")) || AAGlobalProjectile.AnyProjectiles(mod.ProjectileType("ShenWaveDeathraySmall"))))
             {
                 npc.TargetClosest(false);
                 npc.rotation = 0;
@@ -78,7 +76,7 @@ namespace AAModEXAI.Bosses.Shen
                 int shotdirection = npc.spriteDirection = npc.direction;
                 if(internalAI[4] == 0)
                 {
-                    npc.spriteDirection = npc.direction = shen.spriteDirection;
+                    npc.spriteDirection = npc.direction = shen.direction;
                     shotdirection = npc.direction;
                     npc.Center = new Vector2(shen.Center.X + internalAI[1] * shotdirection, shen.Center.Y + internalAI[2]);
                 }
@@ -89,16 +87,20 @@ namespace AAModEXAI.Bosses.Shen
                     internalAI[4] = 1;
                     npc.netUpdate = true;
                 }
-                if(shen.ai[0] == 14 && shen.ai[1] == internalAI[3] * 120 - 30)
+                if(shen.ai[0] == 13 && shen.ai[1] == internalAI[3] * 120 - 30)
                 {
-                    internalAI[4] = 1;
                     if (Main.netMode != NetmodeID.MultiplayerClient)
                         Projectile.NewProjectile(npc.Center + npc.direction * new Vector2(npc.width / 2, 0), npc.DirectionTo(Main.player[shen.target].Center), mod.ProjectileType("ShenWaveDeathraySmall"), npc.damage / 4, 0f, Main.myPlayer, 0f, npc.whoAmI);
+                }
+                if(shen.ai[0] == 13 && shen.ai[1] == 30)
+                {
+                    internalAI[4] = 1;
                     npc.netUpdate = true;
                 }
-                if(shen.ai[0] != 0 && shen.ai[0] != 1 && shen.ai[0] != 13 && shen.ai[0] != 14)
+                if(shen.ai[0] != 0 && shen.ai[0] != 1 && shen.ai[0] != 13)
                 {
                     internalAI[3] = 0;
+                    npc.netUpdate = true;
                 }
                 return;
             }

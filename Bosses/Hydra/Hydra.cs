@@ -7,9 +7,10 @@ using Terraria.Audio;
 using Terraria.ModLoader;
 
 using System.IO;
+using AAMod;
+using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
-using AAMod;
 
 namespace AAModEXAI.Bosses.Hydra
 {

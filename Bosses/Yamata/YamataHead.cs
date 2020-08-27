@@ -7,9 +7,10 @@ using Microsoft.Xna.Framework;
 using AAModEXAI.Bosses.Yamata.Awakened;
 using System.IO;
 using Microsoft.Xna.Framework.Graphics;
+using AAMod;
+using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
-using AAMod;
 
 namespace AAModEXAI.Bosses.Yamata
 {

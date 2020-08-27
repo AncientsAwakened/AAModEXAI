@@ -4,9 +4,10 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework.Graphics;
-using Terraria.Graphics.Shaders;using AAMod.Misc;
+using Terraria.Graphics.Shaders;using AAMod;
+using Terraria.ID;
+using AAMod.Misc;
 using AAMod.Globals;
-using AAMod;
 
 namespace AAModEXAI.Bosses.Shen.GripsShen
 {
