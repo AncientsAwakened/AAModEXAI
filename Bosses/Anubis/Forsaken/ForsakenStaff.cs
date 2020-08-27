@@ -15,8 +15,8 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
 	{
         public override void SetDefaults()
         {
-            projectile.width = 100;
-            projectile.height = 100;
+            projectile.width = 144;
+            projectile.height = 144;
             projectile.aiStyle = -1;
             projectile.timeLeft = 3600;
             projectile.hostile = true;
