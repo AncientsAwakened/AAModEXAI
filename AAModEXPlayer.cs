@@ -12,10 +12,9 @@ using AAModEXAI.Bosses.Zero;
 using AAModEXAI.Bosses.Zero.Protocol;
 using AAModEXAI.Bosses.Anubis.Forsaken;
 using System;
-using AAMod;
-using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAMod;
 
 namespace AAModEXAI
 {
@@ -109,45 +108,41 @@ namespace AAModEXAI
 
         public override void PostUpdate()
         {
-            if(player.endurance >= 1f)
-            {
-                player.endurance = .8f;
-            }
 
-            if (NPC.AnyNPCs(mod.NPCType("AkumaTransition")))
+            if (NPC.AnyNPCs(ModContent.NPCType<Bosses.Akuma.AkumaTransition>()))
             {
-                int n = BaseAI.GetNPC(player.Center, mod.NPCType("AkumaTransition"), -1);
+                int n = BaseAI.GetNPC(player.Center, (ModContent.NPCType<Bosses.Akuma.AkumaTransition>()), -1);
                 NPC akuma = Main.npc[n];
 
                 if (akuma.ai[0] >= 660)
                 {
-                    player.AddBuff(mod.BuffType("BlazingPain"), 2);
+                    player.AddBuff(ModContent.BuffType<Buffs.BlazingPain>(), 2, true);
                 }
             }
-            else if (NPC.AnyNPCs(mod.NPCType("AkumaA")))
+            else if (NPC.AnyNPCs(ModContent.NPCType<Bosses.Akuma.Awakened.AkumaA>()))
             {
-                player.AddBuff(mod.BuffType("BlazingPain"), 2);
+                player.AddBuff(ModContent.BuffType<Buffs.BlazingPain>(), 2, true);
             }
 
-            if (NPC.AnyNPCs(mod.NPCType("Yamata")))
+            if (NPC.AnyNPCs(ModContent.NPCType<Bosses.Yamata.Yamata>()))
             {
-                player.AddBuff(mod.BuffType("YamataGravity"), 10);
+                player.AddBuff(ModContent.BuffType<Buffs.YamataGravity>(), 10, true);
             }
 
-            if (NPC.AnyNPCs(mod.NPCType("YamataA")))
+            if (NPC.AnyNPCs(ModContent.NPCType<Bosses.Yamata.Awakened.YamataA>()))
             {
-                player.AddBuff(mod.BuffType("YamataAGravity"), 10);
+                player.AddBuff(ModContent.BuffType<Buffs.YamataAGravity>(), 10, true);
             }
 
-            if (NPC.AnyNPCs(mod.NPCType("ShenA")))
+            if (NPC.AnyNPCs(ModContent.NPCType<Bosses.Shen.ShenA>()))
             {
-                int n = BaseAI.GetNPC(player.Center, mod.NPCType("ShenA"), -1);
+                int n = BaseAI.GetNPC(player.Center, ModContent.NPCType<Bosses.Shen.ShenA>(), -1);
                 NPC shen = Main.npc[n];
 
                 if (((ShenA)shen.modNPC).halfLifeAIChange)
                 {
-                    player.AddBuff(mod.BuffType("YamataAGravity"), 10);
-                    player.AddBuff(mod.BuffType("BlazingPain"), 10);
+                    player.AddBuff(ModContent.BuffType<Buffs.YamataAGravity>(), 10, true);
+                    player.AddBuff(ModContent.BuffType<Buffs.BlazingPain>(), 10, true);
                 }
             }
 
@@ -159,8 +154,8 @@ namespace AAModEXAI
 
                 if (revenge && (NPC.AnyNPCs(ModContent.NPCType<Shen>()) || NPC.AnyNPCs(ModContent.NPCType<ShenA>())))
                 {
-                    player.AddBuff(mod.BuffType("YamataAGravity"), 10);
-                    player.AddBuff(mod.BuffType("BlazingPain"), 10);
+                    player.AddBuff(ModContent.BuffType<Buffs.YamataAGravity>(), 10, true);
+                    player.AddBuff(ModContent.BuffType<Buffs.BlazingPain>(), 10, true);
                 }
             }
         }

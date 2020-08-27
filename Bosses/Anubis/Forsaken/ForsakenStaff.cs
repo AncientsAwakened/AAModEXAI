@@ -4,10 +4,10 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using AAMod;
-using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAMod;
+using System;
 
 namespace AAModEXAI.Bosses.Anubis.Forsaken
 {
@@ -15,8 +15,8 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
 	{
         public override void SetDefaults()
         {
-            projectile.width = 100;
-            projectile.height = 100;
+            projectile.width = 144;
+            projectile.height = 144;
             projectile.aiStyle = -1;
             projectile.timeLeft = 3600;
             projectile.hostile = true;

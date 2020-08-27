@@ -9,10 +9,9 @@ using System.IO;
 using AAMod.Items.Boss.Rajah;
 using Terraria.Graphics.Shaders;
 using AAModEXAI.Bosses.Rajah.Supreme;
-using AAMod;
-using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAMod;
 
 namespace AAModEXAI.Bosses.Rajah
 {

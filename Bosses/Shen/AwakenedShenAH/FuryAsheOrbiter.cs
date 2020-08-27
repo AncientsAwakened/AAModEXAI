@@ -5,10 +5,9 @@ using System.IO;
 using Terraria;
 using Terraria.ID;
 
-using Terraria.ModLoader;using AAMod;
-using Terraria.ID;
-using AAMod.Misc;
+using Terraria.ModLoader;using AAMod.Misc;
 using AAMod.Globals;
+using AAMod;
 
 namespace AAModEXAI.Bosses.Shen.AwakenedShenAH
 {

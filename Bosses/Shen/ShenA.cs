@@ -7,10 +7,9 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Utilities;
-using AAMod;
-using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAMod;
 
 namespace AAModEXAI.Bosses.Shen
 {
@@ -415,7 +414,6 @@ namespace AAModEXAI.Bosses.Shen
                         break;
                     }
                     else goto case 2;
-                    break;
                 case 8: 
                     if(halfLifeAIChange)
                     {
@@ -585,6 +583,36 @@ namespace AAModEXAI.Bosses.Shen
                     }
                     if (++npc.ai[1] > 360)
                     {
+                        if(halfLifeAIChange)
+                        {
+                            npc.ai[0]++;
+                            npc.ai[1] = 0;
+                            npc.ai[2] = 0;
+                            npc.ai[3] = npc.Distance(player.Center);
+                            npc.netUpdate = true;
+                            npc.velocity.X = 2 * (npc.Center.X < player.Center.X ? -1 : 1);
+                            npc.velocity.Y *= 0.2f;
+                        }
+                        else
+                        {
+                            npc.ai[0] += 2;
+                            npc.ai[1] = 0;
+                            npc.ai[2] = 0;
+                            npc.ai[3] = npc.Distance(player.Center);
+                            npc.netUpdate = true;
+                            npc.velocity = npc.DirectionTo(player.Center).RotatedBy(Math.PI / 2) * 40;
+                        }
+                    }
+                    break;
+
+                case 14: 
+                    if (!AliveCheck(player))
+                        break;
+                    targetPos = player.Center;
+                    targetPos.X += 700 * (npc.Center.X < targetPos.X ? -1 : 1);
+                    Movement(targetPos, 0.7f);
+                    if (++npc.ai[1] > 540)
+                    {
                         npc.ai[0]++;
                         npc.ai[1] = 0;
                         npc.ai[2] = 0;
@@ -594,7 +622,7 @@ namespace AAModEXAI.Bosses.Shen
                     }
                     break;
 
-                case 14: //fly in jumbo circle
+                case 15: //fly in jumbo circle
                     npc.velocity -= npc.velocity.RotatedBy(Math.PI / 2) * npc.velocity.Length() / npc.ai[3];
                     if (++npc.ai[2] > 1)
                     {
@@ -620,7 +648,7 @@ namespace AAModEXAI.Bosses.Shen
                     Dashing = true;
                     break;
 
-                case 15: //wait for old attack to go away
+                case 16: //wait for old attack to go away
                     if (!AliveCheck(player))
                         break;
                     targetPos = player.Center;
@@ -772,7 +800,7 @@ namespace AAModEXAI.Bosses.Shen
                         wingFrame.Y = 0;
                     }
                 }
-                if (npc.ai[0] != 1 && npc.ai[0] != 16 && npc.ai[0] != 17)
+                if (npc.ai[0] != 1 && npc.ai[0] != 15 && npc.ai[0] != 16)
                 {
                     npc.spriteDirection = npc.Center.X < player.Center.X ? 1 : -1;
                 }
@@ -977,7 +1005,7 @@ namespace AAModEXAI.Bosses.Shen
             if(npc.life <= npc.lifeMax * .5f)
             {
                 damage *= .8f;
-                if(npc.ai[0] == 0 || npc.ai[0] == 15 || npc.ai[0] == 16 || npc.ai[0] == 17)
+                if(npc.ai[0] == 0 || npc.ai[0] == 15 || npc.ai[0] == 16 || npc.ai[0] == 17 || npc.ai[0] == 18)
                 {
                     damage = 1.0;
                 }
