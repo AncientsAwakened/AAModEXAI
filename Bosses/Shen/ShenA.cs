@@ -415,7 +415,6 @@ namespace AAModEXAI.Bosses.Shen
                         break;
                     }
                     else goto case 2;
-                    break;
                 case 8: 
                     if(halfLifeAIChange)
                     {
@@ -473,6 +472,7 @@ namespace AAModEXAI.Bosses.Shen
                         Dashing = true;
                     }
                     else goto case 3;
+                    break;
                 case 9: //prepare for fishron dash
                     if (!AliveCheck(player))
                         break;
