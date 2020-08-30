@@ -4,6 +4,7 @@ using Terraria.ModLoader;
 using AAMod.Dusts;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.ID;
+using AAMod;
 namespace AAModEXAI.Bosses.Greed.OreBomb
 {
     public class AFrag : ModProjectile

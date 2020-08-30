@@ -137,7 +137,8 @@ namespace AAModEXAI.Bosses.Greed
                 }
                 else
                 {
-
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                            Projectile.NewProjectile(npc.Center.X, npc.Center.Y, npc.velocity.X * 2f, npc.velocity.Y, ModContent.ProjectileType<Bosses.Greed.OreBomb.OreBomb>(), npc.damage, 3f, Main.myPlayer, 0f, 0f);
                 }
             }
 

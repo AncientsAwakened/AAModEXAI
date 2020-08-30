@@ -1,6 +1,7 @@
 using System;
 using Terraria;
 using Terraria.ModLoader;
+using AAMod;
 namespace AAModEXAI.Bosses.Greed.OreBomb
 {
     public class OreSpores : ModProjectile

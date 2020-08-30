@@ -5,6 +5,7 @@ using Terraria.ModLoader;
 using Terraria.ID;
 using AAMod.Dusts;
 using Microsoft.Xna.Framework.Graphics;
+using AAMod;
 
 namespace AAModEXAI.Bosses.Greed.OreBomb
 {
@@ -259,9 +260,9 @@ namespace AAModEXAI.Bosses.Greed.OreBomb
                 case 10:
                     return 117;
                 case 11:
-                    return ModContent.DustType<IncineriteDust>();
+                    return ModLoader.GetMod("AAMod").DustType("IncineriteDust");
                 case 12:
-                    return ModContent.DustType<AbyssiumDust>();
+                    return ModLoader.GetMod("AAMod").DustType("AbyssiumDust");
                 case 13:
                     return DustID.Fire;
                 case 14:
@@ -281,17 +282,17 @@ namespace AAModEXAI.Bosses.Greed.OreBomb
                 case 21:
                     return 128;
                 case 22:
-                    return ModContent.DustType<LuminiteDust>();
+                    return ModLoader.GetMod("AAMod").DustType("LuminiteDust");
                 case 23:
-                    return ModContent.DustType<DarkmatterDust>();
+                    return ModLoader.GetMod("AAMod").DustType("DarkmatterDust");
                 case 24:
-                    return ModContent.DustType<RadiumDust>();
+                    return ModLoader.GetMod("AAMod").DustType("RadiumDust");
                 case 25:
-                    return ModContent.DustType<DaybreakIncineriteDust>();
+                    return ModLoader.GetMod("AAMod").DustType("DaybreakIncineriteDust");
                 case 26:
-                    return ModContent.DustType<YamataDust>();
+                    return ModLoader.GetMod("AAMod").DustType("YamataDust");
                 case 27:
-                    return ModContent.DustType<VoidDust>();
+                    return ModLoader.GetMod("AAMod").DustType("VoidDust");
                 default:
                     goto case 0;
             }
