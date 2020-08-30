@@ -70,7 +70,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 
         public override void OnHitPlayer(Player target, int damage, bool crit)
         {
-            target.AddBuff(mod.BuffType("DragonFire"), 600);
+            target.AddBuff(ModLoader.GetMod("AAMod").BuffType("DragonFire"), 600);
         }
 
         public override bool PreDraw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch, Color lightColor)

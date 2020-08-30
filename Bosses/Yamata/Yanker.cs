@@ -119,7 +119,7 @@ namespace AAModEXAI.Bosses.Yamata
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitPlayer(Player target, int damage, bool crit)
         {
             target.AddBuff(mod.BuffType("Yanked"), 120);
         }

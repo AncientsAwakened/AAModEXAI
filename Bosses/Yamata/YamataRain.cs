@@ -60,7 +60,7 @@ namespace AAModEXAI.Bosses.Yamata
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitPlayer(Player target, int damage, bool crit)
         {
             target.immune[projectile.owner] = 8;
             target.AddBuff(ModLoader.GetMod("AAMod").BuffType("HydraToxin"), 400);

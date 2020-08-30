@@ -59,6 +59,7 @@ namespace AAModEXAI.Bosses.Rajah
                 writer.Write(internalAI[2]);
                 writer.Write(internalAI[3]);
                 writer.Write(internalAI[4]);
+                writer.Write(internalAI[5]);
                 writer.Write(isSupreme);
             }
         }
@@ -73,6 +74,7 @@ namespace AAModEXAI.Bosses.Rajah
                 internalAI[2] = reader.ReadFloat(); //Is Jumping
                 internalAI[3] = reader.ReadFloat(); //Minion/Rocket Timer
                 internalAI[4] = reader.ReadFloat(); //JumpFlyControl and Vertical dash
+                internalAI[5] = reader.ReadFloat(); //ShootFromSkyPos
                 isSupreme = reader.ReadBool();
             }
         }
@@ -556,7 +558,10 @@ namespace AAModEXAI.Bosses.Rajah
                     if (internalAI[3] > 5)
                     {
                         internalAI[3] = 0;
-                        Vector2 ShootPos = player.Center + new Vector2(player.velocity.X / 10f * ((npc.ai[2] / 60) % 20) * 600f / 14f, 0);
+                        if(npc.ai[2] < 20) internalAI[5] = player.Center.X;
+                        if(internalAI[5] - player.Center.X > 200f) internalAI[5] = player.Center.X + 100f;
+                        else if(internalAI[5] - player.Center.X < -200f) internalAI[5] = player.Center.X - 100f;
+                        Vector2 ShootPos = new Vector2(internalAI[5], player.Center.Y) + new Vector2(player.velocity.X / 10f * ((npc.ai[2] / 60) % 20) * 600f / 14f, 0);
                         Vector2 vector12 = ShootPos;
                         float num75 = 14f;
                         for (int num120 = 0; num120 < 3; num120++)

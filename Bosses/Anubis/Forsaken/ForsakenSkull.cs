@@ -60,7 +60,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
             Main.dust[dustId3].noGravity = true;
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitPlayer(Player target, int damage, bool crit)
         {
             target.AddBuff(BuffID.Wet, 1000);
         }

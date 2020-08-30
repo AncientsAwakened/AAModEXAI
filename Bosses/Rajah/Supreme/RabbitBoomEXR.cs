@@ -48,7 +48,7 @@ namespace AAModEXAI.Bosses.Rajah.Supreme
             return new Color(Color.White.R, Color.White.G, Color.White.B, 120);
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitPlayer(Player target, int damage, bool crit)
         {
             target.AddBuff(BuffID.Daybreak, 300);
         }

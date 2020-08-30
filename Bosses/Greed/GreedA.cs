@@ -826,6 +826,21 @@ namespace AAModEXAI.Bosses.Greed
             return true;
         }
 
+        public override void ModifyHitByProjectile(Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        {
+            if (projectile.penetrate != 1)
+            {
+                for(int i = 0; i < Main.maxNPCs; i ++)
+                {
+                    if(Main.npc[i].active && (Main.npc[i].whoAmI == npc.realLife || (Main.npc[i].realLife >= 0 && Main.npc[i].realLife == npc.realLife)))
+                    {
+                        Main.npc[i].immune[projectile.owner] = 10;
+                    }
+                }
+                damage = (int)(damage * .44f);
+            }
+        }
+
         public override bool PreAI()
         {
             npc.defense = Def();

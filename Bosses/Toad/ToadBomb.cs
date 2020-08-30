@@ -35,7 +35,7 @@ namespace AAModEXAI.Bosses.Toad
             
 		}
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitPlayer(Player target, int damage, bool crit)
         {
             target.AddBuff(ModLoader.GetMod("AAMod").BuffType("Shroomed"), 200);
         }

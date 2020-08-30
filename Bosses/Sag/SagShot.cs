@@ -26,7 +26,7 @@ namespace AAModEXAI.Bosses.Sag
             projectile.tileCollide = true;
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitPlayer(Player target, int damage, bool crit)
         {
             projectile.ai[0] += 0.1f;
             projectile.velocity *= 0.75f;

@@ -91,9 +91,9 @@ namespace AAModEXAI.Bosses.Hydra
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitPlayer(Player target, int damage, bool crit)
         {
-            target.AddBuff(mod.BuffType("Poison"), 300);
+            target.AddBuff(ModLoader.GetMod("AAMod").BuffType("Poison"), 300);
         }
     }
 }

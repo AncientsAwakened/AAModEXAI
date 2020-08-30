@@ -153,17 +153,17 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
             }
 
             internalAI[0] += 1f;
-			if (internalAI[0] == 300f)
+			if (internalAI[0] == 200f)
 			{
 				QuoteSaid = false;
 				Roar(roarTimerMax, false);
 				internalAI[1] = (float)Main.rand.Next(6);
 			}
-			if (internalAI[0] > 300f)
+			if (internalAI[0] > 200f)
 			{
 				Attack(npc);
 			}
-			if (internalAI[0] >= 400f)
+			if (internalAI[0] >= 300f)
 			{
 				internalAI[0] = 0f;
 			}
@@ -272,6 +272,8 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                     }
                     if (++npc.ai[1] > 300)
                     {
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
+                            Projectile.NewProjectile(npc.Center.X, npc.Center.Y, npc.velocity.X * 2f, npc.velocity.Y, ModContent.ProjectileType<AFireProjHostile>(), npc.damage, 3f, Main.myPlayer, 0f, 0f);
                         npc.ai[0]++;
                         npc.ai[1] = 0;
                         npc.ai[2] = 0;
@@ -748,19 +750,19 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 			Player player = Main.player[npc.target];
             if (internalAI[1] == 0f)
 			{
-                if (internalAI[0] == 320f || internalAI[0] == 340f || internalAI[0] == 360f || internalAI[0] == 380f)
+                if (internalAI[0] == 220f || internalAI[0] == 240f || internalAI[0] == 260f || internalAI[0] == 280f)
 				{
 					int num = Main.expertMode ? 20 : 14;
 					for (int i = 0; i < num; i++)
 					{
-						AkumaAttacks.Dragonfire(npc, base.mod, true);
+						AkumaAttacks.Dragonfire(npc, mod, true);
 					}
 					return;
 				}
             }
             else if (internalAI[1] == 1f)
 			{
-				if (internalAI[0] == 350f)
+				if (internalAI[0] == 250f)
 				{
 					int num2 = Main.expertMode ? 5 : 3;
 					double num3 = (double)0.783f;
@@ -770,7 +772,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 					for (int j = 0; j < num2; j++)
 					{
 						double num7 = num5 + num6 * (double)j;
-						Projectile.NewProjectile(npc.Center.X, npc.Center.Y, num4 * (float)Math.Sin(num7) * 2f, num4 * (float)Math.Cos(num7) * 2f, ModContent.ProjectileType<AkumaABomb>(), this.damage, 3f, Main.myPlayer, 0f, 0f);
+						Projectile.NewProjectile(npc.Center.X, npc.Center.Y, num4 * (float)Math.Sin(num7) * 2f, num4 * (float)Math.Cos(num7) * 2f, ModContent.ProjectileType<AkumaABomb>(), npc.damage, 3f, Main.myPlayer, 0f, 0f);
 					}
 					return;
 				}
@@ -778,7 +780,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
             else if (internalAI[1] == 2f)
 			{
 				int num8 = Main.expertMode ? 20 : 15;
-				if (internalAI[0] == 330f || internalAI[0] == 360f || internalAI[0] == 390f)
+				if (internalAI[0] == 230f || internalAI[0] == 260f || internalAI[0] == 290f)
 				{
 					for (int k = 0; k < num8; k++)
 					{
@@ -789,24 +791,24 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 			}
 			else if (internalAI[1] == 3f)
 			{
-				if (internalAI[0] == 350f && NPC.CountNPCS(ModContent.NPCType<AwakenedLung>()) < (Main.expertMode ? 3 : 4))
+				if (internalAI[0] == 250f && NPC.CountNPCS(ModContent.NPCType<AwakenedLung>()) < (Main.expertMode ? 3 : 4))
 				{
-					AkumaAttacks.SpawnLung(player, base.mod, true);
+					AkumaAttacks.SpawnLung(player, mod, true);
 					AkumaA.MinionCount++;
 					return;
 				}
 			}
 			else if (internalAI[1] == 4f)
 			{
-				if (internalAI[0] == 350f)
+				if (internalAI[0] == 250f)
 				{
-					Projectile.NewProjectile(npc.Center.X, npc.Center.Y, npc.velocity.X * 2f, npc.velocity.Y, ModContent.ProjectileType<AFireProjHostile>(), this.damage, 3f, Main.myPlayer, 0f, 0f);
+					Projectile.NewProjectile(npc.Center.X, npc.Center.Y, npc.velocity.X * 2f, npc.velocity.Y, ModContent.ProjectileType<AFireProjHostile>(), npc.damage, 3f, Main.myPlayer, 0f, 0f);
 					return;
 				}
 			}
 			else
 			{
-				if (internalAI[0] == 350f)
+				if (internalAI[0] == 250f)
 				{
 					for (int l = 0; l < 3; l++)
 					{

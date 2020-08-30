@@ -70,7 +70,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
         
         public override void OnHitPlayer(Player target, int damage, bool crit)
         {
-        	target.AddBuff(mod.BuffType("HydraToxin"), 300);
+        	target.AddBuff(ModLoader.GetMod("AAMod").BuffType("HydraToxin"), 300);
         }
 
         public override void Kill(int timeLeft)

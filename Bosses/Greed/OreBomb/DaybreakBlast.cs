@@ -1,37 +1,35 @@
-/*
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
-using AAMod;
-using Terraria.ID;
-using AAMod.Misc;
-using AAMod.Globals;
-
-namespace AAModEXAI.Bosses.Toad
+namespace AAModEXAI.Bosses.Greed.OreBomb
 {
-    public class ToadBoom : ModProjectile
+    public class DaybreakBlast : ModProjectile
     {
         public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Boom");     
-            Main.projFrames[projectile.type] = 7;     
+        {    
+            Main.projFrames[projectile.type] = 7;  
         }
 
         public override void SetDefaults()
         {
             projectile.width = 98;
             projectile.height = 98;
-            projectile.penetrate = 1;
+            projectile.penetrate = -1;
             projectile.friendly = false;
-            projectile.hostile = true;
+			projectile.hostile = true;
             projectile.tileCollide = false;
             projectile.ignoreWater = true;
             projectile.timeLeft = 600;
         }
 
+        public override Color? GetAlpha(Color lightColor)
+        {
+            return Color.White;
+        }
+
         public override void AI()
         {
-            projectile.alpha -= 10;
-            if (++projectile.frameCounter >= 5)
+            if (++projectile.frameCounter >= 3)
             {
                 projectile.frameCounter = 0;
                 if (++projectile.frame >= 6)
@@ -45,16 +43,9 @@ namespace AAModEXAI.Bosses.Toad
 
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
-        {
-            target.AddBuff(ModLoader.GetMod("AAMod").BuffType("Shroomed"), 600);
-        }
-
         public override void Kill(int timeLeft)
         {
             projectile.timeLeft = 0;
         }
-
     }
 }
-*/
