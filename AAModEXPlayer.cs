@@ -114,6 +114,54 @@ namespace AAModEXAI
                 player.endurance = .8f;
             }
 
+            for(int i = 0; i < 200; i++)
+            {
+                if(!Main.npc[i].boss || !Main.npc[i].active) continue;
+                if(Main.npc[i].type == ModContent.NPCType<Bosses.Akuma.AkumaTransition>())
+                {
+                    NPC akuma = Main.npc[i];
+
+                    if (akuma.ai[0] >= 660)
+                    {
+                        player.AddBuff(ModContent.BuffType<Buffs.BlazingPain>(), 2);
+                    }
+                }
+                else if(Main.npc[i].type == ModContent.NPCType<Bosses.Akuma.Awakened.AkumaA>())
+                {
+                    player.AddBuff(ModContent.BuffType<Buffs.BlazingPain>(), 2);
+                }
+                else if(Main.npc[i].type == ModContent.NPCType<Bosses.Yamata.Yamata>())
+                {
+                    player.AddBuff(ModContent.BuffType<Buffs.YamataGravity>(), 10);
+                }
+                else if(Main.npc[i].type == ModContent.NPCType<Bosses.Yamata.Awakened.YamataA>())
+                {
+                    player.AddBuff(ModContent.BuffType<Buffs.YamataAGravity>(), 10);
+                }
+                else if(Main.npc[i].type == ModContent.NPCType<Bosses.Shen.ShenA>())
+                {
+                    NPC shen = Main.npc[i];
+
+                    if (((ShenA)shen.modNPC).halfLifeAIChange)
+                    {
+                        player.AddBuff(ModContent.BuffType<Buffs.YamataAGravity>(), 10, true);
+                        player.AddBuff(ModContent.BuffType<Buffs.BlazingPain>(), 10, true);
+                    }
+                }
+
+                if (ModSupport.GetMod("CalamityMod") != null)
+                {
+                    bool revenge = (bool)ModSupport.GetModWorldConditions("CalamityMod", "CalamityWorld", "revenge", false, true);
+                    bool Death = (bool)ModSupport.GetModWorldConditions("CalamityMod", "CalamityWorld", "death", false, true);
+
+                    if (revenge && (Main.npc[i].type == ModContent.NPCType<Bosses.Shen.Shen>() || Main.npc[i].type == ModContent.NPCType<Bosses.Shen.ShenA>()))
+                    {
+                        player.AddBuff(ModContent.BuffType<Buffs.YamataAGravity>(), 10, true);
+                        player.AddBuff(ModContent.BuffType<Buffs.BlazingPain>(), 10, true);
+                    }
+                }
+            }
+            /*
             if (NPC.AnyNPCs(mod.NPCType("AkumaTransition")))
             {
                 int n = BaseAI.GetNPC(player.Center, mod.NPCType("AkumaTransition"), -1);
@@ -163,6 +211,7 @@ namespace AAModEXAI
                     player.AddBuff(mod.BuffType("BlazingPain"), 10);
                 }
             }
+            */
         }
 	}
 }
