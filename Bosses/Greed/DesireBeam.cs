@@ -82,7 +82,7 @@ namespace AAModEXAI.Bosses.Greed
             }
             if (projectile.ai[1] > charge && projectile.ai[0] != 0f)
             {
-                 projectile.ai[1] += 5f * multiplier;
+                 projectile.ai[1] += 9f * multiplier;
             }
             if (projectile.ai[1] >= charge + 60f && multiplier == 1)
             {
@@ -166,7 +166,7 @@ namespace AAModEXAI.Bosses.Greed
             Vector2 arg_B1FF_2 = value20 - Main.screenPosition;
             sourceRectangle2 = null;
             float scale = Math.Min(projectile.ai[1], charge) / charge;
-            if(projectile.ai[0] == 1f && projectile.ai[1] < charge /2) scale = .2f;
+            if(projectile.ai[0] == 1f && projectile.ai[1] < charge /2) scale = .1f;
             arg_B1FF_0.Draw(arg_B1FF_1, arg_B1FF_2, sourceRectangle2, color44, projectile.rotation, texture2D21.Frame(1, 1, 0, 0).Top(), new Vector2(scale, 1f), SpriteEffects.None, 0f);
             return false;
         }
