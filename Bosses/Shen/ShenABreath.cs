@@ -50,7 +50,7 @@ namespace AAModEXAI.Bosses.Shen
                     num296 = 0.75f;
                 }
                 projectile.ai[0] += 1f;
-                int num297 = ModLoader.GetMod("AAMod").DustType("Discord");
+                int num297 = ModLoader.GetMod("AAMod").DustType("DiscordDust");
                 if (Main.rand.Next(2) == 0)
                 {
                     for (int num298 = 0; num298 < 8; num298++)

@@ -215,7 +215,7 @@ namespace AAModEXAI.Bosses.Shen
                         targetPos = player.Center;
                         targetPos.X += 600 * (npc.Center.X < targetPos.X ? -1 : 1);
                         Movement(targetPos, 1f);
-                        if (++npc.ai[2] > 240)
+                        if (++npc.ai[2] > 480)
                         {
                             Roar(roarTimerMax, false);
                             npc.ai[0]++;
@@ -228,7 +228,7 @@ namespace AAModEXAI.Bosses.Shen
                             if (Main.netMode != NetmodeID.MultiplayerClient)
                                 Projectile.NewProjectile(npc.Center, Vector2.UnitX.RotatedBy(npc.ai[3]), mod.ProjectileType("ShenDeathray"), npc.damage * 2, 0f, Main.myPlayer, 0, npc.whoAmI);
                         }
-                        if (++npc.ai[1] > 60)
+                        if (++npc.ai[1] > 60 && npc.ai[2] < 240)
                         {
                             npc.ai[1] = 0;
                             Roar(roarTimerMax, false);

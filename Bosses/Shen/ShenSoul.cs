@@ -76,11 +76,11 @@ namespace AAModEXAI.Bosses.Shen
                 int shotdirection = npc.spriteDirection = npc.direction;
                 if(internalAI[4] == 0)
                 {
-                    npc.spriteDirection = npc.direction = shen.direction;
+                    npc.spriteDirection = npc.direction = shen.spriteDirection;
                     shotdirection = npc.direction;
                     npc.Center = new Vector2(shen.Center.X + internalAI[1] * shotdirection, shen.Center.Y + internalAI[2]);
                 }
-                if(shen.ai[0] == 0 && shen.ai[2] == 240 && Main.netMode != NetmodeID.MultiplayerClient)
+                if(shen.ai[0] == 0 && shen.ai[2] == 360 && Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     float ai0 = (float)Math.PI * 2 / 300 * (internalAI[3] == 2 ? 1 : -1) * Math.Sign(internalAI[2]);
                             Projectile.NewProjectile(npc.Center + npc.direction * new Vector2(npc.width / 2, 0), Vector2.UnitX * shotdirection, mod.ProjectileType("ShenWaveDeathraySmall"), npc.damage, 0f, Main.myPlayer, ai0, npc.whoAmI);
