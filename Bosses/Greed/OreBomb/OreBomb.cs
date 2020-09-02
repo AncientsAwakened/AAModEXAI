@@ -41,7 +41,7 @@ namespace AAModEXAI.Bosses.Greed.OreBomb
             {
                 int x = Main.rand.Next(-6, 6);
                 int y = -Main.rand.Next(3, 5);
-                int p = Projectile.NewProjectile(projectile.position, new Vector2(x, y), ModContent.ProjectileType<OreChunkM>(), projectile.damage, projectile.knockBack, Main.myPlayer, 0, Main.rand.Next(23));
+                int p = Projectile.NewProjectile(projectile.position, new Vector2(x, y), ModContent.ProjectileType<OreChunkM>(), projectile.damage, projectile.knockBack, Main.myPlayer, 0, Main.rand.Next(28));
                 Main.projectile[p].Center = projectile.Center - new Vector2(0, 25);
 
                 if (Main.projectile[p].ai[1] == 10)

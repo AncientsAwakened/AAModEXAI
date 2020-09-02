@@ -21,6 +21,7 @@ namespace AAModEXAI.Bosses.Greed.OreBomb
             projectile.penetrate = -1;
             projectile.ignoreWater = true;
             projectile.aiStyle = 14;
+            projectile.timeLeft = 1800;
         }
         public override void SetStaticDefaults()
         {
@@ -53,8 +54,9 @@ namespace AAModEXAI.Bosses.Greed.OreBomb
                 rotationspeed -= .021f;
             }
 
-            if (rotationspeed <= 0)
+            if (rotationspeed <= 0 || (projectile.velocity.X == 0))
             {
+                projectile.Kill();
                 rotationspeed = 0f;
             }
 

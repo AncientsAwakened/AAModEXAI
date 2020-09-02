@@ -53,6 +53,9 @@ namespace AAModEXAI.Bosses.Greed
         }
 
         public float[] internalAI = new float[6];
+
+        public bool halfLifeAIChange = false;
+        public bool fisthalf = true;
         public override void SendExtraAI(BinaryWriter writer)
         {
             base.SendExtraAI(writer);
@@ -88,6 +91,14 @@ namespace AAModEXAI.Bosses.Greed
 
             damage = npc.damage / 2;
 
+            halfLifeAIChange = npc.life <= npc.lifeMax * .5f;
+
+            if(fisthalf && halfLifeAIChange)
+            {
+                internalAI[0] = 4;
+                npc.netUpdate = true;
+                fisthalf = false;
+            }
 
             if (npc.alpha <= 0)
             {
@@ -138,13 +149,15 @@ namespace AAModEXAI.Bosses.Greed
                 else
                 {
                     if (Main.netMode != NetmodeID.MultiplayerClient)
-                            Projectile.NewProjectile(npc.Center.X, npc.Center.Y, npc.velocity.X * 2f, npc.velocity.Y, ModContent.ProjectileType<Bosses.Greed.OreBomb.OreBomb>(), npc.damage, 3f, Main.myPlayer, 0f, 0f);
+                            Projectile.NewProjectile(npc.Center.X, npc.Center.Y, npc.velocity.X * 2.5f, npc.velocity.Y, ModContent.ProjectileType<Bosses.Greed.OreBomb.OreBomb>(), npc.damage, 3f, Main.myPlayer, 0f, 0f);
+                    internalAI[3] = 0;
                 }
             }
 
             switch ((int)internalAI[0])
             {
                 case 0:
+                    if(halfLifeAIChange) ++internalAI[1];
                     if (++internalAI[1] > 60)
                     {
                         internalAI[0]++;
@@ -166,6 +179,7 @@ namespace AAModEXAI.Bosses.Greed
                     break;
 
                 case 1:
+                    if(halfLifeAIChange) ++internalAI[1];
                     if (++internalAI[1] > 120)
                     {
                         internalAI[0]++;
@@ -182,6 +196,7 @@ namespace AAModEXAI.Bosses.Greed
 
                 case 2:
                     internalAI[1]++;
+                    if(halfLifeAIChange) ++internalAI[1];
                     if (internalAI[1] > 80 && internalAI[1] <= 160)
                     {
                         if (Main.rand.Next(40) == 0)
@@ -200,6 +215,7 @@ namespace AAModEXAI.Bosses.Greed
                     break;
 
                 case 3:
+                    if(halfLifeAIChange) ++internalAI[1];
                     if (++internalAI[1] > 200)
                     {
                         internalAI[0]++;
@@ -208,11 +224,67 @@ namespace AAModEXAI.Bosses.Greed
                     }
                     break;
 
-                case 4: goto case 0;
+                case 4: 
+                    if(halfLifeAIChange)
+                    {
+                        if (internalAI[1] % 300 == 50)
+                        {
+                            int skip = Main.rand.Next(19) - 9;
+                            int skip2 = Main.rand.Next(19) - 9;
+                            int skip3 = Main.rand.Next(19) - 9;
+                            int skip4 = Main.rand.Next(19) - 9;
+                            for(int k = -9; k<=9; k++)
+                            {
+                                if(k == skip || k == skip2 || k == skip3 || k == skip4) continue;
+                                if(Main.netMode != NetmodeID.MultiplayerClient)
+                                {
+                                    int p = Projectile.NewProjectile(player.Center.X - 1000f, player.Center.Y + k * 70f, 10f, 0, mod.ProjectileType("DesireBeam"), npc.damage / 2, 1);
+                                    Main.projectile[p].ai[0] = 1f;
+                                    Main.projectile[p].netUpdate = true;
+                                }
+                            }
+                        }
+                        if (++internalAI[1] > 900)
+                        {
+                            internalAI[0]++;
+                            internalAI[1] = 0;
+                            npc.netUpdate = true;
+                        }
+                    }
+                    else goto case 0;
+                    break;
+
+                case 5:
+                    if(halfLifeAIChange)
+                    {
+                        if (++internalAI[1] > 600)
+                        {
+                            internalAI[0]++;
+                            internalAI[1] = 0;
+                            npc.netUpdate = true;
+                        }
+                    }
+                    else goto case 0;
+                    break;
 
                 default:
                     internalAI[0] = 0;
                     goto case 0;
+            }
+
+            if(halfLifeAIChange && internalAI[0] == 4)
+            {
+                npc.alpha += 10;
+                if(npc.alpha > 120) npc.alpha = 120;
+                npc.dontTakeDamage = true;
+                npc.damage = 0;
+            }
+            else
+            {
+                if(npc.alpha > 0) npc.alpha -= 10;
+                else npc.alpha = 0;
+                npc.dontTakeDamage = false;
+                npc.damage = npc.defDamage;
             }
 
             if (npc.life <= (int)(npc.lifeMax * 0.5f))
@@ -863,6 +935,43 @@ namespace AAModEXAI.Bosses.Greed
                     npc.HitEffect(0, 10.0);
                     npc.active = false;
                     NetMessage.SendData(MessageID.StrikeNPC, -1, -1, null, npc.whoAmI, -1f, 0.0f, 0.0f, 0, 0, 0);
+                }
+            }
+
+            NPC GreedHead = Main.npc[(int)npc.ai[3]];
+
+            if(((GreedA)GreedHead.modNPC).halfLifeAIChange)
+            {
+                if(((GreedA)GreedHead.modNPC).internalAI[0] == 4)
+                {
+                    if(halfLifeAIChange && internalAI[0] == 4)
+                    {
+                        npc.alpha += 10;
+                        if(npc.alpha > 120) npc.alpha = 120;
+                        npc.dontTakeDamage = true;
+                        npc.damage = 0;
+                    }
+                    else
+                    {
+                        if(npc.alpha > 0) npc.alpha -= 10;
+                        else npc.alpha = 0;
+                        npc.dontTakeDamage = false;
+                        npc.damage = npc.defDamage;
+                    }
+                }
+                if(((GreedA)GreedHead.modNPC).internalAI[0] == 5)
+                {
+                    if(((GreedA)GreedHead.modNPC).internalAI[1] % 60 == 0)
+                    {
+                        if(Main.rand.Next(10) == 0)
+                        {
+                            if(Main.netMode != NetmodeID.MultiplayerClient)
+                            {
+                                Vector2 dir = Vector2.Normalize(Main.player[GreedHead.target].Center - npc.Center);
+                                Projectile.NewProjectile(npc.Center.X, npc.Center.Y, dir.X * 12f, dir.Y * 12f, ModContent.ProjectileType<Bosses.Greed.OreBomb.OreChunkM>(), npc.damage / 4, 4f, Main.myPlayer, 0, npc.ai[2]);
+                            }
+                        }
+                    }
                 }
             }
 

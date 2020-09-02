@@ -30,7 +30,7 @@ namespace AAModEXAI.Bosses.Greed
             projectile.timeLeft = 3600;
             projectile.tileCollide = false;
         }
-        internal const float charge = 40f;
+        private float charge = 40f;
         public float LaserLength { get { return projectile.localAI[1]; } set { projectile.localAI[1] = value; } }
         public const float LaserLengthMax = 2000f;
         int multiplier = 1;
@@ -53,18 +53,36 @@ namespace AAModEXAI.Bosses.Greed
         }
         public override void AI()
         {
-            if (projectile.ai[0] == 0)
+            if (projectile.ai[0] == 1f)
+            {
+                charge = 150f;
+            }
+            else
+            {
+                charge = 40f;
+            }
+            if (attackCounter == 0)
             {
                 if (projectile.ai[1] == 0)
                     Main.PlaySound(SoundID.Item28, projectile.position);
                 projectile.ai[1] = 5;
             }
-            else if (projectile.ai[0] >= 20)
-                projectile.ai[1] += 5f * multiplier;
-            projectile.ai[0]++;
+            else if (attackCounter >= 20)
+            {
+                if(projectile.ai[0] == 0f)
+                {
+                    projectile.ai[1] += 5f * multiplier;
+                }
+                else projectile.ai[1] += 2f * multiplier;
+            }
+            attackCounter++;
             if (projectile.ai[1] == charge)
             {
                 projectile.hostile = true;
+            }
+            if (projectile.ai[1] > charge && projectile.ai[0] != 0f)
+            {
+                 projectile.ai[1] += 5f * multiplier;
             }
             if (projectile.ai[1] >= charge + 60f && multiplier == 1)
             {
@@ -147,7 +165,9 @@ namespace AAModEXAI.Bosses.Greed
             Texture2D arg_B1FF_1 = texture2D21;
             Vector2 arg_B1FF_2 = value20 - Main.screenPosition;
             sourceRectangle2 = null;
-            arg_B1FF_0.Draw(arg_B1FF_1, arg_B1FF_2, sourceRectangle2, color44, projectile.rotation, texture2D21.Frame(1, 1, 0, 0).Top(), new Vector2(Math.Min(projectile.ai[1], charge) / charge, 1f), SpriteEffects.None, 0f);
+            float scale = Math.Min(projectile.ai[1], charge) / charge;
+            if(projectile.ai[0] == 1f && projectile.ai[1] < charge /2) scale = .2f;
+            arg_B1FF_0.Draw(arg_B1FF_1, arg_B1FF_2, sourceRectangle2, color44, projectile.rotation, texture2D21.Frame(1, 1, 0, 0).Top(), new Vector2(scale, 1f), SpriteEffects.None, 0f);
             return false;
         }
     }
