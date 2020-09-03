@@ -21,11 +21,19 @@ namespace AAModEXAI
 {
 	public class AAModEXPlayer : ModPlayer
 	{
+        #region Buff bools
         public bool AkumaPain = false;
         public bool YamataGravity = false;
         public bool YamataAGravity = false;
         public bool Yanked = false;
         public bool Unstable = false;
+
+        #endregion
+
+        #region Accessory bools
+        public bool clawsOfChaos = false;
+
+        #endregion
 
         public override void OnEnterWorld(Player player)
 		{
@@ -40,6 +48,16 @@ namespace AAModEXAI
             YamataAGravity = false;
             Yanked = false;
             Unstable = false;
+
+            DragonSerpentNecklace = false;
+        }
+
+        public override void ModifyHitNPC(Item item, NPC target, ref int damage, ref float knockback, ref bool crit)
+        {
+            if (DragonSerpentNecklace)
+            {
+                player.ApplyDamageToNPC(target, 30, 0, 0, false);
+            }
         }
 
         public override void UpdateBadLifeRegen()

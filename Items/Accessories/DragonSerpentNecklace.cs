@@ -1,53 +1,50 @@
 using Terraria;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+using Terraria.ModLoader;
+using Terraria.ID;
+using AAMod;
+using AAModEXAI;
 
 namespace AAModEXAI.Items.Accessories
 {
-    public class Energy_Conduit : ModItem
-	{
-		public override void SetDefaults()
-		{
-			item.width = 20;
-			item.height = 24;
-			item.value = Item.sellPrice(0, 6, 0, 0);
-			item.rare = 8;
-			item.accessory = true;
-            
-        }
-
-        public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
+    public class DragonSerpentNecklace : BaseAAItem
+    {
+        
+        public override void SetStaticDefaults()
         {
-            Texture2D texture = mod.GetTexture("Glowmasks/" + GetType().Name + "_Glow");
-            spriteBatch.Draw
-            (
-                texture,
-                new Vector2
-                (
-                    item.position.X - Main.screenPosition.X + item.width * 0.5f,
-                    item.position.Y - Main.screenPosition.Y + item.height - texture.Height * 0.5f + 2f
-                ),
-                new Rectangle(0, 0, texture.Width, texture.Height),
-                Color.White,
-                rotation,
-                texture.Size() * 0.5f,
-                scale,
-                SpriteEffects.None,
-                0f
-            );
+            DisplayName.SetDefault("Dragon Serpent Necklace");
+            Tooltip.SetDefault(@"10% increased damage and damage resistance
+Ignores 20 Enemy defense
+Cause 30 extra damage to Enemies");
+        }
+        public override void SetDefaults()
+        {
+            item.width = 58;
+            item.height = 54;
+            item.value = Item.sellPrice(0, 10, 0, 0);
+            item.rare = 2;
+            item.accessory = true;
+            item.expert = true; 
+            item.expertOnly = true;
+            item.defense = 3;
+        }
+        public override void AddRecipes()
+        {
+            ModRecipe recipe = new ModRecipe(mod);
+            recipe.AddIngredient(ModContent.ItemType<AAMod.Items.Boss.Broodmother.DragonCape>(), 1);
+            recipe.AddIngredient(ModContent.ItemType<AAMod.Items.Boss.Hydra.HydraPendant>(), 1);
+            recipe.AddIngredient(ModContent.ItemType<EXSoul>(), 1);
+            recipe.AddIngredient(ItemID.SharkToothNecklace, 1);
+            recipe.AddTile(TileID.DemonAltar);
+            recipe.SetResult(this);
+            recipe.AddRecipe();
         }
 
-        public override void UpdateAccessory(Player player, bool hideVisual)
-		{
-            player.moveSpeed += 0.5f;
-            player.GetModPlayer<AAPlayer>().MaxMovespeedboost += 0.5f;
-		}
-		
-		public override void SetStaticDefaults()
-		{
-			DisplayName.SetDefault("Energy Conduit");
-			Tooltip.SetDefault("50% increased movement speed");
-			
-		}
-	}
+        public override void UpdateEquip(Player player)
+        {
+            player.endurance += .1f;
+            player.allDamage += .1f;
+            player.GetModPlayer<AAModEXPlayer>().DragonSerpentNecklace = true;
+            player.armorPenetration += 20;
+        }
+    }
 }
