@@ -31,7 +31,7 @@ namespace AAModEXAI
         #endregion
 
         #region Accessory bools
-        public bool clawsOfChaos = false;
+        public bool DragonSerpentNecklace = false;
 
         #endregion
 
