@@ -801,7 +801,7 @@ namespace AAModEXAI.Bosses.Shen
                         wingFrame.Y = 0;
                     }
                 }
-                if (npc.ai[0] != 1 && npc.ai[0] != 15 && npc.ai[0] != 16)
+                if (npc.ai[0] != 1 && npc.ai[0] != 15)
                 {
                     npc.spriteDirection = npc.Center.X < player.Center.X ? 1 : -1;
                 }

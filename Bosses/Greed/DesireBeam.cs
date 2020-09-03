@@ -55,7 +55,7 @@ namespace AAModEXAI.Bosses.Greed
         {
             if (projectile.ai[0] == 1f)
             {
-                charge = 150f;
+                charge = 60f;
             }
             else
             {
@@ -67,22 +67,22 @@ namespace AAModEXAI.Bosses.Greed
                     Main.PlaySound(SoundID.Item28, projectile.position);
                 projectile.ai[1] = 5;
             }
-            else if (attackCounter >= 20)
+            else if (attackCounter >= 20 && projectile.ai[0] == 0f)
             {
-                if(projectile.ai[0] == 0f)
-                {
-                    projectile.ai[1] += 5f * multiplier;
-                }
-                else projectile.ai[1] += 2f * multiplier;
+                projectile.ai[1] += 5f * multiplier;
+            }
+            else if (attackCounter >= 120 && projectile.ai[0] == 1f)
+            {
+                projectile.ai[1] += 5f * multiplier;
             }
             attackCounter++;
             if (projectile.ai[1] == charge)
             {
                 projectile.hostile = true;
             }
-            if (projectile.ai[1] > charge && projectile.ai[0] != 0f)
+            if (multiplier == -1)
             {
-                 projectile.ai[1] += 9f * multiplier;
+                projectile.ai[1] += 9f * multiplier;
             }
             if (projectile.ai[1] >= charge + 60f && multiplier == 1)
             {
@@ -166,7 +166,6 @@ namespace AAModEXAI.Bosses.Greed
             Vector2 arg_B1FF_2 = value20 - Main.screenPosition;
             sourceRectangle2 = null;
             float scale = Math.Min(projectile.ai[1], charge) / charge;
-            if(projectile.ai[0] == 1f && projectile.ai[1] < charge /2) scale = .1f;
             arg_B1FF_0.Draw(arg_B1FF_1, arg_B1FF_2, sourceRectangle2, color44, projectile.rotation, texture2D21.Frame(1, 1, 0, 0).Top(), new Vector2(scale, 1f), SpriteEffects.None, 0f);
             return false;
         }

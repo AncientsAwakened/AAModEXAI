@@ -227,7 +227,7 @@ namespace AAModEXAI.Bosses.Greed
                 case 4: 
                     if(halfLifeAIChange)
                     {
-                        if (internalAI[1] % 300 == 50)
+                        if (internalAI[1] % 400 == 50)
                         {
                             int skip = Main.rand.Next(19) - 9;
                             int skip2 = Main.rand.Next(19) - 9;
@@ -244,7 +244,7 @@ namespace AAModEXAI.Bosses.Greed
                                 }
                             }
                         }
-                        if (++internalAI[1] > 900)
+                        if (++internalAI[1] > 1200)
                         {
                             internalAI[0]++;
                             internalAI[1] = 0;
@@ -274,15 +274,11 @@ namespace AAModEXAI.Bosses.Greed
 
             if(halfLifeAIChange && internalAI[0] == 4)
             {
-                npc.alpha += 10;
-                if(npc.alpha > 120) npc.alpha = 120;
                 npc.dontTakeDamage = true;
                 npc.damage = 0;
             }
             else
             {
-                if(npc.alpha > 0) npc.alpha -= 10;
-                else npc.alpha = 0;
                 npc.dontTakeDamage = false;
                 npc.damage = npc.defDamage;
             }
@@ -676,7 +672,20 @@ namespace AAModEXAI.Bosses.Greed
 
             npc.position.Y += npc.height * 0.5f;
 
-            BaseDrawing.DrawTexture(spritebatch, texture, 0, npc, dColor);
+            Color Alpha = dColor;
+
+            if(halfLifeAIChange)
+            {
+                if(internalAI[0] == 4)
+                {
+                    Alpha.R = (byte)((float)(255 - 120));
+                    Alpha.G = (byte)((float)(255 - 120));
+                    Alpha.B = (byte)((float)(255 - 120));
+                    Alpha.A = (byte)((float)(255 - 120));
+                }
+            }
+
+            BaseDrawing.DrawTexture(spritebatch, texture, 0, npc, Alpha);
             if (Main.LocalPlayer.findTreasure)
             {
                 Color color = dColor;
@@ -890,7 +899,7 @@ namespace AAModEXAI.Bosses.Greed
         {
             if(!truehit)
             {
-                damage *= .15f;
+                damage *= .25f;
             }
             else
             {
@@ -944,20 +953,13 @@ namespace AAModEXAI.Bosses.Greed
             {
                 if(((GreedA)GreedHead.modNPC).internalAI[0] == 4)
                 {
-                    if(halfLifeAIChange && internalAI[0] == 4)
-                    {
-                        npc.alpha += 10;
-                        if(npc.alpha > 120) npc.alpha = 120;
-                        npc.dontTakeDamage = true;
-                        npc.damage = 0;
-                    }
-                    else
-                    {
-                        if(npc.alpha > 0) npc.alpha -= 10;
-                        else npc.alpha = 0;
-                        npc.dontTakeDamage = false;
-                        npc.damage = npc.defDamage;
-                    }
+                    npc.dontTakeDamage = true;
+                    npc.damage = 0;
+                }
+                else
+                {
+                    npc.dontTakeDamage = false;
+                    npc.damage = npc.defDamage;
                 }
                 if(((GreedA)GreedHead.modNPC).internalAI[0] == 5)
                 {
@@ -1133,7 +1135,22 @@ namespace AAModEXAI.Bosses.Greed
 
             npc.position.Y += npc.height * 0.5f;
 
-            BaseDrawing.DrawTexture(spritebatch, texture, 0, npc, dColor);
+            Color Alpha = dColor;
+
+            NPC GreedHead = Main.npc[(int)npc.ai[3]];
+
+            if(((GreedA)GreedHead.modNPC).halfLifeAIChange)
+            {
+                if(((GreedA)GreedHead.modNPC).internalAI[0] == 4)
+                {
+                    Alpha.R = (byte)((float)(255 - 120));
+                    Alpha.G = (byte)((float)(255 - 120));
+                    Alpha.B = (byte)((float)(255 - 120));
+                    Alpha.A = (byte)((float)(255 - 120));
+                }
+            }
+
+            BaseDrawing.DrawTexture(spritebatch, texture, 0, npc, Alpha);
             if (Main.LocalPlayer.findTreasure)
             {
                 Color color = dColor;
