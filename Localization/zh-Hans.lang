@@ -556,3 +556,13 @@ NPCName.ZeroEcho=戒木零0-回音
 NPCName.ZeroMini=零械自组织源 零.之.自.组.织.协.议
 
 NPCName.ZeroTransition=破损裂隙
+
+// Items
+
+ItemName.EXSoul=超级远古之魂
+ItemTooltip.EXSoul=古代神秘魔法的精髓
+
+// Accessories
+
+ItemName.DragonSerpentNecklace=龙蛇项链
+ItemTooltip.DragonSerpentNecklace=增加10%伤害和伤害减免\n增加20点护甲穿透\n对敌人造成额外30点伤害
