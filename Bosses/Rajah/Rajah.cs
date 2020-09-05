@@ -660,27 +660,27 @@ namespace AAModEXAI.Bosses.Rajah
         {
             if (npc.ai[3] == 1) //Bunzooka
             {
-                return "NPCs/Bosses/Rajah/RajahArmsB";
+                return "Bosses/Rajah/RajahArmsB";
             }
             else if (npc.ai[3] == 2) //Scepter
             {
-                return "NPCs/Bosses/Rajah/RajahArmsR";
+                return "Bosses/Rajah/RajahArmsR";
             }
             else if (npc.ai[3] == 3 && internalAI[3] <= (isSupreme ? 40 : 60)) //Javelin
             {
-                return "NPCs/Bosses/Rajah/RajahArmsS";
+                return "Bosses/Rajah/RajahArmsS";
             }
             else if (npc.ai[3] == 4) //Excalihare
             {
-                return "NPCs/Bosses/Rajah/Supreme/Excalihare";
+                return "Bosses/Rajah/Supreme/Excalihare";
             }
             else if (npc.ai[3] == 5) //Fluffy Fury
             {
-                return "NPCs/Bosses/Rajah/Supreme/FluffyFury";
+                return "Bosses/Rajah/Supreme/FluffyFury";
             }
             else if (npc.ai[3] == 6) //Rabbits Wrath
             {
-                return "NPCs/Bosses/Rajah/Supreme/RabbitsWrath";
+                return "Bosses/Rajah/Supreme/RabbitsWrath";
             }
             else
             {
@@ -1179,7 +1179,7 @@ namespace AAModEXAI.Bosses.Rajah
             }
             if (npc.ai[3] != 0 && npc.ai[3] < 6) //If holding a weapon
             {
-                ArmTex = ModLoader.GetMod("AAMod").GetTexture(WeaponTexture());
+                ArmTex = mod.GetTexture(WeaponTexture());
                 Rectangle WeaponRectangle = new Rectangle(0, WeaponFrame, 300, 220);
                 BaseDrawing.DrawTexture(spriteBatch, ArmTex, 0, npc.position, npc.width, npc.height, npc.scale, npc.rotation, npc.direction, 8, WeaponRectangle, drawColor, true);
             }
