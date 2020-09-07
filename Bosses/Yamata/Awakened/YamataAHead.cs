@@ -109,7 +109,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                 return;
             }
 
-            npc.realLife = Body.npc.whoAmI;
+            //npc.realLife = Body.npc.whoAmI;
             npc.timeLeft = 100;
             npc.TargetClosest(true);
             Player player = Main.player[npc.target];

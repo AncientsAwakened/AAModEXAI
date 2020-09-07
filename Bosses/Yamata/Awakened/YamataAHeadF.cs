@@ -28,7 +28,6 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
         public override void SetDefaults()
         {
             base.SetDefaults();
-            npc.lifeMax = 30000;
             npc.width = 76;
             npc.height = 92;
             npc.npcSlots = 0;
@@ -40,7 +39,8 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
             npc.damage = 210;
             NPCID.Sets.TechnicallyABoss[npc.type] = true;
             npc.DeathSound = ModLoader.GetMod("AAMod").GetLegacySoundSlot(SoundType.NPCKilled, "Sounds/Sounds/YamataRoar");
-            npc.lifeMax = 45000;
+            npc.lifeMax = Main.expertMode? 325000 : 650000;
+            if(Main.expertMode)
             npc.width = 46;
             npc.height = 46;
             isAwakened = true;

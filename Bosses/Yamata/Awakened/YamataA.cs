@@ -4,6 +4,7 @@ using Terraria.ID;
 
 using Terraria.ModLoader;
 using System.IO;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using AAMod;
@@ -250,6 +251,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                     TrueHead.ai[0] = npc.whoAmI;
                     TrueHead.ai[1] = 0;
                     TrueHead.ai[2] = headY;
+                    TrueHead.realLife = npc.whoAmI;
                     Head2 = Main.npc[NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("YamataAHeadF"), 0)];
                     Head2.ai[0] = npc.whoAmI;
                     Head2.ai[1] = headX * -3f;
@@ -352,6 +354,8 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
         {
             TargetClosest();
             HandleHeads();
+
+            TrueHeadChange();
 
             if (npc.life <= npc.lifeMax / 2 && !spawnHaruka)
 			{
@@ -507,6 +511,45 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
             YamataBody(npc, ref npc.ai, true, 0.2f, 3.5f, 8f, 0.07f, 1.5f, 4);
             if (playerTooFar) npc.position += playerTarget.position - playerTarget.oldPosition;
             npc.rotation = 0f;
+        }
+
+        public void TrueHeadChange()
+        {
+            if(npc.ai[3] ++ > 1800)
+            {
+                npc.ai[3] = 0;
+                NPC[] Heads = {TrueHead, Head2, Head3, Head4, Head5, Head6, Head7};
+                List<NPC> HeadAlive = new List<NPC>();
+                foreach (NPC head in Heads)
+                {
+                    if(head.active && head.life > 0) HeadAlive.Add(head);
+                }
+                if (Main.netMode != NetmodeID.MultiplayerClient)
+                {
+                    foreach (NPC head in HeadAlive)
+                    {
+                        if(!head.active) continue;
+                        if(head.realLife == npc.whoAmI)
+                        {
+                            int k = HeadAlive.Count;
+                            if(k == 1) break;
+                            int randomhead = Main.rand.Next(k);
+                            if(HeadAlive[randomhead] == head)
+                            {
+                                randomhead++;
+                                if(randomhead >= k) randomhead = 0;
+                            }
+                            head.life = HeadAlive[randomhead].life;
+                            head.realLife = -1;
+                            HeadAlive[randomhead].realLife = npc.whoAmI;
+                            HeadAlive[randomhead].life = npc.life;
+                            HeadAlive[randomhead].netUpdate = true;
+                            head.netUpdate = true;
+                        }
+                    }
+                }
+                HeadAlive.Clear();
+            }
         }
 
         public void YamataBody(NPC npc, ref float[] ai, bool ignoreWet = true, float moveInterval = 0.2f, float maxSpeedX = 2f, float maxSpeedY = 1.5f, float hoverInterval = 0.04f, float hoverMaxSpeed = 1.5f, int hoverHeight = 3)

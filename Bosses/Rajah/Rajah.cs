@@ -1085,10 +1085,10 @@ namespace AAModEXAI.Bosses.Rajah
                 }
                 else
                 {
-                    npc.DropLoot(ModLoader.GetMod("AAMod").ItemType("ChampionPlate"), Main.rand.Next(15, 31));
+                    npc.DropLoot(mod.ItemType("ChampionPlate"), Main.rand.Next(15, 31));
                     string[] lootTable = { "Excalihare", "FluffyFury", "RabbitsWrath" };
                     int loot = Main.rand.Next(lootTable.Length);
-                    npc.DropLoot(ModLoader.GetMod("AAMod").ItemType(lootTable[loot]));
+                    npc.DropLoot(mod.ItemType(lootTable[loot]));
                 }
             }
             else

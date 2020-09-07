@@ -1,8 +1,10 @@
 using Terraria.ModLoader;
 using Terraria;
 using Terraria.ID;
+using AAMod;
+using AAModEXAI;
 
-namespace AAMod.Items.Boss.Greed
+namespace AAModEXAI.Items.Accessories
 {
     public class StoneScarf : BaseAAItem
     {
