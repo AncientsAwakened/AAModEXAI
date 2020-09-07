@@ -85,7 +85,13 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                 {
                     int Head = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("YamataAHeadF"));
                     Main.npc[Head].ai[0] = internalAI[0];
-                    if(!((YamataA)Main.npc[(int)internalAI[0]].modNPC).Head2.active)
+                    if(!((YamataA)Main.npc[(int)internalAI[0]].modNPC).TrueHead.active)
+                    {
+                        ((YamataA)Main.npc[(int)internalAI[0]].modNPC).TrueHead = Main.npc[Head];
+                        Main.npc[Head].ai[1] = 0;
+                        Main.npc[Head].ai[2] = -500;
+                    }
+                    else if(!((YamataA)Main.npc[(int)internalAI[0]].modNPC).Head2.active)
                     {
                         ((YamataA)Main.npc[(int)internalAI[0]].modNPC).Head2 = Main.npc[Head];
                         Main.npc[Head].ai[1] = 300 * -3f;
@@ -123,7 +129,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                     else if(!((YamataA)Main.npc[(int)internalAI[0]].modNPC).Head7.active)
                     {
                         ((YamataA)Main.npc[(int)internalAI[0]].modNPC).Head7 = Main.npc[Head];
-                        Main.npc[Head].ai[1] = 300 * 1f;
+                        Main.npc[Head].ai[1] = 300 * 3f;
                         Main.npc[Head].ai[2] = -500 * .7f;
                         Main.npc[Head].ai[3] = 3f;
                     }
