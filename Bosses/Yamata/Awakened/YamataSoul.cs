@@ -75,15 +75,61 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
             if(Main.npc[(int)internalAI[0]].active && Main.npc[(int)internalAI[0]].life > 0)
             {
                 float dist = npc.Distance(Main.npc[(int)internalAI[0]].Center);
-                if (dist > 1000) npc.position = Main.npc[(int)internalAI[0]].Center;
+                if (dist > 2000) npc.position = Main.npc[(int)internalAI[0]].Center;
             }
             if(internalAI[3] > 0) internalAI[3] --;
             else 
             {
-                npc.Transform(ModContent.NPCType<YamataAHeadF>());
-                npc.ai[0] = internalAI[0];
-                npc.ai[1] = internalAI[1];
-                npc.ai[2] = internalAI[2];
+                npc.active = false;
+                if(Main.netMode != NetmodeID.MultiplayerClient)
+                {
+                    int Head = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("YamataAHeadF"));
+                    Main.npc[Head].ai[0] = internalAI[0];
+                    if(!((YamataA)Main.npc[(int)internalAI[0]].modNPC).Head2.active)
+                    {
+                        ((YamataA)Main.npc[(int)internalAI[0]].modNPC).Head2 = Main.npc[Head];
+                        Main.npc[Head].ai[1] = 300 * -3f;
+                        Main.npc[Head].ai[2] = -500 * .7f;
+                        Main.npc[Head].ai[3] = 3f;
+                    }
+                    else if(!((YamataA)Main.npc[(int)internalAI[0]].modNPC).Head3.active)
+                    {
+                        ((YamataA)Main.npc[(int)internalAI[0]].modNPC).Head3 = Main.npc[Head];
+                        Main.npc[Head].ai[1] = 300 * -2f;
+                        Main.npc[Head].ai[2] = -500 * .8f;
+                        Main.npc[Head].ai[3] = 2f;
+                    }
+                    else if(!((YamataA)Main.npc[(int)internalAI[0]].modNPC).Head4.active)
+                    {
+                        ((YamataA)Main.npc[(int)internalAI[0]].modNPC).Head4 = Main.npc[Head];
+                        Main.npc[Head].ai[1] = 300 * -1f;
+                        Main.npc[Head].ai[2] = -500 * .9f;
+                        Main.npc[Head].ai[3] = 1f;
+                    }
+                    else if(!((YamataA)Main.npc[(int)internalAI[0]].modNPC).Head5.active)
+                    {
+                        ((YamataA)Main.npc[(int)internalAI[0]].modNPC).Head5 = Main.npc[Head];
+                        Main.npc[Head].ai[1] = 300 * 1f;
+                        Main.npc[Head].ai[2] = -500 * .9f;
+                        Main.npc[Head].ai[3] = 1f;
+                    }
+                    else if(!((YamataA)Main.npc[(int)internalAI[0]].modNPC).Head6.active)
+                    {
+                        ((YamataA)Main.npc[(int)internalAI[0]].modNPC).Head6 = Main.npc[Head];
+                        Main.npc[Head].ai[1] = 300 * 2f;
+                        Main.npc[Head].ai[2] = -500 * .8f;
+                        Main.npc[Head].ai[3] = 2f;
+                    }
+                    else if(!((YamataA)Main.npc[(int)internalAI[0]].modNPC).Head7.active)
+                    {
+                        ((YamataA)Main.npc[(int)internalAI[0]].modNPC).Head7 = Main.npc[Head];
+                        Main.npc[Head].ai[1] = 300 * 1f;
+                        Main.npc[Head].ai[2] = -500 * .7f;
+                        Main.npc[Head].ai[3] = 3f;
+                    }
+                    
+                    Main.npc[Head].netUpdate = true;
+                }
             }
             if (npc.alpha != 0)
             {

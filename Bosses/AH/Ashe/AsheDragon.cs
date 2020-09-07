@@ -28,7 +28,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
             npc.height = 32;
             npc.aiStyle = 6;
             npc.netAlways = true;
-            npc.damage = 100;
+            npc.damage = 130;
             npc.defense = 40;
             npc.lifeMax = 10000;
             npc.HitSound = SoundID.NPCHit56;

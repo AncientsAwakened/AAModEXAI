@@ -28,7 +28,7 @@ namespace AAModEXAI.Bosses.AH.Haruka
             npc.width = 50;
             npc.height = 60;
             npc.friendly = false;
-            npc.damage = 180;
+            npc.damage = 190;
 			npc.defense = 120;
             npc.lifeMax = 180000;
             npc.HitSound = SoundID.NPCHit1;
@@ -734,7 +734,7 @@ namespace AAModEXAI.Bosses.AH.Haruka
             }
             else if (internalAI[0] == AISTATE_Shadowkilling) //Melee Damage/Speed boost
             {
-                npc.damage = 220;
+                npc.damage = 300;
                 npc.defense = 9999;
             }
             else //Reset Stats

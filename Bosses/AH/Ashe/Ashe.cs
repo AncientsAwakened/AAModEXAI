@@ -31,7 +31,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
         {
             npc.width = 40;
             npc.height = 100;
-            npc.damage = 150;
+            npc.damage = 180;
             npc.defense = 40;
             npc.lifeMax = 160000;
             npc.value = Item.sellPrice(0, 12, 0, 0);

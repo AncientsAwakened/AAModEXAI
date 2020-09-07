@@ -36,7 +36,7 @@ namespace AAModEXAI.Bosses.Shen
             npc.aiStyle = -1;
             npc.netAlways = true;
             npc.knockBackResist = 0f;
-            npc.damage = 180;
+            npc.damage = 200;
 			npc.defense = 200;
             npc.lifeMax = 800000;
             npc.value = Item.sellPrice(20, 0, 0, 0);

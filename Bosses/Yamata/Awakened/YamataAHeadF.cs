@@ -296,6 +296,11 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                 if (Math.Abs(npc.velocity.X) < 0.05f) npc.velocity.X = 0f;
                 if (Math.Abs(npc.velocity.Y) < 0.05f) npc.velocity.Y = 0f;
             }
+            else if (dist < 500)
+            {
+                npc.velocity = Vector2.Normalize(nextTarget - npc.Center);
+                npc.velocity *= 10f;
+            }
             else
             {
                 npc.velocity = Vector2.Normalize(nextTarget - npc.Center);
