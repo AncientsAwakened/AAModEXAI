@@ -5,12 +5,13 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-using AAMod.Dusts;
+
 using System.IO;
 using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Equinox
 {
@@ -212,7 +213,7 @@ namespace AAModEXAI.Bosses.Equinox
 
             if (wormStronger != prevWormStronger)
             {
-                int dustType = nightcrawler ? ModLoader.GetMod("AAMod").DustType("NightcrawlerDust") : ModLoader.GetMod("AAMod").DustType("DaybringerDust");
+                int dustType = nightcrawler ? ModContent.DustType<NightcrawlerDust>() : ModContent.DustType<DaybringerDust>();
                 for (int k = 0; k < 10; k++)
                 {
                     int dustID = Dust.NewDust(npc.position, npc.width, npc.height, dustType, (int)(npc.velocity.X * 0.2f), (int)(npc.velocity.Y * 0.2f), 0, default, 1.5f);
@@ -703,7 +704,7 @@ namespace AAModEXAI.Bosses.Equinox
 		bool spawnedGore = false;
         public override void HitEffect(int hitDirection, double damage)
         {
-			int dustType = nightcrawler ? ModLoader.GetMod("AAMod").DustType("NightcrawlerDust") : ModLoader.GetMod("AAMod").DustType("DaybringerDust");
+			int dustType = nightcrawler ? ModContent.DustType<NightcrawlerDust>() : ModContent.DustType<DaybringerDust>();
             for (int k = 0; k < 5; k++)
             {
                 Dust.NewDust(npc.position, npc.width, npc.height, dustType, hitDirection, -1f, 0, default, 1.2f);

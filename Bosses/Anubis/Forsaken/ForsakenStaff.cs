@@ -8,6 +8,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Anubis.Forsaken
 {
@@ -39,7 +40,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
 
             if (Main.rand.Next(2) == 0)
             {
-                int dustnumber = Dust.NewDust(projectile.position, projectile.width, projectile.height, ModLoader.GetMod("AAMod").DustType("ForsakenDust"), 0f, 0f, 200, default, 0.5f);
+                int dustnumber = Dust.NewDust(projectile.position, projectile.width, projectile.height, ModContent.DustType<ForsakenDust>(), 0f, 0f, 200, default, 0.5f);
                 Main.dust[dustnumber].velocity *= 0.3f;
             }
 
@@ -66,7 +67,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                         Main.PlaySound(SoundID.NPCHit4, Main.projectile[i].position);
                         for (int j = 0; j < 3; j++)
                         {
-                            int num = Dust.NewDust(Main.projectile[i].position, Main.projectile[i].width, Main.projectile[i].height, ModLoader.GetMod("AAMod").DustType("ForsakenDust"), 0f, 0f, 0, default, 1f);
+                            int num = Dust.NewDust(Main.projectile[i].position, Main.projectile[i].width, Main.projectile[i].height, ModContent.DustType<ForsakenDust>(), 0f, 0f, 0, default, 1f);
                             Main.dust[num].velocity *= 0.3f;
                         }
                         Main.projectile[i].hostile = true;

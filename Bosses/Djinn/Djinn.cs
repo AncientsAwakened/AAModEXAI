@@ -12,6 +12,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Djinn
 {
@@ -470,7 +471,7 @@ namespace AAModEXAI.Bosses.Djinn
             npc.position.Y = npc.position.Y + npc.height / 2;
             npc.position.X = npc.position.X - npc.width / 2;
             npc.position.Y = npc.position.Y - npc.height / 2;
-            int dust = ModLoader.GetMod("AAMod").DustType("SandDust");
+            int dust = ModContent.DustType<SandDust>();
             for (int Loop = 0; Loop < 5; Loop++)
             {
                 int d = Dust.NewDust(new Vector2(npc.position.X, npc.position.Y), npc.width, npc.height, dust, 0f, 0f, 0);

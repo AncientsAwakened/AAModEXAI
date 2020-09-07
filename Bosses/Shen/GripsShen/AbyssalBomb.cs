@@ -6,6 +6,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Shen.GripsShen
 {
@@ -90,7 +91,7 @@ namespace AAModEXAI.Bosses.Shen.GripsShen
             }
             for (int num189 = 0; num189 < 1; num189++)
             {
-                int num190 = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, ModLoader.GetMod("AAMod").DustType("YamataDust"), 0f, 0f, 0);
+                int num190 = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, ModContent.DustType<YamataDust>(), 0f, 0f, 0);
 
                 Main.dust[num190].scale *= 1.3f;
                 Main.dust[num190].fadeIn = 1f;
@@ -107,11 +108,11 @@ namespace AAModEXAI.Bosses.Shen.GripsShen
         {
             for (int num468 = 0; num468 < 20; num468++)
             {
-                int num469 = Dust.NewDust(projectile.Center, projectile.width, projectile.height, ModLoader.GetMod("AAMod").DustType("YamataDust"), -projectile.velocity.X * 0.2f,
+                int num469 = Dust.NewDust(projectile.Center, projectile.width, projectile.height, ModContent.DustType<YamataDust>(), -projectile.velocity.X * 0.2f,
                     -projectile.velocity.Y * 0.2f, 0);
                 Main.dust[num469].noGravity = true;
                 Main.dust[num469].velocity *= 2f;
-                num469 = Dust.NewDust(projectile.Center, projectile.width, projectile.height, ModLoader.GetMod("AAMod").DustType("YamataDust"), -projectile.velocity.X * 0.2f,
+                num469 = Dust.NewDust(projectile.Center, projectile.width, projectile.height, ModContent.DustType<YamataDust>(), -projectile.velocity.X * 0.2f,
                     -projectile.velocity.Y * 0.2f, 0);
                 Main.dust[num469].velocity *= 2f;
             }

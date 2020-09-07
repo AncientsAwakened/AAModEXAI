@@ -6,6 +6,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Anubis.Forsaken
 {
@@ -33,7 +34,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
         {
             for (int num468 = 0; num468 < 5; num468++)
             {
-                int num469 = Dust.NewDust(projectile.Center, 0, 0, ModLoader.GetMod("AAMod").DustType("ForsakenDust"), 0f, 0f, 0, default, 2f);
+                int num469 = Dust.NewDust(projectile.Center, 0, 0, ModContent.DustType<ForsakenDust>(), 0f, 0f, 0, default, 2f);
                 Main.dust[num469].noGravity = true;
             }
 

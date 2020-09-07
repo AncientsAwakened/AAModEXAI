@@ -10,6 +10,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Yamata.Awakened
 {
@@ -298,7 +299,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
             else
             {
                 npc.velocity = Vector2.Normalize(nextTarget - npc.Center);
-                npc.velocity *= 10f;
+                npc.velocity *= 30f;
             }
             //npc.position += Body.npc.position - Body.npc.oldPosition;
             npc.spriteDirection = -1;
@@ -365,7 +366,12 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
             if (npc.life <= 0)
             {
                 CombatText.NewText(npc.getRect(), new Color(146, 30, 68), AAMod.Lang.BossChat("YamataAHead"), false, false);
-                NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType("YamataSoul"));
+                int soul = NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType("YamataSoul"));
+                NPC YamataSoul = Main.npc[soul];
+                ((YamataSoul)YamataSoul.modNPC).internalAI[0] = npc.ai[0];
+                ((YamataSoul)YamataSoul.modNPC).internalAI[1] = npc.ai[1];
+                ((YamataSoul)YamataSoul.modNPC).internalAI[2] = npc.ai[2];
+                ((YamataSoul)YamataSoul.modNPC).internalAI[3] = 1800;
             }
         }
 

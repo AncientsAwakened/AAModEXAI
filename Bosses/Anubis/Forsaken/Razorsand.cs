@@ -6,6 +6,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Anubis.Forsaken
 {
@@ -43,7 +44,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                             Vector2 vector43 = Vector2.Normalize(projectile.velocity) * new Vector2(projectile.width / 2f, projectile.height) * 0.75f;
                             vector43 = vector43.RotatedBy((num613 - (num612 / 2 - 1)) * 3.1415926535897931 / (float)num612, default) + projectile.Center;
                             Vector2 value15 = ((float)(Main.rand.NextDouble() * 3.1415927410125732) - 1.57079637f).ToRotationVector2() * Main.rand.Next(3, 8);
-                            int num614 = Dust.NewDust(vector43 + value15, 0, 0, ModLoader.GetMod("AAMod").DustType("SandDust"), value15.X * 2f, value15.Y * 2f, 100, default, 1.4f);
+                            int num614 = Dust.NewDust(vector43 + value15, 0, 0, ModContent.DustType<SandDust>(), value15.X * 2f, value15.Y * 2f, 100, default, 1.4f);
                             Main.dust[num614].noGravity = true;
                             Main.dust[num614].noLight = true;
                             Main.dust[num614].velocity /= 4f;

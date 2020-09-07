@@ -8,6 +8,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Toad
 {
@@ -50,12 +51,12 @@ namespace AAModEXAI.Bosses.Toad
             {
                 for (int m = 0; m < 3; m++)
                 {
-                    int dustID = Dust.NewDust(projectile.position, projectile.width, projectile.height, ModLoader.GetMod("AAMod").DustType("ShroomDust"), 0f, 0f, 100, Color.White, 1.6f);
+                    int dustID = Dust.NewDust(projectile.position, projectile.width, projectile.height, ModContent.DustType<ShroomDust>(), 0f, 0f, 100, Color.White, 1.6f);
                     Main.dust[dustID].velocity = -projectile.velocity * 0.5f;
                     Main.dust[dustID].noLight = false;
                     Main.dust[dustID].noGravity = true;
                 }
-                int dustID2 = Dust.NewDust(projectile.position, projectile.width, projectile.height, ModLoader.GetMod("AAMod").DustType("ShroomDust"), 0f, 0f, 100, Color.Purple, 2f);
+                int dustID2 = Dust.NewDust(projectile.position, projectile.width, projectile.height, ModContent.DustType<ShroomDust>(), 0f, 0f, 100, Color.Purple, 2f);
                 Main.dust[dustID2].velocity = -projectile.velocity * 0.5f;
                 Main.dust[dustID2].noLight = false;
                 Main.dust[dustID2].noGravity = true;
@@ -96,7 +97,7 @@ namespace AAModEXAI.Bosses.Toad
 	    	}
         	for (int dust = 0; dust <= 5; dust++)
             {
-                int dustType = ModLoader.GetMod("AAMod").DustType("ShroomDust");
+                int dustType = ModContent.DustType<ShroomDust>();
                 Dust.NewDust(projectile.position + projectile.velocity, projectile.width, projectile.height, dustType, projectile.oldVelocity.X * 0.5f, projectile.oldVelocity.Y * 0.5f);
         	}
         }

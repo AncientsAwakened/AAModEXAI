@@ -7,6 +7,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Anubis
 {
@@ -29,7 +30,7 @@ namespace AAModEXAI.Bosses.Anubis
         }
         public override void Kill(int timeLeft)
         {
-            int dustType = ModLoader.GetMod("AAMod").DustType("JudgementDust");
+            int dustType = ModContent.DustType<JudgementDust>();
             int pieCut = 20;
             for (int m = 0; m < pieCut; m++)
             {

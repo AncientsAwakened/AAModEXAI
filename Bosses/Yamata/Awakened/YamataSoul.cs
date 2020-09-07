@@ -3,11 +3,13 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.IO;
 
 using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Yamata.Awakened
 {
@@ -35,6 +37,33 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
             npc.alpha = 255;
 
         }
+
+        public float[] internalAI = new float[4];
+
+        public override void SendExtraAI(BinaryWriter writer)
+        {
+            base.SendExtraAI(writer);
+            if (Main.netMode == NetmodeID.Server || Main.dedServ)
+            {
+                writer.Write(internalAI[0]);
+                writer.Write(internalAI[1]);
+                writer.Write(internalAI[2]);
+                writer.Write(internalAI[3]);
+            }
+        }
+
+        public override void ReceiveExtraAI(BinaryReader reader)
+        {
+            base.ReceiveExtraAI(reader);
+            if (Main.netMode == NetmodeID.MultiplayerClient)
+            {
+                internalAI[0] = reader.ReadFloat();
+                internalAI[1] = reader.ReadFloat();
+                internalAI[2] = reader.ReadFloat();
+                internalAI[3] = reader.ReadFloat();
+            }
+        }
+        
         public override void AI()
         {
             Lighting.AddLight(npc.Center, AAColor.YamataA.R / 255, AAColor.YamataA.G / 255, AAColor.YamataA.B / 255);
@@ -43,11 +72,24 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
             {
                 npc.life = 0;
             }
+            if(Main.npc[(int)internalAI[0]].active && Main.npc[(int)internalAI[0]].life > 0)
+            {
+                float dist = npc.Distance(Main.npc[(int)internalAI[0]].Center);
+                if (dist > 1000) npc.position = Main.npc[(int)internalAI[0]].Center;
+            }
+            if(internalAI[3] > 0) internalAI[3] --;
+            else 
+            {
+                npc.Transform(ModContent.NPCType<YamataAHeadF>());
+                npc.ai[0] = internalAI[0];
+                npc.ai[1] = internalAI[1];
+                npc.ai[2] = internalAI[2];
+            }
             if (npc.alpha != 0)
             {
                 for (int spawnDust = 0; spawnDust < 2; spawnDust++)
                 {
-                    int num935 = Dust.NewDust(new Vector2(npc.position.X, npc.position.Y), npc.width, npc.height, ModLoader.GetMod("AAMod").DustType("YamataAuraDust"), 0f, 0f, 100, default, 2f);
+                    int num935 = Dust.NewDust(new Vector2(npc.position.X, npc.position.Y), npc.width, npc.height, ModContent.DustType<YamataAuraDust>(), 0f, 0f, 100, default, 2f);
                     Main.dust[num935].noGravity = true;
                     Main.dust[num935].noLight = true;
                 }

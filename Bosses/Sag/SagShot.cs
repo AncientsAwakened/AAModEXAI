@@ -7,6 +7,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Sag
 {
@@ -53,7 +54,7 @@ namespace AAModEXAI.Bosses.Sag
 
             if (Main.rand.Next(1) == 0)
             {
-                int dustnumber = Dust.NewDust(projectile.position, projectile.width, projectile.height, ModLoader.GetMod("AAMod").DustType("VoidDust"), 0f, 0f, 200, default, 0.8f);
+                int dustnumber = Dust.NewDust(projectile.position, projectile.width, projectile.height, ModContent.DustType<VoidDust>(), 0f, 0f, 200, default, 0.8f);
                 Main.dust[dustnumber].velocity *= 0.3f;
             }
             for (int m = projectile.oldPos.Length - 1; m > 0; m--)

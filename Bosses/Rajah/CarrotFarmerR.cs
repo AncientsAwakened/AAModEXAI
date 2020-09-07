@@ -7,6 +7,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Rajah
 {
@@ -82,7 +83,7 @@ namespace AAModEXAI.Bosses.Rajah
             {
                 for (int u = 0; u < 10; u++)
                 {
-                    int dust = Dust.NewDust(projectile.position, projectile.width, projectile.height, ModLoader.GetMod("AAMod").DustType("CarrotDust"), Main.rand.Next((int)-5f, (int)5f), Main.rand.Next((int)-5f, (int)5f), 0);
+                    int dust = Dust.NewDust(projectile.position, projectile.width, projectile.height, ModContent.DustType<CarrotDust>(), Main.rand.Next((int)-5f, (int)5f), Main.rand.Next((int)-5f, (int)5f), 0);
                     Main.dust[dust].noGravity = true;
                 }
                 float spread = 12f * 0.0174f;

@@ -9,6 +9,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Yamata.Awakened
 {
@@ -150,7 +151,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
             else
             {
                 npc.velocity = Vector2.Normalize(nextTarget - npc.Center);
-                npc.velocity *= 10f;
+                npc.velocity *= 30f;
             }
             //npc.position += Body.position - Body.oldPosition;
 

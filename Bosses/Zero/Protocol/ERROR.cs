@@ -6,6 +6,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Zero.Protocol
 {
@@ -45,7 +46,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
                 projectile.Kill();
             }
 
-            int dustId = Dust.NewDust(projectile.position, projectile.width, projectile.height + 10, ModLoader.GetMod("AAMod").DustType("VoidDust"), projectile.velocity.X * 0.2f,
+            int dustId = Dust.NewDust(projectile.position, projectile.width, projectile.height + 10, ModContent.DustType<VoidDust>(), projectile.velocity.X * 0.2f,
 					projectile.velocity.Y * 0.2f, 100);
 				Main.dust[dustId].noGravity = true;
         }

@@ -7,6 +7,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Yamata
 {
@@ -92,7 +93,7 @@ namespace AAModEXAI.Bosses.Yamata
 	    	}
         	for (int dust = 0; dust <= 5; dust++)
         	{
-        		Dust.NewDust(projectile.position + projectile.velocity, projectile.width, projectile.height, ModLoader.GetMod("AAMod").DustType("CthulhuAuraDust"), projectile.oldVelocity.X * 0.5f, projectile.oldVelocity.Y * 0.5f);
+        		Dust.NewDust(projectile.position + projectile.velocity, projectile.width, projectile.height, ModContent.DustType<CthulhuAuraDust>(), projectile.oldVelocity.X * 0.5f, projectile.oldVelocity.Y * 0.5f);
         	}
         }
     }

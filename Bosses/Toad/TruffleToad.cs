@@ -12,6 +12,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Toad
 {
@@ -189,7 +190,7 @@ namespace AAModEXAI.Bosses.Toad
                         if(tiletele) TeleCooldown = 300;
                         for (int m = 0; m < 6; m++)
                         {
-                            Dust.NewDust(npc.Center, npc.width, npc.height, DustID.Blood, npc.velocity.RotatedBy(Main.rand.NextFloat() * 3.1415926f).X * 0.2f, npc.velocity.RotatedBy(Main.rand.NextFloat() * 3.1415926f).Y * 0.2f, ModLoader.GetMod("AAMod").DustType("ShroomDust"), default, 1.5f);
+                            Dust.NewDust(npc.Center, npc.width, npc.height, DustID.Blood, npc.velocity.RotatedBy(Main.rand.NextFloat() * 3.1415926f).X * 0.2f, npc.velocity.RotatedBy(Main.rand.NextFloat() * 3.1415926f).Y * 0.2f, ModContent.DustType<ShroomDust>(), default, 1.5f);
                         }
                         npc.netUpdate = true;
                     }
@@ -224,7 +225,7 @@ namespace AAModEXAI.Bosses.Toad
                         NPC npc2 = Main.npc[Shrooms[m]];
                         if (npc2 != null && npc2.active)
                         {
-                            int dustID = Dust.NewDust(npc2.position, npc2.width, npc2.height, ModLoader.GetMod("AAMod").DustType("ShroomDust"));
+                            int dustID = Dust.NewDust(npc2.position, npc2.width, npc2.height, ModContent.DustType<ShroomDust>());
                             Main.dust[dustID].position += npc.position - npc.oldPosition;
                             Main.dust[dustID].velocity = (npc.Center - npc2.Center) * 0.10f;
                             Main.dust[dustID].noGravity = true;

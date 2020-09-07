@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.AH.Haruka
 {
@@ -55,7 +56,7 @@ namespace AAModEXAI.Bosses.AH.Haruka
 		{
 			for (int k = 0; k < 5; k++)
 			{
-			     Dust.NewDust(projectile.position + projectile.velocity, projectile.width, projectile.height, ModLoader.GetMod("AAMod").DustType("CthulhuAuraDust"), projectile.oldVelocity.X * 0.1f, projectile.oldVelocity.Y * 0.1f);
+			     Dust.NewDust(projectile.position + projectile.velocity, projectile.width, projectile.height, ModContent.DustType<CthulhuAuraDust>(), projectile.oldVelocity.X * 0.1f, projectile.oldVelocity.Y * 0.1f);
 			}
 			Main.PlaySound(0, (int)projectile.position.X, (int)projectile.position.Y, 0);
 			

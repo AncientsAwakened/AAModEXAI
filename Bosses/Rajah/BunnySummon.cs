@@ -5,6 +5,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Rajah
 {
@@ -32,7 +33,7 @@ namespace AAModEXAI.Bosses.Rajah
         {
             for (int num468 = 0; num468 < 10; num468++)
             {
-                int num469 = Dust.NewDust(projectile.Center, 0, 0, ModLoader.GetMod("AAMod").DustType("AbyssDust"), 0f, 0f, 0, NPC.AnyNPCs(mod.NPCType("SupremeRajah")) ? Main.DiscoColor : new Color(107, 137, 179), 1f);
+                int num469 = Dust.NewDust(projectile.Center, 0, 0, ModContent.DustType<AbyssDust>(), 0f, 0f, 0, NPC.AnyNPCs(mod.NPCType("SupremeRajah")) ? Main.DiscoColor : new Color(107, 137, 179), 1f);
                 Main.dust[num469].noGravity = true;
             }
             projectile.damage = 0;
@@ -112,7 +113,7 @@ namespace AAModEXAI.Bosses.Rajah
         {
             for (int num468 = 0; num468 < 10; num468++)
             {
-                int num469 = Dust.NewDust(projectile.Center, 0, 0, ModLoader.GetMod("AAMod").DustType("AbyssDust"), 0f, 0f, 0, NPC.AnyNPCs(mod.NPCType("SupremeRajah")) ? Main.DiscoColor : new Color(107, 137, 179), 1f);
+                int num469 = Dust.NewDust(projectile.Center, 0, 0, ModContent.DustType<AbyssDust>(), 0f, 0f, 0, NPC.AnyNPCs(mod.NPCType("SupremeRajah")) ? Main.DiscoColor : new Color(107, 137, 179), 1f);
                 Main.dust[num469].noGravity = true;
             }
             projectile.damage = 0;
@@ -192,7 +193,7 @@ namespace AAModEXAI.Bosses.Rajah
         {
             for (int num468 = 0; num468 < 10; num468++)
             {
-                int num469 = Dust.NewDust(projectile.Center, 0, 0, ModLoader.GetMod("AAMod").DustType("AbyssDust"), 0f, 0f, 0, NPC.AnyNPCs(mod.NPCType("SupremeRajah")) ? Main.DiscoColor : new Color(107, 137, 179), 1f);
+                int num469 = Dust.NewDust(projectile.Center, 0, 0, ModContent.DustType<AbyssDust>(), 0f, 0f, 0, NPC.AnyNPCs(mod.NPCType("SupremeRajah")) ? Main.DiscoColor : new Color(107, 137, 179), 1f);
                 Main.dust[num469].noGravity = true;
             }
             projectile.damage = 0;

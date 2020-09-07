@@ -3,6 +3,7 @@ using Terraria.ModLoader;
 using Terraria.ID;
 using AAMod;
 using AAModEXAI;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Items.Accessories
 {

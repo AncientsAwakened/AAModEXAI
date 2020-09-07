@@ -5,6 +5,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Akuma.Awakened
 {
@@ -51,14 +52,14 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 			projectile.position.Y = projectile.position.Y - projectile.height / 2;
 			for (int num336 = 0; num336 < 8; num336++)
 			{
-				Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, ModLoader.GetMod("AAMod").DustType("AkumaADust"), 0f, 0f, 100, new Color(255, Main.DiscoG, 0), 1.5f);
+				Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, ModContent.DustType<AkumaADust>(), 0f, 0f, 100, new Color(255, Main.DiscoG, 0), 1.5f);
 			}
 			for (int num337 = 0; num337 < 32; num337++)
 			{
-				int num338 = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, ModLoader.GetMod("AAMod").DustType("AkumaADust"), 0f, 0f, 100, new Color(255, Main.DiscoG, 0), 2.5f);
+				int num338 = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, ModContent.DustType<AkumaADust>(), 0f, 0f, 100, new Color(255, Main.DiscoG, 0), 2.5f);
 				Main.dust[num338].noGravity = true;
 				Main.dust[num338].velocity *= 3f;
-				num338 = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, ModLoader.GetMod("AAMod").DustType("AkumaDust"), 0f, 0f, 100, new Color(255, Main.DiscoG, 0), 1.5f);
+				num338 = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, ModContent.DustType<AkumaDust>(), 0f, 0f, 100, new Color(255, Main.DiscoG, 0), 1.5f);
 				Main.dust[num338].velocity *= 2f;
 				Main.dust[num338].noGravity = true;
 			}
@@ -81,8 +82,8 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 			{
 				int num342 = Utils.SelectRandom(Main.rand, new int[]
 				{
-                    ModLoader.GetMod("AAMod").DustType("AkumaADust"),
-                    ModLoader.GetMod("AAMod").DustType("AkumaDust")
+                    ModContent.DustType<AkumaADust>(),
+                    ModContent.DustType<AkumaDust>()
                 });
 				int num343 = Dust.NewDust(projectile.position, projectile.width, projectile.height, num342, 2.5f * projectile.direction, -2.5f, 0, new Color(255, Main.DiscoG, 0), 1f);
 				Main.dust[num343].alpha = 200;

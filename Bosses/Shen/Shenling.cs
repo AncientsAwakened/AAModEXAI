@@ -9,6 +9,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Shen
 {
@@ -367,11 +368,11 @@ namespace AAModEXAI.Bosses.Shen
         {
             for (int num468 = 0; num468 < 3; num468++)
             {
-                int num469 = Dust.NewDust(new Vector2(npc.Center.X, npc.Center.Y), npc.width, 1, ModLoader.GetMod("AAMod").DustType("DiscordLight"), -npc.velocity.X * 0.2f,
+                int num469 = Dust.NewDust(new Vector2(npc.Center.X, npc.Center.Y), npc.width, 1, ModContent.DustType<DiscordLight>(), -npc.velocity.X * 0.2f,
                     -npc.velocity.Y * 0.2f, 100, default, 2f);
                 Main.dust[num469].noGravity = true;
                 Main.dust[num469].velocity *= 2f;
-                num469 = Dust.NewDust(new Vector2(npc.Center.X, npc.Center.Y), npc.width, npc.height, ModLoader.GetMod("AAMod").DustType("DiscordLight"), -npc.velocity.X * 0.2f,
+                num469 = Dust.NewDust(new Vector2(npc.Center.X, npc.Center.Y), npc.width, npc.height, ModContent.DustType<DiscordLight>(), -npc.velocity.X * 0.2f,
                     -npc.velocity.Y * 0.2f, 100, default);
                 Main.dust[num469].velocity *= 2f;
             }
@@ -424,8 +425,8 @@ namespace AAModEXAI.Bosses.Shen
                 npc.height = 78;
                 npc.position.X = npc.position.X - npc.width / 2;
                 npc.position.Y = npc.position.Y - npc.height / 2;
-                int dust1 = ModLoader.GetMod("AAMod").DustType("DiscordLight");
-                int dust2 = ModLoader.GetMod("AAMod").DustType("DiscordLight");
+                int dust1 = ModContent.DustType<DiscordLight>();
+                int dust2 = ModContent.DustType<DiscordLight>();
                 Dust.NewDust(new Vector2(npc.position.X, npc.position.Y), npc.width, npc.height, dust1, 0f, 0f, 0);
                 Main.dust[dust1].velocity *= 0.5f;
                 Main.dust[dust1].scale *= 1.3f;
@@ -465,7 +466,7 @@ namespace AAModEXAI.Bosses.Shen
                 {
                     for (int num934 = 0; num934 < 2; num934++)
                     {
-                        int num935 = Dust.NewDust(new Vector2(npc.position.X, npc.position.Y), npc.width, npc.height, ModLoader.GetMod("AAMod").DustType("DiscordLight"), 0f, 0f, 100, default, 2f);
+                        int num935 = Dust.NewDust(new Vector2(npc.position.X, npc.position.Y), npc.width, npc.height, ModContent.DustType<DiscordLight>(), 0f, 0f, 100, default, 2f);
                         Main.dust[num935].noGravity = false;
                         Main.dust[num935].noLight = false;
                     }
@@ -559,8 +560,8 @@ namespace AAModEXAI.Bosses.Shen
                 npc.height = 78;
                 npc.position.X = npc.position.X - npc.width / 2;
                 npc.position.Y = npc.position.Y - npc.height / 2;
-                int dust1 = ModLoader.GetMod("AAMod").DustType("DiscordLight");
-                int dust2 = ModLoader.GetMod("AAMod").DustType("DiscordLight");
+                int dust1 = ModContent.DustType<DiscordLight>();
+                int dust2 = ModContent.DustType<DiscordLight>();
                 Dust.NewDust(new Vector2(npc.position.X, npc.position.Y), npc.width, npc.height, dust1, 0f, 0f, 0);
                 Main.dust[dust1].velocity *= 0.5f;
                 Main.dust[dust1].scale *= 1.3f;
@@ -600,7 +601,7 @@ namespace AAModEXAI.Bosses.Shen
                 {
                     for (int num934 = 0; num934 < 2; num934++)
                     {
-                        int num935 = Dust.NewDust(new Vector2(npc.position.X, npc.position.Y), npc.width, npc.height, ModLoader.GetMod("AAMod").DustType("DiscordLight"), 0f, 0f, 100, default, 2f);
+                        int num935 = Dust.NewDust(new Vector2(npc.position.X, npc.position.Y), npc.width, npc.height, ModContent.DustType<DiscordLight>(), 0f, 0f, 100, default, 2f);
                         Main.dust[num935].noGravity = false;
                         Main.dust[num935].noLight = false;
                     }
@@ -694,8 +695,8 @@ namespace AAModEXAI.Bosses.Shen
                 npc.height = 78;
                 npc.position.X = npc.position.X - npc.width / 2;
                 npc.position.Y = npc.position.Y - npc.height / 2;
-                int dust1 = ModLoader.GetMod("AAMod").DustType("DiscordLight");
-                int dust2 = ModLoader.GetMod("AAMod").DustType("DiscordLight");
+                int dust1 = ModContent.DustType<DiscordLight>();
+                int dust2 = ModContent.DustType<DiscordLight>();
                 Dust.NewDust(new Vector2(npc.position.X, npc.position.Y), npc.width, npc.height, dust1, 0f, 0f, 0);
                 Main.dust[dust1].velocity *= 0.5f;
                 Main.dust[dust1].scale *= 1.3f;
@@ -735,7 +736,7 @@ namespace AAModEXAI.Bosses.Shen
                 {
                     for (int num934 = 0; num934 < 2; num934++)
                     {
-                        int num935 = Dust.NewDust(new Vector2(npc.position.X, npc.position.Y), npc.width, npc.height, ModLoader.GetMod("AAMod").DustType("DiscordLight"), 0f, 0f, 100, default, 2f);
+                        int num935 = Dust.NewDust(new Vector2(npc.position.X, npc.position.Y), npc.width, npc.height, ModContent.DustType<DiscordLight>(), 0f, 0f, 100, default, 2f);
                         Main.dust[num935].noGravity = false;
                         Main.dust[num935].noLight = false;
                     }

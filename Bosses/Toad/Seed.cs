@@ -6,6 +6,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Toad
 {
@@ -46,7 +47,7 @@ namespace AAModEXAI.Bosses.Toad
         {
             for (int i = 0; i < 5; i++)
             {
-                int dustIndex = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, ModLoader.GetMod("AAMod").DustType("ShroomDust"), 0f, 0f, 100, default, 1.2f);
+                int dustIndex = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, ModContent.DustType<ShroomDust>(), 0f, 0f, 100, default, 1.2f);
                 Main.dust[dustIndex].velocity *= 1.8f;
             }
         }

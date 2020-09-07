@@ -8,6 +8,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Anubis
 {
@@ -165,7 +166,7 @@ namespace AAModEXAI.Bosses.Anubis
                                 Main.npc[npcID].ai[2] = 80;
                             }
                         }
-                        int dustType = ModLoader.GetMod("AAMod").DustType("JudgementDust");
+                        int dustType = ModContent.DustType<JudgementDust>();
                         int pieCut = 20;
                         for (int i = 0; i < pieCut; i++)
                         {
@@ -594,14 +595,14 @@ namespace AAModEXAI.Bosses.Anubis
             Main.PlaySound(SoundID.Item14, npc.position);
             for (int m = 0; m < pieCut; m++)
             {
-                int dustID = Dust.NewDust(new Vector2(npc.Center.X - 1, npc.Center.Y - 1), 2, 2, ModLoader.GetMod("AAMod").DustType("JudgementDust"), 0f, 0f, 100, Color.White, 1.6f);
+                int dustID = Dust.NewDust(new Vector2(npc.Center.X - 1, npc.Center.Y - 1), 2, 2, ModContent.DustType<JudgementDust>(), 0f, 0f, 100, Color.White, 1.6f);
                 Main.dust[dustID].velocity = BaseUtility.RotateVector(default, new Vector2(6f, 0f), m / (float)pieCut * 6.28f);
                 Main.dust[dustID].noLight = false;
                 Main.dust[dustID].noGravity = true;
             }
             for (int m = 0; m < pieCut; m++)
             {
-                int dustID = Dust.NewDust(new Vector2(npc.Center.X - 1, npc.Center.Y - 1), 2, 2, ModLoader.GetMod("AAMod").DustType("JudgementDust"), 0f, 0f, 100, Color.White, 2f);
+                int dustID = Dust.NewDust(new Vector2(npc.Center.X - 1, npc.Center.Y - 1), 2, 2, ModContent.DustType<JudgementDust>(), 0f, 0f, 100, Color.White, 2f);
                 Main.dust[dustID].velocity = BaseUtility.RotateVector(default, new Vector2(9f, 0f), m / (float)pieCut * 6.28f);
                 Main.dust[dustID].noLight = false;
                 Main.dust[dustID].noGravity = true;
@@ -661,14 +662,14 @@ namespace AAModEXAI.Bosses.Anubis
             int pieCut = 20;
             for (int m = 0; m < pieCut; m++)
             {
-                int dustID = Dust.NewDust(new Vector2(npc.Center.X - 1, npc.Center.Y - 1), 2, 2, ModLoader.GetMod("AAMod").DustType("JudgementDust"), 0f, 0f, 100, Color.White, 1f);
+                int dustID = Dust.NewDust(new Vector2(npc.Center.X - 1, npc.Center.Y - 1), 2, 2, ModContent.DustType<JudgementDust>(), 0f, 0f, 100, Color.White, 1f);
                 Main.dust[dustID].velocity = BaseUtility.RotateVector(default, new Vector2(6f, 0f), m / (float)pieCut * 6.28f);
                 Main.dust[dustID].noLight = false;
                 Main.dust[dustID].noGravity = true;
             }
             for (int m = 0; m < pieCut; m++)
             {
-                int dustID = Dust.NewDust(new Vector2(npc.Center.X - 1, npc.Center.Y - 1), 2, 2, ModLoader.GetMod("AAMod").DustType("JudgementDust"), 0f, 0f, 100, Color.White, 1.5f);
+                int dustID = Dust.NewDust(new Vector2(npc.Center.X - 1, npc.Center.Y - 1), 2, 2, ModContent.DustType<JudgementDust>(), 0f, 0f, 100, Color.White, 1.5f);
                 Main.dust[dustID].velocity = BaseUtility.RotateVector(default, new Vector2(9f, 0f), m / (float)pieCut * 6.28f);
                 Main.dust[dustID].noLight = false;
                 Main.dust[dustID].noGravity = true;

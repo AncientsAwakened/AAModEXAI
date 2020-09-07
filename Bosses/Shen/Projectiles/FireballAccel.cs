@@ -5,6 +5,7 @@ using Terraria.ModLoader;using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Shen.Projectiles
 {
@@ -61,7 +62,7 @@ namespace AAModEXAI.Bosses.Shen.Projectiles
         {
             for (int i = 0; i < 10; i++)
             {
-                int dustIndex = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, ModLoader.GetMod("AAMod").DustType("AkumaDust"), 0f, 0f, 100, default, 2f);
+                int dustIndex = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, ModContent.DustType<AkumaDust>(), 0f, 0f, 100, default, 2f);
                 Main.dust[dustIndex].velocity *= 1.4f;
             }
         }
@@ -123,7 +124,7 @@ namespace AAModEXAI.Bosses.Shen.Projectiles
         {
             for (int i = 0; i < 10; i++)
             {
-                int dustIndex = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, ModLoader.GetMod("AAMod").DustType("YamataDust"), 0f, 0f, 100, default, 2f);
+                int dustIndex = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, ModContent.DustType<YamataDust>(), 0f, 0f, 100, default, 2f);
                 Main.dust[dustIndex].velocity *= 1.4f;
             }
         }

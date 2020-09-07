@@ -11,6 +11,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Akuma.Awakened
 {
@@ -141,7 +142,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
             {
                 for (int spawnDust = 0; spawnDust < 2; spawnDust++)
                 {
-                    int num935 = Dust.NewDust(new Vector2(npc.position.X, npc.position.Y), npc.width, npc.height, ModLoader.GetMod("AAMod").DustType("AkumaADust"), 0f, 0f, 100, default, 2f);
+                    int num935 = Dust.NewDust(new Vector2(npc.position.X, npc.position.Y), npc.width, npc.height, ModContent.DustType<AkumaADust>(), 0f, 0f, 100, default, 2f);
                     Main.dust[num935].noGravity = true;
                     Main.dust[num935].noLight = true;
                 }
@@ -237,7 +238,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                         {
                             for (int spawnDust = 0; spawnDust < 2; spawnDust++)
                             {
-                                int num935 = Dust.NewDust(new Vector2(npc.position.X, npc.position.Y), npc.width, npc.height, ModLoader.GetMod("AAMod").DustType("MireBubbleDust"), 0f, 0f, 90, default, 2f);
+                                int num935 = Dust.NewDust(new Vector2(npc.position.X, npc.position.Y), npc.width, npc.height, ModContent.DustType<MireBubbleDust>(), 0f, 0f, 90, default, 2f);
                                 Main.dust[num935].noGravity = true;
                                 Main.dust[num935].velocity.Y -= 1f;
                             }
@@ -715,8 +716,8 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 
         public override void HitEffect(int hitDirection, double damage)
         {
-            int dust1 = ModLoader.GetMod("AAMod").DustType("AkumaADust");
-            int dust2 = ModLoader.GetMod("AAMod").DustType("AkumaDust");
+            int dust1 = ModContent.DustType<AkumaADust>();
+            int dust2 = ModContent.DustType<AkumaDust>();
             if (npc.life <= 0)
             {
                 Dust.NewDust(new Vector2(npc.position.X, npc.position.Y), npc.width, npc.height, dust1, 0f, 0f, 0);
@@ -887,7 +888,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
             {
                 for (int spawnDust = 0; spawnDust < 2; spawnDust++)
                 {
-                    int num935 = Dust.NewDust(new Vector2(npc.position.X, npc.position.Y), npc.width, npc.height, ModLoader.GetMod("AAMod").DustType("AkumaADust"), 0f, 0f, 100, default, 2f);
+                    int num935 = Dust.NewDust(new Vector2(npc.position.X, npc.position.Y), npc.width, npc.height, ModContent.DustType<AkumaADust>(), 0f, 0f, 100, default, 2f);
                     Main.dust[num935].noGravity = true;
                     Main.dust[num935].noLight = true;
                 }

@@ -8,6 +8,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Athena
 {
@@ -46,7 +47,7 @@ namespace AAModEXAI.Bosses.Athena
                 {
                     for (int spawnDust = 0; spawnDust < 2; spawnDust++)
                     {
-                        int num935 = Dust.NewDust(new Vector2(npc.position.X, npc.position.Y), npc.width, npc.height, ModLoader.GetMod("AAMod").DustType("AbyssDust"), 0f, 0f, 100);
+                        int num935 = Dust.NewDust(new Vector2(npc.position.X, npc.position.Y), npc.width, npc.height, ModContent.DustType<AbyssDust>(), 0f, 0f, 100);
                         Main.dust[num935].noGravity = true;
                         Main.dust[num935].noLight = false;
                     }
@@ -67,7 +68,7 @@ namespace AAModEXAI.Bosses.Athena
             {
                 for (int spawnDust = 0; spawnDust < 2; spawnDust++)
                 {
-                    int num935 = Dust.NewDust(new Vector2(npc.position.X, npc.position.Y), npc.width, npc.height, ModLoader.GetMod("AAMod").DustType("AbyssDust"), 0f, 0f, 100);
+                    int num935 = Dust.NewDust(new Vector2(npc.position.X, npc.position.Y), npc.width, npc.height, ModContent.DustType<AbyssDust>(), 0f, 0f, 100);
                     Main.dust[num935].noGravity = true;
                     Main.dust[num935].noLight = false;
                 }

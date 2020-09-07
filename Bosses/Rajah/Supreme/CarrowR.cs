@@ -8,6 +8,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Rajah.Supreme
 {
@@ -51,7 +52,7 @@ namespace AAModEXAI.Bosses.Rajah.Supreme
             }
             for (int num468 = 0; num468 < 10; num468++)
             {
-                int num469 = Dust.NewDust(projectile.Center, projectile.width, projectile.height, ModLoader.GetMod("AAMod").DustType("CarrotDust"), -projectile.velocity.X * 0.2f,
+                int num469 = Dust.NewDust(projectile.Center, projectile.width, projectile.height, ModContent.DustType<CarrotDust>(), -projectile.velocity.X * 0.2f,
                     -projectile.velocity.Y * 0.2f, 100);
                 Main.dust[num469].velocity *= 2f;
             }

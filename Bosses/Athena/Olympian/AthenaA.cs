@@ -10,6 +10,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Athena.Olympian
 {
@@ -142,17 +143,17 @@ namespace AAModEXAI.Bosses.Athena.Olympian
                             NPC Seraph1 = Main.npc[NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y + 150, mod.NPCType("SeraphA"))];
                             for (int i = 0; i < 3; i++)
                             {
-                                Dust.NewDust(Seraph1.position, Seraph1.height, Seraph1.width, ModLoader.GetMod("AAMod").DustType("Feather"), Main.rand.Next(-1, 2), 1, 0);
+                                Dust.NewDust(Seraph1.position, Seraph1.height, Seraph1.width, ModContent.DustType<Feather>(), Main.rand.Next(-1, 2), 1, 0);
                             }
                             NPC Seraph2 = Main.npc[NPC.NewNPC((int)npc.Center.X + 150, (int)npc.Center.Y - 75, mod.NPCType("SeraphA"))];
                             for (int i = 0; i < 3; i++)
                             {
-                                Dust.NewDust(Seraph2.position, Seraph2.height, Seraph2.width, ModLoader.GetMod("AAMod").DustType("Feather"), Main.rand.Next(-1, 2), 1, 0);
+                                Dust.NewDust(Seraph2.position, Seraph2.height, Seraph2.width, ModContent.DustType<Feather>(), Main.rand.Next(-1, 2), 1, 0);
                             }
                             NPC Seraph3 = Main.npc[NPC.NewNPC((int)npc.Center.X + 150, (int)npc.Center.Y - 75, mod.NPCType("SeraphA"))];
                             for (int i = 0; i < 3; i++)
                             {
-                                Dust.NewDust(Seraph3.position, Seraph3.height, Seraph3.width, ModLoader.GetMod("AAMod").DustType("Feather"), Main.rand.Next(-1, 2), 1, 0);
+                                Dust.NewDust(Seraph3.position, Seraph3.height, Seraph3.width, ModContent.DustType<Feather>(), Main.rand.Next(-1, 2), 1, 0);
                             }
                         }
                         internalAI[3] = 0;

@@ -4,6 +4,7 @@ using Terraria.ModLoader;using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Shen
 {
@@ -50,7 +51,7 @@ namespace AAModEXAI.Bosses.Shen
                     num296 = 0.75f;
                 }
                 projectile.ai[0] += 1f;
-                int num297 = ModLoader.GetMod("AAMod").DustType("DiscordDust");
+                int num297 = ModContent.DustType<DiscordDust>();
                 if (Main.rand.Next(2) == 0)
                 {
                     for (int num298 = 0; num298 < 8; num298++)

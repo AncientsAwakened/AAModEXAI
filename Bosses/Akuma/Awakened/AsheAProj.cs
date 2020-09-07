@@ -7,6 +7,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Akuma.Awakened
 {
@@ -73,14 +74,14 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                 Main.PlaySound(SoundID.Item14, projectile.position);
                 for (int m = 0; m < pieCut; m++)
                 {
-                    int dustID = Dust.NewDust(new Vector2(projectile.Center.X - 1, projectile.Center.Y - 1), 2, 2, ModLoader.GetMod("AAMod").DustType("AkumaDust"), 0f, 0f, 100, Color.White, 1.6f);
+                    int dustID = Dust.NewDust(new Vector2(projectile.Center.X - 1, projectile.Center.Y - 1), 2, 2, ModContent.DustType<AkumaDust>(), 0f, 0f, 100, Color.White, 1.6f);
                     Main.dust[dustID].velocity = BaseUtility.RotateVector(default, new Vector2(6f, 0f), m / (float)pieCut * 6.28f);
                     Main.dust[dustID].noLight = false;
                     Main.dust[dustID].noGravity = true;
                 }
                 for (int m = 0; m < pieCut; m++)
                 {
-                    int dustID = Dust.NewDust(new Vector2(projectile.Center.X - 1, projectile.Center.Y - 1), 2, 2, ModLoader.GetMod("AAMod").DustType("AkumaDust"), 0f, 0f, 100, Color.White, 2f);
+                    int dustID = Dust.NewDust(new Vector2(projectile.Center.X - 1, projectile.Center.Y - 1), 2, 2, ModContent.DustType<AkumaDust>(), 0f, 0f, 100, Color.White, 2f);
                     Main.dust[dustID].velocity = BaseUtility.RotateVector(default, new Vector2(9f, 0f), m / (float)pieCut * 6.28f);
                     Main.dust[dustID].noLight = false;
                     Main.dust[dustID].noGravity = true;
@@ -105,13 +106,13 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
             }
             for (int num87 = 0; num87 < 15; num87++)
             {
-                int num88 = Dust.NewDust(position, num84, height3, ModLoader.GetMod("AAMod").DustType("AkumaDust"), 0f, 0f, 50, default, 3.7f);
+                int num88 = Dust.NewDust(position, num84, height3, ModContent.DustType<AkumaDust>(), 0f, 0f, 50, default, 3.7f);
                 Main.dust[num88].position = projectile.Center + (Vector2.UnitY.RotatedByRandom(3.1415927410125732) * (float)Main.rand.NextDouble() * num84 / 2f);
                 Main.dust[num88].noGravity = true;
                 Main.dust[num88].noLight = true;
                 Main.dust[num88].velocity *= 3f;
                 Main.dust[num88].velocity += projectile.DirectionTo(Main.dust[num88].position) * (2f + (Main.rand.NextFloat() * 4f));
-                num88 = Dust.NewDust(position, num84, height3, ModLoader.GetMod("AAMod").DustType("AkumaDust"), 0f, 0f, 25, default, 1.5f);
+                num88 = Dust.NewDust(position, num84, height3, ModContent.DustType<AkumaDust>(), 0f, 0f, 25, default, 1.5f);
                 Main.dust[num88].position = projectile.Center + (Vector2.UnitY.RotatedByRandom(3.1415927410125732) * (float)Main.rand.NextDouble() * num84 / 2f);
                 Main.dust[num88].velocity *= 2f;
                 Main.dust[num88].noGravity = true;
@@ -122,7 +123,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
             }
             for (int num89 = 0; num89 < 10; num89++)
             {
-                int num90 = Dust.NewDust(position, num84, height3, ModLoader.GetMod("AAMod").DustType("AkumaDust"), 0f, 0f, 0, default, 2.7f);
+                int num90 = Dust.NewDust(position, num84, height3, ModContent.DustType<AkumaDust>(), 0f, 0f, 0, default, 2.7f);
                 Main.dust[num90].position = projectile.Center + (Vector2.UnitX.RotatedByRandom(3.1415927410125732).RotatedBy(projectile.velocity.ToRotation(), default) * num84 / 2f);
                 Main.dust[num90].noGravity = true;
                 Main.dust[num90].noLight = true;
@@ -131,7 +132,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
             }
             for (int num91 = 0; num91 < 30; num91++)
             {
-                int num92 = Dust.NewDust(position, num84, height3, ModLoader.GetMod("AAMod").DustType("AkumaDust"), 0f, 0f, 0, default, 1.5f);
+                int num92 = Dust.NewDust(position, num84, height3, ModContent.DustType<AkumaDust>(), 0f, 0f, 0, default, 1.5f);
                 Main.dust[num92].position = projectile.Center + (Vector2.UnitX.RotatedByRandom(3.1415927410125732).RotatedBy(projectile.velocity.ToRotation(), default) * num84 / 2f);
                 Main.dust[num92].noGravity = true;
                 Main.dust[num92].velocity *= 3f;

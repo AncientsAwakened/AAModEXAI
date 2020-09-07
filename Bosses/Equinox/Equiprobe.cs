@@ -3,11 +3,12 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-using AAMod.Dusts;
+
 using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Equinox
 {
@@ -41,7 +42,7 @@ namespace AAModEXAI.Bosses.Equinox
 			bool isDead = npc.life <= 0;
 			for (int m = 0; m < (isDead ? 25 : 5); m++)
 			{
-				int dustType = Main.rand.Next(2) == 0 ? ModLoader.GetMod("AAMod").DustType("NightcrawlerDust") : ModLoader.GetMod("AAMod").DustType("DaybringerDust");
+				int dustType = Main.rand.Next(2) == 0 ? ModContent.DustType<NightcrawlerDust>() : ModContent.DustType<DaybringerDust>();
 				Dust.NewDust(npc.position, npc.width, npc.height, dustType, npc.velocity.X * 0.2f, npc.velocity.Y * 0.2f, 100, Color.White, isDead ? 2f : 1.1f);
 			}
 		}

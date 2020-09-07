@@ -4,6 +4,7 @@ using Terraria.ModLoader;using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.AH.Ashe
 {
@@ -49,7 +50,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
                     num296 = 0.75f;
                 }
                 projectile.ai[0] += 1f;
-                int num297 = ModLoader.GetMod("AAMod").DustType("AkumaDust");
+                int num297 = ModContent.DustType<AkumaDust>();
                 if (Main.rand.Next(2) == 0)
                 {
                     for (int num298 = 0; num298 < 6; num298++)

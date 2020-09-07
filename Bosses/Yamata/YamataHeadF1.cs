@@ -11,6 +11,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Yamata
 {
@@ -141,7 +142,7 @@ namespace AAModEXAI.Bosses.Yamata
             else
             {
                 npc.velocity = Vector2.Normalize(nextTarget - npc.Center);
-                npc.velocity *= 5f;
+                npc.velocity *= 20f;
             }
             npc.position += Body.npc.position - Body.npc.oldPosition;
             npc.spriteDirection = -1;

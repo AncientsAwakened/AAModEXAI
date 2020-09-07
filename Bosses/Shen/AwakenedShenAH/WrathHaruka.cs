@@ -9,6 +9,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Shen.AwakenedShenAH
 {
@@ -137,7 +138,7 @@ namespace AAModEXAI.Bosses.Shen.AwakenedShenAH
 
         public override void HitEffect(int hitDirection, double damage)
         {
-            Dust.NewDust(npc.position + npc.velocity, npc.width, npc.height, ModLoader.GetMod("AAMod").DustType("AcidDust"), npc.velocity.X * 0.5f, npc.velocity.Y * 0.5f);
+            Dust.NewDust(npc.position + npc.velocity, npc.width, npc.height, ModContent.DustType<AcidDust>(), npc.velocity.X * 0.5f, npc.velocity.Y * 0.5f);
             if (npc.life <= 0)
             {
                 DontSayDeathLine = false;

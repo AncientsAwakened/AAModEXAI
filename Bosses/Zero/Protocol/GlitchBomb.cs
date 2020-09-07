@@ -7,6 +7,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Zero.Protocol
 {
@@ -65,7 +66,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
             projectile.rotation = (float)Math.Atan2(projectile.velocity.Y, projectile.velocity.X) + 1.57f;
             Lighting.AddLight(projectile.Center, (255 - projectile.alpha) * 0.5f / 255f, (255 - projectile.alpha) * 0f / 255f, (255 - projectile.alpha) * 0.15f / 255f);
 
-            int dustId = Dust.NewDust(projectile.position, projectile.width, projectile.height + 10, ModLoader.GetMod("AAMod").DustType("VoidDust"), projectile.velocity.X * 0.2f,
+            int dustId = Dust.NewDust(projectile.position, projectile.width, projectile.height + 10, ModContent.DustType<VoidDust>(), projectile.velocity.X * 0.2f,
 					projectile.velocity.Y * 0.2f, 100);
 				Main.dust[dustId].noGravity = true;
         }
@@ -76,7 +77,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
             {
                 for (int m = 0; m < 6; m++)
                 {
-                    int dustID = Dust.NewDust(projectile.Center, projectile.width, projectile.height, ModLoader.GetMod("AAMod").DustType("VoidDust"), -projectile.velocity.X * 0.2f,
+                    int dustID = Dust.NewDust(projectile.Center, projectile.width, projectile.height, ModContent.DustType<VoidDust>(), -projectile.velocity.X * 0.2f,
                     -projectile.velocity.Y * 0.2f, 100);
                     Main.dust[dustID].noGravity = true;
                     Main.dust[dustID].velocity = new Vector2(MathHelper.Lerp(-1f, 1f, (float)Main.rand.NextDouble()), MathHelper.Lerp(-1f, 1f, (float)Main.rand.NextDouble()));

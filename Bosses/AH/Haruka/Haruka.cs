@@ -8,6 +8,7 @@ using System.IO;
 using AAMod;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.AH.Haruka
 {
@@ -144,7 +145,7 @@ namespace AAModEXAI.Bosses.AH.Haruka
 
         public override void HitEffect(int hitDirection, double damage)
         {
-            Dust.NewDust(npc.position + npc.velocity, npc.width, npc.height, ModLoader.GetMod("AAMod").DustType("AcidDust"), npc.velocity.X * 0.5f, npc.velocity.Y * 0.5f);
+            Dust.NewDust(npc.position + npc.velocity, npc.width, npc.height, ModContent.DustType<AcidDust>(), npc.velocity.X * 0.5f, npc.velocity.Y * 0.5f);
         }
         public override bool? DrawHealthBar(byte hbPosition, ref float scale, ref Vector2 position)
         {

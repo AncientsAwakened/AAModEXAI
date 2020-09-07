@@ -7,6 +7,7 @@ using Terraria.ID;using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Shen.AwakenedShenAH
 {
@@ -63,13 +64,13 @@ namespace AAModEXAI.Bosses.Shen.AwakenedShenAH
                         }
                         for (int num87 = 0; num87 < 15; num87++)
                         {
-                            int num88 = Dust.NewDust(position, num84, height3, ModLoader.GetMod("AAMod").DustType("AbyssDust"), 0f, 0f, 200, default, 3.7f);
+                            int num88 = Dust.NewDust(position, num84, height3, ModContent.DustType<AbyssDust>(), 0f, 0f, 200, default, 3.7f);
                             Main.dust[num88].position = npc.Center + (Vector2.UnitY.RotatedByRandom(3.1415927410125732) * (float)Main.rand.NextDouble() * num84 / 2f);
                             Main.dust[num88].noGravity = true;
                             Main.dust[num88].noLight = true;
                             Main.dust[num88].velocity *= 3f;
                             Main.dust[num88].velocity += npc.DirectionTo(Main.dust[num88].position) * (2f + (Main.rand.NextFloat() * 4f));
-                            num88 = Dust.NewDust(position, num84, height3, ModLoader.GetMod("AAMod").DustType("YamataDust"), 0f, 0f, 100, default, 1.5f);
+                            num88 = Dust.NewDust(position, num84, height3, ModContent.DustType<YamataDust>(), 0f, 0f, 100, default, 1.5f);
                             Main.dust[num88].position = npc.Center + (Vector2.UnitY.RotatedByRandom(3.1415927410125732) * (float)Main.rand.NextDouble() * num84 / 2f);
                             Main.dust[num88].velocity *= 2f;
                             Main.dust[num88].noGravity = true;

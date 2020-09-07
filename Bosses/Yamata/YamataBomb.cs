@@ -7,6 +7,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Yamata
 {
@@ -128,7 +129,7 @@ namespace AAModEXAI.Bosses.Yamata
             }
             for (int num468 = 0; num468 < 20; num468++)
             {
-                int num469 = Dust.NewDust(projectile.Center, projectile.width, projectile.height, ModLoader.GetMod("AAMod").DustType("YamataDust"), -projectile.velocity.X * 0.2f,
+                int num469 = Dust.NewDust(projectile.Center, projectile.width, projectile.height, ModContent.DustType<YamataDust>(), -projectile.velocity.X * 0.2f,
                     -projectile.velocity.Y * 0.2f, 0);
                 Main.dust[num469].velocity *= 2f;
             }

@@ -10,6 +10,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Serpent
 {
@@ -744,13 +745,13 @@ namespace AAModEXAI.Bosses.Serpent
         {
             for (int x = 0; x < 5; x++)
             {
-                Dust.NewDust(npc.position, npc.width, npc.height, ModLoader.GetMod("AAMod").DustType("IceDust"), hitDirection, -1f, 0, default, 1f);
+                Dust.NewDust(npc.position, npc.width, npc.height, ModContent.DustType<IceDust"), hitDirection, -1f, 0, default, 1f);
             }
             if (npc.life == 0)
             {
                 for (int x = 0; x < 5; x++)
                 {
-                    Dust.NewDust(npc.position, npc.width, npc.height, ModLoader.GetMod("AAMod").DustType("SnowDustLight"), hitDirection, -1f, 0, default, 1f);
+                    Dust.NewDust(npc.position, npc.width, npc.height, ModContent.DustType<SnowDustLight"), hitDirection, -1f, 0, default, 1f);
                 }
 
                 Gore.NewGore(npc.position, npc.velocity * 0.2f, mod.GetGoreSlot("Gores/SZSGoreHead"), 1f);
@@ -1189,13 +1190,13 @@ namespace AAModEXAI.Bosses.Serpent
         {
             for (int x = 0; x < 5; x++)
             {
-                Dust.NewDust(npc.position, npc.width, npc.height, ModLoader.GetMod("AAMod").DustType("IceDust"), hitDirection, -1f, 0, default, 1f);
+                Dust.NewDust(npc.position, npc.width, npc.height, ModContent.DustType<IceDust"), hitDirection, -1f, 0, default, 1f);
             }
             if (npc.life == 0)
             {
                 for (int x = 0; x < 5; x++)
                 {
-                    Dust.NewDust(npc.position, npc.width, npc.height, ModLoader.GetMod("AAMod").DustType("SnowDustLight"), hitDirection, -1f, 0, default, 1f);
+                    Dust.NewDust(npc.position, npc.width, npc.height, ModContent.DustType<SnowDustLight"), hitDirection, -1f, 0, default, 1f);
                 }
 
                 Gore.NewGore(npc.position, npc.velocity * 0.2f, mod.GetGoreSlot("Gores/SZSGoreBody"), 1f);
@@ -1571,13 +1572,13 @@ namespace AAModEXAI.Bosses.Serpent
         {
             for (int x = 0; x < 5; x++)
             {
-                Dust.NewDust(npc.position, npc.width, npc.height, ModLoader.GetMod("AAMod").DustType("IceDust"), hitDirection, -1f, 0, default, 1f);
+                Dust.NewDust(npc.position, npc.width, npc.height, ModContent.DustType<IceDust"), hitDirection, -1f, 0, default, 1f);
             }
             if (npc.life == 0)
             {
                 for (int x = 0; x < 5; x++)
                 {
-                    Dust.NewDust(npc.position, npc.width, npc.height, ModLoader.GetMod("AAMod").DustType("SnowDustLight"), hitDirection, -1f, 0, default, 1f);
+                    Dust.NewDust(npc.position, npc.width, npc.height, ModContent.DustType<SnowDustLight"), hitDirection, -1f, 0, default, 1f);
                 }
 
                 Gore.NewGore(npc.position, npc.velocity * 0.2f, mod.GetGoreSlot("Gores/SZSGoreTail"), 1f);

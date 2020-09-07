@@ -9,6 +9,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Athena.Olympian
 {
@@ -111,7 +112,7 @@ namespace AAModEXAI.Bosses.Athena.Olympian
                         float num851 = projectile.rotation + ((Main.rand.Next(2) == 1) ? -1f : 1f) * 1.57079637f;
                         float num852 = (float)Main.rand.NextDouble() * 0.8f + 1f;
                         Vector2 vector84 = new Vector2((float)Math.Cos(num851) * num852, (float)Math.Sin(num851) * num852);
-                        int num853 = Dust.NewDust(projectile.Center, 0, 0, ModLoader.GetMod("AAMod").DustType("Discord"), vector84.X, vector84.Y, 0);
+                        int num853 = Dust.NewDust(projectile.Center, 0, 0, ModContent.DustType<DiscordDust>(), vector84.X, vector84.Y, 0);
                         Main.dust[num853].noGravity = true;
                         Main.dust[num853].scale = 1.2f;
                     }

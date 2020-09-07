@@ -11,6 +11,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Shen
 {
@@ -226,8 +227,8 @@ namespace AAModEXAI.Bosses.Shen
                 {
                     for (int spawnDust = 0; spawnDust < 2; spawnDust++)
                     {
-                        int dust = spawnDust == 1 ? ModLoader.GetMod("AAMod").DustType("AkumaADust") : ModLoader.GetMod("AAMod").DustType("YamataADust");
-                        if (Main.rand.Next(4) == 0) dust = ModLoader.GetMod("AAMod").DustType("Discord");
+                        int dust = spawnDust == 1 ? ModContent.DustType<AkumaADust>() : ModContent.DustType<YamataADust>();
+                        if (Main.rand.Next(4) == 0) dust = ModContent.DustType<DiscordDust>();
                         int num935 = Dust.NewDust(new Vector2(npc.position.X, npc.position.Y), npc.width, npc.height, dust, 0f, 0f, 100, default, 2f);
                         Main.dust[num935].noGravity = true;
                         Main.dust[num935].noLight = true;

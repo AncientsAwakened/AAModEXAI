@@ -11,6 +11,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Shen
 {
@@ -125,7 +126,7 @@ namespace AAModEXAI.Bosses.Shen
                 {
                     for (int spawnDust = 0; spawnDust < 2; spawnDust++)
                     {
-                        int dust = ModLoader.GetMod("AAMod").DustType("DiscordLight");
+                        int dust = ModContent.DustType<DiscordLight>();
                         int num935 = Dust.NewDust(new Vector2(npc.position.X, npc.position.Y), npc.width, npc.height, dust, 0f, 0f, 100, default, 2f);
                         Main.dust[num935].noGravity = true;
                         Main.dust[num935].noLight = true;
@@ -1021,14 +1022,14 @@ namespace AAModEXAI.Bosses.Shen
             int pieCut = 20;
             for (int m = 0; m < pieCut; m++)
             {
-                int dustID = Dust.NewDust(new Vector2(npc.Center.X - 1, npc.Center.Y - 1), 2, 2, ModLoader.GetMod("AAMod").DustType("DiscordLight"), 0f, 0f, 100, Color.White, 1f);
+                int dustID = Dust.NewDust(new Vector2(npc.Center.X - 1, npc.Center.Y - 1), 2, 2, ModContent.DustType<DiscordLight>(), 0f, 0f, 100, Color.White, 1f);
                 Main.dust[dustID].velocity = BaseUtility.RotateVector(default, new Vector2(6f, 0f), m / (float)pieCut * 6.28f);
                 Main.dust[dustID].noLight = false;
                 Main.dust[dustID].noGravity = true;
             }
             for (int m = 0; m < pieCut; m++)
             {
-                int dustID = Dust.NewDust(new Vector2(npc.Center.X - 1, npc.Center.Y - 1), 2, 2, ModLoader.GetMod("AAMod").DustType("DiscordLight"), 0f, 0f, 100, Color.White, 1.5f);
+                int dustID = Dust.NewDust(new Vector2(npc.Center.X - 1, npc.Center.Y - 1), 2, 2, ModContent.DustType<DiscordLight>(), 0f, 0f, 100, Color.White, 1.5f);
                 Main.dust[dustID].velocity = BaseUtility.RotateVector(default, new Vector2(9f, 0f), m / (float)pieCut * 6.28f);
                 Main.dust[dustID].noLight = false;
                 Main.dust[dustID].noGravity = true;

@@ -7,6 +7,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Equinox
 {
@@ -55,7 +56,7 @@ namespace AAModEXAI.Bosses.Equinox
 				Main.PlaySound(SoundID.Item8, projectile.position);
 				for (int num124 = 0; num124 < 10; num124++)
 				{
-					int num125 = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, ModLoader.GetMod("AAMod").DustType("DarkmatterDust"), projectile.velocity.X, projectile.velocity.Y, 100, Color.White, 2f);
+					int num125 = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, ModContent.DustType<DarkmatterDust>(), projectile.velocity.X, projectile.velocity.Y, 100, Color.White, 2f);
 					Main.dust[num125].noGravity = true;
 					Main.dust[num125].velocity = projectile.Center - Main.dust[num125].position;
 					Main.dust[num125].velocity.Normalize();
@@ -74,7 +75,7 @@ namespace AAModEXAI.Bosses.Equinox
 			{
 				for (int num155 = 0; num155 < 2; num155++)
 				{
-					int num156 = Dust.NewDust(new Vector2(projectile.position.X + 4f, projectile.position.Y + 4f), projectile.width - 8, projectile.height - 8, ModLoader.GetMod("AAMod").DustType("DarkmatterDust"), projectile.velocity.X * 0.2f, projectile.velocity.Y * 0.2f, 100, default, 1.5f);
+					int num156 = Dust.NewDust(new Vector2(projectile.position.X + 4f, projectile.position.Y + 4f), projectile.width - 8, projectile.height - 8, ModContent.DustType<DarkmatterDust>(), projectile.velocity.X * 0.2f, projectile.velocity.Y * 0.2f, 100, default, 1.5f);
 					Main.dust[num156].position -= projectile.velocity;
 					Main.dust[num156].noGravity = true;
 					Dust expr_7ED9_cp_0 = Main.dust[num156];
@@ -87,7 +88,7 @@ namespace AAModEXAI.Bosses.Equinox
 			{
 				for (int num157 = 0; num157 < 2; num157++)
 				{
-					int num158 = Dust.NewDust(new Vector2(projectile.position.X + 4f, projectile.position.Y + 4f), projectile.width - 8, projectile.height - 8, ModLoader.GetMod("AAMod").DustType("DarkmatterDust"), projectile.velocity.X * 0.2f, projectile.velocity.Y * 0.2f, 100, default, 2f);
+					int num158 = Dust.NewDust(new Vector2(projectile.position.X + 4f, projectile.position.Y + 4f), projectile.width - 8, projectile.height - 8, ModContent.DustType<DarkmatterDust>(), projectile.velocity.X * 0.2f, projectile.velocity.Y * 0.2f, 100, default, 2f);
 					Main.dust[num158].position -= projectile.velocity * 2f;
 					Main.dust[num158].noGravity = true;
 					Dust expr_7FDC_cp_0 = Main.dust[num158];
@@ -144,18 +145,18 @@ namespace AAModEXAI.Bosses.Equinox
             int height3 = num84;
             for (int num85 = 0; num85 < 3; num85++)
             {
-                int num86 = Dust.NewDust(position, num84, height3, ModLoader.GetMod("AAMod").DustType("NightcrawlerDust"), 0f, 0f, 100, default, 1.5f);
+                int num86 = Dust.NewDust(position, num84, height3, ModContent.DustType<NightcrawlerDust>(), 0f, 0f, 100, default, 1.5f);
                 Main.dust[num86].position = projectile.Center + (Vector2.UnitY.RotatedByRandom(3.1415927410125732) * (float)Main.rand.NextDouble() * num84 / 2f);
             }
             for (int num87 = 0; num87 < 7; num87++)
             {
-                int num88 = Dust.NewDust(position, num84, height3, ModLoader.GetMod("AAMod").DustType("NightcrawlerDust"), 0, 0, 100, new Color(), 2f);
+                int num88 = Dust.NewDust(position, num84, height3, ModContent.DustType<NightcrawlerDust>(), 0, 0, 100, new Color(), 2f);
                 Main.dust[num88].position = projectile.Center + (Vector2.UnitY.RotatedByRandom(3.1415927410125732) * (float)Main.rand.NextDouble() * num84 / 2f);
                 Main.dust[num88].noGravity = true;
                 Main.dust[num88].noLight = true;
                 Main.dust[num88].velocity *= 3f;
                 Main.dust[num88].velocity += projectile.DirectionTo(Main.dust[num88].position) * (2f + (Main.rand.NextFloat() * 4f));
-                num88 = Dust.NewDust(position, num84, height3, ModLoader.GetMod("AAMod").DustType("NightcrawlerDust"), 0, 0, 100, new Color(), 2f);
+                num88 = Dust.NewDust(position, num84, height3, ModContent.DustType<NightcrawlerDust>(), 0, 0, 100, new Color(), 2f);
                 Main.dust[num88].position = projectile.Center + (Vector2.UnitY.RotatedByRandom(3.1415927410125732) * (float)Main.rand.NextDouble() * num84 / 2f);
                 Main.dust[num88].velocity *= 2f;
                 Main.dust[num88].noGravity = true;

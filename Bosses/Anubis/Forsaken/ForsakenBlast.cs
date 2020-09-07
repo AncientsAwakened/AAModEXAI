@@ -7,6 +7,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Anubis.Forsaken
 {
@@ -26,7 +27,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
         public override void AI()
         {
             projectile.rotation = projectile.velocity.ToRotation() + 1.57079637f;
-            int dustType = ModLoader.GetMod("AAMod").DustType("ForsakenDust");
+            int dustType = ModContent.DustType<ForsakenDust>();
             if (projectile.localAI[0] == 0f)
             {
                 projectile.localAI[0] = 1f;
@@ -42,7 +43,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
         }
         public override void Kill(int timeLeft)
         {
-            int dustType = ModLoader.GetMod("AAMod").DustType("ForsakenDust");
+            int dustType = ModContent.DustType<ForsakenDust>();
             int pieCut = 20;
             for (int m = 0; m < pieCut; m++)
             {

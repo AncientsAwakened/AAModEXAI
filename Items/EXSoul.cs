@@ -3,6 +3,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Microsoft.Xna.Framework;
 using AAMod;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Items
 {

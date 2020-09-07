@@ -5,6 +5,7 @@ using Terraria.ModLoader;
 using AAMod;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.AH.Haruka
 {

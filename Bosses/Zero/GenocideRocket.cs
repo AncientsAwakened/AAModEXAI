@@ -7,6 +7,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Zero
 {
@@ -86,14 +87,14 @@ namespace AAModEXAI.Bosses.Zero
                 {
                     if (Main.rand.Next(2) == 0)
                     {
-                        int num233 = Dust.NewDust(new Vector2(projectile.position.X + 3f + num231, projectile.position.Y + 3f + num232) - projectile.velocity * 0.5f, projectile.width - 8, projectile.height - 8, ModLoader.GetMod("AAMod").DustType("VoidDust"), 0f, 0f, 100, default, 1f);
+                        int num233 = Dust.NewDust(new Vector2(projectile.position.X + 3f + num231, projectile.position.Y + 3f + num232) - projectile.velocity * 0.5f, projectile.width - 8, projectile.height - 8, ModContent.DustType<VoidDust>(), 0f, 0f, 100, default, 1f);
                         Main.dust[num233].scale *= 1.4f + Main.rand.Next(10) * 0.1f;
                         Main.dust[num233].velocity *= 0.2f;
                         Main.dust[num233].noGravity = true;
                     }
                     if (Main.rand.Next(2) == 0)
                     {
-                        int num234 = Dust.NewDust(new Vector2(projectile.position.X + 3f + num231, projectile.position.Y + 3f + num232) - projectile.velocity * 0.5f, projectile.width - 8, projectile.height - 8, ModLoader.GetMod("AAMod").DustType("VoidDust"), 0f, 0f, 100, default, 0.5f);
+                        int num234 = Dust.NewDust(new Vector2(projectile.position.X + 3f + num231, projectile.position.Y + 3f + num232) - projectile.velocity * 0.5f, projectile.width - 8, projectile.height - 8, ModContent.DustType<VoidDust>(), 0f, 0f, 100, default, 0.5f);
                         Main.dust[num234].fadeIn = 0.5f + Main.rand.Next(5) * 0.1f;
                         Main.dust[num234].velocity *= 0.05f;
                     }
@@ -147,7 +148,7 @@ namespace AAModEXAI.Bosses.Zero
             {
                 for (int m = 0; m < 6; m++)
                 {
-                    int dustID = Dust.NewDust(projectile.Center, projectile.width, projectile.height, ModLoader.GetMod("AAMod").DustType("VoidDust"), -projectile.velocity.X * 0.2f,
+                    int dustID = Dust.NewDust(projectile.Center, projectile.width, projectile.height, ModContent.DustType<VoidDust>(), -projectile.velocity.X * 0.2f,
                     -projectile.velocity.Y * 0.2f, 100);
                     Main.dust[dustID].noGravity = true;
                     Main.dust[dustID].velocity = new Vector2(MathHelper.Lerp(-1f, 1f, (float)Main.rand.NextDouble()), MathHelper.Lerp(-1f, 1f, (float)Main.rand.NextDouble()));

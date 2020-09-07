@@ -8,6 +8,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Shen
 {
@@ -32,7 +33,7 @@ namespace AAModEXAI.Bosses.Shen
 
         public override void AI()
         {
-            int dustType = projectile.ai[0] == 1 ? ModLoader.GetMod("AAMod").DustType("AkumaADust") : ModLoader.GetMod("AAMod").DustType("YamataADust");
+            int dustType = projectile.ai[0] == 1 ? ModContent.DustType<AkumaADust>() : ModContent.DustType<YamataADust>();
             if (projectile.localAI[0] == 0f)
             {
                 projectile.localAI[0] = 1f;
@@ -64,7 +65,7 @@ namespace AAModEXAI.Bosses.Shen
 
         public override void Kill(int timeLeft)
         {
-            int dustType = projectile.ai[0] == 1 ? ModLoader.GetMod("AAMod").DustType("AkumaADust") : ModLoader.GetMod("AAMod").DustType("YamataADust");
+            int dustType = projectile.ai[0] == 1 ? ModContent.DustType<AkumaADust>() : ModContent.DustType<YamataADust>();
             int pieCut = 20;
 			for(int m = 0; m < pieCut; m++)
 			{

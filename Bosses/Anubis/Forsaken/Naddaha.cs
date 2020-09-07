@@ -9,6 +9,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Anubis.Forsaken
 {
@@ -41,7 +42,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
 			if (Main.netMode == NetmodeID.Server) { return; }
 			for (int m = 0; m < (npc.life <= 0 ? 30 : 8); m++)
 			{
-				Dust.NewDust(npc.position, npc.width, npc.height, ModLoader.GetMod("AAMod").DustType("ForsakenDust"), npc.velocity.X * 0.2f, npc.velocity.Y * 0.2f, 100, Color.White, 1.1f);
+				Dust.NewDust(npc.position, npc.width, npc.height, ModContent.DustType<ForsakenDust>(), npc.velocity.X * 0.2f, npc.velocity.Y * 0.2f, 100, Color.White, 1.1f);
 			}		
 		}
 

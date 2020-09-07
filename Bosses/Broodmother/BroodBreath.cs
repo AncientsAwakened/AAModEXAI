@@ -6,6 +6,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Broodmother
 {
@@ -51,7 +52,7 @@ namespace AAModEXAI.Bosses.Broodmother
                     num296 = 0.75f;
                 }
                 projectile.ai[0] += 1f;
-                int num297 = ModLoader.GetMod("AAMod").DustType("BroodmotherDust");
+                int num297 = ModContent.DustType<BroodmotherDust>();
                 if (Main.rand.Next(2) == 0)
                 {
                     for (int num298 = 0; num298 < 4; num298++)

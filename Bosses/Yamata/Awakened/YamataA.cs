@@ -10,6 +10,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Yamata.Awakened
 {
@@ -104,8 +105,8 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
         {
             damage = 0;
             
-            int dust1 = ModLoader.GetMod("AAMod").DustType("YamataADust");
-            int dust2 = ModLoader.GetMod("AAMod").DustType("YamataADust");
+            int dust1 = ModContent.DustType<YamataADust>();
+            int dust2 = ModContent.DustType<YamataADust>();
             if (npc.life <= 0)
             {
                 Dust.NewDust(new Vector2(npc.position.X, npc.position.Y), npc.width, npc.height, dust1, 0f, 0f, 0);

@@ -7,6 +7,7 @@ using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
 using AAMod.Globals;
+using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Yamata.Awakened
 {
@@ -59,7 +60,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                     num296 = 0.75f;
                 }
                 projectile.ai[0] += 1f;
-                int num297 = ModLoader.GetMod("AAMod").DustType("YamataADust");
+                int num297 = ModContent.DustType<YamataADust>();
                 if (Main.rand.Next(2) == 0)
                 {
                     for (int num298 = 0; num298 < 3; num298++)
