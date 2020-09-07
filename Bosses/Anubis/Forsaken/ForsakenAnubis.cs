@@ -653,7 +653,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
             if (Main.expertMode)
             {
                 for(int i = 0; i < 10; i++) npc.DropBossBags();
-                npc.DropItemInstanced(npc.position, new Vector2(npc.width, npc.height), ModContent.ItemType<Items.EXSoul>(), 1, true);
+                if (!AAWorld.downedAnubisA) npc.DropItemInstanced(npc.position, new Vector2(npc.width, npc.height), ModContent.ItemType<Items.EXSoul>(), 1, true);
             }
             else
             {

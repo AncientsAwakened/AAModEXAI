@@ -510,7 +510,7 @@ namespace AAModEXAI.Bosses.Greed
                 if (Main.expertMode)
                 {
                     for(int i = 0; i < 10; i++) npc.DropBossBags();
-                    npc.DropItemInstanced(npc.position, new Vector2(npc.width, npc.height), ModContent.ItemType<Items.EXSoul>(), 1, true);
+                    if (!AAWorld.downedGreed) npc.DropItemInstanced(npc.position, new Vector2(npc.width, npc.height), ModContent.ItemType<Items.EXSoul>(), 1, true);
                 }
             }
             if (Main.rand.Next(10) == 0)

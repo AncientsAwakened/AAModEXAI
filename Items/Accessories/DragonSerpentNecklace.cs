@@ -33,9 +33,9 @@ Cause 30 extra damage to Enemies");
             ModRecipe recipe = new ModRecipe(mod);
             recipe.AddIngredient(ModContent.ItemType<AAMod.Items.Boss.Broodmother.DragonCape>(), 1);
             recipe.AddIngredient(ModContent.ItemType<AAMod.Items.Boss.Hydra.HydraPendant>(), 1);
-            recipe.AddIngredient(ModContent.ItemType<EXSoul>(), 1);
             recipe.AddIngredient(ItemID.SharkToothNecklace, 1);
-            recipe.AddTile(TileID.DemonAltar);
+            recipe.AddIngredient(ModContent.ItemType<EXSoul>(), 1);
+            recipe.AddTile(TileID.LunarCraftingStation);
             recipe.SetResult(this);
             recipe.AddRecipe();
         }
