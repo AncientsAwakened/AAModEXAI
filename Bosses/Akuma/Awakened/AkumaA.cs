@@ -88,7 +88,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
         }
         public static int MinionCount = 0;
 
-        public float[] internalAI = new float[4];
+        public float[] internalAI = new float[3];
         public override void SendExtraAI(BinaryWriter writer)
         {
             base.SendExtraAI(writer);
@@ -97,7 +97,6 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                 writer.Write(internalAI[0]);
                 writer.Write(internalAI[1]);
                 writer.Write(internalAI[2]);
-                writer.Write(internalAI[3]);
             }
         }
         public override void ReceiveExtraAI(BinaryReader reader)
@@ -108,7 +107,6 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                 internalAI[0] = reader.ReadFloat();
                 internalAI[1] = reader.ReadFloat();
                 internalAI[2] = reader.ReadFloat();
-                internalAI[3] = reader.ReadFloat();
             }
         }
         public Texture2D AkumaTex = null;
@@ -168,6 +166,37 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 			{
 				internalAI[0] = 0f;
 			}
+
+            internalAI[2]++;
+
+            if (internalAI[2] % 600 == 0)
+            {
+                AkumaAttacks.SpawnLung(player, mod, true);
+            }
+
+            if (internalAI[2] % 60 == 0)
+            {
+                for(int i = 0; i < 5; i++)
+                {
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                                Projectile.NewProjectile(npc.Center + new Vector2(50f * (float)Main.rand.NextDouble(), 0), new Vector2(0, 2f), mod.ProjectileType("AkumaAFire"), npc.damage / 2, 0f, Main.myPlayer, 0, 0);
+                }
+            }
+
+            if (internalAI[2] > 1800)
+            {
+                internalAI[2] = 0;
+                for(int i = 0; i < 200; i++)
+                {
+                    if(Main.npc[i].active && Main.npc[i].type == ModContent.NPCType<AwakenedLung>() && Main.npc[i].life > 0)
+                    {
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
+                            Projectile.NewProjectile(Main.npc[i].Center, Vector2.Zero, mod.ProjectileType("AkumaFireHeal"), 0, 0f, Main.myPlayer, npc.whoAmI, Main.npc[i].life);
+                        Main.npc[i].life = 0;
+                        Main.npc[i].active = false;
+                    }
+                }
+            }
 
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
@@ -660,20 +689,16 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
             if (Main.netMode != NetmodeID.MultiplayerClient) AAModEXAI.Chat(AAMod.Lang.BossChat("AkumaA12"), Color.DeepSkyBlue.R, Color.DeepSkyBlue.G, Color.DeepSkyBlue.B);
             return;
         }
-
-        public bool Quote1;
-        public bool Quote2;
-        public bool Quote3;
-        public bool Quote4;
-        public bool Quote5;
         public bool QuoteSaid;
-
         public override void ModifyHitByProjectile(Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
             if (projectile.penetrate > 1 || projectile.penetrate == -1)
             {
                 damage = (int)(damage * .5f);
             }
+
+            if (Main.netMode != NetmodeID.MultiplayerClient)
+                                Projectile.NewProjectile(npc.Center, new Vector2(0, 2f), mod.ProjectileType("AkumaAFire"), npc.damage / 2, 0f, Main.myPlayer, 0, 0);
         }
 
         public override bool PreDraw(SpriteBatch spriteBatch, Color drawColor)
@@ -792,7 +817,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 			}
 			else if (internalAI[1] == 3f)
 			{
-				if (internalAI[0] == 250f && NPC.CountNPCS(ModContent.NPCType<AwakenedLung>()) < (Main.expertMode ? 3 : 4))
+				if (internalAI[0] == 250f && NPC.CountNPCS(ModContent.NPCType<AwakenedLung>()) < (Main.expertMode ? 3 : 6))
 				{
 					AkumaAttacks.SpawnLung(player, mod, true);
 					AkumaA.MinionCount++;
@@ -948,6 +973,8 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
         public override bool StrikeNPC(ref double damage, int defense, ref float knockback, int hitDirection, ref bool crit)
         {
             damage *= .1f;
+            if (Main.netMode != NetmodeID.MultiplayerClient)
+                                Projectile.NewProjectile(npc.Center, new Vector2(0, 2f), mod.ProjectileType("AkumaAFire"), Main.npc[npc.realLife].damage / 2, 0f, Main.myPlayer, 0, 0);
             return true;
         }
 

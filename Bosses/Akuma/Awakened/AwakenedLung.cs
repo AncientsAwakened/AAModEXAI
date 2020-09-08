@@ -35,7 +35,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 			npc.knockBackResist = 0f;
             npc.damage = 130;
             npc.defense = 90;
-            npc.lifeMax = 9000;
+            npc.lifeMax = 50000;
             npc.knockBackResist = 0f;
             npc.aiStyle = -1;
             npc.lavaImmune = true;

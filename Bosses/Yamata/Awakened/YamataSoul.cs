@@ -133,6 +133,10 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                         Main.npc[Head].ai[2] = -500 * .7f;
                         Main.npc[Head].ai[3] = 3f;
                     }
+                    else
+                    {
+                        Main.npc[Head].active = false;
+                    }
                     
                     Main.npc[Head].netUpdate = true;
                 }
