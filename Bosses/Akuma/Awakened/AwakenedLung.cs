@@ -22,7 +22,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
         public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Awakened Lung");
-
+            Main.npcFrameCount[npc.type] = 2;
         }
 
         public override void SetDefaults()
@@ -34,8 +34,8 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 			npc.netAlways = true;
 			npc.knockBackResist = 0f;
             npc.damage = 130;
-            npc.defense = 90;
-            npc.lifeMax = 50000;
+            npc.defense = 100;
+            npc.lifeMax = 10000;
             npc.knockBackResist = 0f;
             npc.aiStyle = -1;
             npc.lavaImmune = true;
@@ -51,6 +51,8 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
             npc.buffImmune[103] = false;
             npc.alpha = 255;
         }
+
+        bool flaming = false;
 
         public override bool PreAI()
         {
@@ -130,6 +132,21 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
             npcCenter.Y = (int)(npcCenter.Y / 16.0) * 16;
             float dirX = targetRoundedPosX - npcCenter.X;
             float dirY = targetRoundedPosY - npcCenter.Y;
+
+            Vector2 vector132 = player.Center - npc.Center;
+            (vector132.X > 0f).ToDirectionInt();
+            (vector132.Y > 0f).ToDirectionInt();
+            if (vector132.Length() < 500f && vector132.Length() >= 100f && npc.velocity.X / vector132.X > 0)
+            {
+                flaming = true;
+                Vector2 shootspeed = Vector2.Normalize(npc.velocity) * 20f;
+                Vector2 shootpos = Vector2.Normalize(npc.velocity).RotatedBy((float)Math.PI / 2 * npc.direction) * npc.height / 2;
+                AAAI.BreatheFire(npc, true, mod.ProjectileType("AkumaABreath"), 2, 4);
+            }
+            else
+            {
+                flaming = false;
+            }
 
             float length = (float)Math.Sqrt(dirX * dirX + dirY * dirY);
             if (!collision)
@@ -276,6 +293,12 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                 npc.netUpdate = true;
 
             return false;
+        }
+
+        public override void FindFrame(int frameHeight)
+        {
+            if(flaming) npc.frame.Y = frameHeight;
+            else npc.frame.Y = 0;
         }
         
 
