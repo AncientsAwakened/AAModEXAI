@@ -317,6 +317,20 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
             }
         }
 
+        public override void HitEffect(int hitDirection, double damage)
+        {
+            if (npc.life <= 0)
+            {
+                CombatText.NewText(npc.getRect(), new Color(146, 30, 68), AAMod.Lang.BossChat("YamataAHead"), false, false);
+                int soul = NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType("YamataSoul"));
+                NPC YamataSoul = Main.npc[soul];
+                ((YamataSoul)YamataSoul.modNPC).internalAI[0] = npc.ai[0];
+                ((YamataSoul)YamataSoul.modNPC).internalAI[1] = npc.ai[1];
+                ((YamataSoul)YamataSoul.modNPC).internalAI[2] = npc.ai[2];
+                ((YamataSoul)YamataSoul.modNPC).internalAI[3] = 1800;
+            }
+        }
+
         int laughTimer = 0;
         bool Laughing = false;
 
