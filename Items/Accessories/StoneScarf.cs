@@ -18,7 +18,7 @@ namespace AAModEXAI.Items.Accessories
         {
             item.width = 22;
             item.height = 24;
-            item.value = Item.sellPrice(0, 3, 0, 0);
+            item.value = Item.sellPrice(0, 10, 0, 0);
             item.rare = 8;
             item.defense = 3;
             item.accessory = true;

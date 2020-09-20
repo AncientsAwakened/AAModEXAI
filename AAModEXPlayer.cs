@@ -11,7 +11,9 @@ using AAModEXAI.Bosses.Yamata.Awakened;
 using AAModEXAI.Bosses.Zero;
 using AAModEXAI.Bosses.Zero.Protocol;
 using AAModEXAI.Bosses.Anubis.Forsaken;
+
 using System;
+using Microsoft.Xna.Framework;
 using AAMod;
 using Terraria.ID;
 using AAMod.Misc;
@@ -33,6 +35,8 @@ namespace AAModEXAI
 
         #region Accessory bools
         public bool DragonSerpentNecklace = false;
+        public bool ForbiddenTele = false;
+        public float ForbiddenCharge = 0;
 
         #endregion
 
@@ -51,6 +55,7 @@ namespace AAModEXAI
             Unstable = false;
 
             DragonSerpentNecklace = false;
+            ForbiddenTele = false;
         }
 
         public override void ModifyHitNPC(Item item, NPC target, ref int damage, ref float knockback, ref bool crit)
@@ -126,8 +131,51 @@ namespace AAModEXAI
 			}
         }
 
+        public void AccessoryEffects()
+        {
+            if(ForbiddenTele)
+            {
+                if(ForbiddenCharge < 100)
+                {
+                    ForbiddenCharge ++;
+                }
+                else
+                {
+                    if(AAMod.AAMod.AccessoryAbilityKey.JustPressed)
+                    {
+                        Vector2 vector32;
+                        vector32.X = (float)Main.mouseX + Main.screenPosition.X;
+                        if (player.gravDir == 1f)
+                        {
+                            vector32.Y = (float)Main.mouseY + Main.screenPosition.Y;
+                        }
+                        else
+                        {
+                            vector32.Y = Main.screenPosition.Y + (float)Main.screenHeight - (float)Main.mouseY;
+                        }
+                        vector32.X -= (float)(player.width / 2);
+                        if (vector32.X > 50f && vector32.X < (float)(Main.maxTilesX * 16 - 50) && vector32.Y > 50f && vector32.Y < (float)(Main.maxTilesY * 16 - 50))
+                        {
+                            int num276 = (int)(vector32.X / 16f);
+                            int num277 = (int)(vector32.Y / 16f);
+                            if (!Collision.SolidCollision(vector32, player.width, player.height))
+                            {
+                                for (int index = 0; index < 70; ++index)
+                Main.dust[Dust.NewDust(player.position, player.width, player.height, 15, player.velocity.X * 0.2f, player.velocity.Y * 0.2f, ModContent.DustType<ForsakenDust>(), Color.Cyan, 1.2f)].velocity *= 0.5f;
+                                player.Teleport(vector32, 5, 0);
+                                NetMessage.SendData(MessageID.Teleport, -1, -1, null, 0, (float)player.whoAmI, vector32.X, vector32.Y, 1, 0, 0);
+                            }
+                        }
+                        ForbiddenCharge = 0;
+                    }
+                }
+            }
+        }
+
         public override void PostUpdate()
         {
+            AccessoryEffects();
+
             if(player.endurance >= 1f)
             {
                 player.endurance = .8f;
