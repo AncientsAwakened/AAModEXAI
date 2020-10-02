@@ -256,7 +256,17 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                     if (!npc.HasPlayerTarget)
                         npc.TargetClosest(true);
                     targetPos = Main.player[npc.target].Center;
-                    MovementWorm(targetPos, 15f, 0.13f); //original movement
+                    if(Vector2.Distance(npc.Center, targetPos) > 200)
+                    {
+                        targetPos.X += 200 * (npc.Center.X < player.Center.X ? -1 : 1);
+                        targetPos.Y -= 200;
+                        MovementWorm(targetPos, 30f, 0.26f);
+                    }
+                    else
+                    {
+                        targetPos = Main.player[npc.target].Center;
+                        MovementWorm(targetPos, 15f, 0.13f); //original movement
+                    }
                     Main.PlaySound(SoundID.Item, (int)npc.Center.X, (int)npc.Center.Y, 20);
                     AAAI.BreatheFire(npc, true, mod.ProjectileType("AkumaABreath"), 2, 4);
                     if (npc.HasBuff(BuffID.Wet))
@@ -973,7 +983,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
         public override bool StrikeNPC(ref double damage, int defense, ref float knockback, int hitDirection, ref bool crit)
         {
             damage *= .1f;
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (Main.netMode != NetmodeID.MultiplayerClient && Main.rand.Next(10) == 0)
                                 Projectile.NewProjectile(npc.Center, new Vector2(0, 2f), mod.ProjectileType("AkumaAFire"), Main.npc[npc.realLife].damage / 2, 0f, Main.myPlayer, 0, 0);
             return true;
         }

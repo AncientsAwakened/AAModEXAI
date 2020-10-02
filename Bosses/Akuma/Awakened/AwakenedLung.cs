@@ -35,7 +35,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 			npc.knockBackResist = 0f;
             npc.damage = 130;
             npc.defense = 100;
-            npc.lifeMax = 10000;
+            npc.lifeMax = 7500;
             npc.knockBackResist = 0f;
             npc.aiStyle = -1;
             npc.lavaImmune = true;
@@ -119,7 +119,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 
             bool collision = true;
 
-            float speed = 12;
+            float speed = 16;
             float acceleration = 0.15f;
 
             Vector2 npcCenter = new Vector2(npc.position.X + npc.width * 0.5f, npc.position.Y + npc.height * 0.5f);

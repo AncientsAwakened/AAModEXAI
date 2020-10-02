@@ -905,7 +905,7 @@ namespace AAModEXAI.Bosses.Equinox
                 if (npc.type == mod.NPCType("NightcrawlerBody")) { texName += "NightcrawlerBodyBig"; }
                 else
                 if (npc.type == mod.NPCType("NightcrawlerTail")) { texName += "NightcrawlerTailBig"; }
-                tex = ModLoader.GetMod("AAMod").GetTexture(texName);
+                tex = mod.GetTexture(texName);
 
                 int diff = Main.LocalPlayer.miscCounter % 50;
                 float diffFloat = diff / 50f;
