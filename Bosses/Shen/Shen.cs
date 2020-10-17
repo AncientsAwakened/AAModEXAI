@@ -456,8 +456,8 @@ namespace AAModEXAI.Bosses.Shen
                         if (Main.netMode != NetmodeID.MultiplayerClient)
                         {
                             const float ai0 = 0.01f;
-                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(Math.PI / 2), Accel, npc.damage / 4, 0f, Main.myPlayer, ai0);
-                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(-Math.PI / 2), Accel, npc.damage / 4, 0f, Main.myPlayer, ai0);
+                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(Math.PI / 2), Accel, npc.damage / 2, 0f, Main.myPlayer, ai0);
+                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(-Math.PI / 2), Accel, npc.damage / 2, 0f, Main.myPlayer, ai0);
                         }
                     }
                     
@@ -465,7 +465,7 @@ namespace AAModEXAI.Bosses.Shen
                     {
                         npc.ai[1] = 0;
                         npc.ai[2] = 0;
-                        if (++npc.ai[3] >= 3) //dash three times
+                        if (++npc.ai[3] >= 5) //dash three times
                         {
                             npc.ai[0]++;
                             npc.ai[3] = 0;
@@ -496,7 +496,7 @@ namespace AAModEXAI.Bosses.Shen
                         npc.velocity.X = -30 * (npc.Center.X < player.Center.X ? -1 : 1);
                         npc.velocity.Y = 5f;
                         if (Main.netMode != NetmodeID.MultiplayerClient)
-                            Projectile.NewProjectile(npc.Center, Vector2.Zero, Homing, npc.damage / 3, 0f, Main.myPlayer, npc.target, 8f);
+                            Projectile.NewProjectile(npc.Center, Vector2.Zero, Homing, npc.damage / 2, 0f, Main.myPlayer, npc.target, 8f);
                     }
                     npc.rotation = 0;
                     break;
@@ -568,7 +568,7 @@ namespace AAModEXAI.Bosses.Shen
 
                 case 14: //fly in jumbo circle
                     npc.velocity -= npc.velocity.RotatedBy(Math.PI / 2) * npc.velocity.Length() / npc.ai[3];
-                    if (++npc.ai[2] > 5)
+                    if (++npc.ai[2] > 2)
                     {
                         npc.ai[2] = 0;
                         if (Main.netMode != NetmodeID.MultiplayerClient)

@@ -256,17 +256,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                     if (!npc.HasPlayerTarget)
                         npc.TargetClosest(true);
                     targetPos = Main.player[npc.target].Center;
-                    if(Vector2.Distance(npc.Center, targetPos) > 200)
-                    {
-                        targetPos.X += 200 * (npc.Center.X < player.Center.X ? -1 : 1);
-                        targetPos.Y -= 200;
-                        MovementWorm(targetPos, 30f, 0.26f);
-                    }
-                    else
-                    {
-                        targetPos = Main.player[npc.target].Center;
-                        MovementWorm(targetPos, 15f, 0.13f); //original movement
-                    }
+                    MovementWorm(targetPos, 15f, 0.13f); //original movement
                     Main.PlaySound(SoundID.Item, (int)npc.Center.X, (int)npc.Center.Y, 20);
                     AAAI.BreatheFire(npc, true, mod.ProjectileType("AkumaABreath"), 2, 4);
                     if (npc.HasBuff(BuffID.Wet))
@@ -340,9 +330,9 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                 case 3: //meteor rain
                     targetPos = new Vector2(player.Center.X + npc.ai[2] * 1000, npc.Center.Y);
                     MovementWorm(targetPos, 30f, 0.26f); //accelerate horizontally
-                    if (++npc.ai[3] > 40)
+                    if (++npc.ai[2] > 40)
                     {
-                        npc.ai[3] = 0;
+                        npc.ai[2] = 0;
                         if (Main.netMode != NetmodeID.MultiplayerClient)
                         {
                             bool fire = true;
@@ -381,7 +371,6 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                         npc.ai[0]++;
                         npc.ai[1] = 0;
                         npc.ai[2] = 0;
-                        npc.ai[3] = 0;
                         npc.netUpdate = true;
                         npc.velocity.Normalize();
                         npc.velocity *= 15f;
@@ -535,6 +524,45 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                     }
                     break;
 
+                case 11: //prepare for roiling
+                    targetPos = player.Center;
+                    targetPos.X += 700 * (npc.Center.X < targetPos.X ? -1 : 1);
+                    MovementWorm(targetPos, 20f, 0.6f);
+                    if (++npc.ai[1] > 240 || npc.Distance(targetPos) < 50f)
+                    {
+                        npc.ai[0]++;
+                        npc.ai[1] = 0;
+                        npc.ai[2] = 0;
+                        npc.localAI[1] = npc.Distance(player.Center);
+                        npc.netUpdate = true;
+                        npc.velocity = npc.DirectionTo(player.Center).RotatedBy(Math.PI / 2) * 30f;
+                        npc.rotation = npc.velocity.ToRotation();
+                    }
+                    break;
+
+                case 12:
+                    npc.velocity -= npc.velocity.RotatedBy(Math.PI / 2) * npc.velocity.Length() / npc.localAI[1];
+                    if (++npc.ai[2] > 2)
+                    {
+                        npc.ai[2] = 0;
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
+                        {
+                            const float ai0 = 0.004f;
+                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(Math.PI / 2), mod.ProjectileType("AkumaAFireballAccel"), npc.damage / 4, 0f, Main.myPlayer, ai0);
+                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(-Math.PI / 2), mod.ProjectileType("AkumaAFireballAccel"), npc.damage / 4, 0f, Main.myPlayer, ai0);
+                        }
+                    }
+                    if (++npc.ai[1] > 400)
+                    {
+                        npc.ai[0]++;
+                        npc.ai[1] = 0;
+                        npc.ai[2] = 0;
+                        npc.localAI[1] = 0;
+                        npc.velocity /= 2;
+                    }
+                    npc.rotation = (float)Math.Atan2((double)(npc.velocity.Y * (float)npc.direction), (double)(npc.velocity.X * (float)npc.direction));
+                    break;
+    
                 default:
                     npc.ai[0] = 0;
                     goto case 0;
@@ -707,7 +735,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                 damage = (int)(damage * .5f);
             }
 
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (Main.netMode != NetmodeID.MultiplayerClient && Main.rand.Next(10) == 0)
                                 Projectile.NewProjectile(npc.Center, new Vector2(0, 2f), mod.ProjectileType("AkumaAFire"), npc.damage / 2, 0f, Main.myPlayer, 0, 0);
         }
 
@@ -983,8 +1011,6 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
         public override bool StrikeNPC(ref double damage, int defense, ref float knockback, int hitDirection, ref bool crit)
         {
             damage *= .1f;
-            if (Main.netMode != NetmodeID.MultiplayerClient && Main.rand.Next(10) == 0)
-                                Projectile.NewProjectile(npc.Center, new Vector2(0, 2f), mod.ProjectileType("AkumaAFire"), Main.npc[npc.realLife].damage / 2, 0f, Main.myPlayer, 0, 0);
             return true;
         }
 

@@ -509,7 +509,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
         {
             bool playerTooFar = playerDistance > playerTooFarDist;
             YamataBody(npc, ref npc.ai, true, 0.2f, 3.5f, 8f, 0.07f, 1.5f, 4);
-            if (playerTooFar) npc.position += playerTarget.position - playerTarget.oldPosition;
+            //if (playerTooFar) npc.position += playerTarget.position - playerTarget.oldPosition;
             npc.rotation = 0f;
         }
 

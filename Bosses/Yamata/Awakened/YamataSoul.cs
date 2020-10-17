@@ -87,6 +87,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                     Main.npc[Head].ai[0] = internalAI[0];
                     if(!((YamataA)Main.npc[(int)internalAI[0]].modNPC).TrueHead.active)
                     {
+                        Head = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("YamataAHead"));
                         ((YamataA)Main.npc[(int)internalAI[0]].modNPC).TrueHead = Main.npc[Head];
                         Main.npc[Head].ai[1] = 0;
                         Main.npc[Head].ai[2] = -500;
