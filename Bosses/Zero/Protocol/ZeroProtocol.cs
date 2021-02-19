@@ -731,10 +731,10 @@ namespace AAModEXAI.Bosses.Zero.Protocol
             {
                 while (!safe)
                 {
-                    int posX = Main.rand.Next(-500, 500);
-                    int posY = Main.rand.Next(-500, 500);
+                    int posX = Main.rand.Next(-900, 900);
+                    int posY = Main.rand.Next(-900, 900);
 
-                    if ((posX < 50 && posX > -50) && (posY < 50 && posY > -50))
+                    if ((posX < 400 && posX > -400) && (posY < 400 && posY > -400))
                     {
                         return;
                     }

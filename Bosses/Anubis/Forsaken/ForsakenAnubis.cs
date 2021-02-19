@@ -767,12 +767,12 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
 
             Player player = Main.player[npc.target];
             Vector2 targetPos = player.Center;
-            int posX = Main.rand.Next(-400, 400);
+            int posX = Main.rand.Next(-800, 800);
 
-            int posY = Main.rand.Next(0, 400);
-            if (posX > -150 && posX < 150)
+            int posY = Main.rand.Next(0, 800);
+            if (posX > -400 && posX < 400)
             {
-                posY = Main.rand.Next(150, 400);
+                 posY = Main.rand.Next(400, 400);
             }
 
             npc.position = new Vector2(targetPos.X + posX, targetPos.Y - posY);
