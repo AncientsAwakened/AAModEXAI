@@ -4,4 +4,16 @@ If you want to challenge yourself or want to experience the real power of ancien
 
 You must be familiar with each weapons in AAMod, which could help you with choosing the best weapons.
 
+Changes in 1.0.0.2:
+
+1.Fix the problem FA and ZP jumping on player's face.
+
+2.Buff the YamataA and AkumaA.
+
+3.Buff the CRajah.
+
+4.Debuff the ShenA.
+
+5.Add some accessories for the Challengers.
+
 WARNING: This mod will seriously affect your normal playthrough. If some bosses are too powerful for you to defeat, this is very much the norm. That's why we nerf them. Maybe you can try your best and figure out how to defeat them.
