@@ -5,7 +5,7 @@ using Terraria.Localization;
 
 using AAMod;
 using Terraria.ID;
-using AAMod.Misc;
+ 
 using AAMod.Globals;
 using AAModEXAI.Dusts;
 
@@ -56,7 +56,7 @@ namespace AAModEXAI
         {
             if (AAConfigClient.Instance.AncientIntroText)
             {
-                Projectile.NewProjectile(npc.Center, Vector2.Zero, ModContent.ProjectileType<AAMod.Globals.Title>(), 0, 0, Main.myPlayer, ID, 0);
+                Projectile.NewProjectile(npc.Center, Vector2.Zero, ModContent.ProjectileType<AAMod.Title>(), 0, 0, Main.myPlayer, ID, 0);
             }
         }
 
@@ -64,7 +64,7 @@ namespace AAModEXAI
         {
             if (AAConfigClient.Instance.AncientIntroText)
             {
-                Projectile.NewProjectile(player.Center, Vector2.Zero, ModContent.ProjectileType<AAMod.Globals.Title>(), 0, 0, Main.myPlayer, ID, 0);
+                Projectile.NewProjectile(player.Center, Vector2.Zero, ModContent.ProjectileType<AAMod.Title>(), 0, 0, Main.myPlayer, ID, 0);
             }
         }
 
@@ -72,7 +72,7 @@ namespace AAModEXAI
         {
             if (AAConfigClient.Instance.AncientIntroText)
             {
-                Projectile.NewProjectile(npc.Center, Vector2.Zero, ModContent.ProjectileType<AAMod.Globals.SistersTitle>(), 0, 0, Main.myPlayer, 16, 0);
+                Projectile.NewProjectile(npc.Center, Vector2.Zero, ModContent.ProjectileType<AAMod.SistersTitle>(), 0, 0, Main.myPlayer, 16, 0);
             }
         }
 	}

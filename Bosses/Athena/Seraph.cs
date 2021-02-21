@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 using AAModEXAI.Bosses.Athena.Olympian;
 using AAMod;
 using Terraria.ID;
-using AAMod.Misc;
+ 
 using AAMod.Globals;
 using AAModEXAI.Dusts;
 

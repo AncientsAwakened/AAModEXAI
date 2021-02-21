@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 using Terraria.Audio;
 using AAMod;
 using Terraria.ID;
-using AAMod.Misc;
+ 
 using AAMod.Globals;
 using AAModEXAI.Dusts;
 
