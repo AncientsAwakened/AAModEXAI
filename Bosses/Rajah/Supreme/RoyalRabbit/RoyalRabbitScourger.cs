@@ -32,6 +32,7 @@ namespace AAModEXAI.Bosses.Rajah.Supreme.RoyalRabbit
             npc.lifeMax = 70000;
             npc.knockBackResist = 0f;
             npc.HitSound = SoundID.NPCHit1;
+            npc.DeathSound = SoundID.NPCDeath1;
             npc.noGravity = true;
             npc.noTileCollide = true;
             npc.value = 0;

@@ -50,7 +50,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
             }
         }
 
-        public float[] internalAI = new float[4];
+        public float[] internalAI = new float[5];
         public override void SendExtraAI(BinaryWriter writer)
         {
             base.SendExtraAI(writer);
@@ -60,6 +60,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                 writer.Write(internalAI[1]);
                 writer.Write(internalAI[2]);
                 writer.Write(internalAI[3]);
+                writer.Write(internalAI[4]);
             }
         }
 
@@ -72,6 +73,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                 internalAI[1] = reader.ReadFloat();
                 internalAI[2] = reader.ReadFloat();
                 internalAI[3] = reader.ReadFloat();
+                internalAI[4] = reader.ReadFloat();
             }
         }
 
@@ -382,6 +384,20 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
         public override bool PreDraw(SpriteBatch spriteBatch, Color drawColor)
         {
             return false;
+        }
+
+        public override bool StrikeNPC(ref double damage, int defense, ref float knockback, int hitDirection, ref bool crit)
+        {
+            if(internalAI[4] == 1f && npc.ai[0] < 200 && npc.ai[0] > -1 && Main.netMode != NetmodeID.MultiplayerClient)
+            {
+                Main.npc[(int)npc.ai[0]].life -= (int) damage;
+                if(Main.npc[(int)npc.ai[0]].life <= 0)
+                {
+                    Main.npc[(int)npc.ai[0]].checkDead();
+                    Main.npc[(int)npc.ai[0]].netUpdate = true;
+                }
+            }
+            return true;
         }
 
         public override void ModifyHitByProjectile(Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)

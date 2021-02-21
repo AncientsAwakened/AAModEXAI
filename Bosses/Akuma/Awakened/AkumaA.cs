@@ -183,21 +183,6 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                 }
             }
 
-            if (internalAI[2] > 1800)
-            {
-                internalAI[2] = 0;
-                for(int i = 0; i < 200; i++)
-                {
-                    if(Main.npc[i].active && Main.npc[i].type == ModContent.NPCType<AwakenedLung>() && Main.npc[i].life > 0)
-                    {
-                        if (Main.netMode != NetmodeID.MultiplayerClient)
-                            Projectile.NewProjectile(Main.npc[i].Center, Vector2.Zero, mod.ProjectileType("AkumaFireHeal"), 0, 0f, Main.myPlayer, npc.whoAmI, Main.npc[i].life);
-                        Main.npc[i].life = 0;
-                        Main.npc[i].active = false;
-                    }
-                }
-            }
-
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 if (npc.localAI[2] == 0)
@@ -586,7 +571,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                 Main.time = 0;
             }
 
-            if (Main.player[npc.target].dead || Math.Abs(npc.position.X - Main.player[npc.target].position.X) > 6000f || Math.Abs(npc.position.Y - Main.player[npc.target].position.Y) > 6000f)
+            if (Main.player[npc.target].dead || Math.Abs(npc.position.X - Main.player[npc.target].position.X) > 9000f || Math.Abs(npc.position.Y - Main.player[npc.target].position.Y) > 9000f)
             {
                 if (Loludided == false)
                 {
@@ -734,9 +719,6 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
             {
                 damage = (int)(damage * .5f);
             }
-
-            if (Main.netMode != NetmodeID.MultiplayerClient && Main.rand.Next(10) == 0)
-                                Projectile.NewProjectile(npc.Center, new Vector2(0, 2f), mod.ProjectileType("AkumaAFire"), npc.damage / 2, 0f, Main.myPlayer, 0, 0);
         }
 
         public override bool PreDraw(SpriteBatch spriteBatch, Color drawColor)

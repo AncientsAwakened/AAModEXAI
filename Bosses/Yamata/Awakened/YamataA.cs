@@ -282,7 +282,12 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                     Head7.ai[1] = headX * 3f;
                     Head7.ai[2] = headY * 0.7f;
                     Head7.ai[3] = 3f;
-
+                    
+                    NPC[] Heads = {Head2, Head3, Head4, Head5, Head6, Head7};
+                    int k = 6;
+                    int randomhead = Main.rand.Next(k);
+                    ((YamataAHeadF)Heads[randomhead].modNPC).internalAI[4] = 1f;
+                    
                     TrueHead.netUpdate = true;
                     Head2.netUpdate = true;
                     Head3.netUpdate = true;
@@ -449,7 +454,6 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                         TeleportMeBitch = true;
                         npc.Center = tele;
                         npc.dontTakeDamage = true;
-                        TrueHead.dontTakeDamage = true;
                         Head2.dontTakeDamage = true;
                         Head3.dontTakeDamage = true;
                         Head4.dontTakeDamage = true;
@@ -466,7 +470,6 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                     {
                         npc.alpha = 0;
                         npc.dontTakeDamage = false;
-                        TrueHead.dontTakeDamage = false;
                         Head2.dontTakeDamage = false;
                         Head3.dontTakeDamage = false;
                         Head4.dontTakeDamage = false;
@@ -508,7 +511,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
         public void AIMovementNormal(float playerDistance)
         {
             bool playerTooFar = playerDistance > playerTooFarDist;
-            YamataBody(npc, ref npc.ai, true, 0.2f, 3.5f, 8f, 0.07f, 1.5f, 4);
+            YamataBody(npc, ref npc.ai, true, 0.2f, 1.5f, 8f, 0.07f, 1.5f, 4);
             //if (playerTooFar) npc.position += playerTarget.position - playerTarget.oldPosition;
             npc.rotation = 0f;
         }
@@ -518,7 +521,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
             if(npc.ai[3] ++ > 1800)
             {
                 npc.ai[3] = 0;
-                NPC[] Heads = {TrueHead, Head2, Head3, Head4, Head5, Head6, Head7};
+                NPC[] Heads = {Head2, Head3, Head4, Head5, Head6, Head7};
                 List<NPC> HeadAlive = new List<NPC>();
                 foreach (NPC head in Heads)
                 {
@@ -529,7 +532,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                     foreach (NPC head in HeadAlive)
                     {
                         if(!head.active) continue;
-                        if(head.realLife == npc.whoAmI)
+                        if(((YamataAHeadF)head.modNPC).internalAI[4] == 1f)
                         {
                             int k = HeadAlive.Count;
                             if(k == 1) break;
@@ -539,12 +542,11 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                                 randomhead++;
                                 if(randomhead >= k) randomhead = 0;
                             }
-                            head.life = HeadAlive[randomhead].life;
-                            head.realLife = -1;
-                            HeadAlive[randomhead].realLife = npc.whoAmI;
-                            HeadAlive[randomhead].life = npc.life;
+                            ((YamataAHeadF)head.modNPC).internalAI[4] = 0f;
+                            ((YamataAHeadF)HeadAlive[randomhead].modNPC).internalAI[4] = 1f;
                             HeadAlive[randomhead].netUpdate = true;
                             head.netUpdate = true;
+                            break;
                         }
                     }
                 }
@@ -786,7 +788,18 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                         new Vector2(neckTex2D.Width * 0.5f, neckTex2D.Height * 0.5f), 1f, SpriteEffects.None, 0f);
                     }
                 }
-                BaseDrawing.DrawTexture(spriteBatch, ModLoader.GetMod("AAMod").GetTexture(headTexture), 0, head.position, head.width, head.height, head.scale, head.rotation, head.spriteDirection, Main.npcFrameCount[head.type], head.frame, drawColor, false);
+                if(head.modNPC is YamataAHeadF)
+                {
+                    if(((YamataAHeadF)head.modNPC).internalAI[4] != 1f )
+                    {
+                        BaseDrawing.DrawTexture(spriteBatch, ModLoader.GetMod("AAMod").GetTexture(headTexture), 0, head.position, head.width, head.height, head.scale, head.rotation, head.spriteDirection, Main.npcFrameCount[head.type], head.frame, drawColor, false);
+                    }
+                    else
+                    {
+                        Texture2D YamataAHeadF = mod.GetTexture("Bosses/Yamata/Awakened/YamataAHeadFTrue");
+                        BaseDrawing.DrawTexture(spriteBatch, YamataAHeadF, 0, head.position, head.width, head.height, head.scale, head.rotation, head.spriteDirection, Main.npcFrameCount[head.type], head.frame, drawColor, false);
+                    }
+                }
                 BaseDrawing.DrawTexture(spriteBatch, ModLoader.GetMod("AAMod").GetTexture(glowMaskTexture), 0, head.position, head.width, head.height, head.scale, head.rotation, head.spriteDirection, Main.npcFrameCount[head.type], head.frame, GlowColor, false);
             }
         }
