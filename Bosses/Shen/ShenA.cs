@@ -263,7 +263,6 @@ namespace AAModEXAI.Bosses.Shen
                         targetPos.X += 800 * (npc.Center.X < targetPos.X ? -1 : 1);
                         targetPos.Y -= 800;
                         Tele(targetPos);
-                        npc.ai[1] = 70;
                         if (++npc.ai[1] > 70) //initiate dash
                         {
                             npc.ai[0]++;
