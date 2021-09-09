@@ -12,7 +12,7 @@ Changes in 1.0.0.2:
 
 3.Buff the CRajah.
 
-4.Debuff the ShenA.
+4.Nerf the ShenA.
 
 5.Add some accessories for the Challengers.
 
