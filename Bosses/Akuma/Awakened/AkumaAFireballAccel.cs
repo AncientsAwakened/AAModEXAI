@@ -65,18 +65,5 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
         {
             target.AddBuff(ModLoader.GetMod("AAMod").BuffType("DragonFire"), 180);
         }
-
-        public override void Kill(int timeLeft)
-        {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
-            {
-                Vector2 vel = Vector2.Normalize(projectile.velocity) * 5;
-                for (int i = 0; i < 6; ++i)
-                {
-                    vel = vel.RotatedBy(Math.PI / 3);
-                    Projectile.NewProjectile(projectile.Center, vel, mod.ProjectileType("AkumaABomb"), projectile.damage, 0f, Main.myPlayer);
-                }
-            }
-        }
     }
 }

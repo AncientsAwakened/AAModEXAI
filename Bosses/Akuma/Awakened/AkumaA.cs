@@ -505,6 +505,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                         npc.ai[0]++;
                         npc.ai[1] = 0;
                         npc.ai[2] = 0;
+                        npc.localAI[1] = 0;
                         npc.netUpdate = true;
                     }
                     break;
@@ -520,14 +521,15 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                         npc.ai[2] = 0;
                         npc.localAI[1] = npc.Distance(player.Center);
                         npc.netUpdate = true;
-                        npc.velocity = npc.DirectionTo(player.Center).RotatedBy(Math.PI / 2) * 30f;
+                        npc.velocity = npc.DirectionTo(player.Center).RotatedBy(Math.PI / 2) * 40f;
                         npc.rotation = npc.velocity.ToRotation();
                     }
                     break;
 
                 case 12:
                     npc.velocity -= npc.velocity.RotatedBy(Math.PI / 2) * npc.velocity.Length() / npc.localAI[1];
-                    if (++npc.ai[2] > 2)
+                    if (npc.velocity.Length() > 40f) npc.velocity *= 40f / npc.velocity.Length();
+                    if (++npc.ai[2] > 4)
                     {
                         npc.ai[2] = 0;
                         if (Main.netMode != NetmodeID.MultiplayerClient)
@@ -543,11 +545,24 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                         npc.ai[1] = 0;
                         npc.ai[2] = 0;
                         npc.localAI[1] = 0;
-                        npc.velocity /= 2;
+                        npc.netUpdate = true;
                     }
                     npc.rotation = (float)Math.Atan2((double)(npc.velocity.Y * (float)npc.direction), (double)(npc.velocity.X * (float)npc.direction));
                     break;
-    
+                case 13: //wait for old attack to go away
+                    targetPos = player.Center;
+                    targetPos.X += 600 * (npc.Center.X < targetPos.X ? -1 : 1);
+                    MovementWorm(targetPos, 20f, 0.6f);
+                    if (++npc.ai[2] > 120)
+                    {
+                        npc.ai[0]++;
+                        npc.ai[1] = 0;
+                        npc.ai[2] = 0;
+                        npc.ai[3] = 0;
+                        npc.netUpdate = true;
+                    }
+                    npc.rotation = 0;
+                    break;
                 default:
                     npc.ai[0] = 0;
                     goto case 0;
