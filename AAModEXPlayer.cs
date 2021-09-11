@@ -123,7 +123,7 @@ namespace AAModEXAI
                 player.moveSpeed *= Utils.NextFloat(Main.rand, 0.25f, 2f);
             }
 
-            if (ForbiddenTele && (player.inventory[player.selectedItem].type == ItemID.RodofDiscord || player.HeldItem))
+            if (ForbiddenTele && (player.inventory[player.selectedItem].type == ItemID.RodofDiscord || player.HeldItem.type == ItemID.RodofDiscord))
             {
                 player.moveSpeed *=  1.1f;
                 player.maxRunSpeed *= 1.1f;
@@ -144,53 +144,6 @@ namespace AAModEXAI
         {
             if(ForbiddenTele)
             {
-                if (player.inventory[player.selectedItem].type == ItemID.RodofDiscord)
-                {
-                    bool wings = false;
-                    if (player.wingsLogic > 0 && player.controlJump && player.wingTime > 0f && !player.jumpAgainCloud && player.jump == 0 && player.velocity.Y != 0f)
-                    {
-                        wings = true;
-                    }
-                    if ((player.wingsLogic == 22 || player.wingsLogic == 28 || player.wingsLogic == 30 || player.wingsLogic == 32 || player.wingsLogic == 29 || player.wingsLogic == 33 || player.wingsLogic == 35 || player.wingsLogic == 37) && player.controlJump && player.controlDown && player.wingTime > 0f)
-                    {
-                        wings = true;
-                    }
-                    if (wings)
-                    {
-                        ItemLoader.VerticalWingSpeeds(player, ref num2, ref num5, ref num4, ref num3, ref num);
-			            this.velocity.Y = this.velocity.Y - num * this.gravDir;
-                        if (player.gravDir == 1f)
-                        {
-                            if (player.velocity.Y > 0f)
-                            {
-                                player.velocity.Y = player.velocity.Y - num2;
-                            }
-                            else if (player.velocity.Y > -Player.jumpSpeed * num4)
-                            {
-                                player.velocity.Y = player.velocity.Y - num5;
-                            }
-                            if (player.velocity.Y < -Player.jumpSpeed * num3)
-                            {
-                                player.velocity.Y = -Player.jumpSpeed * num3;
-                            }
-                        }
-                        else
-                        {
-                            if (player.velocity.Y < 0f)
-                            {
-                                player.velocity.Y = player.velocity.Y + num2;
-                            }
-                            else if (player.velocity.Y < Player.jumpSpeed * num4)
-                            {
-                                player.velocity.Y = player.velocity.Y + num5;
-                            }
-                            if (player.velocity.Y > Player.jumpSpeed * num3)
-                            {
-                                player.velocity.Y = Player.jumpSpeed * num3;
-                            }
-                        }
-                    }
-                }
 
                 if(ForbiddenCharge < 100)
                 {
@@ -262,7 +215,11 @@ namespace AAModEXAI
                 {
                     player.AddBuff(ModContent.BuffType<Buffs.YamataAGravity>(), 10);
                     DistancetoYamata = (player.Center - Main.npc[i].Center).Length();
-                    if((player.velocity + player.Center - Main.npc[i].Center).Length() > DistancetoYamata && DistancetoYamata > 400f && YamataAGravity) player.velocity *= .98f;
+                    if(/* player.velocity + player.Center - Main.npc[i].Center).Length() > DistancetoYamata */ DistancetoYamata > 0 && YamataAGravity)
+                    {
+                        Vector2 dir = Vector2.Normalize(player.Center - Main.npc[i].Center);
+                        player.velocity -= dir * (DistancetoYamata / 3200f);
+                    }
                 }
                 else if(Main.npc[i].type == ModContent.NPCType<Bosses.Shen.ShenA>())
                 {
