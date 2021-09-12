@@ -178,19 +178,19 @@ namespace AAModEXAI.Bosses.Yamata
             {
                 internalAI[2]++;
             }
-            if (internalAI[2] == 239)
+            if (internalAI[2] == 399)
             {
                 QuoteSaid = false;
                 Main.PlaySound(roarSound, npc.Center);
                 internalAI[1] = Main.rand.Next(4);
             }
 
-            if (internalAI[2] >= 240)
+            if (internalAI[2] >= 400)
             {
                 Attacks(internalAI[1]);
             }
 
-            if (internalAI[2] >= 300)
+            if (internalAI[2] >= 600)
             {
                 EATTHELITTLEMAGGOT = false;
                 internalAI[2] = 0;
