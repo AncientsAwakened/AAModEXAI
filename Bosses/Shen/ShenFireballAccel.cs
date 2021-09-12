@@ -14,7 +14,7 @@ namespace AAModEXAI.Bosses.Shen
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("Fireball");
+			DisplayName.SetDefault("Fireball");
 			Main.projFrames[projectile.type] = 4;
 		}
 
@@ -48,7 +48,7 @@ namespace AAModEXAI.Bosses.Shen
 			projectile.timeLeft = 720;
 			projectile.aiStyle = -1;
 			projectile.extraUpdates = 1;
-			this.cooldownSlot = 1;
+			cooldownSlot = 1;
 		}
 
 		// Token: 0x060018D8 RID: 6360 RVA: 0x00119324 File Offset: 0x00117524

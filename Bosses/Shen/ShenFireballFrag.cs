@@ -14,7 +14,7 @@ namespace AAModEXAI.Bosses.Shen
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("Fireball");
+			DisplayName.SetDefault("Fireball");
 			Main.projFrames[projectile.type] = 4;
 		}
 
@@ -51,7 +51,7 @@ namespace AAModEXAI.Bosses.Shen
 			projectile.hostile = true;
 			projectile.timeLeft = 30;
 			projectile.aiStyle = -1;
-			this.cooldownSlot = 1;
+			cooldownSlot = 1;
 		}
 
 		public override void OnHitPlayer(Player target, int damage, bool crit)

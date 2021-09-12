@@ -84,6 +84,8 @@ namespace AAModEXAI.Bosses.Athena.Olympian
             }
         }
 
+        public int timer = 0;
+
         public override void AI()
         {
             if (!npc.HasPlayerTarget)
@@ -92,12 +94,38 @@ namespace AAModEXAI.Bosses.Athena.Olympian
             }
             Player player = Main.player[npc.target];
 
-            if (internalAI[2] == 0 && npc.life < npc.lifeMax / 3 && Main.netMode != NetmodeID.MultiplayerClient)
+            if (internalAI[2] < 1 && npc.life < npc.lifeMax / 2 && Main.netMode != NetmodeID.MultiplayerClient)
             {
                 NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType("AthenaDark"));
                 NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType("AthenaLight"));
-                internalAI[2] = 1;
+                internalAI[2] ++;
                 npc.netUpdate = true;
+            }
+            else if(internalAI[2] < 2 && npc.life < npc.lifeMax / 3 && Main.netMode != NetmodeID.MultiplayerClient)
+            {
+                timer ++;
+                if(timer == 120)
+                {
+                    if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat("No!! I don't want to lose.", Color.CornflowerBlue);
+                    npc.netUpdate = true;
+                }
+                if(timer == 240)
+                {
+                    if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat("My sister from the Varia World will help me!", Color.CornflowerBlue);
+                    npc.netUpdate = true;
+                }
+                if(timer == 360)
+                {
+                    if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat("The Varia Fallen Angle!", Color.CornflowerBlue);
+                    npc.netUpdate = true;
+                    Vector2 Origin = new Vector2((int)(Main.maxTilesX * 0.65f), 100) * 16;
+                    Vector2 Acropolis = new Vector2(Origin.X + (80 * 16), Origin.Y + (79 * 16));
+                    Main.PlaySound(SoundID.Item, (int)Acropolis.X, (int)Acropolis.Y, 14);
+                    int p = NPC.NewNPC((int)Acropolis.X, (int)Acropolis.Y, mod.NPCType("FallenAngleSummonRune"));
+                    Main.npc[p].Center = Acropolis;
+                    Main.npc[p].ai[1] = (float)npc.whoAmI;
+                    internalAI[2] ++;
+                }
             }
 
             Vector2 targetPos;
