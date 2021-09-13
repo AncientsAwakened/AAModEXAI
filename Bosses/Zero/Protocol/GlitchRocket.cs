@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ModLoader;
 using AAMod;
@@ -67,6 +68,19 @@ namespace AAModEXAI.Bosses.Zero.Protocol
 			int dustId = Dust.NewDust(projectile.position, projectile.width, projectile.height + 10, ModContent.DustType<VoidDust>(), projectile.velocity.X * 0.2f,
 					projectile.velocity.Y * 0.2f, 100);
 				Main.dust[dustId].noGravity = true;
+        }
+
+		public override bool PreDraw(SpriteBatch sb, Color lightColor)
+        {
+            projectile.frameCounter++;
+            if (projectile.frameCounter >= 5)
+            {
+                projectile.frame++;
+                projectile.frameCounter = 0;
+                if (projectile.frame > 2) 
+                    projectile.frame = 0; 
+            }
+            return true;
         }
 
         public override void Kill(int timeLeft)

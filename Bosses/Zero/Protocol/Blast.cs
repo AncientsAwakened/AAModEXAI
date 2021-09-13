@@ -77,7 +77,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
                 Main.dust[num86].shader = GameShaders.Armor.GetSecondaryShader(59, Main.LocalPlayer);
                 Main.dust[num86].position = projectile.Center + (Vector2.UnitY.RotatedByRandom(3.1415927410125732) * (float)Main.rand.NextDouble() * num84 / 2f);
             }
-            for (int num87 = 0; num87 < 15; num87++)
+            for (int num87 = 0; num87 < 7; num87++)
             {
                 int num88 = Dust.NewDust(position, num84, height3, 226, 0, 0, 100, new Color(), 2f);
                 Main.dust[num88].shader = GameShaders.Armor.GetSecondaryShader(59, Main.LocalPlayer);
