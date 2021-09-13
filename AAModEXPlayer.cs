@@ -125,9 +125,9 @@ namespace AAModEXAI
 
             if (ForbiddenTele && (player.inventory[player.selectedItem].type == ItemID.RodofDiscord || player.HeldItem.type == ItemID.RodofDiscord))
             {
-                player.moveSpeed *=  1.1f;
-                player.maxRunSpeed *= 1.1f;
-                player.accRunSpeed *= 1.1f;
+                player.moveSpeed *=  1.2f;
+                player.maxRunSpeed *= 1.2f;
+                player.accRunSpeed *= 1.2f;
             }
 		}
 
