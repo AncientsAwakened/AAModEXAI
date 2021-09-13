@@ -62,7 +62,7 @@ namespace AAModEXAI.Bosses.Zero
         public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
         {
             npc.damage = (int)(npc.damage * .7f);
-            npc.lifeMax = (int)(npc.lifeMax * 0.5f * bossLifeScale);
+            npc.lifeMax = (int)(npc.lifeMax * 0.6f * bossLifeScale);
         }
 
         public override bool? DrawHealthBar(byte hbPosition, ref float scale, ref Vector2 position)
@@ -316,7 +316,7 @@ namespace AAModEXAI.Bosses.Zero
 
         public int MinionTimer = 0;
         public float Distance = 0;
-        public float[] internalAI = new float[5];
+        public float[] internalAI = new float[7];
 
         public override void SendExtraAI(BinaryWriter writer)
         {
@@ -328,6 +328,8 @@ namespace AAModEXAI.Bosses.Zero
                 writer.Write(internalAI[2]);
                 writer.Write(internalAI[3]);
                 writer.Write(internalAI[4]);
+                writer.Write(internalAI[5]);
+                writer.Write(internalAI[6]);
                 writer.Write(Distance);
             }
         }
@@ -342,6 +344,8 @@ namespace AAModEXAI.Bosses.Zero
                 internalAI[2] = reader.ReadFloat();
                 internalAI[3] = reader.ReadFloat();
                 internalAI[4] = reader.ReadFloat();
+                internalAI[5] = reader.ReadFloat();
+                internalAI[6] = reader.ReadFloat();
                 Distance = reader.ReadFloat();
             }
         }
@@ -354,20 +358,46 @@ namespace AAModEXAI.Bosses.Zero
         bool RespawnArms1;
         bool RespawnArms2;
 
+        public int timer = 0;
+
         public override void AI()
         {
-            if (Main.expertMode)
-            {
-                damage = npc.damage / 4;
-            }
-            else
-            {
-                damage = npc.damage / 2;
-            }
+            damage = npc.damage / 2;
 
             if (npc.ai[0] > 0)
             {
                 npc.ai[0]--;
+            }
+
+            if (internalAI[5] == 0 && npc.life < npc.lifeMax * .66f)
+            {
+                timer ++;
+                if(timer == 120)
+                {
+                    if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat("Attempting to log in to the path 'C:/terraria/terraria.exe'", Color.Red);
+                }
+                if(timer == 240)
+                {
+                    if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat("Successfully hack into the program.", Color.Red);
+                }
+                if(timer == 360)
+                {
+                    if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat("Set a search path for executable files.", Color.Red);
+                }
+                if(timer == 480)
+                {
+                    if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat("Decompiling...", Color.Red);
+                }
+                if(timer == 600)
+                {
+                    if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat("Complete.", Color.Red);
+                    internalAI[5] = 1;
+                }
+            }
+
+            if(internalAI[5] > 0)
+            {
+                SummonMinnions();
             }
 
             npc.TargetClosest();
@@ -847,6 +877,29 @@ namespace AAModEXAI.Bosses.Zero
             npc.velocity = length == 0f ? Vector2.Zero : Vector2.Normalize(dist);
             npc.velocity *= moveSpeed;
             npc.velocity *= velMultiplier;
+        }
+
+        public void SummonMinnions()
+        {
+            internalAI[6] ++;
+            if(internalAI[5] == 1)
+            {
+                if(internalAI[6] % 600 == 0)
+                {
+                    Player player = Main.player[npc.target];
+                    int A = Main.rand.Next(-50, 50);
+                    if(Main.netMode != NetmodeID.MultiplayerClient)
+                    {
+                        int Minion = NPC.NewNPC((int)player.Center.X + A, (int)player.Center.Y + A, mod.NPCType("ZeroSummonRune"), 0);
+                        Main.npc[Minion].ai[1] = mod.NPCType("ZeroTeslaTurrent");
+                        Main.npc[Minion].netUpdate = true;
+                    }
+                }
+            }
+            if(internalAI[6] > 600)
+            {
+                internalAI[6] = 0;
+            }
         }
     }
 }

@@ -121,6 +121,14 @@ namespace AAModEXAI.Bosses.Athena.Olympian.AthenaSister
             }
         }
 
+		public override bool PreDraw(SpriteBatch spritebatch, Color dColor)
+        {
+            Texture2D Tex = Main.npcTexture[npc.type];
+
+            BaseDrawing.DrawTexture(spritebatch, Tex, 0, npc.position, npc.width, npc.height, npc.scale, npc.rotation, npc.direction, Main.npcFrameCount[npc.type], npc.frame, dColor, true);
+            return false;
+        }
+
 		private NPC parent;
 
 		private int timeAlive;

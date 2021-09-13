@@ -140,7 +140,7 @@ namespace AAModEXAI.Bosses.Athena.Olympian.AthenaSister
 			if (npc.life < npc.lifeMax / 2 && npc.ai[3] < 50f)
 			{
 				npc.ai[3] = 50f;
-				NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("FallenAngleForcefield"), 0, (float)npc.whoAmI, 0f, 0f, 0f, 255);
+				if (Main.netMode != NetmodeID.MultiplayerClient) NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("FallenAngleForcefield"), 0, (float)npc.whoAmI, 0f, 0f, 0f, 255);
 			}
 			if (npc.ai[3] >= 50f)
 			{
