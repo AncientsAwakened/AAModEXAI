@@ -9,12 +9,16 @@ Changes in 1.0.0.2:
 
 1.Fix the problem FA and ZP jumping on player's face.
 
-2.Buff the YamataA and AkumaA.
+2.Fix the unclearly ZP bullet
 
-3.Buff the CRajah.
+3.Buff the YamataA and AkumaA.
 
-4.Nerf the ShenA.
+4.Buff the Athena and GreedA.
 
-5.Add some accessories for the Challengers.
+5.Buff the CRajah.
+
+6.Nerf the ShenA.
+
+7.Add some accessories for the Challengers.
 
 WARNING: This mod will seriously affect your normal playthrough. If some bosses are too powerful for you to defeat, this is very much the norm. That's why we nerf them. Maybe you can try your best and figure out how to defeat them.
