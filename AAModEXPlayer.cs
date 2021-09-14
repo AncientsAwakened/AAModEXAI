@@ -44,7 +44,8 @@ namespace AAModEXAI
 
         public override void OnEnterWorld(Player player)
 		{
-			Main.NewText("WARNING: SUPER AAMOD AI Detected. It will influence your playthrough seriously. If you are a new AA player, it is not recommended to experience it. ", 67, 110, 238, false);
+			Main.NewText("WARNING: SUPER AAMOD AI Detected. It is a fanmade mod and will influence your playthrough seriously. If you are a new AA player, it is not recommended to experience it. ", 67, 110, 238, false);
+            Main.NewText("This mod matches with the AAMod version 1.0.3.2.", 67, 110, 238, false);
             Main.NewText("GLHF.", 67, 110, 238, false);
 		}
 
