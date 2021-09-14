@@ -38,6 +38,7 @@ namespace AAModEXAI.Bosses.Yamata
             npc.boss = false;
             npc.noGravity = true;
             npc.damage = 140;
+            npc.defense = 100;
             NPCID.Sets.TechnicallyABoss[npc.type] = true;
             npc.DeathSound = ModLoader.GetMod("AAMod").GetLegacySoundSlot(SoundType.NPCKilled, "Sounds/Sounds/YamataRoar");
             for (int k = 0; k < npc.buffImmune.Length; k++)
@@ -133,9 +134,9 @@ namespace AAModEXAI.Bosses.Yamata
                 BaseAI.AIFlier(npc, ref customAI, true, .5f, .8f, 5, 5, false, 300);
             }
             else
-            if (dist < 40f)
+            if (dist < 60f)
             {
-                npc.velocity *= 0.9f;
+                npc.velocity *= 0.81f;
                 if (Math.Abs(npc.velocity.X) < 0.05f) npc.velocity.X = 0f;
                 if (Math.Abs(npc.velocity.Y) < 0.05f) npc.velocity.Y = 0f;
             }
@@ -194,7 +195,7 @@ namespace AAModEXAI.Bosses.Yamata
             {
                 if (npc.alpha <= 0)
                 {
-                    npc.ai[1]++; ;
+                    npc.ai[1]++;
                 }
                 int aiTimerFire = npc.whoAmI % 3 == 0 ? 50 : npc.whoAmI % 2 == 0 ? 150 : 100;
                 if (leftHead) aiTimerFire += 30;

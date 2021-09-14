@@ -29,7 +29,7 @@ namespace AAModEXAI.Bosses.Yamata
             projectile.tileCollide = false;
             projectile.ignoreWater = true;
             projectile.penetrate = 4; //
-            projectile.timeLeft = 300;
+            projectile.timeLeft = 1200;
             projectile.aiStyle = 1; //
             aiType = ProjectileID.Bullet;
         }
@@ -117,6 +117,10 @@ namespace AAModEXAI.Bosses.Yamata
                 Main.dust[num580].velocity *= 2f;
                 num580 = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, ModContent.DustType<AAMod.Dusts.YamataDust>(), -projectile.velocity.X * 0.2f, -projectile.velocity.Y * 0.2f, 100);
                 Main.dust[num580].velocity *= 2f;
+            }
+            if(Main.netMode != NetmodeID.MultiplayerClient && NPC.AnyNPCs(mod.NPCType("Yamata")))
+            {
+                int soul = NPC.NewNPC((int)projectile.Center.X, (int)projectile.Center.Y, mod.NPCType("YamataSnake"));
             }
         }
 

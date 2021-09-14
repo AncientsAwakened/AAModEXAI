@@ -1,9 +1,11 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
 using AAModEXAI.Dusts;
+using AAMod;
 
 namespace AAModEXAI.Bosses.Athena.Olympian.AthenaSister
 {

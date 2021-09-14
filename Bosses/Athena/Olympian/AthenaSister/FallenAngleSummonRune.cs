@@ -51,7 +51,7 @@ namespace AAModEXAI.Bosses.Athena.Olympian.AthenaSister
                     npc.alpha = 0;
                 }
             }
-            else if(npc.ai[0] == 360f Main.netMode != NetmodeID.MultiplayerClient)
+            else if(npc.ai[0] == 360f && Main.netMode != NetmodeID.MultiplayerClient)
             {
 
                 int boss = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("VariaFallenAngel"));
