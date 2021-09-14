@@ -69,8 +69,7 @@ namespace AAModEXAI.Bosses.Athena.Olympian.AthenaSister
 
 		public override void BossLoot(ref string name, ref int potionType)
 		{
-			if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat("It's the contradiction between you two. I will not disturb you.", Color.AntiqueWhite);
-			if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat("By the way, Varia is a great mod. Welcome to visit us.", Color.AntiqueWhite);
+			if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat("It's the contradiction between you two. I won't interfere.", Color.AntiqueWhite);
 			npc.netUpdate = true;
 			potionType = 499;
 
@@ -87,53 +86,15 @@ namespace AAModEXAI.Bosses.Athena.Olympian.AthenaSister
 				}
 				if(timer == 240)
 				{
-					if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat("I'm busy in Varia Mod. ", Color.AntiqueWhite);
+					if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat("I'm busy in Varia Mod", Color.AntiqueWhite);
 					npc.netUpdate = true;
-				}
-				if(timer == 300)
-				{
-					for(int proj = 0; proj < 1000; proj ++)
-					{
-						if (Main.projectile[proj].active && Main.projectile[proj].friendly && !Main.projectile[proj].hostile)
-						{
-							Main.projectile[proj].hostile = true;
-							Main.projectile[proj].friendly = false;
-							Vector2 vector = Main.projectile[proj].Center - npc.Center;
-							vector.Normalize();
-							Vector2 reflectvelocity = new Vector2(Main.rand.Next(-100, 101), Main.rand.Next(-100, 101));
-							reflectvelocity.Normalize();
-							reflectvelocity *= vector.Length();
-							reflectvelocity += vector * 20f;
-							reflectvelocity.Normalize();
-							reflectvelocity *= vector.Length();
-							if(reflectvelocity.Length() < 20f)
-							{
-								reflectvelocity.Normalize();
-								reflectvelocity *= 20f;
-							}
-
-							Main.projectile[proj].penetrate = 1;
-
-							Main.projectile[proj].GetGlobalProjectile<AAModEXAIGlobalProjectile>().reflectvelocity = reflectvelocity;
-							Main.projectile[proj].GetGlobalProjectile<AAModEXAIGlobalProjectile>().isReflecting = true;
-							Main.projectile[proj].GetGlobalProjectile<AAModEXAIGlobalProjectile>().ReflectConter = 180;
-						}
-					}
-					int b = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0f, 0f, ModLoader.GetMod("AAMod").ProjectileType("ShockwaveBoom"), 0, 0, Main.myPlayer, 0, 10);
-					Main.projectile[b].Center = npc.Center;
 				}
 				if(timer == 360)
 				{
 					if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat("Oh, the earthwalker! He will be in trouble.", Color.AntiqueWhite);
 					npc.netUpdate = true;
-
 					timer = 400f;
 				}
-				if(npc.alpha-- < 0)
-				{
-					npc.alpha = 0;
-				}
-				return;
 			}
 			
 
@@ -154,7 +115,7 @@ namespace AAModEXAI.Bosses.Athena.Olympian.AthenaSister
 				}
 			}
 			Player player = Main.player[npc.target];
-			if (!Main.player[npc.target].dead && Main.npc[(int)AthenaA].active && Main.npc[(int)AthenaA].type == mod.NPCType("AthenaA"))
+			if (!Main.player[npc.target].dead || (Main.npc[(int)AthenaA].active && Main.npc[(int)AthenaA].type == mod.NPCType("AthenaA")))
 			{
 				despawn = 0;
 				BaseAI.AISpaceOctopus(npc, ref npc.ai, 0.15f, 10f, 300f, 70f, null);
@@ -175,16 +136,20 @@ namespace AAModEXAI.Bosses.Athena.Olympian.AthenaSister
 				{
 					if(!Main.npc[(int)AthenaA].active || Main.npc[(int)AthenaA].type != mod.NPCType("AthenaA"))
 					{
-						if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat("It's the contradiction between you two. I will not disturb you.", Color.AntiqueWhite);
+						if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat("It's the contradiction between you two. I won't interfere.", Color.AntiqueWhite);
+						npc.netUpdate = true;
 					}
 					else if(Main.player[npc.target].dead)
 					{
 						if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat("Okey! I'm going back.", Color.AntiqueWhite);
+						npc.netUpdate = true;
 					}
-					if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat("By the way, Varia is a great mod. Welcome to visit us.", Color.AntiqueWhite);
-					npc.netUpdate = true;
 					npc.active = false;
 				}
+			}
+			if (turretTime == 1 || turretTime == 61 || turretTime == 121)
+			{
+				NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("OrbitingTurret"), 0, (float)npc.whoAmI, 0f, 0f, 0f, 255);
 			}
 			npc.ai[1] += 1f;
 			if (npc.ai[0] <= 2f)
@@ -342,7 +307,7 @@ namespace AAModEXAI.Bosses.Athena.Olympian.AthenaSister
 		{
 			npc.spriteDirection = npc.direction;
 			npc.frameCounter += 1.0;
-			if (npc.frameCounter >= 6.0)
+			if (npc.frameCounter >= 3.0)
 			{
 				npc.frame.Y = (npc.frame.Y / frameHeight + 1) % Main.npcFrameCount[npc.type] * frameHeight;
 				npc.frameCounter = 0.0;

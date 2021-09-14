@@ -53,10 +53,37 @@ namespace AAModEXAI.Bosses.Athena.Olympian.AthenaSister
             }
             else if(npc.ai[0] == 360f Main.netMode != NetmodeID.MultiplayerClient)
             {
+                for(int proj = 0; proj < 1000; proj ++)
+                {
+                    if (Main.projectile[proj].active && Main.projectile[proj].friendly && !Main.projectile[proj].hostile)
+                    {
+                        Main.projectile[proj].hostile = true;
+                        Main.projectile[proj].friendly = false;
+                        Vector2 vector = Main.projectile[proj].Center - npc.Center;
+                        vector.Normalize();
+                        Vector2 reflectvelocity = new Vector2(Main.rand.Next(-100, 101), Main.rand.Next(-100, 101));
+                        reflectvelocity.Normalize();
+                        reflectvelocity *= vector.Length();
+                        reflectvelocity += vector * 20f;
+                        reflectvelocity.Normalize();
+                        reflectvelocity *= vector.Length();
+                        if(reflectvelocity.Length() < 20f)
+                        {
+                            reflectvelocity.Normalize();
+                            reflectvelocity *= 20f;
+                        }
 
-                int boss = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("VariaFallenAngel"));
-                Main.npc[boss].alpha = 255;
-                Main.npc[boss].Center = npc.Center;
+                        Main.projectile[proj].penetrate = 1;
+
+                        Main.projectile[proj].GetGlobalProjectile<AAModEXAIGlobalProjectile>().reflectvelocity = reflectvelocity;
+                        Main.projectile[proj].GetGlobalProjectile<AAModEXAIGlobalProjectile>().isReflecting = true;
+                        Main.projectile[proj].GetGlobalProjectile<AAModEXAIGlobalProjectile>().ReflectConter = 180;
+                    }
+                }
+                int b = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0f, 0f, ModLoader.GetMod("AAMod").ProjectileType("ShockwaveBoom"), 0, 0, Main.myPlayer, 0, 10);
+                Main.projectile[b].Center = npc.Center;
+
+                int boss = NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType("VariaFallenAngel"));
                 ((VariaFallenAngel)Main.npc[boss].modNPC).AthenaA = npc.ai[1];
             }
             else
@@ -71,6 +98,44 @@ namespace AAModEXAI.Bosses.Athena.Olympian.AthenaSister
             }
             npc.ai[0] += 1f;
             Lighting.AddLight(npc.Center, 0f, 0.85f, 0.9f);
+            if (npc.alpha < 150 && npc.ai[0] < 360f)
+            {
+                for (int num843 = 0; num843 < 1; num843++)
+                {
+                    float num844 = (float)Main.rand.NextDouble() * 1f - 0.5f;
+                    if (num844 < -0.5f)
+                    {
+                        num844 = -0.5f;
+                    }
+                    if (num844 > 0.5f)
+                    {
+                        num844 = 0.5f;
+                    }
+                    Vector2 value47 = new Vector2(-npc.width * 0.2f * npc.scale, 0f).RotatedBy(num844 * 6.28318548f, default).RotatedBy(npc.velocity.ToRotation(), default);
+                    int num845 = Dust.NewDust(npc.Center - Vector2.One * 5f, 10, 10, 226, -npc.velocity.X / 3f, -npc.velocity.Y / 3f, 150, Color.Transparent, 0.7f);
+                    Main.dust[num845].position = npc.Center + value47;
+                    Main.dust[num845].velocity = Vector2.Normalize(Main.dust[num845].position - npc.Center) * 2f;
+                    Main.dust[num845].noGravity = true;
+                }
+                for (int num846 = 0; num846 < 1; num846++)
+                {
+                    float num847 = (float)Main.rand.NextDouble() * 1f - 0.5f;
+                    if (num847 < -0.5f)
+                    {
+                        num847 = -0.5f;
+                    }
+                    if (num847 > 0.5f)
+                    {
+                        num847 = 0.5f;
+                    }
+                    Vector2 value48 = new Vector2(-npc.width * 0.6f * npc.scale, 0f).RotatedBy(num847 * 6.28318548f, default).RotatedBy(npc.velocity.ToRotation(), default);
+                    int num848 = Dust.NewDust(npc.Center - Vector2.One * 5f, 10, 10, 226, -npc.velocity.X / 3f, -npc.velocity.Y / 3f, 150, Color.Transparent, 0.7f);
+                    Main.dust[num848].velocity = Vector2.Zero;
+                    Main.dust[num848].position = npc.Center + value48;
+                    Main.dust[num848].noGravity = true;
+                }
+                return;
+            }
         }
 
         public override bool PreDraw(SpriteBatch sb, Color drawColor)
