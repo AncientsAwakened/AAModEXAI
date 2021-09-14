@@ -5,6 +5,8 @@ The power of the Ancients in this mod is based on the original design.
 
 You must be familiar with each weapons in AAMod, which could help you with choosing the best weapons.
 
+However it is a fanmade mod which fixes the bugs and adjusts the boss difficulty, which doesn't have the relationship to the new AA's progress.
+
 Changes in 1.0.0.2:
 
 1.Fix the problem FA and ZP jumping on player's face.
