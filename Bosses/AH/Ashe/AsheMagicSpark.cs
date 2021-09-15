@@ -2,11 +2,11 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+
 using Terraria;
-using Terraria.ModLoader;using AAMod;
 using Terraria.ID;
- 
-using AAMod.Globals;
+using Terraria.ModLoader;
+
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.AH.Ashe
@@ -64,7 +64,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
 
         public override void OnHitPlayer(Player target, int damage, bool crit)
         {
-            target.AddBuff(ModLoader.GetMod("AAMod").BuffType("DragonFire"), 600);
+            target.AddBuff(ModContent.BuffType<DeBuffs.DragonFire>(), 600);
         }
 
         public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)

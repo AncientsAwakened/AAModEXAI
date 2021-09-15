@@ -151,6 +151,19 @@ namespace AAModEXAI.Localization
                 else if(index == 1) info = "别再叫我遥酱了...从现在起.";
                 else if(index == 2) info = "Пожалуйста, больше никогда не называй меня Хаки...";
             }
+
+            if(info == "HarukaDowned")
+            {
+                if(index == 0) info = "Rgh..! Ow...";
+                else if(index == 1) info = "啊. . ! 哦啊...";
+                else if(index == 2) info = "Ргх..! Ау...";
+            }
+            if(info == "AsheDowned")
+            {
+                if(index == 0) info = "OW..! THAT HURT, YOU MEANIE!";
+                else if(index == 1) info = "哦 啊. . ! 很 疼, 你 这 个 小 鬼!";
+                else if(index == 2) info = "АУЧ..! ВООБЩЕ ТО БОЛЬНО, ПРИДУРОК!";
+            }
         }
     }
 }

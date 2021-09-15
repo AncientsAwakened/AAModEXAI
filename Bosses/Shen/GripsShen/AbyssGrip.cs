@@ -94,7 +94,7 @@ namespace AAModEXAI.Bosses.Shen.GripsShen
 
         public override void ModifyHitPlayer(Player target, ref int damage, ref bool crit)
         {
-            target.AddBuff(ModLoader.GetMod("AAMod").BuffType("HydraToxin"), 180);
+            target.AddBuff(ModContent.BuffType<DeBuffs.HydraToxin>(), 180);
         }
 
         public override void BossLoot(ref string name, ref int potionType)

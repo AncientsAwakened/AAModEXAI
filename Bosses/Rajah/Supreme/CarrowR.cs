@@ -40,7 +40,7 @@ namespace AAModEXAI.Bosses.Rajah.Supreme
         public override void Kill(int timeleft)
         {
             int Split = Main.rand.Next(2, 4);
-            Main.PlaySound(0, (int)projectile.position.X, (int)projectile.position.Y, 1);
+            Main.PlaySound(SoundID.Dig, (int)projectile.position.X, (int)projectile.position.Y, 1);
             float spread = 12f * 0.0174f;
             double startAngle = Math.Atan2(projectile.velocity.X, projectile.velocity.Y) - spread / 2;
             double deltaAngle = spread / Split;

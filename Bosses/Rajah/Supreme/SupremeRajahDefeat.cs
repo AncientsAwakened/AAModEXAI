@@ -62,7 +62,7 @@ namespace AAModEXAI.Bosses.Rajah.Supreme
             if (npc.ai[0] >= 600)
             {
                 npc.ai[1] = 1;
-                music = ModLoader.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/ThinkAboutIt");
+                music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/ThinkAboutIt");
                 npc.netUpdate = true;
             }
             if (npc.ai[0] == 600)

@@ -97,7 +97,7 @@ namespace AAModEXAI
                 npc.life = 0;
                 if(Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    int id = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("Ashe"));
+                    int id = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<Bosses.AH.Ashe.Ashe>());
                     Main.npc[id].position = npc.position;
                     npc.netUpdate = true;
                 }
@@ -386,7 +386,7 @@ namespace AAModEXAI
                 }
                 return base.PreAI(npc);
             }
-            if(npc.type == mod.NPCType("Ashe"))
+            if(npc.type == ModContent.NPCType<Bosses.AH.Ashe.Ashe>())
             {
                 if(!title)
                 {

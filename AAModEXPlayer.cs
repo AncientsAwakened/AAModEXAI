@@ -1,6 +1,12 @@
-using Terraria.ModLoader;
+using System;
+using Microsoft.Xna.Framework;
+
 using Terraria;
-using AAModEXAI.Buffs;
+using Terraria.ID;
+using Terraria.ModLoader;
+using Terraria.DataStructures;
+
+using AAModEXAI.Dusts;
 using AAModEXAI.Bosses.Akuma;
 using AAModEXAI.Bosses.Akuma.Awakened;
 using AAModEXAI.Bosses.Athena;
@@ -12,20 +18,14 @@ using AAModEXAI.Bosses.Zero;
 using AAModEXAI.Bosses.Zero.Protocol;
 using AAModEXAI.Bosses.Anubis.Forsaken;
 
-using System;
-using Microsoft.Xna.Framework;
-using AAMod;
-using Terraria.ID;
-using Terraria.DataStructures;
- 
-using AAMod.Globals;
-using AAModEXAI.Dusts;
-
 namespace AAModEXAI
 {
 	public class AAModEXPlayer : ModPlayer
 	{
         #region Buff bools
+        public bool dragonFire = false;
+        public bool hydraToxin = false;
+
         public bool AkumaPain = false;
         public bool YamataGravity = false;
         public bool YamataAGravity = false;
@@ -54,6 +54,23 @@ namespace AAModEXAI
 
         public override void ResetEffects()
         {
+            dragonFire = false;
+            hydraToxin = false;
+            AkumaPain = false;
+            YamataGravity = false;
+            YamataAGravity = false;
+            Yanked = false;
+            Unstable = false;
+
+            DragonSerpentNecklace = false;
+            ForbiddenTele = false;
+            Spellreflow = false;
+        }
+
+        public override void UpdateDead()
+        {
+            dragonFire = false;
+            hydraToxin = false;
             AkumaPain = false;
             YamataGravity = false;
             YamataAGravity = false;
@@ -85,10 +102,22 @@ namespace AAModEXAI
 
                 player.lifeRegenTime = 0;
 
-                if ((player.onFire || player.frostBurn || player.onFire2 || modPlayer.dragonFire || modPlayer.discordInferno) && player.lifeRegen < 0)
+                if ((player.onFire || player.frostBurn || player.onFire2 || dragonFire || modPlayer.dragonFire || modPlayer.discordInferno) && player.lifeRegen < 0)
                 {
                     player.lifeRegen *= 2;
                 }
+            }
+
+            if (hydraToxin)
+            {
+                if (player.lifeRegen > 0)
+                {
+                    player.lifeRegen = 0;
+                }
+
+                player.lifeRegenTime = 0;
+
+                player.lifeRegen -= Math.Abs((int)player.velocity.X) * 2;
             }
         }
 
@@ -269,20 +298,20 @@ namespace AAModEXAI
 
                     if (akuma.ai[0] >= 660)
                     {
-                        player.AddBuff(ModContent.BuffType<Buffs.BlazingPain>(), 2);
+                        player.AddBuff(ModContent.BuffType<DeBuffs.BlazingPain>(), 2);
                     }
                 }
                 else if(Main.npc[i].type == ModContent.NPCType<Bosses.Akuma.Awakened.AkumaA>())
                 {
-                    player.AddBuff(ModContent.BuffType<Buffs.BlazingPain>(), 2);
+                    player.AddBuff(ModContent.BuffType<DeBuffs.BlazingPain>(), 2);
                 }
                 else if(Main.npc[i].type == ModContent.NPCType<Bosses.Yamata.Yamata>())
                 {
-                    player.AddBuff(ModContent.BuffType<Buffs.YamataGravity>(), 10);
+                    player.AddBuff(ModContent.BuffType<DeBuffs.YamataGravity>(), 10);
                 }
                 else if(Main.npc[i].type == ModContent.NPCType<Bosses.Yamata.Awakened.YamataA>())
                 {
-                    player.AddBuff(ModContent.BuffType<Buffs.YamataAGravity>(), 10);
+                    player.AddBuff(ModContent.BuffType<DeBuffs.YamataAGravity>(), 10);
                     DistancetoYamata = (player.Center - Main.npc[i].Center).Length();
                     if(/* player.velocity + player.Center - Main.npc[i].Center).Length() > DistancetoYamata */ DistancetoYamata > 0 && YamataAGravity)
                     {
@@ -296,8 +325,8 @@ namespace AAModEXAI
 
                     if (((ShenA)shen.modNPC).halfLifeAIChange)
                     {
-                        player.AddBuff(ModContent.BuffType<Buffs.YamataAGravity>(), 10, true);
-                        player.AddBuff(ModContent.BuffType<Buffs.BlazingPain>(), 10, true);
+                        player.AddBuff(ModContent.BuffType<DeBuffs.YamataAGravity>(), 10, true);
+                        player.AddBuff(ModContent.BuffType<DeBuffs.BlazingPain>(), 10, true);
                     }
                 }
 
@@ -308,8 +337,8 @@ namespace AAModEXAI
 
                     if (revenge && (Main.npc[i].type == ModContent.NPCType<Bosses.Shen.Shen>() || Main.npc[i].type == ModContent.NPCType<Bosses.Shen.ShenA>()))
                     {
-                        player.AddBuff(ModContent.BuffType<Buffs.YamataAGravity>(), 10, true);
-                        player.AddBuff(ModContent.BuffType<Buffs.BlazingPain>(), 10, true);
+                        player.AddBuff(ModContent.BuffType<DeBuffs.YamataAGravity>(), 10, true);
+                        player.AddBuff(ModContent.BuffType<DeBuffs.BlazingPain>(), 10, true);
                     }
                 }
             }

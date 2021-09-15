@@ -1,17 +1,14 @@
 using System;
+using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.IO;
+
 using Terraria;
 using Terraria.ID;
-using AAModEXAI.Bosses.Akuma.Awakened;
-
 using Terraria.ModLoader;
-using AAMod;
-using Terraria.ID;
- 
-using AAMod.Globals;
+
 using AAModEXAI.Dusts;
+using AAModEXAI.Bosses.Akuma.Awakened;
 
 namespace AAModEXAI.Bosses.AH.Ashe
 {
@@ -85,7 +82,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
             body = (int)npc.ai[0];
             if (body == -1)
             {
-                int npcID = BaseAI.GetNPC(npc.Center, mod.NPCType("Ashe"), 120f, null);
+                int npcID = BaseAI.GetNPC(npc.Center, ModContent.NPCType<Bosses.AH.Ashe.Ashe>(), 120f, null);
                 if (npcID >= 0) body = npcID;
                 else
                 {
@@ -96,7 +93,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
             if (body == -1) return;
 
             NPC ashe = Main.npc[body];
-            if (ashe == null || ashe.life <= 0 || !ashe.active || (ashe.type != mod.NPCType("Ashe") && ashe.type != ModContent.NPCType<AsheA>())) { npc.active = false; return; }
+            if (ashe == null || ashe.life <= 0 || !ashe.active || (ashe.type != ModContent.NPCType<Bosses.AH.Ashe.Ashe>() && ashe.type != ModContent.NPCType<AsheA>())) { npc.active = false; return; }
 
             for (int m = npc.oldPos.Length - 1; m > 0; m--)
             {
@@ -119,7 +116,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
             for (int i = 0; i < 6; i++)
             {
                 offsetAngle = startAngle + deltaAngle * (i + i * i) / 2f + 32f * i;
-                Projectile.NewProjectile(npc.Center.X, npc.Center.Y, (float)(Math.Sin(offsetAngle) * 7f), (float)(Math.Cos(offsetAngle) * 7f), mod.ProjectileType("AsheMagicSpark"), npc.damage / 2, 0, Main.myPlayer, 0f, 0f);
+                Projectile.NewProjectile(npc.Center.X, npc.Center.Y, (float)(Math.Sin(offsetAngle) * 7f), (float)(Math.Cos(offsetAngle) * 7f), ModContent.ProjectileType<AsheMagicSpark>(), npc.damage / 2, 0, Main.myPlayer, 0f, 0f);
             }
         }
 

@@ -97,7 +97,7 @@ namespace AAModEXAI.Bosses.Shen.Projectiles
 
         public override void OnHitPlayer(Player target, int damage, bool crit)
         {
-            target.AddBuff(ModLoader.GetMod("AAMod").BuffType("HydraToxin"), 180);
+            target.AddBuff(ModContent.BuffType<DeBuffs.HydraToxin>(), 180);
         }
 
         public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
@@ -194,7 +194,7 @@ namespace AAModEXAI.Bosses.Shen.Projectiles
 
         public override void OnHitPlayer(Player target, int damage, bool crit)
         {
-            target.AddBuff(ModLoader.GetMod("AAMod").BuffType("DragonFire"), 180);
+            target.AddBuff(ModContent.BuffType<DeBuffs.DragonFire>(), 180);
         }
 
         public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)

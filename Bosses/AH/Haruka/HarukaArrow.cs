@@ -1,10 +1,10 @@
-using Terraria;
-using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;using AAMod;
+using Microsoft.Xna.Framework.Graphics;
+
+using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
  
-using AAMod.Globals;
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.AH.Haruka
@@ -36,7 +36,7 @@ namespace AAModEXAI.Bosses.AH.Haruka
 
         public override void OnHitPlayer(Player target, int damage, bool crit)
         {
-            target.AddBuff(ModLoader.GetMod("AAMod").BuffType("HydraToxin"), 180);
+            target.AddBuff(ModContent.BuffType<DeBuffs.HydraToxin>(), 180);
             projectile.netUpdate = true;
         }
 
@@ -58,7 +58,7 @@ namespace AAModEXAI.Bosses.AH.Haruka
 			{
 			     Dust.NewDust(projectile.position + projectile.velocity, projectile.width, projectile.height, ModContent.DustType<CthulhuAuraDust>(), projectile.oldVelocity.X * 0.1f, projectile.oldVelocity.Y * 0.1f);
 			}
-			Main.PlaySound(0, (int)projectile.position.X, (int)projectile.position.Y, 0);
+			Main.PlaySound(SoundID.Dig, (int)projectile.position.X, (int)projectile.position.Y, 0);
 			
 		}
 	}

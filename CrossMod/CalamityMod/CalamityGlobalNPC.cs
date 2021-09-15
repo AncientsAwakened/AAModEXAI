@@ -29,7 +29,7 @@ namespace AAModEXAI
                 if(npc.type == mod.NPCType("Naddaha")) CalamityDR = 0.55f;
                 if(npc.type == mod.NPCType("HorusSentry")) CalamityDR = 0.55f;
 
-                if(npc.type == mod.NPCType("Ashe")) CalamityDR = 0.3f;
+                if(npc.type == ModContent.NPCType<Bosses.AH.Ashe.Ashe>()) CalamityDR = 0.3f;
                 if(npc.type == mod.NPCType("AsheDragon")) CalamityDR = 0.3f;
                 if(npc.type == mod.NPCType("AsheOrbiter")) CalamityDR = 0.4f;
 

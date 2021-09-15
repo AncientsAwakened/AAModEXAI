@@ -1,10 +1,9 @@
 using Terraria;
 using Terraria.ModLoader;
- 
-using AAMod.Globals;
+
 using AAModEXAI.Dusts;
 
-namespace AAModEXAI.Buffs
+namespace AAModEXAI.DeBuffs
 {
     public class Unstable : ModBuff
 	  {

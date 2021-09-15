@@ -1,11 +1,11 @@
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+
 using Terraria;
-using Terraria.ModLoader;using AAMod;
 using Terraria.ID;
- 
-using AAMod.Globals;
+using Terraria.ModLoader;
+
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.AH.Ashe
@@ -54,7 +54,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
 
         public override bool PreDraw(SpriteBatch spritebatch, Color dColor)
         {
-            Texture2D glowTex = ModLoader.GetMod("AAMod").GetTexture("Glowmasks/AsheSpawn_Glow");
+            Texture2D glowTex = mod.GetTexture("Bosses/AH/Ashe/AsheGlow/AsheSpawn_Glow");
             
             BaseDrawing.DrawTexture(spritebatch, Main.npcTexture[npc.type], 0, npc.position, npc.width, npc.height, npc.scale, npc.rotation, npc.direction, 16, npc.frame, dColor, true);
             BaseDrawing.DrawTexture(spritebatch, glowTex, 0, npc.position, npc.width, npc.height, npc.scale, npc.rotation, npc.direction, 16, npc.frame, Color.White, true);

@@ -4,10 +4,8 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.ID;
-using Terraria.ModLoader;using AAMod;
-using Terraria.ID;
- 
-using AAMod.Globals;
+using Terraria.ModLoader;
+
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.AH.Ashe
@@ -406,14 +404,12 @@ namespace AAModEXAI.Bosses.AH.Ashe
                 int dust1 = ModContent.DustType<AkumaDust>();
                 Dust.NewDust(npc.position, npc.width, npc.height, dust1, 0f, 0f, 0);
                 Main.dust[dust1].velocity *= 0.5f;
-                Main.dust[dust1].scale *= 1.3f;
                 Main.dust[dust1].fadeIn = 1f;
                 Main.dust[dust1].noGravity = false;
 
                 int dust2 = ModContent.DustType<AkumaDust>();
                 Dust.NewDust(npc.position, npc.width, npc.height, dust2, 0f, 0f, 0);
                 Main.dust[dust2].velocity *= 0.5f;
-                Main.dust[dust2].scale *= 1.3f;
                 Main.dust[dust2].fadeIn = 1f;
                 Main.dust[dust2].noGravity = true;
             }
@@ -557,14 +553,12 @@ namespace AAModEXAI.Bosses.AH.Ashe
                 int dust1 = ModContent.DustType<AkumaDust>();
                 Dust.NewDust(npc.position, npc.width, npc.height, dust1, 0f, 0f, 0);
                 Main.dust[dust1].velocity *= 0.5f;
-                Main.dust[dust1].scale *= 1.3f;
                 Main.dust[dust1].fadeIn = 1f;
                 Main.dust[dust1].noGravity = false;
 
                 int dust2 = ModContent.DustType<AkumaDust>();
                 Dust.NewDust(npc.position, npc.width, npc.height, dust2, 0f, 0f, 0);
                 Main.dust[dust2].velocity *= 0.5f;
-                Main.dust[dust2].scale *= 1.3f;
                 Main.dust[dust2].fadeIn = 1f;
                 Main.dust[dust2].noGravity = true;
             }
@@ -702,14 +696,12 @@ namespace AAModEXAI.Bosses.AH.Ashe
                 int dust1 = ModContent.DustType<AkumaDust>();
                 Dust.NewDust(npc.position, npc.width, npc.height, dust1, 0f, 0f, 0);
                 Main.dust[dust1].velocity *= 0.5f;
-                Main.dust[dust1].scale *= 1.3f;
                 Main.dust[dust1].fadeIn = 1f;
                 Main.dust[dust1].noGravity = false;
 
                 int dust2 = ModContent.DustType<AkumaDust>();
                 Dust.NewDust(npc.position, npc.width, npc.height, dust2, 0f, 0f, 0);
                 Main.dust[dust2].velocity *= 0.5f;
-                Main.dust[dust2].scale *= 1.3f;
                 Main.dust[dust2].fadeIn = 1f;
                 Main.dust[dust2].noGravity = true;
             }
@@ -846,14 +838,12 @@ namespace AAModEXAI.Bosses.AH.Ashe
                 int dust1 = ModContent.DustType<AkumaDust>();
                 Dust.NewDust(npc.position, npc.width, npc.height, dust1, 0f, 0f, 0);
                 Main.dust[dust1].velocity *= 0.5f;
-                Main.dust[dust1].scale *= 1.3f;
                 Main.dust[dust1].fadeIn = 1f;
                 Main.dust[dust1].noGravity = false;
 
                 int dust2 = ModContent.DustType<AkumaDust>();
                 Dust.NewDust(npc.position, npc.width, npc.height, dust2, 0f, 0f, 0);
                 Main.dust[dust2].velocity *= 0.5f;
-                Main.dust[dust2].scale *= 1.3f;
                 Main.dust[dust2].fadeIn = 1f;
                 Main.dust[dust2].noGravity = true;
             }
@@ -990,14 +980,12 @@ namespace AAModEXAI.Bosses.AH.Ashe
                 int dust1 = ModContent.DustType<AkumaDust>();
                 Dust.NewDust(npc.position, npc.width, npc.height, dust1, 0f, 0f, 0);
                 Main.dust[dust1].velocity *= 0.5f;
-                Main.dust[dust1].scale *= 1.3f;
                 Main.dust[dust1].fadeIn = 1f;
                 Main.dust[dust1].noGravity = false;
 
                 int dust2 = ModContent.DustType<AkumaDust>();
                 Dust.NewDust(npc.position, npc.width, npc.height, dust2, 0f, 0f, 0);
                 Main.dust[dust2].velocity *= 0.5f;
-                Main.dust[dust2].scale *= 1.3f;
                 Main.dust[dust2].fadeIn = 1f;
                 Main.dust[dust2].noGravity = true;
             }

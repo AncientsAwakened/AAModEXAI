@@ -1,4 +1,10 @@
 
+BuffName.DragonFireBuff=燎狱龙炎
+BuffDescription.DragonFireBuff=持续减少生命值
+
+BuffName.HydraToxinBuff=九头蛇毒
+BuffDescription.HydraToxinBuff=在你身上的时间越长,越能腐蚀你的身体
+
 BuffName.BlazingPain=痛灼
 BuffDescription.BlazingPain=着火debuff对你造成双倍伤害
 

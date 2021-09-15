@@ -1,9 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
+
 using Terraria;
-using Terraria.ModLoader;using AAMod;
 using Terraria.ID;
- 
-using AAMod.Globals;
+using Terraria.ModLoader;
+
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.AH.Ashe
@@ -88,7 +88,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
 
         public override void OnHitPlayer(Player target, int damage, bool crit)
         {
-            target.AddBuff(ModLoader.GetMod("AAMod").BuffType("DragonFire"), 600);
+            target.AddBuff(ModContent.BuffType<DeBuffs.DragonFire>(), 600);
         }
     }
 }

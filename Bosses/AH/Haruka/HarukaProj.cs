@@ -1,11 +1,10 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+
 using Terraria;
 using Terraria.ID;
-using Terraria.ModLoader;using AAMod;
-using Terraria.ID;
- 
-using AAMod.Globals;
+using Terraria.ModLoader;
+
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.AH.Haruka
@@ -36,12 +35,6 @@ namespace AAModEXAI.Bosses.AH.Haruka
 		public override Color? GetAlpha(Color lightColor)
 		{
 			return Color.White;
-		}
-
-		public override void OnHitPlayer(Player target, int damage, bool crit)
-		{
-			projectile.ai[0] += 0.1f;
-			projectile.velocity *= 0.75f;
 		}
 		
 		public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)

@@ -1,10 +1,10 @@
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+
 using Terraria;
 using Terraria.ID;
-using Terraria.ModLoader;using AAMod;
-using Terraria.ID;
+using Terraria.ModLoader;
  
 using AAMod.Globals;
 using AAModEXAI.Dusts;
@@ -137,7 +137,7 @@ namespace AAModEXAI.Bosses.AH.Haruka
 
         public override bool PreDraw(SpriteBatch spritebatch, Color dColor)
         {
-            Texture2D glowTex = ModLoader.GetMod("AAMod").GetTexture("Glowmasks/HarukaVanish_Glow");
+            Texture2D glowTex = mod.GetTexture("Bosses/AH/Haruka/HarukaGlow/HarukaVanish_Glow");
 
             BaseDrawing.DrawTexture(spritebatch, Main.npcTexture[npc.type], 0, npc.position, npc.width, npc.height, npc.scale, npc.rotation, npc.spriteDirection, 17, npc.frame, npc.GetAlpha(dColor), true);
             BaseDrawing.DrawTexture(spritebatch, glowTex, 0, npc.position, npc.width, npc.height, npc.scale, npc.rotation, npc.spriteDirection, 17, npc.frame, Color.White, true);

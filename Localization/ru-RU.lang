@@ -1,4 +1,8 @@
+BuffName.DragonFireBuff=Пламя дракона
+BuffDescription.DragonFireBuff=Уменьшен урон
 
+BuffName.HydraToxinBuff=Гидратоксин
+BuffDescription.HydraToxinBuff=Чем дольше гидратоксин в вас, тем быстрее он пожирает вас 
 
 BuffName.BlazingPain=Палящая боль
 BuffDescription.BlazingPain=Огненные дебаффы наносят вам двойной урон

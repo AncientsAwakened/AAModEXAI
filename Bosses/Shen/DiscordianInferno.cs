@@ -119,7 +119,7 @@ namespace AAModEXAI.Bosses.Shen
 
         public override void OnHitPlayer(Player target, int damage, bool crit)
         {
-            target.AddBuff(projectile.ai[0] == 1 ? ModLoader.GetMod("AAMod").BuffType("DragonFire") : ModLoader.GetMod("AAMod").BuffType("HydraToxin"), 200);
+            target.AddBuff(projectile.ai[0] == 1 ? ModContent.BuffType<DeBuffs.DragonFire>() : ModContent.BuffType<DeBuffs.HydraToxin>(), 200);
         }
     }
 }

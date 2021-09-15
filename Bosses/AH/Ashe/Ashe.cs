@@ -10,6 +10,7 @@ using Terraria.Graphics.Shaders;
 
 using AAModEXAI.Dusts;
 using AAModEXAI.Misc;
+using AAModEXAI.Localization;
 using AAModEXAI.Bosses.AH;
 
 namespace AAModEXAI.Bosses.AH.Ashe
@@ -559,7 +560,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
             }
             int DeathAnim = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<AsheVanish>(), 0);
             Main.npc[DeathAnim].velocity = npc.velocity;
-            if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("AsheDowned"), new Color(102, 20, 48));
+            if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(Trans.text("AH", "AsheDowned"), new Color(102, 20, 48));
             npc.value = 0f;
             npc.boss = false;
         }
@@ -710,7 +711,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
         public override bool PreDraw(SpriteBatch spritebatch, Color dColor)
         {
             Texture2D Tex = Main.npcTexture[npc.type];
-            Texture2D Glow = mod.GetTexture("Bosses/AH/Ashe/Ashe_Glow");
+            Texture2D Glow = mod.GetTexture("Bosses/AH/Ashe/AsheGlow/Ashe_Glow");
 
             Texture2D RingTex = mod.GetTexture("Bosses/AH/Ashe/AsheRing1");
             Texture2D RingTex1 = mod.GetTexture("Bosses/AH/Ashe/AsheRing2");

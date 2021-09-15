@@ -81,7 +81,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 
         public override void OnHitPlayer(Player target, int damage, bool crit)
         {
-            target.AddBuff(ModLoader.GetMod("AAMod").BuffType("DragonFire"), 300);
+            target.AddBuff(ModContent.BuffType<DeBuffs.DragonFire>(), 300);
         }
 
         public override void Kill(int timeLeft)

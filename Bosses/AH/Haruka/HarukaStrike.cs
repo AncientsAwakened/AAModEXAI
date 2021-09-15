@@ -1,9 +1,9 @@
 using Microsoft.Xna.Framework;
+
 using Terraria;
-using Terraria.ModLoader;using AAMod;
+using Terraria.ModLoader;
 using Terraria.ID;
- 
-using AAMod.Globals;
+
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.AH.Haruka
@@ -54,7 +54,7 @@ namespace AAModEXAI.Bosses.AH.Haruka
 
         public override void OnHitPlayer(Player target, int damage, bool crit)
         {
-            target.AddBuff(ModLoader.GetMod("AAMod").BuffType("HydraToxin"), 200);
+            target.AddBuff(ModContent.BuffType<DeBuffs.HydraToxin>(), 200);
         }
 
         public override void Kill(int timeLeft)

@@ -1,9 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.ModLoader;using AAMod;
+using Terraria.ModLoader;
 using Terraria.ID;
- 
-using AAMod.Globals;
+
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.AH.Ashe
@@ -137,13 +136,13 @@ namespace AAModEXAI.Bosses.AH.Ashe
         }
         public override void OnHitPlayer(Player target, int damage, bool crit)
         {
-            target.AddBuff(ModLoader.GetMod("AAMod").BuffType("DragonFire"), 600);
+            target.AddBuff(ModContent.BuffType<DeBuffs.DragonFire>(), 600);
         }
 
         public override void Kill(int timeLeft)
         {
             Main.PlaySound(new Terraria.Audio.LegacySoundStyle(2, 124, Terraria.Audio.SoundType.Sound));
-            int id = Projectile.NewProjectile(projectile.Center, new Vector2(0, 0), mod.ProjectileType("AsheStrike"), projectile.damage, 5);
+            int id = Projectile.NewProjectile(projectile.Center, new Vector2(0, 0), ModContent.ProjectileType<AsheStrike>(), projectile.damage, 5);
             if(projectile.ai[1] == 1)
             {
                 Main.projectile[id].hostile = false;

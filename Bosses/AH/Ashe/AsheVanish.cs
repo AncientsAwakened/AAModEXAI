@@ -1,13 +1,12 @@
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+
 using Terraria;
+using Terraria.ID;
 using Terraria.Graphics.Shaders;
-using Terraria.ID;
-using Terraria.ModLoader;using AAMod;
-using Terraria.ID;
- 
-using AAMod.Globals;
+using Terraria.ModLoader;
+
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.AH.Ashe
@@ -59,8 +58,8 @@ namespace AAModEXAI.Bosses.AH.Ashe
 
         public override bool PreDraw(SpriteBatch spritebatch, Color dColor)
         {
-            Texture2D glowTex = ModLoader.GetMod("AAMod").GetTexture("Glowmasks/AsheVanish_Glow2");
-            Texture2D eyeTex = ModLoader.GetMod("AAMod").GetTexture("Glowmasks/AsheVanish_Glow1");
+            Texture2D glowTex = mod.GetTexture("Bosses/AH/Ashe/AsheGlow/AsheVanish_Glow2");
+            Texture2D eyeTex = mod.GetTexture("Bosses/AH/Ashe/AsheGlow/AsheVanish_Glow1");
 
             int blue = GameShaders.Armor.GetShaderIdFromItemId(ItemID.LivingOceanDye);
             int red = GameShaders.Armor.GetShaderIdFromItemId(ItemID.LivingFlameDye);

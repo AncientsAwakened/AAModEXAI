@@ -1,14 +1,15 @@
-using Terraria;
 using System;
-using Terraria.ID;
-using Microsoft.Xna.Framework;
-using Terraria.ModLoader;
-using Microsoft.Xna.Framework.Graphics;
 using System.IO;
-using AAMod;
- 
-using AAMod.Globals;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
+using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
+
+using AAModEXAI.Misc;
 using AAModEXAI.Dusts;
+using AAModEXAI.Localization;
 
 namespace AAModEXAI.Bosses.AH.Haruka
 {
@@ -156,10 +157,10 @@ namespace AAModEXAI.Bosses.AH.Haruka
 
         public override void NPCLoot()
         {
-            int Ashe = NPC.CountNPCS(mod.NPCType("Ashe"));
+            int Ashe = NPC.CountNPCS(ModContent.NPCType<Bosses.AH.Ashe.Ashe>());
             if (Ashe == 0)
             {
-                NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("AHDeath"));
+                NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<AHDeath>());
                 if (Main.expertMode)
                 {
                     for(int i = 0; i < 10; i++) npc.DropBossBags();
@@ -175,8 +176,8 @@ namespace AAModEXAI.Bosses.AH.Haruka
             {
                 Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, ModLoader.GetMod("AAMod").ItemType("HarukaTrophy"));
             }
-            if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("HarukaDowned"), new Color(72, 78, 117));
-            NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("HarukaVanish"));
+            if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(Trans.text("AH", "HarukaDowned"), new Color(72, 78, 117));
+            NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<HarukaVanish>());
 
         }
         public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
@@ -203,7 +204,7 @@ namespace AAModEXAI.Bosses.AH.Haruka
                 damage = npc.damage / 2;
             }
 
-            int Ashe = NPC.CountNPCS(mod.NPCType("Ashe"));
+            int Ashe = NPC.CountNPCS(ModContent.NPCType<Bosses.AH.Ashe.Ashe>());
             bool flag = player.dead || !player.active || Math.Abs(npc.position.X - Main.player[npc.target].position.X) > 6000f || Math.Abs(npc.position.Y - Main.player[npc.target].position.Y) > 6000f;
             if (Ashe == 0)
             {
@@ -212,7 +213,7 @@ namespace AAModEXAI.Bosses.AH.Haruka
                     npc.TargetClosest(false);
                     if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
-                        int DeathAnim = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("HarukaVanish"), 0);
+                        int DeathAnim = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<HarukaVanish>(), 0);
                         Main.npc[DeathAnim].velocity = npc.velocity;
                         Main.npc[DeathAnim].netUpdate = true;
                         npc.active = false;
@@ -299,8 +300,8 @@ namespace AAModEXAI.Bosses.AH.Haruka
                 Backstab();
                 Vector2 targetCenter = player.position + new Vector2(player.width * 0.5f, player.height * 0.5f);
                 Vector2 fireTarget = npc.Center;
-                int projType = mod.ProjectileType("HarukaProj");
-                BaseAI.FireProjectile(targetCenter, fireTarget, projType, damage*1, 0f, 12f);
+                int projType = ModContent.ProjectileType<HarukaProj>();
+                BaseAI.FireProjectile(targetCenter, fireTarget, projType, damage*1, 0f, 14f);
                 internalAI[0] = Main.rand.Next(2);
                 internalAI[5] = 0;
                 npc.netUpdate = true;
@@ -465,7 +466,7 @@ namespace AAModEXAI.Bosses.AH.Haruka
                     if (internalAI[2] == 5 && internalAI[1] == 3 && Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         repeat -= 1;
-                        int projType = mod.ProjectileType("HarukaKunai");
+                        int projType = ModContent.ProjectileType<HarukaKunai>();
                         float spread = 45f * 0.0174f;
                         Vector2 dir = Vector2.Normalize(player.Center - npc.Center);
                         dir *= 14f;
@@ -531,7 +532,7 @@ namespace AAModEXAI.Bosses.AH.Haruka
                     {
                         Vector2 targetCenter = player.position + new Vector2(player.width * 0.5f, player.height * 0.5f);
                         Vector2 fireTarget = npc.Center;
-                        int projType = mod.ProjectileType("HarukaProj");
+                        int projType = ModContent.ProjectileType<HarukaProj>();
                         BaseAI.FireProjectile(targetCenter, fireTarget, projType, damage*1, 0f, 14f);
                         npc.netUpdate = true;
                     }
@@ -649,11 +650,11 @@ namespace AAModEXAI.Bosses.AH.Haruka
 
                 if (internalAI[4] >= 200)
                 {
-                    int projType = mod.ProjectileType("HarukaProj");
+                    int projType = ModContent.ProjectileType<HarukaProj>();
                     float spread = 45f * 0.0174f;
                     Vector2 dir = Vector2.Normalize(player.Center - npc.Center);
                     dir *= 14f;
-                    float baseSpeed = (float)Math.Sqrt((dir.X * dir.X) + (dir.Y * dir.Y));
+                    float baseSpeed = 16f;
                     double startAngle = Math.Atan2(dir.X, dir.Y) - .1d;
                     double deltaAngle = spread / 6f;
 
@@ -671,7 +672,7 @@ namespace AAModEXAI.Bosses.AH.Haruka
                             for (int i = 0; i < strikebackproj; i++)
                             {
                                 double offsetAngle = startAngle + (deltaAngle * i);
-                                Projectile.NewProjectile(npc.Center.X, npc.Center.Y, baseSpeed * (float)Math.Sin(offsetAngle), baseSpeed * (float)Math.Cos(offsetAngle), mod.ProjectileType("HarukaArrow"), damage, 0, Main.myPlayer);
+                                Projectile.NewProjectile(npc.Center.X, npc.Center.Y, baseSpeed * (float)Math.Sin(offsetAngle), baseSpeed * (float)Math.Cos(offsetAngle), ModContent.ProjectileType<HarukaArrow>(), damage, 0, Main.myPlayer);
                             }
                         }
                     }
@@ -938,9 +939,9 @@ namespace AAModEXAI.Bosses.AH.Haruka
                 }
                 if(Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    ShadowNPC[1] = NPC.NewNPC((int)spawnpoint[k1].X, (int)spawnpoint[k1].Y, mod.NPCType("HarukaClone"), 0, npc.whoAmI);
+                    ShadowNPC[1] = NPC.NewNPC((int)spawnpoint[k1].X, (int)spawnpoint[k1].Y, ModContent.NPCType<HarukaClone>(), 0, npc.whoAmI);
                     NetMessage.SendData(23, -1, -1, null, ShadowNPC[1], 0f, 0f, 0f, 0, 0, 0);
-                    ShadowNPC[2] = NPC.NewNPC((int)spawnpoint[k2].X, (int)spawnpoint[k2].Y, mod.NPCType("HarukaClone"), 0, npc.whoAmI);
+                    ShadowNPC[2] = NPC.NewNPC((int)spawnpoint[k2].X, (int)spawnpoint[k2].Y, ModContent.NPCType<HarukaClone>(), 0, npc.whoAmI);
                     NetMessage.SendData(23, -1, -1, null, ShadowNPC[2], 0f, 0f, 0f, 0, 0, 0);
                 }
                 npc.netUpdate = true;
@@ -1007,9 +1008,9 @@ namespace AAModEXAI.Bosses.AH.Haruka
                 Vector2 shoot;
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    Projectile.NewProjectile(ShadowkingPosition.X, ShadowkingPosition.Y, 0, 0, mod.ProjectileType("HarukaStrike"), damage*1, 5, Main.myPlayer);
-                    int projType = mod.ProjectileType("HarukaProj");
-                    for (int i = 0; i < 12; i++)
+                    Projectile.NewProjectile(ShadowkingPosition.X, ShadowkingPosition.Y, 0, 0, ModContent.ProjectileType<HarukaStrike>(), damage * 3, 5, Main.myPlayer);
+                    int projType = ModContent.ProjectileType<HarukaProj>();
+                    for (int i = 0; i < 16; i++)
                     {
                         shoot = new Vector2((float)Math.Sin(i * (Pi / 6)), (float)Math.Cos(i * (Pi / 6)));
                         shoot *= 13f;
@@ -1146,7 +1147,7 @@ namespace AAModEXAI.Bosses.AH.Haruka
 
         public override bool PreDraw(SpriteBatch spritebatch, Color dColor)
         {
-            Texture2D glowTex = ModLoader.GetMod("AAMod").GetTexture("Glowmasks/Haruka_Glow");
+            Texture2D glowTex = mod.GetTexture("Bosses/AH/Haruka/HarukaGlow/Haruka_Glow");
             Texture2D Slash = mod.GetTexture("Bosses/AH/Haruka/HarukaSlash");
             if (internalAI[0] == AISTATE_SPIN)
             {

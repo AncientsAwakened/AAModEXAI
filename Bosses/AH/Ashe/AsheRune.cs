@@ -1,15 +1,14 @@
+using System.IO;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-
-using Microsoft.Xna.Framework.Graphics;
 using Terraria.Graphics.Shaders;
-using System.IO;
-using AAMod;
- 
-using AAMod.Globals;
+
 using AAModEXAI.Dusts;
+using AAModEXAI.Misc;
 
 namespace AAModEXAI.Bosses.AH.Ashe
 {
@@ -92,7 +91,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
                     }
                     if(Main.netMode != NetmodeID.MultiplayerClient)
                     {
-                        int SootProj = Projectile.NewProjectile(npc.Center.X + Runeshootspeed.X, npc.Center.Y + Runeshootspeed.Y, Runeshootspeed.X, Runeshootspeed.Y, mod.ProjectileType("AsheShot"), (int)npc.ai[2]/2, 0, Main.myPlayer, npc.whoAmI, 0);
+                        int SootProj = Projectile.NewProjectile(npc.Center.X + Runeshootspeed.X, npc.Center.Y + Runeshootspeed.Y, Runeshootspeed.X, Runeshootspeed.Y, ModContent.ProjectileType<AsheShot>(), (int)npc.ai[2]/2, 0, Main.myPlayer, npc.whoAmI, 0);
                         Main.projectile[SootProj].alpha = 0;
                     }
                     npc.netUpdate = true;
