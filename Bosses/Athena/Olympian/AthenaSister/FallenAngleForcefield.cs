@@ -20,7 +20,7 @@ namespace AAModEXAI.Bosses.Athena.Olympian.AthenaSister
 			npc.height = 160;
 			npc.alpha = 235;
 			npc.lifeMax = (Main.expertMode ? 100 : 150);
-			npc.aiStyle = 0;
+			npc.aiStyle = -1;
 			npc.damage = (Main.expertMode ? 50 : 84);
 			npc.defense = 99999;
 			npc.noGravity = true;

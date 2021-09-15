@@ -14,15 +14,19 @@ namespace AAMod
     {
 
         public static bool downedRajahsRevenge;
+        public static bool CRajahFirst;
+
         public override void Initialize()
         {
             downedRajahsRevenge = false;
+            CRajahFirst = false;
         }
 
         public override TagCompound Save()
         {
             var downed = new List<string>();
             if (downedRajahsRevenge) downed.Add("RajahsRevenge");
+            if (CRajahFirst) downed.Add("CRajahFirst");
 
             return new TagCompound {
                 {"downed", downed},
@@ -34,12 +38,14 @@ namespace AAMod
             var downed = tag.GetList<string>("downed");
             //bosses
             downedRajahsRevenge = downed.Contains("RajahsRevenge");
+            CRajahFirst = downed.Contains("CRajahFirst");
         }
 
         public override void NetSend(BinaryWriter writer)
         {
             BitsByte flags = new BitsByte();
             flags[0] = downedRajahsRevenge;
+            flags[1] = CRajahFirst;
             writer.Write(flags);
         }
 
@@ -47,6 +53,7 @@ namespace AAMod
         {
             BitsByte flags = reader.ReadByte();
             downedRajahsRevenge = flags[0];
+            CRajahFirst = flags[1];
         }
     }
 }

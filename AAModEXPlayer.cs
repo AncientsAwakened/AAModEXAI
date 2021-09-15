@@ -16,6 +16,7 @@ using System;
 using Microsoft.Xna.Framework;
 using AAMod;
 using Terraria.ID;
+using Terraria.DataStructures;
  
 using AAMod.Globals;
 using AAModEXAI.Dusts;
@@ -40,6 +41,8 @@ namespace AAModEXAI
         public bool ForbiddenTele = false;
         public float ForbiddenCharge = 0;
 
+        public bool Spellreflow = false;
+
         #endregion
 
         public override void OnEnterWorld(Player player)
@@ -59,6 +62,7 @@ namespace AAModEXAI
 
             DragonSerpentNecklace = false;
             ForbiddenTele = false;
+            Spellreflow = false;
         }
 
         public override void ModifyHitNPC(Item item, NPC target, ref int damage, ref float knockback, ref bool crit)
@@ -183,6 +187,70 @@ namespace AAModEXAI
             }
         }
 
+        public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
+		{
+            if(Spellreflow)
+            {
+                if(damage > player.statLife && damage < player.statLife + player.statMana)
+                {
+                    double dmg = customDamage ? ((double)damage) : Main.CalculatePlayerDamage(damage, player.statDefense);
+                    player.statMana -= (int)dmg - player.statLife + 1;
+                    if(player.statMana < 0) player.statMana = 0;
+                    player.statLife = 1;
+
+                    if (Main.netMode == NetmodeID.MultiplayerClient && player.whoAmI == Main.myPlayer && !quiet)
+                    {
+                        NetMessage.SendData(MessageID.PlayerControls, -1, -1, null, player.whoAmI, 0f, 0f, 0f, 0, 0, 0);
+                        NetMessage.SendData(MessageID.PlayerHealth, -1, -1, null, player.whoAmI, 0f, 0f, 0f, 0, 0, 0);
+                    }
+                    Color color = crit ? CombatText.DamagedFriendlyCrit : CombatText.DamagedFriendly;
+                    CombatText.NewText(new Rectangle((int)player.position.X, (int)player.position.Y, player.width, player.height), color, (int)dmg, crit, false);
+
+                    player.immune = true;
+					player.immuneTime = 40;
+                    if (player.longInvince)
+                    {
+                        player.immuneTime += 40;
+                    }
+
+                    if (!player.noKnockback && hitDirection != 0 && (!player.mount.Active || !player.mount.Cart))
+                    {
+                        player.velocity.X = 4.5f * (float)hitDirection;
+                        player.velocity.Y = -3.5f;
+                    }
+                    if (playSound)
+                    {
+                        if (player.stoned)
+                        {
+                            Main.PlaySound(SoundID.Dig, (int)player.position.X, (int)player.position.Y, 1, 1f, 0f);
+                        }
+                        else if (player.frostArmor)
+                        {
+                            Main.PlaySound(SoundID.Item27, player.position);
+                        }
+                        else if ((player.wereWolf || player.forceWerewolf) && !player.hideWolf)
+                        {
+                            Main.PlaySound(SoundID.NPCHit, (int)player.position.X, (int)player.position.Y, 6, 1f, 0f);
+                        }
+                        else if (player.boneArmor)
+                        {
+                            Main.PlaySound(SoundID.NPCHit, (int)player.position.X, (int)player.position.Y, 2, 1f, 0f);
+                        }
+                        else if (!player.Male)
+                        {
+                            Main.PlaySound(SoundID.FemaleHit, (int)player.position.X, (int)player.position.Y, 1, 1f, 0f);
+                        }
+                        else
+                        {
+                            Main.PlaySound(SoundID.PlayerHit, (int)player.position.X, (int)player.position.Y, 1, 1f, 0f);
+                        }
+                    }
+                    return false;
+                }
+            }
+            return true;
+		}
+
         public override void PostUpdate()
         {
             AccessoryEffects();
@@ -245,57 +313,6 @@ namespace AAModEXAI
                     }
                 }
             }
-            /*
-            if (NPC.AnyNPCs(mod.NPCType("AkumaTransition")))
-            {
-                int n = BaseAI.GetNPC(player.Center, mod.NPCType("AkumaTransition"), -1);
-                NPC akuma = Main.npc[n];
-
-                if (akuma.ai[0] >= 660)
-                {
-                    player.AddBuff(mod.BuffType("BlazingPain"), 2);
-                }
-            }
-            else if (NPC.AnyNPCs(mod.NPCType("AkumaA")))
-            {
-                player.AddBuff(mod.BuffType("BlazingPain"), 2);
-            }
-
-            if (NPC.AnyNPCs(mod.NPCType("Yamata")))
-            {
-                player.AddBuff(mod.BuffType("YamataGravity"), 10);
-            }
-
-            if (NPC.AnyNPCs(mod.NPCType("YamataA")))
-            {
-                player.AddBuff(mod.BuffType("YamataAGravity"), 10);
-            }
-
-            if (NPC.AnyNPCs(mod.NPCType("ShenA")))
-            {
-                int n = BaseAI.GetNPC(player.Center, mod.NPCType("ShenA"), -1);
-                NPC shen = Main.npc[n];
-
-                if (((ShenA)shen.modNPC).halfLifeAIChange)
-                {
-                    player.AddBuff(mod.BuffType("YamataAGravity"), 10);
-                    player.AddBuff(mod.BuffType("BlazingPain"), 10);
-                }
-            }
-
-            
-            if (ModSupport.GetMod("CalamityMod") != null)
-            {
-                bool revenge = (bool)ModSupport.GetModWorldConditions("CalamityMod", "CalamityWorld", "revenge", false, true);
-                bool Death = (bool)ModSupport.GetModWorldConditions("CalamityMod", "CalamityWorld", "death", false, true);
-
-                if (revenge && (NPC.AnyNPCs(ModContent.NPCType<Shen>()) || NPC.AnyNPCs(ModContent.NPCType<ShenA>())))
-                {
-                    player.AddBuff(mod.BuffType("YamataAGravity"), 10);
-                    player.AddBuff(mod.BuffType("BlazingPain"), 10);
-                }
-            }
-            */
         }
 	}
 }

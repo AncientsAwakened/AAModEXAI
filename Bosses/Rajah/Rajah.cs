@@ -1257,6 +1257,15 @@ namespace AAModEXAI.Bosses.Rajah
 
             return player.velocity + npctoplayer / movetime;
         }
+
+        public void SRajahChanges()
+        {
+            if(!AAModEXAIWorld.CRajahFirst)
+            {
+
+            }
+            
+        }
     }
 
     [AutoloadBossHead]

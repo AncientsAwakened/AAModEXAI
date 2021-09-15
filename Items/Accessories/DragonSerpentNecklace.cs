@@ -13,7 +13,7 @@ namespace AAModEXAI.Items.Accessories
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Dragon Serpent Necklace");
-            Tooltip.SetDefault(@"10% increased damage and damage resistance
+            Tooltip.SetDefault(@"12% increased damage and damage resistance
 Ignores 20 Enemy defense
 Cause 30 extra damage to Enemies");
         }
@@ -42,8 +42,8 @@ Cause 30 extra damage to Enemies");
 
         public override void UpdateEquip(Player player)
         {
-            player.endurance += .1f;
-            player.allDamage += .1f;
+            player.endurance += .12f;
+            player.allDamage += .12f;
             player.GetModPlayer<AAModEXPlayer>().DragonSerpentNecklace = true;
             player.armorPenetration += 20;
         }
