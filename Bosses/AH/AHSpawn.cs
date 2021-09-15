@@ -59,7 +59,7 @@ namespace AAModEXAI.Bosses.AH
             if (npc.ai[1] == 60)          //if the timer has gotten to 7.5 seconds, this happens (60 = 1 second)
             {
                 if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(Trans.text("AH", "AHSpawn1"), new Color(102, 20, 48));
-                music = ModLoader.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/ChaosSissy");
+                music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/ChaosSissy");
             }
 
             if (npc.ai[1] == 300)

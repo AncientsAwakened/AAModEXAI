@@ -10,6 +10,7 @@ namespace AAModEXAI.Bosses.AH
 {
     public class AHDeath : ModNPC
     {
+        public override string Texture => "AAModEXAI/BlankTex";
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Sisters Defeat");
@@ -28,7 +29,7 @@ namespace AAModEXAI.Bosses.AH
             npc.noGravity = true;
             npc.aiStyle = -1;
             npc.timeLeft = 10;
-            music = ModLoader.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/ChaosSissy");
+            music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/ChaosSissy");
 
             for (int k = 0; k < npc.buffImmune.Length; k++)
             {
