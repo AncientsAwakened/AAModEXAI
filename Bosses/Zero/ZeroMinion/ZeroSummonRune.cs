@@ -45,7 +45,7 @@ namespace AAModEXAI.Bosses.Zero.ZeroMinion
             Texture2D[] Number = new Texture2D[2];
             Number[0] = mod.GetTexture("Bosses/Zero/ZeroMinion/zero");
             Number[1] = mod.GetTexture("Bosses/Zero/ZeroMinion/one");
-            if (npc.ai[0] * Number[0].Width > tex.Width && npc.ai[0] * Number[0].Height > tex.Height && timer <= 100)
+            if (npc.ai[0] * Number[0].Width > tex.Width && npc.ai[0] * Number[0].Height > tex.Height / Main.npcFrameCount[(int)npc.ai[1]] && timer <= 100)
             {
                 if(timer < 100)
                 {
@@ -58,13 +58,17 @@ namespace AAModEXAI.Bosses.Zero.ZeroMinion
                     Main.npc[a].Center = npc.Center;
                     Main.npc[a].ai[1] = npc.Center.X;
                     Main.npc[a].ai[2] = npc.Center.Y;
-                    Main.npc[a].ai[3] = npc.ai[3];
+                }
+                if(npc.ai[1] == mod.NPCType("ZeroSag") && Main.netMode != NetmodeID.MultiplayerClient)
+                {
+                    int a = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, (int)npc.ai[1]);
+                    Main.npc[a].Center = npc.Center;
                 }
                 timer ++;
             }
             if(timer++ > 100)
             {
-                if (((timer - 100) / 8) * Number[0].Width > tex.Width && ((timer - 100) / 8) * Number[0].Height > tex.Height)
+                if (((timer - 100) / 8) * Number[0].Width > tex.Width && ((timer - 100) / 8) * Number[0].Height > tex.Height / Main.npcFrameCount[(int)npc.ai[1]])
                 {
                     npc.active = false;
                     return;
@@ -92,11 +96,11 @@ namespace AAModEXAI.Bosses.Zero.ZeroMinion
             Alpha.A = (byte)((float)(255 - npc.alpha));
             for(int i = 0 + (int)(timer > 100? (timer - 100) / 8 : 0); i * Number[0].Width < tex.Width && i * Number[0].Width < npc.ai[0] * Number[0].Width ; i++)
             {
-                for(int j = 0 + (int)(timer > 100? (timer - 100) / 8 : 0); j * Number[0].Height  < tex.Height  && j * Number[0].Height < npc.ai[0] * Number[0].Height; j++)
+                for(int j = 0 + (int)(timer > 100? (timer - 100) / 8 : 0); j * Number[0].Height  < tex.Height / Main.npcFrameCount[(int)npc.ai[1]]  && j * Number[0].Height < npc.ai[0] * Number[0].Height; j++)
                 {
                     int n = Main.rand.Next(2);
                     //sb.Draw(Number[n], npc.Center + new Vector2(i * Number[0].Width - tex.Width / 2, j * Number[0].Height - tex.Height / 2) - Main.screenPosition, new Microsoft.Xna.Framework.Rectangle?(new Rectangle(0, 0, Number[n].Width, Number[n].Height)), npc.GetAlpha(drawColor), 0f, default, 0.6f, SpriteEffects.None, 0f);
-                    BaseDrawing.DrawTexture(sb, Number[n], 0, npc.Center + new Vector2(i * Number[0].Width - tex.Width / 2, j * Number[0].Height - tex.Height / 2), Number[n].Width, Number[n].Height, 1f, 0f, 0, 1, new Rectangle(0, 0, Number[n].Width, Number[n].Height), Alpha, true);
+                    BaseDrawing.DrawTexture(sb, Number[n], 0, npc.Center + new Vector2(i * Number[0].Width - tex.Width / 2, j * Number[0].Height - tex.Height / Main.npcFrameCount[(int)npc.ai[1]] / 2), Number[n].Width, Number[n].Height, 1f, 0f, 0, 1, new Rectangle(0, 0, Number[n].Width, Number[n].Height), Alpha, true);
                 }
             }
             return false;

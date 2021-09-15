@@ -24,6 +24,7 @@ namespace AAModEXAI.Bosses.Zero.ZeroMinion
 
         public override void SetDefaults()
         {
+            npc.alpha = 255;
             npc.width = 30;
             npc.height = 50;
             npc.damage = 55;
@@ -49,6 +50,14 @@ namespace AAModEXAI.Bosses.Zero.ZeroMinion
 
         public override void AI()
         {
+            if(npc.alpha > 0)
+            {
+                npc.alpha -= 5;
+            }
+            else
+            {
+                npc.alpha = 0;
+            }
             npc.TargetClosest(false);
 		    npc.spriteDirection = npc.direction;
             npc.Center = new Vector2(npc.ai[1], npc.ai[2]);

@@ -395,6 +395,11 @@ namespace AAModEXAI.Bosses.Zero
                 }
             }
 
+            if (internalAI[5] == 1 && npc.life < npc.lifeMax * .33f)
+            {
+                internalAI[5] = 2;
+            }
+
             if(internalAI[5] > 0)
             {
                 SummonMinnions();
@@ -882,7 +887,7 @@ namespace AAModEXAI.Bosses.Zero
         public void SummonMinnions()
         {
             internalAI[6] ++;
-            if(internalAI[5] == 1)
+            if(internalAI[5] >= 1)
             {
                 if(internalAI[6] % 600 == 0)
                 {
@@ -896,7 +901,21 @@ namespace AAModEXAI.Bosses.Zero
                     }
                 }
             }
-            if(internalAI[6] > 600)
+            if(internalAI[5] == 2)
+            {
+                if(internalAI[6] % 6000 == 1000)
+                {
+                    Player player = Main.player[npc.target];
+                    int A = Main.rand.Next(-50, 50);
+                    if(Main.netMode != NetmodeID.MultiplayerClient)
+                    {
+                        int Minion = NPC.NewNPC((int)player.Center.X + A, (int)player.Center.Y + A, mod.NPCType("ZeroSummonRune"), 0);
+                        Main.npc[Minion].ai[1] = mod.NPCType("ZeroSag");
+                        Main.npc[Minion].netUpdate = true;
+                    }
+                }
+            }
+            if(internalAI[6] > 10000)
             {
                 internalAI[6] = 0;
             }
