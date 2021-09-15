@@ -1,16 +1,16 @@
+using System;
+using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-
 using Terraria.Graphics.Shaders;
-using System;
-using System.IO;
-using AAMod;
- 
-using AAMod.Globals;
+
 using AAModEXAI.Dusts;
+using AAModEXAI.Misc;
+using AAModEXAI.Bosses.AH;
 
 namespace AAModEXAI.Bosses.AH.Ashe
 {
@@ -82,7 +82,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
 
                     MoveToPoint(wantedVelocity);
 
-                    BaseAI.ShootPeriodic(npc, player.Center + new Vector2(Main.rand.Next(-10, 10), Main.rand.Next(-10, 10)), player.width, player.height, mod.ProjectileType("AsheShot"), ref npc.ai[2], 18, npc.damage / 4, 16, false);
+                    BaseAI.ShootPeriodic(npc, player.Center + new Vector2(Main.rand.Next(-10, 10), Main.rand.Next(-10, 10)), player.width, player.height, ModContent.ProjectileType<AsheShot>(), ref npc.ai[2], 18, npc.damage / 4, 16, false);
                     if (npc.ai[1]++ > (Main.expertMode ? 180 : 280))
                     {
                         AIChange();
@@ -120,7 +120,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
                     {
                         if (npc.ai[1] > 60 && npc.ai[1] <= 180)
                         {
-                            BaseAI.ShootPeriodic(npc, player.Center, player.width, player.height, mod.ProjectileType("AsheFlamethrower"), ref npc.ai[2], 5, npc.damage / 4, 20, false);
+                            BaseAI.ShootPeriodic(npc, player.Center, player.width, player.height, ModContent.ProjectileType<AsheFlamethrower>(), ref npc.ai[2], 5, npc.damage / 4, 20, false);
                         }
                     }
 
@@ -164,8 +164,8 @@ namespace AAModEXAI.Bosses.AH.Ashe
                         if (Main.netMode != NetmodeID.MultiplayerClient)
                         {
                             const float ai0 = 0.01f;
-                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(Math.PI / 2), mod.ProjectileType("AsheSpell"), npc.damage / 2, 0f, Main.myPlayer, ai0);
-                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(-Math.PI / 2), mod.ProjectileType("AsheSpell"), npc.damage / 2, 0f, Main.myPlayer, ai0);
+                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(Math.PI / 2), ModContent.ProjectileType<AsheSpell>(), npc.damage / 2, 0f, Main.myPlayer, ai0);
+                            Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(-Math.PI / 2), ModContent.ProjectileType<AsheSpell>(), npc.damage / 2, 0f, Main.myPlayer, ai0);
                         }
                     }
                     if (++npc.ai[1] > 60)
@@ -217,7 +217,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
                     }
                     if (npc.life > npc.lifeMax / 3 || npc.ai[1] < 100)
                     {
-                        BaseAI.ShootPeriodic(npc, player.Center, player.width, player.height, mod.ProjectileType("AsheFire"), ref npc.ai[2], npc.life < npc.lifeMax * 0.666f ? 20 : 40, npc.damage / 4, 8, false);
+                        BaseAI.ShootPeriodic(npc, player.Center, player.width, player.height, ModContent.ProjectileType<AsheFire>(), ref npc.ai[2], npc.life < npc.lifeMax * 0.666f ? 20 : 40, npc.damage / 4, 8, false);
                     }
                     if (npc.ai[1]++ > (Main.expertMode ? 180 : 280))
                     {
@@ -229,7 +229,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
                                 {
                                     Vector2 shoot = new Vector2((float)Math.Sin(i * 0.25f * 3.1415926f), (float)Math.Cos(i * 0.25f * 3.1415926f));
                                     shoot *= 8f;
-                                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, shoot.X, shoot.Y, mod.ProjectileType("AsheFire"), npc.damage / 4, 5, Main.myPlayer, 0f, 0f);
+                                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, shoot.X, shoot.Y, ModContent.ProjectileType<AsheFire>(), npc.damage / 4, 5, Main.myPlayer, 0f, 0f);
                                 }
                             }
                             if(Main.rand.Next(3) == 0)
@@ -244,7 +244,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
                 case 10:
                     if (!AliveCheck(player))
                         break;
-                    if (NPC.AnyNPCs(mod.NPCType("AsheDragon")))
+                    if (NPC.AnyNPCs(ModContent.NPCType<AsheDragon>()))
                     {
                         npc.ai[0] = 12;
                         npc.netUpdate = true;
@@ -262,8 +262,8 @@ namespace AAModEXAI.Bosses.AH.Ashe
                     MoveToPoint(wantedVelocity);
                     if (npc.ai[1]++ > 200)
                     {
-                        int id = NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType("AsheDragon"));
-                        if (Main.netMode == NetmodeID.Server && id < 200) NetMessage.SendData(23, -1, -1, null, id);
+                        int id = NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, ModContent.NPCType<AsheDragon>());
+                        if (Main.netMode == NetmodeID.Server && id < 200) NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, id);
                         npc.netUpdate = true;
                         AIChange();
                     }
@@ -303,8 +303,8 @@ namespace AAModEXAI.Bosses.AH.Ashe
                     float RunepositionY = Runeposition.Y;
                     if(Main.netMode != NetmodeID.MultiplayerClient)
                     {
-                        int id = NPC.NewNPC((int)RunepositionX, (int)RunepositionY, mod.NPCType("AsheRune"), 0, RunepositionX, RunepositionY, npc.damage, npc.whoAmI, player.whoAmI);
-                        if (Main.netMode == NetmodeID.Server && id < 200) NetMessage.SendData(23, -1, -1, null, id);
+                        int id = NPC.NewNPC((int)RunepositionX, (int)RunepositionY, ModContent.NPCType<AsheRune>(), 0, RunepositionX, RunepositionY, npc.damage, npc.whoAmI, player.whoAmI);
+                        if (Main.netMode == NetmodeID.Server && id < 200) NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, id);
                     }
                     npc.ai[2] = 0;
                 }
@@ -459,7 +459,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
                 npc.TargetClosest(true);
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    int DeathAnim = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("AsheVanish"), 0);
+                    int DeathAnim = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<AsheVanish>(), 0);
                     Main.npc[DeathAnim].velocity = npc.velocity;
                     Main.npc[DeathAnim].netUpdate = true;
                 }
@@ -492,7 +492,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
                 {
                     for(int i = 0; i < 200; i++)
                     {
-                        if(Main.npc[i].type == mod.NPCType("AsheOrbiter"))
+                        if(Main.npc[i].type == ModContent.NPCType<AsheOrbiter>())
                         {
                             Main.npc[i].life = 0;
                             Main.npc[i].active = false;
@@ -501,36 +501,36 @@ namespace AAModEXAI.Bosses.AH.Ashe
                 }
                 const float distance = 125f;
                 float rotation = 2f * (float)Math.PI / OrbiterCount;
-                if (Health && npc.life >= npc.lifeMax * .66f)
+                if (Health && npc.life >= npc.lifeMax * .66f && Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     Health = false;
                     rotation = 2f * (float)Math.PI / 4;
                     for (int m = 0; m < 4; m++)
                     {
-                        int n = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("AsheOrbiter"), 0, npc.whoAmI, distance, 300, rotation * m);
+                        int n = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<AsheOrbiter>(), 0, npc.whoAmI, distance, 300, rotation * m);
                         if (Main.netMode == NetmodeID.Server && n < 200)
-                            NetMessage.SendData(23, -1, -1, null, n);
+                            NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, n);
                     }
                 }
-                if (Health && npc.life < npc.lifeMax * .66f && npc.life >= npc.lifeMax * .33f)
+                if (Health && npc.life < npc.lifeMax * .66f && npc.life >= npc.lifeMax * .33f && Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     Health = false;
                     for (int m = 0; m < OrbiterCount; m++)
                     {
-                        int n = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("AsheOrbiter"), 0, npc.whoAmI, distance, 300, rotation * m);
+                        int n = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<AsheOrbiter>(), 0, npc.whoAmI, distance, 300, rotation * m);
                         if (Main.netMode == NetmodeID.Server && n < 200)
-                            NetMessage.SendData(23, -1, -1, null, n);
+                            NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, n);
                     }
                 }
-                if (Health && npc.life < npc.lifeMax * .33f)
+                if (Health && npc.life < npc.lifeMax * .33f && Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     OrbiterCount += 2;
                     Health = false;
                     for (int m = 0; m < OrbiterCount; m++)
                     {
-                        int n = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("AsheOrbiter"), 0, npc.whoAmI, distance, 300, rotation * m);
+                        int n = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<AsheOrbiter>(), 0, npc.whoAmI, distance, 300, rotation * m);
                         if (Main.netMode == NetmodeID.Server && n < 200)
-                            NetMessage.SendData(23, -1, -1, null, n);
+                            NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, n);
                     }
                     OrbiterCount -= 2;
                 }
@@ -539,10 +539,9 @@ namespace AAModEXAI.Bosses.AH.Ashe
 
         public override void NPCLoot()
         {
-            int Haruka = NPC.CountNPCS(mod.NPCType("Haruka"));
-            if (Haruka == 0)
+            if (NPC.CountNPCS(ModContent.NPCType<Bosses.AH.Haruka.Haruka>()) == 0)
             {
-                NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("AHDeath"));
+                NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<AHDeath>());
                 if (Main.expertMode)
                 {
                     for(int i = 0; i < 10; i++) npc.DropBossBags();
@@ -558,7 +557,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
             {
                 Item.NewItem((int)npc.Center.X, (int)npc.Center.Y, npc.width, npc.height, ModLoader.GetMod("AAMod").ItemType("AsheTrophy"));
             }
-            int DeathAnim = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("AsheVanish"), 0);
+            int DeathAnim = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<AsheVanish>(), 0);
             Main.npc[DeathAnim].velocity = npc.velocity;
             if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("AsheDowned"), new Color(102, 20, 48));
             npc.value = 0f;
@@ -567,7 +566,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
 
         public override void BossLoot(ref string name, ref int potionType)
         {
-            if (NPC.AnyNPCs(mod.NPCType("Haruka")))
+            if (NPC.AnyNPCs(ModContent.NPCType<Bosses.AH.Haruka.Haruka>()))
             {
                 potionType = 0;
             }
@@ -711,7 +710,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
         public override bool PreDraw(SpriteBatch spritebatch, Color dColor)
         {
             Texture2D Tex = Main.npcTexture[npc.type];
-            Texture2D Glow = ModLoader.GetMod("AAMod").GetTexture("Glowmasks/Ashe_Glow");
+            Texture2D Glow = mod.GetTexture("Bosses/AH/Ashe/Ashe_Glow");
 
             Texture2D RingTex = mod.GetTexture("Bosses/AH/Ashe/AsheRing1");
             Texture2D RingTex1 = mod.GetTexture("Bosses/AH/Ashe/AsheRing2");
@@ -748,13 +747,13 @@ namespace AAModEXAI.Bosses.AH.Ashe
         {
             RingRotation += 0.02f;
             RingRotation2 -= 0.02f;
-            if (npc.ai[0] == 12 || NPC.AnyNPCs(mod.NPCType("AsheOrbiter")))
+            if (npc.ai[0] == 12 || NPC.AnyNPCs(ModContent.NPCType<AsheOrbiter>()))
             {
                 if (scale >= 1f)
                 {
                     scale = 1f;
 
-                    if(NPC.CountNPCS(mod.NPCType("AsheOrbiter")) < OrbiterCount)
+                    if(NPC.CountNPCS(ModContent.NPCType<AsheOrbiter>()) < OrbiterCount)
                     {
                         Health = true;
                         npc.netUpdate = true;

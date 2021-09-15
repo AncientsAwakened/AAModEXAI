@@ -8,16 +8,17 @@ using Terraria.Utilities;
 using Terraria.ModLoader.IO;
 using AAModEXAI.Dusts;
 
-namespace AAMod
+namespace AAModEXAI
 {
     public class AAModEXAIWorld : ModWorld
     {
-
+        public static bool downedSisters;
         public static bool downedRajahsRevenge;
         public static bool CRajahFirst;
 
         public override void Initialize()
         {
+            downedSisters = false;
             downedRajahsRevenge = false;
             CRajahFirst = false;
         }
@@ -25,18 +26,20 @@ namespace AAMod
         public override TagCompound Save()
         {
             var downed = new List<string>();
+            if (downedSisters) downed.Add("downedSisters");
             if (downedRajahsRevenge) downed.Add("RajahsRevenge");
             if (CRajahFirst) downed.Add("CRajahFirst");
 
             return new TagCompound {
-                {"downed", downed},
+                {"AAModEXAIWorlddowned", downed},
             };
         }
 
         public override void Load(TagCompound tag)
         {
-            var downed = tag.GetList<string>("downed");
+            var downed = tag.GetList<string>("AAModEXAIWorlddowned");
             //bosses
+            downedSisters = downed.Contains("downedSisters");
             downedRajahsRevenge = downed.Contains("RajahsRevenge");
             CRajahFirst = downed.Contains("CRajahFirst");
         }
@@ -44,16 +47,22 @@ namespace AAMod
         public override void NetSend(BinaryWriter writer)
         {
             BitsByte flags = new BitsByte();
-            flags[0] = downedRajahsRevenge;
-            flags[1] = CRajahFirst;
-            writer.Write(flags);
+            flags[0] = downedSisters;
+            
+            BitsByte flags2 = new BitsByte();
+            flags2[0] = downedRajahsRevenge;
+            flags2[1] = CRajahFirst;
+            writer.Write(flags2);
         }
 
         public override void NetReceive(BinaryReader reader)
         {
             BitsByte flags = reader.ReadByte();
-            downedRajahsRevenge = flags[0];
-            CRajahFirst = flags[1];
+            downedSisters = flags[0];
+
+            BitsByte flags2 = reader.ReadByte();
+            downedRajahsRevenge = flags2[0];
+            CRajahFirst = flags2[1];
         }
     }
 }

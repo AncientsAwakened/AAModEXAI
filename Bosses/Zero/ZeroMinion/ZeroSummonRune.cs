@@ -14,7 +14,7 @@ namespace AAModEXAI.Bosses.Zero.ZeroMinion
 {
 	public class ZeroSummonRune : ModNPC
     {
-        public override string Texture => "AAMod/BlankTex";
+        public override string Texture => "AAModEXAI/BlankTex";
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("The digital Portal");

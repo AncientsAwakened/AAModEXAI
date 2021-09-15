@@ -12,7 +12,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
 {
     public class SunSummon : ModProjectile
     {
-        public override string Texture => "AAMod/BlankTex";
+        public override string Texture => "AAModEXAI/BlankTex";
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Sun Summon");

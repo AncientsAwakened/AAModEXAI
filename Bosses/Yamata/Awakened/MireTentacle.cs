@@ -9,7 +9,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
 {
     public class MireTentacle : ModProjectile
     {
-		public override string Texture => "AAMod/BlankTex";
+		public override string Texture => "AAModEXAI/BlankTex";
     	public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Scary Mire Soul");

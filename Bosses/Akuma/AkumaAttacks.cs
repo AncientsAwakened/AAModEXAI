@@ -8,7 +8,7 @@ using Terraria.ID;
 using AAMod.Globals;
 using AAModEXAI.Dusts;
 
-namespace AAMod
+namespace AAModEXAI
 {
     public class AkumaAttacks
 	{

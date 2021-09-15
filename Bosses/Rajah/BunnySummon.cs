@@ -11,7 +11,7 @@ namespace AAModEXAI.Bosses.Rajah
 {
     public class BunnySummon1 : ModProjectile
     {
-        public override string Texture => "AAMod/BlankTex";
+        public override string Texture => "AAModEXAI/BlankTex";
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Bunny Summon");
@@ -91,7 +91,7 @@ namespace AAModEXAI.Bosses.Rajah
 
     public class BunnySummon2 : ModProjectile
     {
-        public override string Texture => "AAMod/BlankTex";
+        public override string Texture => "AAModEXAI/BlankTex";
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Bunny Summon");
@@ -171,7 +171,7 @@ namespace AAModEXAI.Bosses.Rajah
 
     public class BunnySummon3 : ModProjectile
     {
-        public override string Texture => "AAMod/BlankTex";
+        public override string Texture => "AAModEXAI/BlankTex";
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Bunny Summon");

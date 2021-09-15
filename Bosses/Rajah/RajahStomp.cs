@@ -9,7 +9,7 @@ namespace AAModEXAI.Bosses.Rajah
 {
     public class RajahStomp: ModProjectile
     {
-        public override string Texture => "AAMod/BlankTex";
+        public override string Texture => "AAModEXAI/BlankTex";
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Rajah Stomp");

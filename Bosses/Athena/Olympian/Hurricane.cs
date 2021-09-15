@@ -12,7 +12,7 @@ namespace AAModEXAI.Bosses.Athena.Olympian
 {
     public class Hurricane : ModProjectile
     {
-        public override string Texture => "AAMod/BlankTex";
+        public override string Texture => "AAModEXAI/BlankTex";
 
         public override void SetDefaults()
         {

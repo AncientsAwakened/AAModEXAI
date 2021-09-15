@@ -11,7 +11,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
 {
     public class HorusSummon : ModProjectile
     {
-        public override string Texture => "AAMod/BlankTex";
+        public override string Texture => "AAModEXAI/BlankTex";
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Eye Summon");
