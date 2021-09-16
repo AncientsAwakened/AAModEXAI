@@ -591,7 +591,7 @@ namespace AAModEXAI.Bosses.Athena
                     }
                     int a = NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType("AthenaA"));
                     Main.npc[a].Center = npc.Center;
-                    int b = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0f, 0f, ModLoader.GetMod("AAMod").ProjectileType("ShockwaveBoom"), 0, 1, Main.myPlayer, 0, 0);
+                    int b = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0f, 0f, ModContent.ProjectileType<Effects.ShockwaveBoom>(), 0, 1, Main.myPlayer, 0, 0);
                     Main.projectile[b].Center = npc.Center;
                     CombatText.NewText(npc.Hitbox, Color.CadetBlue, AAMod.Lang.BossChat("Athena10"));
 

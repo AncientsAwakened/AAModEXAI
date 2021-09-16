@@ -1,12 +1,10 @@
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+
+using Terraria.ID;
 using Terraria;
 using Terraria.ModLoader;
 
-using Microsoft.Xna.Framework;
-using AAMod;
-using Terraria.ID;
- 
-using AAMod.Globals;
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Akuma

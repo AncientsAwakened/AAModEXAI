@@ -111,7 +111,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                                 Main.projectile[proj].GetGlobalProjectile<AAModEXAIGlobalProjectile>().ReflectConter = 180;
                             }
                         }
-                        int b = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0f, 0f, ModLoader.GetMod("AAMod").ProjectileType("ShockwaveBoom"), 0, 0, Main.myPlayer, 0, 10);
+                        int b = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0f, 0f, ModContent.ProjectileType<Effects.ShockwaveBoom>(), 0, 0, Main.myPlayer, 0, 10);
                         Main.projectile[b].Center = npc.Center;
 
                         NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType("ForsakenAnubis"));

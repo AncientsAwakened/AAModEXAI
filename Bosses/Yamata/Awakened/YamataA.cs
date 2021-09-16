@@ -12,6 +12,7 @@ using Terraria.ID;
  
 using AAMod.Globals;
 using AAModEXAI.Dusts;
+using AAModEXAI.Bosses;
 
 namespace AAModEXAI.Bosses.Yamata.Awakened
 {
@@ -375,7 +376,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
 					{
 						AAModEXAI.Chat(AAMod.Lang.BossChat("YamataA15"), new Color(146, 30, 68), true);
 					}
-					AAModGlobalNPC.SpawnBoss(Main.player[npc.target], mod.NPCType("HarukaY"), false, 0, 0, "", false);
+					SpawnBossMethod.SpawnBoss(Main.player[npc.target], mod.NPCType("HarukaY"), false, 0, 0, "", false);
 					return;
 				}
 				if (Main.netMode != NetmodeID.MultiplayerClient)
@@ -386,7 +387,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
 				{
 					AAModEXAI.Chat(AAMod.Lang.BossChat("YamataA17"), new Color(72, 78, 117), true);
 				}
-				AAModGlobalNPC.SpawnBoss(Main.player[npc.target], mod.NPCType("HarukaY"), false, 0, 0, "", false);
+				SpawnBossMethod.SpawnBoss(Main.player[npc.target], mod.NPCType("HarukaY"), false, 0, 0, "", false);
 			}
 
             if (Tag)

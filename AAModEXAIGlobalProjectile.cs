@@ -3,8 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
- 
-using AAMod.Globals;
+
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI
@@ -34,6 +33,19 @@ namespace AAModEXAI
             }
 
             base.PostAI(projectile);
+        }
+
+        public static bool AnyProjectiles(int type)
+        {
+            for (int i = 0; i < Main.maxProjectiles; i++)
+            {
+                if (Main.projectile[i].active && Main.projectile[i].type == type)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public Vector2 reflectvelocity = Vector2.Zero;

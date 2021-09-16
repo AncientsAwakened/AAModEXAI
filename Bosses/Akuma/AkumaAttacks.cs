@@ -1,14 +1,14 @@
-using Microsoft.Xna.Framework;
-using Terraria.ModLoader;
 using System;
-using Terraria;
-using AAMod;
-using Terraria.ID;
- 
-using AAMod.Globals;
-using AAModEXAI.Dusts;
+using Microsoft.Xna.Framework;
 
-namespace AAModEXAI
+using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
+
+using AAModEXAI.Dusts;
+using AAModEXAI.Bosses.Akuma.Awakened;
+
+namespace AAModEXAI.Bosses.Akuma
 {
     public class AkumaAttacks
 	{
@@ -33,7 +33,7 @@ namespace AAModEXAI
             num80 = num72 / num80;
             num79 *= num80;
             float num115 = num79 + (Main.rand.Next(41) * 0.02f);
-            int projType = Awakened ? mod.ProjectileType("AkumaAMeteor") : mod.ProjectileType("AkumaMeteor");
+            int projType = Awakened ? ModContent.ProjectileType<AkumaAMeteor>() : ModContent.ProjectileType<AkumaMeteor>();
             Projectile.NewProjectile(vector2.X, vector2.Y, 0, num115 * 1.5f, projType, npc.damage / 4, 0, player.whoAmI, 0f, 0.5f + ((float)Main.rand.NextDouble() * 0.3f));
         }
 
@@ -41,7 +41,7 @@ namespace AAModEXAI
         {
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
-                int npcID = NPC.NewNPC((int)player.Center.X, (int)player.Center.Y, mod.NPCType(isAwakened ? "AwakenedLung" : "AncientLung"), 0);
+                int npcID = NPC.NewNPC((int)player.Center.X, (int)player.Center.Y, ModContent.NPCType<AwakenedLung>(), 0);
                 Main.npc[npcID].Center = player.Center - new Vector2(MathHelper.Lerp(-100f, 100f, (float)Main.rand.NextDouble()), 600f);
                 Main.npc[npcID].netUpdate2 = true; Main.npc[npcID].netUpdate = true;
             }
@@ -68,7 +68,7 @@ namespace AAModEXAI
             num80 = num72 / num80;
             num79 *= num80;
             float num115 = num79 + (Main.rand.Next(41) * 0.02f);
-            Projectile.NewProjectile(vector2.X, vector2.Y, 0, num115 * 2f, mod.ProjectileType("AkumaRock"), npc.damage / 4, 0, player.whoAmI, 0f, 0.5f + ((float)Main.rand.NextDouble() * 0.3f));
+            Projectile.NewProjectile(vector2.X, vector2.Y, 0, num115 * 2f, ModContent.ProjectileType<AkumaRock>(), npc.damage / 4, 0, player.whoAmI, 0f, 0.5f + ((float)Main.rand.NextDouble() * 0.3f));
         }
     }
 }

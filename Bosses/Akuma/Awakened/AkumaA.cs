@@ -12,6 +12,7 @@ using Terraria.ID;
  
 using AAMod.Globals;
 using AAModEXAI.Dusts;
+using AAModEXAI.Bosses;
 
 namespace AAModEXAI.Bosses.Akuma.Awakened
 {
@@ -216,7 +217,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 					{
 						AAModEXAI.Chat(AAMod.Lang.BossChat("AkumaA2"), new Color(102, 20, 48), true);
 					}
-					AAModGlobalNPC.SpawnBoss(player, mod.NPCType("AsheA"), false, 0, 0, "", false);
+					SpawnBossMethod.SpawnBoss(player, mod.NPCType("AsheA"), false, 0, 0, "", false);
 				}
 				else
 				{
@@ -228,7 +229,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 					{
 						AAModEXAI.Chat(AAMod.Lang.BossChat("AkumaA4"), Color.DeepSkyBlue, true);
 					}
-					AAModGlobalNPC.SpawnBoss(player, mod.NPCType("AsheA"), false, 0, 0, "", false);
+					SpawnBossMethod.SpawnBoss(player, mod.NPCType("AsheA"), false, 0, 0, "", false);
 				}
 			}
 

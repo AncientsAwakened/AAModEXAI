@@ -1,14 +1,12 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
+
 using Terraria;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
-using AAMod;
-using Terraria.ID;
- 
-using AAMod.Globals;
+
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Akuma
@@ -105,10 +103,10 @@ namespace AAModEXAI.Bosses.Akuma
             for (int i = 0; i < 2; i++)
             {
                 offsetAngle = startAngle + deltaAngle * (i + i * i) / 2f + 32f * i;
-                Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, (float)(Math.Sin(offsetAngle) * 6f), (float)(Math.Cos(offsetAngle) * 6f), mod.ProjectileType("HomingFireball"), projectile.damage, projectile.knockBack, projectile.owner, 0f, 0f);
-                Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, (float)(-Math.Sin(offsetAngle) * 6f), (float)(-Math.Cos(offsetAngle) * 6f), mod.ProjectileType("HomingFireball"), projectile.damage, projectile.knockBack, projectile.owner, 0f, 0f);
+                Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, (float)(Math.Sin(offsetAngle) * 6f), (float)(Math.Cos(offsetAngle) * 6f), ModContent.ProjectileType<HomingFireball>(), projectile.damage, projectile.knockBack, projectile.owner, 0f, 0f);
+                Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, (float)(-Math.Sin(offsetAngle) * 6f), (float)(-Math.Cos(offsetAngle) * 6f), ModContent.ProjectileType<HomingFireball>(), projectile.damage, projectile.knockBack, projectile.owner, 0f, 0f);
             }
-            Projectile.NewProjectile(projectile.position.X, projectile.position.Y, projectile.velocity.X, projectile.velocity.Y, mod.ProjectileType("AkumaBoom"), projectile.damage, projectile.knockBack, projectile.owner, 0f, 0f);
+            Projectile.NewProjectile(projectile.position.X, projectile.position.Y, projectile.velocity.X, projectile.velocity.Y, ModContent.ProjectileType<AkumaBoom>(), projectile.damage, projectile.knockBack, projectile.owner, 0f, 0f);
         }
 
         private int HomeOnTarget()

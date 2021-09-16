@@ -705,7 +705,7 @@ namespace AAModEXAI.Bosses.Serpent
             {
                 for (int i = 0; i < 3 - NPC.CountNPCS(mod.NPCType("SnakeHead")); i++)
                 {
-                    AAModGlobalNPC.SpawnBoss(player, mod.NPCType("SnakeHead"), false, 0, 0, "Snake", false);
+                    SpawnBossMethod.SpawnBoss(player, mod.NPCType("SnakeHead"), false, 0, 0, "Snake", false);
                 }
                 internalAI[3] = 0;
             }

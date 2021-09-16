@@ -154,7 +154,7 @@ namespace AAModEXAI.Bosses.Zero
                     int z = NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType("ZeroProtocol"), 0, 0, 0, 0, 0, npc.target);
                     Main.npc[z].Center = npc.Center;
 
-                    int b = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0f, 0f, ModLoader.GetMod("AAMod").ProjectileType("ShockwaveBoom"), 0, 1, Main.myPlayer, 0, 0);
+                    int b = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0f, 0f, ModContent.ProjectileType<Effects.ShockwaveBoom>(), 0, 1, Main.myPlayer, 0, 0);
                     Main.projectile[b].Center = npc.Center;
 
                     for(int proj = 0; proj < 1000; proj ++)

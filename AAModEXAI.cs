@@ -1,31 +1,46 @@
-using Terraria.ModLoader;
-using Terraria;
+using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+
+using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
 using Terraria.Localization;
 
-using AAMod;
-using Terraria.ID;
- 
-using AAMod.Globals;
+using AAModEXAI.Loaders;
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI
 {
 	public class AAModEXAI : Mod
 	{
-		public static Mod Instance;
-		internal static AAModEXAI instance;
-		public AAModEXAI()
-		{
-			Instance = this;
-			instance = this;
+        [BypassAutoUnload] // Don't unload the instance automatically because it is needed until unloading finishes.
+        public static AAModEXAI instance;
+
+        [BypassAutoUnload]
+        public static Type[] allTypesInAssembly;
+
+        public static List<SoundEffectInstance> activeRumbleSounds;
+
+		public override void Load()
+        {
+            Loader.Load();
 		}
 
 		public override void Unload()
         {
-			Instance = null;
-			instance = null;
+            Unloader.Unload();
 		}
+
+        public override void PreSaveAndQuit()
+        {
+            foreach (SoundEffectInstance sound in activeRumbleSounds)
+            {
+                sound.Stop();
+            }
+            activeRumbleSounds.Clear();
+        }
 
         public override void PostSetupContent()
         {
@@ -42,38 +57,24 @@ namespace AAModEXAI
          */
         public static void Chat(string s, byte colorR = 255, byte colorG = 255, byte colorB = 255, bool sync = true)
         {
-            if (!AAConfigClient.Instance.NoBossDialogue)
-            {
-                if (Main.netMode == NetmodeID.SinglePlayer) { Main.NewText(s, colorR, colorG, colorB); }
-                else
-                if (Main.netMode == NetmodeID.MultiplayerClient) { Main.NewText(s, colorR, colorG, colorB); }
-                else //if(sync){ NetMessage.BroadcastChatMessage(NetworkText.FromLiteral(s), new Color(colorR, colorG, colorB), Main.myPlayer); } }else
-                if (sync && Main.netMode == NetmodeID.Server) { NetMessage.BroadcastChatMessage(NetworkText.FromLiteral(s), new Color(colorR, colorG, colorB), -1); }
-            }
+            if (Main.netMode == NetmodeID.SinglePlayer) { Main.NewText(s, colorR, colorG, colorB); }
+            else if (Main.netMode == NetmodeID.MultiplayerClient) { Main.NewText(s, colorR, colorG, colorB); }
+            else if (sync && Main.netMode == NetmodeID.Server) { NetMessage.BroadcastChatMessage(NetworkText.FromLiteral(s), new Color(colorR, colorG, colorB), -1); }
         }
 
         public static void ShowTitle(NPC npc, int ID)
         {
-            if (AAConfigClient.Instance.AncientIntroText)
-            {
-                Projectile.NewProjectile(npc.Center, Vector2.Zero, ModContent.ProjectileType<AAMod.Title>(), 0, 0, Main.myPlayer, ID, 0);
-            }
+            Projectile.NewProjectile(npc.Center, Vector2.Zero, ModContent.ProjectileType<AAMod.Title>(), 0, 0, Main.myPlayer, ID, 0);
         }
 
         public static void ShowTitle(Player player, int ID)
         {
-            if (AAConfigClient.Instance.AncientIntroText)
-            {
-                Projectile.NewProjectile(player.Center, Vector2.Zero, ModContent.ProjectileType<AAMod.Title>(), 0, 0, Main.myPlayer, ID, 0);
-            }
+            Projectile.NewProjectile(player.Center, Vector2.Zero, ModContent.ProjectileType<AAMod.Title>(), 0, 0, Main.myPlayer, ID, 0);
         }
 
         public static void ShowSistersTitle(NPC npc)
         {
-            if (AAConfigClient.Instance.AncientIntroText)
-            {
-                Projectile.NewProjectile(npc.Center, Vector2.Zero, ModContent.ProjectileType<AAMod.SistersTitle>(), 0, 0, Main.myPlayer, 16, 0);
-            }
+            Projectile.NewProjectile(npc.Center, Vector2.Zero, ModContent.ProjectileType<AAMod.SistersTitle>(), 0, 0, Main.myPlayer, 16, 0);
         }
 	}
 }

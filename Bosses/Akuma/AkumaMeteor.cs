@@ -1,15 +1,12 @@
 ﻿using System;
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+
 using Terraria;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
-using AAMod;
-using Terraria.ID;
- 
-using AAMod.Globals;
+
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Akuma
@@ -56,7 +53,7 @@ namespace AAModEXAI.Bosses.Akuma
             double deltaAngle = spread / 8f;
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
-                int proj = Projectile.NewProjectile(projectile.position.X, projectile.position.Y, projectile.velocity.X, projectile.velocity.Y, mod.ProjectileType("AkumaBoom"), projectile.damage, projectile.knockBack, projectile.owner, 0f, 0f);
+                int proj = Projectile.NewProjectile(projectile.position.X, projectile.position.Y, projectile.velocity.X, projectile.velocity.Y, ModContent.ProjectileType<AkumaBoom>(), projectile.damage, projectile.knockBack, projectile.owner, 0f, 0f);
                 Main.projectile[proj].netUpdate = true;
             }
             for (int num468 = 0; num468 < 20; num468++)

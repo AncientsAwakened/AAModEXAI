@@ -8,6 +8,7 @@ using Terraria.ID;
  
 using AAMod.Globals;
 using AAModEXAI.Dusts;
+using AAModEXAI.Bosses;
 
 namespace AAModEXAI.Bosses.Athena
 {
@@ -149,9 +150,9 @@ namespace AAModEXAI.Bosses.Athena
                                         Main.projectile[proj].GetGlobalProjectile<AAModEXAIGlobalProjectile>().ReflectConter = 180;
                                     }
                                 }
-                                AAModGlobalNPC.SpawnBoss(Main.player[npc.target], mod.NPCType("AthenaA"), false, npc.Center);
+                                SpawnBossMethod.SpawnBoss(Main.player[npc.target], mod.NPCType("AthenaA"), false, npc.Center);
 
-                                int b = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0f, 0f, ModLoader.GetMod("AAMod").ProjectileType("ShockwaveBoom"), 0, 1, Main.myPlayer);
+                                int b = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0f, 0f, ModContent.ProjectileType<Effects.ShockwaveBoom>(), 0, 1, Main.myPlayer);
                                 Main.projectile[b].Center = npc.Center;
 
                                 npc.active = false;
@@ -213,7 +214,7 @@ namespace AAModEXAI.Bosses.Athena
                             else if (npc.ai[0] >= 1200)
                             {
                                 if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("Athena2Defeat9"), Color.CornflowerBlue);
-                                AAModGlobalNPC.SpawnBoss(Main.player[npc.target], mod.NPCType("AthenaFlee"), false, npc.Center);
+                                SpawnBossMethod.SpawnBoss(Main.player[npc.target], mod.NPCType("AthenaFlee"), false, npc.Center);
                                 npc.active = false;
                                 npc.netUpdate = true;
                             }

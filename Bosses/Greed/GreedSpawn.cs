@@ -8,6 +8,7 @@ using Terraria.ID;
  
 using AAMod.Globals;
 using AAModEXAI.Dusts;
+using AAModEXAI.Bosses;
 
 namespace AAModEXAI.Bosses.Greed
 {
@@ -83,7 +84,7 @@ namespace AAModEXAI.Bosses.Greed
 				}else
 				if (npc.ai[0] >= 755 && !NPC.AnyNPCs(mod.NPCType("Greed")))
 				{
-					AAModGlobalNPC.SpawnBoss(player, mod.NPCType("Greed"), true, npc.Center, AAMod.Lang.BossChat("GreedName"), false);
+					SpawnBossMethod.SpawnBoss(player, mod.NPCType("Greed"), true, npc.Center, AAMod.Lang.BossChat("GreedName"), false);
 					if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("Greed5"), Color.Goldenrod);
 
                     npc.netUpdate = true;

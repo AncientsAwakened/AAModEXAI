@@ -1,13 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+
 using Terraria;
 using Terraria.ModLoader;
-
-using AAMod;
 using Terraria.ID;
- 
-using AAMod.Globals;
+
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Akuma
@@ -87,8 +85,8 @@ namespace AAModEXAI.Bosses.Akuma
             for (i = 0; i < (Main.expertMode ? 6 : 3); i++)
             {
                 offsetAngle = startAngle + deltaAngle * (i + i * i) / 2f + 32f * i;
-                Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, (float)(Math.Sin(offsetAngle) * 6f), (float)(Math.Cos(offsetAngle) * 6f), mod.ProjectileType("Fireshot"), projectile.damage, projectile.knockBack, projectile.owner, 0f, 0f);
-                Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, (float)(-Math.Sin(offsetAngle) * 6f), (float)(-Math.Cos(offsetAngle) * 6f), mod.ProjectileType("Fireshot"), projectile.damage, projectile.knockBack, projectile.owner, 0f, 0f);
+                Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, (float)(Math.Sin(offsetAngle) * 6f), (float)(Math.Cos(offsetAngle) * 6f), ModContent.ProjectileType<FireShot>(), projectile.damage, projectile.knockBack, projectile.owner, 0f, 0f);
+                Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, (float)(-Math.Sin(offsetAngle) * 6f), (float)(-Math.Cos(offsetAngle) * 6f), ModContent.ProjectileType<FireShot>(), projectile.damage, projectile.knockBack, projectile.owner, 0f, 0f);
             }
             for (int dust = 0; dust <= 10; dust++)
             {

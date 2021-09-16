@@ -1,13 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+
 using Terraria;
-using Terraria.ModLoader;
-using AAMod;
 using Terraria.ID;
- 
-using AAMod.Globals;
+using Terraria.ModLoader;
+
 using AAModEXAI.Dusts;
+using AAModEXAI.Base;
 
 namespace AAModEXAI.Bosses.Akuma
 {
@@ -89,7 +89,7 @@ namespace AAModEXAI.Bosses.Akuma
             Main.PlaySound(SoundID.Item, (int)projectile.position.X, (int)projectile.position.Y, 20);
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
-                int proj = Projectile.NewProjectile(projectile.position.X, projectile.position.Y, projectile.velocity.X, projectile.velocity.Y, mod.ProjectileType("AkumaBoom"), projectile.damage, projectile.knockBack, projectile.owner, 0f, 0f);
+                int proj = Projectile.NewProjectile(projectile.position.X, projectile.position.Y, projectile.velocity.X, projectile.velocity.Y, ModContent.ProjectileType<AkumaBoom>(), projectile.damage, projectile.knockBack, projectile.owner, 0f, 0f);
                 Main.projectile[proj].netUpdate = true;
             }
         }

@@ -7,6 +7,7 @@ using Terraria.ID;
  
 using AAMod.Globals;
 using AAModEXAI.Dusts;
+using AAModEXAI.Bosses;
 
 namespace AAModEXAI.Bosses.Shen
 {
@@ -215,7 +216,7 @@ namespace AAModEXAI.Bosses.Shen
 
         public void SummonShen()
         {
-            AAModGlobalNPC.SpawnBoss(Main.player[npc.target], mod.NPCType("Shen"), false, npc.Center, "");
+            SpawnBossMethod.SpawnBoss(Main.player[npc.target], mod.NPCType("Shen"), false, npc.Center, "");
         }
 
         public Color GetColorAlpha()
@@ -551,7 +552,7 @@ namespace AAModEXAI.Bosses.Shen
             if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("ShenTransition7"), Color.Magenta.R, Color.Magenta.G, Color.Magenta.B);
             if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("ShenTransition8"), Color.DarkMagenta.R, Color.DarkMagenta.G, Color.DarkMagenta.B);
 
-            int b = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0f, 0f, ModLoader.GetMod("AAMod").ProjectileType("ShockwaveBoom"), 0, 1, Main.myPlayer, 0, 0);
+            int b = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0f, 0f, ModContent.ProjectileType<Effects.ShockwaveBoom>(), 0, 1, Main.myPlayer, 0, 0);
             Main.projectile[b].Center = npc.Center;
 
             for(int proj = 0; proj < 1000; proj ++)
@@ -583,7 +584,7 @@ namespace AAModEXAI.Bosses.Shen
             }
 
 
-            AAModGlobalNPC.SpawnBoss(player, mod.NPCType("ShenA"), false, npc.Center, "Shen Awakened", false);
+            SpawnBossMethod.SpawnBoss(player, mod.NPCType("ShenA"), false, npc.Center, "Shen Awakened", false);
         }
 
         public Color GetColorAlpha()
