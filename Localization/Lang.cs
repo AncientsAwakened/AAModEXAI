@@ -20,8 +20,9 @@ namespace AAModEXAI.Localization
             }
 
             if(place == "Common") Common(ref info, index);
-            if(place == "AH") AHChat(ref info, index);
-            if(place == "Akuma") AHChat(ref info, index);
+            else if(place == "AH") AHChat(ref info, index);
+            else if(place == "Akuma") AkumaChat(ref info, index);
+
             return info;
         }
 
