@@ -1,11 +1,10 @@
 using System;
 using Microsoft.Xna.Framework;
+
 using Terraria;
 using Terraria.ModLoader;
-using AAMod;
 using Terraria.ID;
- 
-using AAMod.Globals;
+
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Akuma.Awakened
@@ -57,7 +56,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                 for (int i = 0; i < 6; ++i)
                 {
                     vel = vel.RotatedBy(Math.PI / 3);
-                    Projectile.NewProjectile(projectile.Center, vel, mod.ProjectileType("AkumaABomb"), projectile.damage, 0f, Main.myPlayer);
+                    Projectile.NewProjectile(projectile.Center, vel, ModContent.ProjectileType<AkumaABomb>(), projectile.damage, 0f, Main.myPlayer);
                 }
             }
         }

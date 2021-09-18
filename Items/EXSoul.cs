@@ -12,7 +12,7 @@ namespace AAModEXAI.Items
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Super Ancients Soul");
-            Tooltip.SetDefault("Essence of ancient, arcane magic. Be used for making the Legendary weapons.");
+            Tooltip.SetDefault("Essence of ancient, arcane magic. Be used for making the Legendary equipments.");
             // ticksperframe, frameCount
             Main.RegisterItemAnimation(item.type, new DrawAnimationVertical(4, 4));
             ItemID.Sets.ItemNoGravity[item.type] = true;

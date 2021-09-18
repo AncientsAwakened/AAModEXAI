@@ -20,6 +20,7 @@ namespace AAModEXAI
         public override void Initialize()
         {
             downedSisters = false;
+            downedAkuma = false;
             downedRajahsRevenge = false;
             CRajahFirst = false;
         }

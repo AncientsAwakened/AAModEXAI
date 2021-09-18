@@ -55,10 +55,10 @@ namespace AAModEXAI.Bosses.Akuma
                 projectile.rotation = (float)Math.Atan2(projectile.velocity.Y, projectile.velocity.X);
             }
 
-            int dustId = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y + 2f), projectile.width, projectile.height + 5, ModContent.DustType<InfinityOverloadB>(), projectile.velocity.X * 0.2f,
+            int dustId = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y + 2f), projectile.width, projectile.height + 5, ModContent.DustType<AkumaDust>(), projectile.velocity.X * 0.2f,
                 projectile.velocity.Y * 0.2f, 100, new Color(86, 191, 188), 2f);
             Main.dust[dustId].noGravity = true;
-            int dustId3 = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y + 2f), projectile.width, projectile.height + 5, ModContent.DustType<InfinityOverloadB>(), projectile.velocity.X * 0.2f,
+            int dustId3 = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y + 2f), projectile.width, projectile.height + 5, ModContent.DustType<AkumaDust>(), projectile.velocity.X * 0.2f,
                 projectile.velocity.Y * 0.2f, 100, new Color(86, 191, 188), 2f);
             Main.dust[dustId3].noGravity = true;
         }

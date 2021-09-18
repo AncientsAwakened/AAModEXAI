@@ -1,4 +1,4 @@
-displayName = Super Ancients Awakened
+displayName = The Memory of Ancients Awakened
 author = Cerberus
 hideCode = true
 includeSource = false

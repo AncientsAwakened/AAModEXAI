@@ -7,7 +7,7 @@ namespace AAModEXAI.Localization
         // 0 is English
         // 1 is Chinese
         // 2 is Russian
-        public static string  text(string place, string info)
+        public static string text(string place, string info)
         {
             int index = 0;
             if(Language.ActiveCulture == GameCulture.Chinese)
@@ -309,6 +309,139 @@ namespace AAModEXAI.Localization
                 if(index == 0) info = "IT ONLY MAKES THEM STRONGER!";
                 else if(index == 1) info = "只 会 让 他 们 更 猛 烈!";
                 else if(index == 2) info = "ЭТО ИХ ТОЛЬКО УСИЛИЛО!";
+            }
+
+            if(info == "AkumaA1")
+            {
+                if(index == 0) info = "Ashe? Help your dear old dad with this kid again!";
+                else if(index == 1) info = "艾希? 再来帮你一次亲爱的老爸料理这小子!";
+                else if(index == 2) info = "Аши? Помоги своему старому папе справиться с этим сопляком снова!";
+            }
+            if(info == "AkumaA2")
+            {
+                if(index == 0) info = "You got it, daddy..!";
+                else if(index == 1) info = "懂了, 爸爸. . !";
+                else if(index == 2) info = "У тебя получиться, папочка..!";
+            }
+            if(info == "AkumaA3")
+            {
+                if(index == 0) info = "Hey! Hands off my papa!";
+                else if(index == 1) info = "嘿! 放开我爸!";
+                else if(index == 2) info = "Эй! Убрал руки от моего папы!";
+            }
+            if(info == "AkumaA4")
+            {
+                if(index == 0) info = "Atta-girl..!";
+                else if(index == 1) info = "艾女...!";
+                else if(index == 2) info = "Моя девочка!";
+            }
+            if(info == "AkumaA5")
+            {
+                if(index == 0) info = "Still got it, do you? Ya got fire in your spirit! I like that about you, kid!";
+                else if(index == 1) info = "明白吗? 你有火焰般炽热的精神! 小子, 我很喜欢这样!.";
+                else if(index == 2) info = "Все еще жив, а? А в тебе есть стержень! Мне это нравится, сопляк!";
+            }
+            if(info == "AkumaA6")
+            {
+                if(index == 0) info = "What?! How have you lasted this long?! Why you little... I refuse to be bested by a terrarian again! Have at it!";
+                else if(index == 1) info = "什么? !你怎么坚持这么长时间的? !为什么你这个小...我拒绝再被一个泰拉人打败! 攻击!";
+                else if(index == 2) info = "Что?! Как ты держишься так долго?! Почему ты... Я отказываюсь быть побежденным террарианом снова! Получай!";
+            }
+            if(info == "AkumaA7")
+            {
+                if(index == 0) info = "ACK..! WATER! I LOATHE WATER!!!";
+                else if(index == 1) info = "啊啊. . ! 水! 我讨厌水!!!";
+                else if(index == 2) info = "АК..! ВОДА! Я НЕНАВИЖУ ВОДУ!!!";
+            }
+            if(info == "AkumaA8")
+            {
+                if(index == 0) info = "Nighttime won't save you from me this time, kid! The day is born anew!";
+                else if(index == 1) info = "这次, 晚上可救不了你, 小子!已经是新的一天了! ";
+                else if(index == 2) info = "В этот раз ночь тебя не спасет, сопляк! День перерождается!";
+            }
+            if(info == "AkumaA9")
+            {
+                if(index == 0) info = "You just got burned, kid.";
+                else if(index == 1) info = "你烧伤了, 小子";
+                else if(index == 2) info = "Ты только что сгорел, сопляк.";
+            }
+            if(info == "AkumaA10")
+            {
+                if(index == 0) info = "Heh, not too shabby this time kid. I'm impressed. Here. Take your prize.";
+                else if(index == 1) info = "嘿, 小子这次很光明磊落. 我印象深刻. 这儿. 拿走你的战利品. ";
+                else if(index == 2) info = "Хех, не такой убогий в этот раз, сопляк. Я впечатлен. Вот. Бери свой приз.";
+            }
+            if(info == "AkumaA11")
+            {
+                if(index == 0) info = "GRAH..! HOW!? HOW COULD I LOSE TO A MERE MORTAL TERRARIAN?! Hmpf...fine kid, you win, fair and square. Here's your reward.";
+                else if(index == 1) info = "啊…!怎么回事!我怎么会输给一个普通的泰拉人? !嗯……好小子, 你赢了, 公平公正. 这是你的奖励. ";
+                else if(index == 2) info = "ГРАХ..! КАК!? КАК Я МОГ ПРОЙГРАТЬ СМЕРТНОМУ ТЕРРАРИАНУ?! Хмпф... ладно, сопляк, ты выиграл честно. Вот твой приз.";
+            }
+            if(info == "AkumaA12")
+            {
+                if(index == 0) info = "Nice. You cheated. Now come fight me in expert mode like a real man.";
+                else if(index == 1) info = "好好好. 你作弊. 你应该像一个真正的男子汉一样来专家模式挑战我. ";
+                else if(index == 2) info = "Мило. Ты сжульничал. А теперь сразись со мной в эксперт моде, как настоящий мужчина.";
+            }
+            if(info == "AkumaA13")
+            {
+                if(index == 0) info = "Sky's fallin' again! On your toes!";
+                else if(index == 1) info = "天又要塌了! 集中注意!";
+                else if(index == 2) info = "Небеса вновь падают!";
+            }
+            if(info == "AkumaA14")
+            {
+                if(index == 0) info = "Down comes the flames of fury again!";
+                else if(index == 1) info = "愤怒之火再次从天而降!";
+                else if(index == 2) info = "И вот снова вниз спускаются огонь и ярость!";
+            }
+            if(info == "AkumaA15")
+            {
+                if(index == 0) info = "You underestimate the artillery of a dragon, kid!";
+                else if(index == 1) info = "你低估了龙的火力, 小子!";
+                else if(index == 2) info = "Ты недооцениваешь силу дракона, сопляк!";
+            }
+            if(info == "AkumaA16")
+            {
+                if(index == 0) info = "Flames don't give in till the end, kid!";
+                else if(index == 1) info = "烈火永不熄灭, 小子!";
+                else if(index == 2) info = "Огни не сдаются до самого конца, сопляк!";
+            }
+            if(info == "AkumaA17")
+            {
+                if(index == 0) info = "Heads up! Volcano's eruptin' kid!";
+                else if(index == 1) info = "注意点! 火山喷发了, 小子!";
+                else if(index == 2) info = "Осторожно! Вулканы извергаются снова";
+            }
+            if(info == "AkumaA18")
+            {
+                if(index == 0) info = "INCOMING!";
+                else if(index == 1) info = "来了!";
+                else if(index == 2) info = "СПАСАЙСЯ, СОПЛЯК!!";
+            }
+            if(info == "AkumaA19")
+            {
+                if(index == 0) info = "Hey Kid? Like Fireworks? No? Too Bad!";
+                else if(index == 1) info = "嘿小子? 喜欢烟花吗? 不? 真糟糕!";
+                else if(index == 2) info = "Эй, сопляк? Любишь фейерверки? Нет? Очень жаль!";
+            }
+            if(info == "AkumaA20")
+            {
+                if(index == 0) info = "Here comes the grand finale, kid!";
+                else if(index == 1) info = "该完美收场了, 小子!";
+                else if(index == 2) info = "А вот и твой грандиозный финал, сопляк!";
+            }
+            if(info == "AkumaA21")
+            {
+                if(index == 0) info = "The Sun won't quit 'til the day is done, kid!";
+                else if(index == 1) info = "白昼不息烈日不止, 小子!";
+                else if(index == 2) info = "Солнце не сдастся, пока день не закончиться, сопляк!";
+            }
+            if(info == "AkumaA22")
+            {
+                if(index == 0) info = "Face the fury of the sun!";
+                else if(index == 1) info = "面对烈日的怒火吧!";
+                else if(index == 2) info = "Сразись лицом к лицу с яростью солнца!";
             }
         }
     }

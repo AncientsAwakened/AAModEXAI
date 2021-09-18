@@ -31,7 +31,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
 
         public override void AI()
         {
-            if(Main.npc[(int)projectile.ai[0]].type == mod.NPCType("AsheRune"))
+            if(Main.npc[(int)projectile.ai[0]].type == ModContent.NPCType<AsheRune>())
             {
                 if(projectile.ai[1] ++ < 30)
                 {

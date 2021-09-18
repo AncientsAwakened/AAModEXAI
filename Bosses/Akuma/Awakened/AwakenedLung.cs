@@ -1,15 +1,12 @@
-﻿using Terraria;
-using System;
-using Terraria.ID;
+﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+
+using Terraria;
 using Terraria.ModLoader;
 using Terraria.Audio;
-
-using AAMod;
 using Terraria.ID;
- 
-using AAMod.Globals;
+
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Akuma.Awakened
@@ -89,13 +86,13 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 
                     for (int i = 0; i < 12; ++i)
                     {
-                        latestNPC = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("AwakenedLungBody"), npc.whoAmI, 0, latestNPC);
+                        latestNPC = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<AwakenedLungBody>(), npc.whoAmI, 0, latestNPC);
                         Main.npc[latestNPC].realLife = npc.whoAmI;
                         Main.npc[latestNPC].ai[3] = npc.whoAmI;
                         
                     }
                     
-                    latestNPC = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("AwakenedLungTail"), npc.whoAmI, 0, latestNPC);
+                    latestNPC = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<AwakenedLungTail>(), npc.whoAmI, 0, latestNPC);
                     Main.npc[latestNPC].realLife = npc.whoAmI;
                     Main.npc[latestNPC].ai[3] = npc.whoAmI;
 
@@ -141,7 +138,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                 flaming = true;
                 Vector2 shootspeed = Vector2.Normalize(npc.velocity) * 20f;
                 Vector2 shootpos = Vector2.Normalize(npc.velocity).RotatedBy((float)Math.PI / 2 * npc.direction) * npc.height / 2;
-                AAAI.BreatheFire(npc, true, mod.ProjectileType("AkumaABreath"), 2, 4);
+                AAAI.BreatheFire(npc, true, ModContent.ProjectileType<AkumaABreath>(), 2, 4);
             }
             else
             {
@@ -369,7 +366,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
-                if (!Main.npc[(int)npc.ai[1]].active || Main.npc[(int)npc.ai[3]].type != mod.NPCType("AwakenedLung"))
+                if (!Main.npc[(int)npc.ai[1]].active || Main.npc[(int)npc.ai[3]].type != ModContent.ProjectileType<AwakenedLung>())
                 {
                     npc.life = 0;
                     npc.HitEffect(0, 10.0);
@@ -470,7 +467,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
-                if (!Main.npc[(int)npc.ai[1]].active || Main.npc[(int)npc.ai[3]].type != mod.NPCType("AwakenedLung"))
+                if (!Main.npc[(int)npc.ai[1]].active || Main.npc[(int)npc.ai[3]].type != ModContent.ProjectileType<AwakenedLung>())
                 {
                     npc.life = 0;
                     npc.HitEffect(0, 10.0);
@@ -526,7 +523,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 
         public override bool CheckActive()
         {
-            if (NPC.AnyNPCs(mod.NPCType("AwakenedLung")))
+            if (NPC.AnyNPCs(ModContent.ProjectileType<AwakenedLung>()))
             {
                 return false;
             }

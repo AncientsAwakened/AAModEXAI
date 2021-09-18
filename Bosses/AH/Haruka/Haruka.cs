@@ -44,10 +44,8 @@ namespace AAModEXAI.Bosses.AH.Haruka
             npc.lavaImmune = true;
             npc.boss = true;
             npc.netAlways = true;
-            music = ModLoader.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/AH");
             npc.noGravity = true;
             npc.noTileCollide = true;
-            bossBag = ModLoader.GetMod("AAMod").ItemType("AHBag");
         }
 
 
@@ -161,20 +159,7 @@ namespace AAModEXAI.Bosses.AH.Haruka
             if (Ashe == 0)
             {
                 NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<AHDeath>());
-                if (Main.expertMode)
-                {
-                    for(int i = 0; i < 10; i++) npc.DropBossBags();
-                }
-            }
-            if (!Main.expertMode)
-            {
-                string[] lootTableH = { "HarukaKunai", "Masamune", "MizuArashi", "HarukaBox" };
-                int lootH = Main.rand.Next(lootTableH.Length);
-                npc.DropLoot(ModLoader.GetMod("AAMod").ItemType(lootTableH[lootH]));
-            }
-            if (Main.rand.Next(10) == 0)
-            {
-                Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, ModLoader.GetMod("AAMod").ItemType("HarukaTrophy"));
+                for(int i = 0; i < 10; i++) npc.DropBossBags();
             }
             if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(Trans.text("AH", "HarukaDowned"), new Color(72, 78, 117));
             NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<HarukaVanish>());

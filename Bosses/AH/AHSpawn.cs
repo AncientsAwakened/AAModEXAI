@@ -89,7 +89,6 @@ namespace AAModEXAI.Bosses.AH
 
             if (npc.ai[1] == 820)
             {
-                music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/AH");
                 Main.npc[BaseAI.GetNPC(npc.Center, ModContent.NPCType<AsheSpawn>(), -1)].Transform(ModContent.NPCType<Ashe.Ashe>());
                 if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(Trans.text("AH", "AHSpawn5"), new Color(102, 20, 48));
                 SpawnBoss(player, "Ashe");

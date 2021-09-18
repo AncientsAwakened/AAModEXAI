@@ -1,13 +1,12 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.Enums;
-using AAMod;
 using Terraria.ID;
- 
-using AAMod.Globals;
+
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Akuma.Awakened
@@ -225,7 +224,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
         public override void Kill(int timeLeft)
         {
             if (Main.netMode != NetmodeID.MultiplayerClient)
-                Projectile.NewProjectile(projectile.Center, projectile.velocity, mod.ProjectileType("AkumaADeathray"), projectile.damage, projectile.knockBack, projectile.owner, projectile.ai[0], projectile.ai[1]);
+                Projectile.NewProjectile(projectile.Center, projectile.velocity, ModContent.ProjectileType<AkumaADeathray>(), projectile.damage, projectile.knockBack, projectile.owner, projectile.ai[0], projectile.ai[1]);
             base.Kill(timeLeft);
         }
     }

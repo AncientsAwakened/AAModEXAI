@@ -1,12 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+
 using Terraria;
 using Terraria.ModLoader;
-using AAMod;
 using Terraria.ID;
  
-using AAMod.Globals;
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Akuma.Awakened
@@ -87,7 +86,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
         public override void Kill(int timeLeft)
         {
             Main.PlaySound(SoundID.Item, (int)projectile.position.X, (int)projectile.position.Y, 20);
-            Projectile.NewProjectile(projectile.position.X, projectile.position.Y, projectile.velocity.X, projectile.velocity.Y, mod.ProjectileType("HomingBoom"), projectile.damage, projectile.knockBack, projectile.owner, 0f, 0f);
+            Projectile.NewProjectile(projectile.position.X, projectile.position.Y, projectile.velocity.X, projectile.velocity.Y, ModContent.ProjectileType<HomingBoom>(), projectile.damage, projectile.knockBack, projectile.owner, 0f, 0f);
         }
 
         private int HomeOnTarget()

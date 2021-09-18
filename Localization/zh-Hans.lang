@@ -1,12 +1,15 @@
 
-BuffName.DragonFireBuff=燎狱龙炎
-BuffDescription.DragonFireBuff=持续减少生命值
+BuffName.DragonFire=燎狱龙炎
+BuffDescription.DragonFire=你的生命持续减少，攻击力下降
 
-BuffName.HydraToxinBuff=九头蛇毒
-BuffDescription.HydraToxinBuff=在你身上的时间越长,越能腐蚀你的身体
+BuffName.HydraToxin=九头蛇毒
+BuffDescription.HydraToxin=在你身上的时间越长,越能腐蚀你的身体
 
 BuffName.BlazingPain=痛灼
 BuffDescription.BlazingPain=着火debuff对你造成双倍伤害
+
+BuffName.BlazingMadness=灼炎狂暴
+BuffDescription.BlazingMadness=你必须保持攻击和移动状态
 
 BuffName.Unstable=不安定
 BuffDescription.Unstable=Y你角色的c代o码de变得不un稳sta定ble
@@ -364,8 +367,8 @@ NPCName.Rajah7=巨兔王公
 NPCName.Rajah8=巨兔王公
 NPCName.Rajah9=巨兔王公
 
-NPCName.SupremeRajah=至尊巨兔王公 无辜的保护者
-NPCName.SupremeRajahDefeat=巨兔王公
+NPCName.SupremeRajah=兔神尊皇 公道的捍卫者
+NPCName.SupremeRajahDefeat=兔神尊皇
 
 
 

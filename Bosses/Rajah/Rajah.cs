@@ -1275,7 +1275,7 @@ namespace AAModEXAI.Bosses.Rajah
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Rajah Rabbit; Champion of the Innocent");
+            DisplayName.SetDefault("Supreme Emperor Rabbit; Champion of the Innocent");
             Main.npcFrameCount[npc.type] = 8;
         }
 

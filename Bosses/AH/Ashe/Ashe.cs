@@ -49,8 +49,6 @@ namespace AAModEXAI.Bosses.AH.Ashe
             npc.noTileCollide = true;
             npc.HitSound = SoundID.NPCHit1;
             npc.DeathSound = SoundID.NPCDeath1;
-            music = ModLoader.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/AH");
-            bossBag = ModLoader.GetMod("AAMod").ItemType("AHBag");
         }
 
         public bool RuneCrash = false;
@@ -543,20 +541,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
             if (NPC.CountNPCS(ModContent.NPCType<Bosses.AH.Haruka.Haruka>()) == 0)
             {
                 NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<AHDeath>());
-                if (Main.expertMode)
-                {
-                    for(int i = 0; i < 10; i++) npc.DropBossBags();
-                }
-            }
-            if (!Main.expertMode)
-            {
-                string[] lootTableA = { "AshRain", "FuryFlame", "FireSpiritStaff", "AsheSatchel" };
-                int lootA = Main.rand.Next(lootTableA.Length);
-                npc.DropLoot(ModLoader.GetMod("AAMod").ItemType(lootTableA[lootA]));
-            }
-            if (Main.rand.Next(10) == 0)
-            {
-                Item.NewItem((int)npc.Center.X, (int)npc.Center.Y, npc.width, npc.height, ModLoader.GetMod("AAMod").ItemType("AsheTrophy"));
+                for(int i = 0; i < 10; i++) npc.DropBossBags();
             }
             int DeathAnim = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<AsheVanish>(), 0);
             Main.npc[DeathAnim].velocity = npc.velocity;

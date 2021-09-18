@@ -5,7 +5,7 @@ The power of the Ancients in this mod is based on the original design.
 
 You must be familiar with each weapons in AAMod, which could help you with choosing the best weapons.
 
-However it is a fanmade mod which fixes the bugs and adjusts the boss difficulty, which doesn't have the relationship to the new AA's progress.
+However it is a fanmade mod which fixes the bugs and adjusts the boss difficulty, which doesn't have any relationships to the new AA's progress.
 
 Changes in 1.0.0.2:
 
@@ -24,3 +24,8 @@ Changes in 1.0.0.2:
 7.Add some accessories for the Challengers.
 
 WARNING: This mod will seriously affect your normal playthrough. If some bosses are too powerful for you to defeat, this is very much the norm. That's why we nerf them. Maybe you can try your best and figure out how to defeat them.
+
+Thanks for all these people working for this mod:
+
+Spriter: 中学生, 花
+Tester: 向导-Guide

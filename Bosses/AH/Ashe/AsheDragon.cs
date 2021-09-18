@@ -98,22 +98,22 @@ namespace AAModEXAI.Bosses.AH.Ashe
 
                     for (int l = 0; l < 30; l++)
                     {
-                        int type = mod.NPCType("AsheDragonBody");
+                        int type = ModContent.NPCType<AsheDragonBody>();
                         if ((l - 2) % 4 == 0 && l < 26)
                         {
-                            type = mod.NPCType("AsheDragonArms");
+                            type = ModContent.NPCType<AsheDragonArms>();
                         }
                         else if (l == 27)
                         {
-                            type = mod.NPCType("AsheDragonBody1");
+                            type = ModContent.NPCType<AsheDragonBody1>();
                         }
                         else if (l == 28)
                         {
-                            type = mod.NPCType("AsheDragonBody2");
+                            type = ModContent.NPCType<AsheDragonBody2>();
                         }
                         else if (l == 29)
                         {
-                            type = mod.NPCType("AsheDragonTail");
+                            type = ModContent.NPCType<AsheDragonTail>();
                         }
 
                         if(Main.netMode != NetmodeID.MultiplayerClient)

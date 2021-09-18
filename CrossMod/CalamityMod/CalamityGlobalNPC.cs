@@ -35,7 +35,7 @@ namespace AAModEXAI
 
                 if(npc.type == mod.NPCType("Haruka")) CalamityDR = 0.3f;
 
-                if(npc.type == mod.NPCType("AkumaA")) CalamityDR = 0.05f;
+                if(npc.type == ModContent.NPCType<Bosses.Akuma.Awakened.AkumaA>()) CalamityDR = 0.05f;
                 if(npc.type == mod.NPCType("Akuma")) CalamityDR = 0.1f;
                 if(npc.type == mod.NPCType("AwakenedLung")) CalamityDR = 0.07f;
                 if(npc.type == mod.NPCType("AncientLung")) CalamityDR = 0.1f;

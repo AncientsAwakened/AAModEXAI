@@ -1,11 +1,10 @@
-using Terraria;
-using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using AAMod;
+
+using Terraria;
+using Terraria.ModLoader;
 using Terraria.ID;
- 
-using AAMod.Globals;
+
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI
@@ -14,8 +13,144 @@ namespace AAModEXAI
     {
         public override bool InstancePerEntity => true;
         public bool title = false;
+
+        public override void SetDefaults(NPC npc)
+		{
+            //AH
+            if(npc.type == ModContent.NPCType<Bosses.AH.Ashe.Ashe>())
+            {
+                npc.modNPC.music = ModSupport.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/AH");
+                npc.modNPC.bossBag = ModSupport.GetModItem("AAMod", "AHBag").item.type;
+                return;
+            }
+            if(npc.type == ModContent.NPCType<Bosses.AH.Haruka.Haruka>())
+            {
+                npc.modNPC.music = ModSupport.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/AH");
+                npc.modNPC.bossBag = ModSupport.GetModItem("AAMod", "AHBag").item.type;
+                return;
+            }
+            //Akuma
+            if(npc.type == ModContent.NPCType<Bosses.Akuma.Akuma>())
+            {
+                npc.modNPC.music = ModSupport.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/Akuma");
+                return;
+            }
+            if(npc.type == ModContent.NPCType<Bosses.Akuma.Awakened.AkumaA>())
+            {
+                npc.modNPC.music = ModSupport.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/Akuma2");
+                npc.modNPC.bossBag = ModSupport.GetModItem("AAMod", "AkumaBag").item.type;
+                return;
+            }
+		}
+
+        public override void NPCLoot(NPC npc)
+		{
+            //AH
+            if(npc.type == ModContent.NPCType<Bosses.AH.Ashe.Ashe>())
+            {
+                Item.NewItem((int)npc.Center.X, (int)npc.Center.Y, npc.width, npc.height, ModSupport.GetModItem("AAMod", "AsheTrophy").item.type);
+                return;
+            }
+            if(npc.type == ModContent.NPCType<Bosses.AH.Haruka.Haruka>())
+            {
+                Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, ModSupport.GetModItem("AAMod", "HarukaTrophy").item.type);
+                return;
+            }
+            //Akuma
+            if(npc.type == ModContent.NPCType<Bosses.Akuma.Akuma>())
+            {
+                Item.NewItem((int)npc.Center.X, (int)npc.Center.Y, npc.width, npc.height, ModSupport.GetModItem("AAMod", "AkumaTrophy").item.type);
+                Item.NewItem((int)npc.Center.X, (int)npc.Center.Y, npc.width, npc.height, ModSupport.GetModItem("AAMod", "AkumaMask").item.type);
+                return;
+            }
+            if(npc.type == ModContent.NPCType<Bosses.Akuma.Awakened.AkumaA>())
+            {
+                if (!AAModEXAIWorld.downedAkuma)
+                {
+                    Item.NewItem((int)npc.Center.X, (int)npc.Center.Y, npc.width, npc.height, ModSupport.GetModItem("AAMod", "DraconianRune").item.type);
+                }
+                Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, ModSupport.GetModItem("AAMod", "AkumaATrophy").item.type);
+                Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, ModSupport.GetModItem("AAMod", "AkumaAMask").item.type);
+                for(int i = 0; i < 10; i++) npc.DropBossBags();
+                return;
+            }
+		}
+
+        public override void AI(NPC npc)
+        {
+            if(npc.type == ModContent.NPCType<Bosses.AH.AHSpawn>())
+            {
+                if (npc.ai[1] == 820)
+                {
+                    npc.modNPC.music = ModSupport.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/AH");
+                }
+            }
+        }
+
         public override bool PreAI(NPC npc)
         {
+            //AH
+            if(npc.type == ModSupport.GetModNPC("AAMod", "Ashe").npc.type)
+            {
+                npc.boss = false;
+                npc.life = 0;
+                if(Main.netMode != NetmodeID.MultiplayerClient)
+                {
+                    int id = ChangeToSAABoss(npc.whoAmI, ModContent.NPCType<Bosses.AH.Ashe.Ashe>());
+                    if (Main.netMode == NetmodeID.Server && id < 200) NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, id);
+                    Main.npc[id].netUpdate = true;
+                }
+                AAModEXAI.ShowSistersTitle(npc);
+                npc.active = false;
+                npc.netUpdate = true;
+                return false;
+            }
+            if(npc.type == ModSupport.GetModNPC("AAMod", "Haruka").npc.type)
+            {
+                npc.boss = false;
+                npc.life = 0;
+                if(Main.netMode != NetmodeID.MultiplayerClient)
+                {
+                    int id = ChangeToSAABoss(npc.whoAmI, ModContent.NPCType<Bosses.AH.Haruka.Haruka>());
+                    if (Main.netMode == NetmodeID.Server && id < 200) NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, id);
+                    Main.npc[id].netUpdate = true;
+                }
+                npc.active = false;
+                npc.netUpdate = true;
+                return false;
+            }
+            //Akuma
+            if(npc.type == ModSupport.GetModNPC("AAMod", "Akuma").npc.type)
+            {
+                npc.boss = false;
+                npc.life = 0;
+                if(Main.netMode != NetmodeID.MultiplayerClient)
+                {
+                    int id = ChangeToSAABoss(npc.whoAmI, ModContent.NPCType<Bosses.Akuma.Akuma>());
+                    if (Main.netMode == NetmodeID.Server && id < 200) NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, id);
+                    Main.npc[id].netUpdate = true;
+                }
+                AAModEXAI.ShowTitle(npc, 7);
+                npc.active = false;
+                npc.netUpdate = true;
+                return false;
+            }
+            if(npc.type == ModSupport.GetModNPC("AAMod", "AkumaA").npc.type)
+            {
+                npc.boss = false;
+                npc.life = 0;
+                if(Main.netMode != NetmodeID.MultiplayerClient)
+                {
+                    int id = ChangeToSAABoss(npc.whoAmI, ModContent.NPCType<Bosses.Akuma.Awakened.AkumaA>());
+                    if (Main.netMode == NetmodeID.Server && id < 200) NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, id);
+                    Main.npc[id].netUpdate = true;
+                }
+                AAModEXAI.ShowTitle(npc, 8);
+                npc.active = false;
+                npc.netUpdate = true;
+                return false;
+            }
+
             if(npc.type == ModLoader.GetMod("AAMod").NPCType("Athena"))
             {
                 npc.boss = false;
@@ -87,65 +222,6 @@ namespace AAModEXAI
                     npc.netUpdate = true;
                 }
                 AAModEXAI.ShowTitle(npc, 4);
-                npc.active = false;
-                npc.netUpdate = true;
-                return false;
-            }
-            if(npc.type == ModLoader.GetMod("AAMod").NPCType("Ashe"))
-            {
-                npc.boss = false;
-                npc.life = 0;
-                if(Main.netMode != NetmodeID.MultiplayerClient)
-                {
-                    int id = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<Bosses.AH.Ashe.Ashe>());
-                    Main.npc[id].position = npc.position;
-                    npc.netUpdate = true;
-                }
-                AAModEXAI.ShowSistersTitle(npc);
-                npc.active = false;
-                npc.netUpdate = true;
-                return false;
-            }
-            if(npc.type == ModLoader.GetMod("AAMod").NPCType("Haruka"))
-            {
-                npc.boss = false;
-                npc.life = 0;
-                if(Main.netMode != NetmodeID.MultiplayerClient)
-                {
-                    int id = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("Haruka"));
-                    Main.npc[id].position = npc.position;
-                    npc.netUpdate = true;
-                }
-                npc.active = false;
-                npc.netUpdate = true;
-                return false;
-            }
-            if(npc.type == ModLoader.GetMod("AAMod").NPCType("Akuma"))
-            {
-                npc.boss = false;
-                npc.life = 0;
-                if(Main.netMode != NetmodeID.MultiplayerClient)
-                {
-                    int id = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("Akuma"));
-                    Main.npc[id].position = npc.position;
-                    npc.netUpdate = true;
-                }
-                AAModEXAI.ShowTitle(npc, 7);
-                npc.active = false;
-                npc.netUpdate = true;
-                return false;
-            }
-            if(npc.type == ModLoader.GetMod("AAMod").NPCType("AkumaA"))
-            {
-                npc.boss = false;
-                npc.life = 0;
-                if(Main.netMode != NetmodeID.MultiplayerClient)
-                {
-                    int id = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("AkumaA"));
-                    Main.npc[id].position = npc.position;
-                    npc.netUpdate = true;
-                }
-                AAModEXAI.ShowTitle(npc, 8);
                 npc.active = false;
                 npc.netUpdate = true;
                 return false;
@@ -404,7 +480,7 @@ namespace AAModEXAI
                 }
                 return base.PreAI(npc);
             }
-            if(npc.type == mod.NPCType("AkumaA"))
+            if(npc.type == ModContent.NPCType<Bosses.Akuma.Awakened.AkumaA>())
             {
                 if(!title)
                 {
@@ -505,17 +581,25 @@ namespace AAModEXAI
             }
             return base.PreAI(npc);
         }
-        /*
-
-        public override bool StrikeNPC(NPC npc, ref double damage, int defense, ref float knockback, int hitDirection, ref bool crit)
+        
+        public static int ChangeToSAABoss(int num, int Type)
 		{
-            if(damage > npc.lifeMax * .05f)
-            {
-                damage = Main.DamageVar(npc.lifeMax * .01f);;
-                return false;
-            }
-            return true;
+            if (num >= 0)
+			{
+                float X = Main.npc[num].Center.X;
+                float Y = Main.npc[num].Center.Y;
+                int Target = Main.npc[num].target;
+                Main.npc[num].active = false;
+				Main.npc[num] = new NPC();
+				Main.npc[num].SetDefaults(Type, -1f);
+				Main.npc[num].Center = new Vector2(X, Y);
+				Main.npc[num].active = true;
+				Main.npc[num].wet = Collision.WetCollision(Main.npc[num].position, Main.npc[num].width, Main.npc[num].height);
+				Main.npc[num].target = Target;
+				return num;
+			}
+            Main.npc[num].active = false;
+            return 0;
         }
-        */
     }
 }

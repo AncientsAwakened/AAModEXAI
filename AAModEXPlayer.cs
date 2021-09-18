@@ -27,6 +27,7 @@ namespace AAModEXAI
         public bool hydraToxin = false;
 
         public bool AkumaPain = false;
+        public bool BlazingMadness = false;
         public bool YamataGravity = false;
         public bool YamataAGravity = false;
         public bool Yanked = false;
@@ -57,6 +58,7 @@ namespace AAModEXAI
             dragonFire = false;
             hydraToxin = false;
             AkumaPain = false;
+            BlazingMadness = false;
             YamataGravity = false;
             YamataAGravity = false;
             Yanked = false;
@@ -72,6 +74,7 @@ namespace AAModEXAI
             dragonFire = false;
             hydraToxin = false;
             AkumaPain = false;
+            BlazingMadness = false;
             YamataGravity = false;
             YamataAGravity = false;
             Yanked = false;
@@ -105,6 +108,13 @@ namespace AAModEXAI
                 if ((player.onFire || player.frostBurn || player.onFire2 || dragonFire || modPlayer.dragonFire || modPlayer.discordInferno) && player.lifeRegen < 0)
                 {
                     player.lifeRegen *= 2;
+                }
+            }
+            if (BlazingMadness)
+            {
+                if((player.velocity.X == 0 && player.velocity.Y == 0) || player.itemtime == 0)
+                {
+                    player.lifeRegen -= (int)(player.statLifeMax / 5);
                 }
             }
 
@@ -218,6 +228,17 @@ namespace AAModEXAI
 
         public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
 		{
+            if(BlazingMadness)
+            {
+                for(int i = 0; i < 200; i++)
+                {
+                    if(Main.npc[i].type == ModContent.NPCType<Bosses.Akuma.Akuma>() || Main.npc[i].type == ModContent.NPCType<Bosses.Akuma.Awakened.AkumaA>())
+                    {
+                        double offsetAngle = (double)(Main.rand.NextFloat() * Math.PI);
+                        Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, (float)(Math.Sin(offsetAngle) * 3f), (float)(Math.Cos(offsetAngle) * 3f), ModContent.ProjectileType<AkumaFireHeal>(), 0f, projectile.knockBack, projectile.owner, i, damage * 5f);
+                    }
+                }
+            }
             if(Spellreflow)
             {
                 if(damage > player.statLife && damage < player.statLife + player.statMana)
@@ -301,9 +322,15 @@ namespace AAModEXAI
                         player.AddBuff(ModContent.BuffType<DeBuffs.BlazingPain>(), 2);
                     }
                 }
+                else if(Main.npc[i].type == ModContent.NPCType<Bosses.Akuma.Akuma>())
+                {
+                    player.AddBuff(ModContent.BuffType<DeBuffs.BlazingPain>(), 2);
+                    player.AddBuff(ModContent.BuffType<DeBuffs.BlazingMadness>(), 2);
+                }
                 else if(Main.npc[i].type == ModContent.NPCType<Bosses.Akuma.Awakened.AkumaA>())
                 {
                     player.AddBuff(ModContent.BuffType<DeBuffs.BlazingPain>(), 2);
+                    player.AddBuff(ModContent.BuffType<DeBuffs.BlazingMadness>(), 2);
                 }
                 else if(Main.npc[i].type == ModContent.NPCType<Bosses.Yamata.Yamata>())
                 {

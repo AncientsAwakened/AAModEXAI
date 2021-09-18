@@ -88,7 +88,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                 }
             }
 
-            if (!NPC.AnyNPCs(mod.NPCType("AkumaA")) || NPC.AnyNPCs(mod.NPCType("AsheA")))
+            if (!NPC.AnyNPCs(ModContent.NPCType<Bosses.Akuma.Awakened.AkumaA>()) || NPC.AnyNPCs(mod.NPCType("AsheA")))
             {
                 projectile.Kill();
             }

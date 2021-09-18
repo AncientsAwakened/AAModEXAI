@@ -59,14 +59,13 @@ namespace AAModEXAI.Bosses.Akuma
             npc.noGravity = true;
             npc.noTileCollide = true;
             npc.behindTiles = true;
-            music = ModLoader.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/Akuma");
             npc.HitSound = SoundID.NPCHit1;
             npc.DeathSound = mod.GetLegacySoundSlot(SoundType.NPCKilled, "Sounds/Sounds/AkumaRoar");
             for (int k = 0; k < npc.buffImmune.Length; k++)
             {
                 npc.buffImmune[k] = true;
             }
-            npc.buffImmune[103] = false;
+            npc.buffImmune[BuffID.Wet] = false;
             npc.alpha = 255;
             musicPriority = MusicPriority.BossHigh;
         }
@@ -460,7 +459,7 @@ namespace AAModEXAI.Bosses.Akuma
                     for (int i = 0; i < Fireballs; i++)
                     {
                         offsetAngle = startAngle + (deltaAngle * i);
-                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y, baseSpeed * (float)Math.Sin(offsetAngle) * 2, baseSpeed * (float)Math.Cos(offsetAngle) * 2, mod.ProjectileType("AkumaBomb"), damage, 3, Main.myPlayer);
+                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y, baseSpeed * (float)Math.Sin(offsetAngle) * 2, baseSpeed * (float)Math.Cos(offsetAngle) * 2, ModContent.ProjectileType<AkumaBomb>(), damage, 3, Main.myPlayer);
                     }
                 }
             }
@@ -486,24 +485,9 @@ namespace AAModEXAI.Bosses.Akuma
 
         public override void NPCLoot()
         {
-            npc.DropLoot(AAMod.Items.Vanity.Mask.AkumaMask.type, 1f / 7);
-            if (!Main.expertMode)
-            {
-                if (!AAModEXAIWorld.downedAkuma)
-                {
-                    if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(Trans.text("Akuma", "Akuma11"), Color.DarkOrange.R, Color.DarkOrange.G, Color.DarkOrange.B, false);
-                }
-                string[] lootTable = { "AkumaTerratool", "DayStorm", "LungStaff", "MorningGlory", "RadiantDawn", "Solar", "SunSpear", "ReignOfFire", "DaybreakArrow", "Daycrusher", "Dawnstrike", "SunStorm", "SunStaff", "DragonSlasher" };
-                AAAI.DownedBoss(npc, mod, lootTable, AAModEXAIWorld.downedAkuma, true, ModLoader.GetMod("AAMod").ItemType("CrucibleScale"), 20, 30, false, false, true, 0, ModLoader.GetMod("AAMod").ItemType("AkumaTrophy"), false);
-                if (Main.netMode != NetmodeID.MultiplayerClient) AAModEXAI.Chat(Trans.text("Akuma","Akuma12"), new Color(180, 41, 32));
-
-            }
-            if (Main.expertMode)
-            {
-                int npcID = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("AkumaTransition"), 0, 0, 0, 0, 0, npc.target);
-                Main.npc[npcID].Center = npc.Center;
-                Main.npc[npcID].netUpdate2 = true; Main.npc[npcID].netUpdate = true;
-            }
+            int npcID = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<AkumaTransition>(), 0, 0, 0, 0, 0, npc.target);
+            Main.npc[npcID].Center = npc.Center;
+            Main.npc[npcID].netUpdate2 = true; Main.npc[npcID].netUpdate = true;
             npc.value = 0f;
             npc.boss = false;
         }
@@ -629,7 +613,7 @@ namespace AAModEXAI.Bosses.Akuma
 
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
-                if (!Main.npc[(int)npc.ai[1]].active || Main.npc[(int)npc.ai[3]].type != mod.NPCType("Akuma"))
+                if (!Main.npc[(int)npc.ai[1]].active || Main.npc[(int)npc.ai[3]].type != ModContent.NPCType<Bosses.Akuma.Akuma>())
                 {
                     npc.life = 0;
                     npc.HitEffect(0, 10.0);

@@ -1,10 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
+
 using Terraria;
 using Terraria.ModLoader;
-using AAMod;
 using Terraria.ID;
-using AAModEXAI.Dusts;
-using System;
 
 namespace AAModEXAI.Bosses.Akuma.Awakened
 {
@@ -46,7 +45,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 			num495 *= num496;
 			projectile.velocity.X = (projectile.velocity.X * 15f + num494) / 16f;
 			projectile.velocity.Y = (projectile.velocity.Y * 15f + num495) / 16f;
-			int num297 = ModContent.DustType<AkumaADust>();
+			int num297 = ModContent.DustType<AkumaDust>();
 			if (Main.rand.Next(2) == 0)
 			{
 				for (int num298 = 0; num298 < 3; num298++)
