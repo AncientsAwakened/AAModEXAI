@@ -1,14 +1,13 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
+
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using System;
-using AAModEXAI.Bosses.AH.Ashe;
-using AAMod;
-using Terraria.ID;
- 
-using AAMod.Globals;
+
 using AAModEXAI.Dusts;
+using AAModEXAI.Bosses.AH.Ashe;
+using AAModEXAI.Localization;
 
 namespace AAModEXAI.Bosses.Akuma.Awakened
 {
@@ -24,7 +23,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 		{
 			npc.width = 40;
 			npc.height = 80;
-			npc.damage = 100;
+			npc.damage = 120;
 			npc.defense = 40;
 			npc.lifeMax = 100000;
 			npc.value = (float)Item.sellPrice(0, 0, 0, 0);
@@ -67,13 +66,13 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 			{
 				if (Main.netMode != NetmodeID.MultiplayerClient)
 				{
-					AAModEXAI.Chat(AAMod.Lang.BossChat("AkumaAAshe1"), new Color(102, 20, 48), true);
+					AAModEXAI.Chat(Trans.text("Akuma", "AkumaAAshe1"), new Color(102, 20, 48), true);
 				}
 				return;
 			}
 			if (Main.netMode != NetmodeID.MultiplayerClient)
 			{
-				AAModEXAI.Chat(AAMod.Lang.BossChat("AkumaAAshe2"), new Color(102, 20, 48), true);
+				AAModEXAI.Chat(Trans.text("Akuma", "AkumaAAshe2"), new Color(102, 20, 48), true);
 			}
 		}
 		public override void BossLoot(ref string name, ref int potionType)

@@ -95,7 +95,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
         public override void Kill(int timeLeft)
         {
             Main.PlaySound(new Terraria.Audio.LegacySoundStyle(2, 124, Terraria.Audio.SoundType.Sound));
-            Projectile.NewProjectile(projectile.position.X, projectile.position.Y, projectile.velocity.X, projectile.velocity.Y, ModContent.ProjectileType<AkumaABoom>(), projectile.damage, projectile.knockBack, projectile.owner, 0f, 0f);
+            Projectile.NewProjectile(projectile.position.X, projectile.position.Y, projectile.velocity.X, projectile.velocity.Y, ModContent.ProjectileType<AkumaABoom>(), projectile.damage / 2, projectile.knockBack, projectile.owner, 0f, 0f);
             
         }
         public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)

@@ -5,6 +5,8 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
 
+using AAModEXAI.Dusts;
+
 namespace AAModEXAI.Bosses.Akuma.Awakened
 {
     public class AkumaFireHeal : ModProjectile

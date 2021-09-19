@@ -90,7 +90,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 				Main.dust[num343].scale += Main.rand.NextFloat();
 			}
 
-            Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, projectile.velocity.X, projectile.velocity.Y, ModContent.ProjectileType<AkumaABoom>(), projectile.damage, projectile.knockBack, projectile.owner, 0f, 0f);
+            Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, projectile.velocity.X, projectile.velocity.Y, ModContent.ProjectileType<AkumaABoom>(), projectile.damage / 2, projectile.knockBack, projectile.owner, 0f, 0f);
         }
 
         /*public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)

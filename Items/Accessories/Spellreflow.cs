@@ -11,7 +11,11 @@ namespace AAModEXAI.Items.Accessories
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Spell Reflow");
-            Tooltip.SetDefault(@"The fatal damage will be offset by your magic.");
+            Tooltip.SetDefault(@"The fatal damage will be offset by your magic.
+            
+If this accessory is in the first accessory slot:
++20 defense
+5% non-magic damage increased");
         }
 
         public override void SetDefaults()
@@ -28,6 +32,13 @@ namespace AAModEXAI.Items.Accessories
         public override void UpdateEquip(Player player)
         {
             player.GetModPlayer<AAModEXPlayer>().Spellreflow = true;
+
+            if(player.armor[3].type == item.type)
+            {
+                player.statDefense += 20;
+                player.allDamage += .05f;
+                player.magicDamage -= .05f;
+            }
         }
 
         public override void AddRecipes()

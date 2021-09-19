@@ -64,7 +64,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
             if (++projectile.localAI[0] == 52)
             {
                 if (Main.netMode != NetmodeID.MultiplayerClient)
-                    Projectile.NewProjectile(projectile.Center, Vector2.UnitY * 4, mod.ProjectileType("AkumaRock"), projectile.damage, 0, Main.myPlayer);
+                    Projectile.NewProjectile(projectile.Center, Vector2.UnitY * 4, ModContent.ProjectileType<AkumaRock>(), projectile.damage, 0, Main.myPlayer);
             }
 
             if (projectile.localAI[1] == 0)
@@ -88,7 +88,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                 }
             }
 
-            if (!NPC.AnyNPCs(ModContent.NPCType<Bosses.Akuma.Awakened.AkumaA>()) || NPC.AnyNPCs(mod.NPCType("AsheA")))
+            if (!NPC.AnyNPCs(ModContent.NPCType<Bosses.Akuma.Awakened.AkumaA>()) || NPC.AnyNPCs(ModContent.NPCType<AsheA>()))
             {
                 projectile.Kill();
             }

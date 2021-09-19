@@ -443,6 +443,20 @@ namespace AAModEXAI.Localization
                 else if(index == 1) info = "面对烈日的怒火吧!";
                 else if(index == 2) info = "Сразись лицом к лицу с яростью солнца!";
             }
+
+            if(info == "AkumaAAshe1")
+            {
+                if(index == 0) info = "Papa, NO! HEY! YOU! I'm gonna bake you alive next time we meet..!";
+                else if(index == 1) info = "爸, 不! 啊! 你! 下次我们再见的时候, 我要把你活烤了. . !";
+                else if(index == 2) info = "Папочка, НЕТ! ЭЙ! ТЫ! Я зажарю тебя в следующий раз..!";
+            }
+            if(info == "AkumaAAshe2")
+            {
+                if(index == 0) info = "OW, you Jerk..! I'm out!";
+                else if(index == 1) info = "哦啊， 混蛋...! 我先撤了!";
+                else if(index == 2) info = "АУ, урод..! Я все!";
+            }
+
         }
     }
 }

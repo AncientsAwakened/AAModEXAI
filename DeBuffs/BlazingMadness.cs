@@ -7,8 +7,9 @@ namespace AAModEXAI.DeBuffs
 	{
 		public override void SetDefaults()
 		{
-			DisplayName.SetDefault("Blazing Madness");
-			Description.SetDefault("You must keep moving and attacking");
+			DisplayName.SetDefault("Akuma Battle Ground");
+			Description.SetDefault(@"You must keep on moving and attacking
+The damage you get will recover Akuma's life");
 			Main.debuff[Type] = true;
 			Main.pvpBuff[Type] = true;
 			Main.buffNoSave[Type] = true;

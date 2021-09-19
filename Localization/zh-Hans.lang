@@ -8,8 +8,8 @@ BuffDescription.HydraToxin=在你身上的时间越长,越能腐蚀你的身体
 BuffName.BlazingPain=痛灼
 BuffDescription.BlazingPain=着火debuff对你造成双倍伤害
 
-BuffName.BlazingMadness=灼炎狂暴
-BuffDescription.BlazingMadness=你必须保持攻击和移动状态
+BuffName.BlazingMadness=鬼龙竞技场
+BuffDescription.BlazingMadness=你必须保持攻击和移动状态\n你受到的伤害将回复邪鬼巨龙的生命
 
 BuffName.Unstable=不安定
 BuffDescription.Unstable=Y你角色的c代o码de变得不un稳sta定ble
@@ -140,8 +140,6 @@ NPCName.AwakenedLungTail=觉醒之伴龙
 
 
 // AAMod.NPCs.Bosses.Akuma
-
-NPCName.SunA=邪鬼之阳
 
 NPCName.Akuma=远古之邪鬼巨龙 凶煞恶魔
 
@@ -569,12 +567,15 @@ NPCName.ZeroTransition=破损裂隙
 // Items
 
 ItemName.EXSoul=超级远古之魂
-ItemTooltip.EXSoul=古代神秘魔法的精髓
+ItemTooltip.EXSoul=古代神秘魔法的精髓, 可用于打造究极装备
 
 // Accessories
 
 ItemName.DragonSerpentNecklace=龙蛇项链
-ItemTooltip.DragonSerpentNecklace=增加10%伤害和伤害减免\n增加20点护甲穿透\n对敌人造成额外30点伤害
+ItemTooltip.DragonSerpentNecklace=增加10%伤害和伤害减免\n增加20点护甲穿透\n对敌人造成额外30点伤害\n\n当此饰品处于第1饰品栏时：\n你增加20%近战伤害
 
 ItemName.StoneScarf=磐石围巾
 ItemTooltip.StoneScarf=增加25%伤害减免
+
+ItemName.Spellreflow=法术回流
+ItemTooltip.Spellreflow=受到即死伤害时，可由魔法值分担伤害\n\n当此饰品处于第1饰品栏时：\n+20防御\n你增加5%非近战伤害

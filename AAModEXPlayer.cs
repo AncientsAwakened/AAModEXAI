@@ -28,6 +28,7 @@ namespace AAModEXAI
 
         public bool AkumaPain = false;
         public bool BlazingMadness = false;
+        public float BlazingMadnessCoolDown = 0f;
         public bool YamataGravity = false;
         public bool YamataAGravity = false;
         public bool Yanked = false;
@@ -112,9 +113,17 @@ namespace AAModEXAI
             }
             if (BlazingMadness)
             {
-                if((player.velocity.X == 0 && player.velocity.Y == 0) || player.itemtime == 0)
+                if((player.velocity.X == 0 && player.velocity.Y == 0) || player.itemTime == 0)
                 {
-                    player.lifeRegen -= (int)(player.statLifeMax / 5);
+                    if(BlazingMadnessCoolDown ++ >= 300)
+                    {
+                        player.lifeRegen -= (int)(player.statLifeMax / 5);
+                        BlazingMadnessCoolDown = 300;
+                    }
+                }
+                else
+                {
+                    BlazingMadnessCoolDown = 0;
                 }
             }
 
@@ -235,7 +244,7 @@ namespace AAModEXAI
                     if(Main.npc[i].type == ModContent.NPCType<Bosses.Akuma.Akuma>() || Main.npc[i].type == ModContent.NPCType<Bosses.Akuma.Awakened.AkumaA>())
                     {
                         double offsetAngle = (double)(Main.rand.NextFloat() * Math.PI);
-                        Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, (float)(Math.Sin(offsetAngle) * 3f), (float)(Math.Cos(offsetAngle) * 3f), ModContent.ProjectileType<AkumaFireHeal>(), 0f, projectile.knockBack, projectile.owner, i, damage * 5f);
+                        Projectile.NewProjectile(player.Center.X, player.Center.Y, 0f, 0f, ModContent.ProjectileType<AkumaFireHeal>(), 0, 0, Main.myPlayer, i, damage * 1.2f);
                     }
                 }
             }

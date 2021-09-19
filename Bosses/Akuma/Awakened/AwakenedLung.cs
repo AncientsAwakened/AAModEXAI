@@ -8,6 +8,7 @@ using Terraria.Audio;
 using Terraria.ID;
 
 using AAModEXAI.Dusts;
+using AAModEXAI.Base;
 
 namespace AAModEXAI.Bosses.Akuma.Awakened
 {
@@ -366,7 +367,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
-                if (!Main.npc[(int)npc.ai[1]].active || Main.npc[(int)npc.ai[3]].type != ModContent.ProjectileType<AwakenedLung>())
+                if (!Main.npc[(int)npc.ai[1]].active || Main.npc[(int)npc.ai[3]].type != ModContent.NPCType<AwakenedLung>())
                 {
                     npc.life = 0;
                     npc.HitEffect(0, 10.0);
@@ -417,7 +418,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 
         public override bool CheckActive()
         {
-            if (NPC.AnyNPCs(mod.NPCType("AwakenedLung")))
+            if (NPC.AnyNPCs(ModContent.NPCType<AwakenedLung>()))
             {
                 return false;
             }
@@ -467,7 +468,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
-                if (!Main.npc[(int)npc.ai[1]].active || Main.npc[(int)npc.ai[3]].type != ModContent.ProjectileType<AwakenedLung>())
+                if (!Main.npc[(int)npc.ai[1]].active || Main.npc[(int)npc.ai[3]].type != ModContent.NPCType<AwakenedLung>())
                 {
                     npc.life = 0;
                     npc.HitEffect(0, 10.0);
@@ -523,7 +524,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 
         public override bool CheckActive()
         {
-            if (NPC.AnyNPCs(ModContent.ProjectileType<AwakenedLung>()))
+            if (NPC.AnyNPCs(ModContent.NPCType<AwakenedLung>()))
             {
                 return false;
             }

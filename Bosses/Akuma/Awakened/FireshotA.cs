@@ -76,7 +76,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                     -projectile.velocity.Y * 0.2f, 100, new Color(86, 191, 188));
                 Main.dust[num469].velocity *= 2f;
             }
-            Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, 0, 0, ModContent.ProjectileType<FlareA>(), projectile.damage, projectile.knockBack, projectile.owner, 0f, 0f);
+            Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, 0, 0, ModContent.ProjectileType<FlareA>(), projectile.damage / 2, projectile.knockBack, projectile.owner, 0f, 0f);
         }
     }
 }

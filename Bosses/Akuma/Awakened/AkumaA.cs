@@ -166,18 +166,15 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 
             internalAI[2]++;
 
-            if (internalAI[2] % 600 == 0)
+            if (internalAI[2] % 600 == 0 && NPC.CountNPCS(ModContent.NPCType<AwakenedLung>()) < (Main.expertMode ? 3 : 5))
             {
                 AkumaAttacks.SpawnLung(player, mod, true);
             }
 
-            if (internalAI[2] % 60 == 0)
+            if (internalAI[2] % 300 == 0)
             {
-                for(int i = 0; i < 5; i++)
-                {
-                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                                 Projectile.NewProjectile(npc.Center + new Vector2(50f * (float)Main.rand.NextDouble(), 0), new Vector2(0, 2f), ModContent.ProjectileType<AkumaAFire>(), npc.damage / 2, 0f, Main.myPlayer, 0, 0);
-                }
             }
 
             if (Main.netMode != NetmodeID.MultiplayerClient)
@@ -495,7 +492,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                     {
                         npc.ai[2] = 1;
                         if (Main.netMode != NetmodeID.MultiplayerClient)
-                            Projectile.NewProjectile(npc.Center, Vector2.Zero, ModContent.ProjectileType<AsheAProj>(), npc.damage / 4, 0f, Main.myPlayer, npc.target); 
+                            Projectile.NewProjectile(npc.Center, Vector2.Zero, ModContent.ProjectileType<AsheAProj>(), npc.damage / 2, 0f, Main.myPlayer, npc.target); 
                     }
                     if (++npc.ai[1] > 300)
                     {
@@ -832,7 +829,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 			}
 			else if (internalAI[1] == 3f)
 			{
-				if (internalAI[0] == 250f && NPC.CountNPCS(ModContent.NPCType<AwakenedLung>()) < (Main.expertMode ? 3 : 6))
+				if (internalAI[0] == 250f && NPC.CountNPCS(ModContent.NPCType<AwakenedLung>()) < (Main.expertMode ? 3 : 5))
 				{
 					AkumaAttacks.SpawnLung(player, mod, true);
 					AkumaA.MinionCount++;

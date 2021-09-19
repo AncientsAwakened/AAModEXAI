@@ -141,7 +141,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                 Main.dust[num1059].customData = this;
             }
 
-            BaseAI.ShootPeriodic(npc, player.position, player.width, player.height, mod.ProjectileType("AkumaRock"), ref npc.ai[1], 100, npc.damage / 4, 7, false);
+            BaseAI.ShootPeriodic(npc, player.position, player.width, player.height, ModContent.ProjectileType<AkumaRock>(), ref npc.ai[1], 100, npc.damage / 2, 7, false);
         }
     }
 }
