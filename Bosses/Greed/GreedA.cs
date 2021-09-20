@@ -239,7 +239,7 @@ namespace AAModEXAI.Bosses.Greed
                                 if(k == skip || k == skip2 || k == skip3 || k == skip4) continue;
                                 if(Main.netMode != NetmodeID.MultiplayerClient)
                                 {
-                                    int p = Projectile.NewProjectile(player.Center.X - 1000f, player.Center.Y + k * 70f, 10f, 0, mod.ProjectileType("DesireBeam"), npc.damage / 2, 1);
+                                    int p = Projectile.NewProjectile(player.Center.X - 1000f, player.Center.Y + k * 70f, 10f, 0, mod.ProjectileType("DesireBeam"), 100, 1);
                                     Main.projectile[p].ai[0] = 1f;
                                     Main.projectile[p].netUpdate = true;
                                 }
