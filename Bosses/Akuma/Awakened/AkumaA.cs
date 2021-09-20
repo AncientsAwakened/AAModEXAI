@@ -183,7 +183,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                 {
                     npc.realLife = npc.whoAmI;
                     int latestNPC = npc.whoAmI;
-                    int[] Frame = { 1, 2, 0, 1, 2, 2, 1, 2, 2, 0, 1, 2, 2, 1, 2, 2, 0, 1, 2, 3, 4};
+                    int[] Frame = { 1, 2, 0, 1, 2, 2, 1, 2, 2, 1, 2, 2, 0, 1, 2, 2, 1, 2, 2, 1, 2, 2, 0, 1, 2, 2, 1, 2, 3, 4};
                     for (int i = 0; i < Frame.Length; ++i)
                     {
                         latestNPC = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<AkumaABody>(), npc.whoAmI, 0, latestNPC);
@@ -408,18 +408,11 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                     break;
 
                 case 8: //fire lasers from all segments, slower now
-                    npc.velocity *= 0.9875f;
-                    if (++npc.ai[2] >= 30)
-                    {
-                        targetPos = player.Center;
-                        targetPos.X += 700 * (npc.Center.X < player.Center.X ? -1 : 1);
-                        targetPos.Y -= 400;
-                        MovementWorm(targetPos, 10f, 0.26f);
-                    }
+                    npc.velocity *= 0.97f;
                     if (npc.ai[2] == 30 && Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         bool fire = true;
-                        for (int i = 0; i < Main.maxNPCs; i++)
+                        for (int i = 0; i < Main.maxNPCs; i+=2)
                             if (Main.npc[i].active && Main.npc[i].realLife == npc.whoAmI)
                             {
                                 fire = !fire;
@@ -551,7 +544,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                 case 14:
                     npc.velocity -= npc.velocity.RotatedBy(Math.PI / 2) * npc.velocity.Length() / npc.localAI[1];
                     if (npc.velocity.Length() > 24f) npc.velocity *= 24f / npc.velocity.Length();
-                    if (++npc.ai[2] > 4)
+                    if (++npc.ai[2] > 6)
                     {
                         npc.ai[2] = 0;
                         if (Main.netMode != NetmodeID.MultiplayerClient)

@@ -68,12 +68,13 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
 
         public int RuneCount = 9;
 
-        bool text = false;
+        private bool text = false;
+        
+
+        private int TeleportCount = 0;
 
         public override void AI()
         {
-
-            int TeleportCount = 0;
 
             if (npc.life < (int)(npc.lifeMax * .75f))
             {
@@ -97,7 +98,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
 
             Player player = Main.player[npc.target];
 
-            int anubis = ModSupport.GetModNPC("AAMod", "Legendscribe").npc.type;
+            int anubis = BaseAI.GetNPC(player.Center, ModSupport.GetModNPC("AAMod", "Legendscribe").npc.type, -1);
             
             if(anubis > -1)
             {

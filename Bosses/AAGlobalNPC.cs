@@ -149,7 +149,6 @@ namespace AAModEXAI
                     Main.npc[id].netUpdate = true;
                 }
                 AAModEXAI.ShowSistersTitle(npc);
-                npc.active = false;
                 npc.netUpdate = true;
                 return false;
             }
@@ -164,7 +163,6 @@ namespace AAModEXAI
                     if (Main.netMode == NetmodeID.Server && id < 200) NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, id);
                     Main.npc[id].netUpdate = true;
                 }
-                npc.active = false;
                 npc.netUpdate = true;
                 return false;
             }
@@ -181,7 +179,6 @@ namespace AAModEXAI
                     Main.npc[id].netUpdate = true;
                 }
                 AAModEXAI.ShowTitle(npc, 7);
-                npc.active = false;
                 npc.netUpdate = true;
                 return false;
             }
@@ -197,7 +194,6 @@ namespace AAModEXAI
                     Main.npc[id].netUpdate = true;
                 }
                 AAModEXAI.ShowTitle(npc, 8);
-                npc.active = false;
                 npc.netUpdate = true;
                 return false;
             }
@@ -214,7 +210,6 @@ namespace AAModEXAI
                     Main.npc[id].netUpdate = true;
                 }
                 AAModEXAI.ShowTitle(npc, 1);
-                npc.active = false;
                 npc.netUpdate = true;
                 return false;
             }
@@ -230,7 +225,6 @@ namespace AAModEXAI
                     Main.npc[id].netUpdate = true;
                 }
                 AAModEXAI.ShowTitle(npc, 4);
-                npc.active = false;
                 npc.netUpdate = true;
                 return false;
             }
@@ -643,8 +637,6 @@ namespace AAModEXAI
                 float X = Main.npc[num].Center.X;
                 float Y = Main.npc[num].Center.Y;
                 int Target = Main.npc[num].target;
-                Main.npc[num].active = false;
-				Main.npc[num] = new NPC();
 				Main.npc[num].SetDefaults(Type, -1f);
 				Main.npc[num].Center = new Vector2(X, Y);
 				Main.npc[num].active = true;
