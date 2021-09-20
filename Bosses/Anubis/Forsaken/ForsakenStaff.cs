@@ -49,7 +49,15 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
             projectile.oldPos[0] = projectile.position;
 
             //AIBoomerang(Projectile p, ref float[] ai, Vector2 position = default, int width = -1, int height = -1, bool playSound = true, float maxDistance = 9f, int returnDelay = 35, float speedInterval = 0.4f, float rotationInterval = 0.4f, bool direct = false)
-            BaseAI.AIBoomerang(projectile, ref projectile.ai, Main.npc[master].position, Main.npc[master].width, Main.npc[master].height, true, 120, 60, 10f, 1f, true);
+            if(Main.npc[master].ai[0] == 1)
+            {
+                BaseAI.AIBoomerang(projectile, ref projectile.ai, Main.npc[master].position, Main.npc[master].width, Main.npc[master].height, true, 40, 45, 10f, 1f, true);
+            }
+            else
+            {
+                BaseAI.AIBoomerang(projectile, ref projectile.ai, Main.npc[master].position, Main.npc[master].width, Main.npc[master].height, true, 120, 60, 10f, 1f, true);
+            }
+            
 
             ReflectProjectiles(projectile.Hitbox);
         }
@@ -61,7 +69,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                 if (Main.projectile[i].active && Main.projectile[i].friendly && !Main.projectile[i].hostile)
                 {
                     Rectangle hitbox = Main.projectile[i].Hitbox;
-                    if (myRect.Intersects(hitbox))
+                    if (Main.projectile[i].Colliding(hitbox, myRect))
                     {
                         Main.PlaySound(SoundID.NPCHit4, Main.projectile[i].position);
                         for (int j = 0; j < 3; j++)

@@ -54,7 +54,7 @@ namespace AAModEXAI.Bosses.Anubis
                 if (Main.projectile[i].active && Main.projectile[i].friendly && !Main.projectile[i].hostile)
                 {
                     Rectangle hitbox = Main.projectile[i].Hitbox;
-                    if (myRect.Intersects(hitbox))
+                    if (Main.projectile[i].Colliding(hitbox, myRect))
                     {
                         Main.PlaySound(SoundID.NPCHit4, Main.projectile[i].position);
                         for (int j = 0; j < 3; j++)

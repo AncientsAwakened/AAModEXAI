@@ -225,7 +225,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                         BaseAI.FireProjectile(player.position, npc.position,  ModContent.ProjectileType<ForsakenStaff>(), npc.damage / 2, 14, 10, -1);
                     }
 
-                    if (npc.ai[1] >= 130)
+                    if (npc.ai[1] >= 130 && !AAModEXAIGlobalProjectile.AnyProjectiles(ModContent.ProjectileType<ForsakenStaff>()))
                     {
                         internalAI[1]++;
                         if (internalAI[3] < TeleportCount && internalAI[1] >= 50)
@@ -322,7 +322,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                     if (!AliveCheck(player))
                         break;
 
-                    if (npc.ai[1] == 120)
+                    if (npc.ai[1] == 60)
                     {
                         BaseAI.FireProjectile(player.position, npc.position,  ModContent.ProjectileType<ForsakenStaff>(), npc.damage / 2, 14, 10, -1);
                     }
@@ -365,16 +365,6 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                             vel = vel.RotatedBy(rotation);
                             Projectile.NewProjectile(npc.Center.X, npc.Center.Y, vel.X, vel.Y, type, 0, 4, Main.myPlayer, npc.direction > 0 ? -1f : 1f, 6f);
                         }
-
-                        
-                        int a = Projectile.NewProjectile(player.position + new Vector2(-250, 0), Vector2.Zero, ModContent.ProjectileType<Razorsand>(), npc.damage / 2, 7, Main.myPlayer);
-                        Main.projectile[a].Center = player.Center + new Vector2(-250, 0);
-                        int b = Projectile.NewProjectile(player.position + new Vector2(250, 0), Vector2.Zero, ModContent.ProjectileType<Razorsand>(), npc.damage / 2, 7, Main.myPlayer);
-                        Main.projectile[b].Center = player.Center + new Vector2(250, 0);
-                        int c = Projectile.NewProjectile(player.position + new Vector2(0, -250), Vector2.Zero, ModContent.ProjectileType<Razorsand>(), npc.damage / 2, 7, Main.myPlayer);
-                        Main.projectile[c].Center = player.Center + new Vector2(0, -250);
-                        int d = Projectile.NewProjectile(player.position + new Vector2(0, 250), Vector2.Zero, ModContent.ProjectileType<Razorsand>(), npc.damage / 2, 7, Main.myPlayer);
-                        Main.projectile[d].Center = player.Center + new Vector2(0, 250);
                         
                         npc.ai[0]++;
                         npc.ai[1] = 0;
@@ -585,9 +575,16 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                         }
                         else
                         {
-                            for(int i = 0; i < 16; i++)
+                            for(int i = 0; i < 4; i++)
                             {
-                                Vector2 pos = new Vector2((float)Math.Cos(i * 3.1415f / 8), (float)Math.Sin(i * 3.1415f / 8)) * 400f;
+                                Vector2 pos = new Vector2((float)Math.Cos(i * 3.1415f / 2), (float)Math.Sin(i * 3.1415f / 8)) * 200f;
+                                int a = Projectile.NewProjectile(player.position + pos, Vector2.Zero, ModContent.ProjectileType<AnubisFireball>(), npc.damage / 2, 7, Main.myPlayer);
+                                Main.projectile[a].Center = player.Center + pos;
+                                Kaboom(Main.projectile[a]);
+                            }
+                            for(int i = 0; i < 8; i++)
+                            {
+                                Vector2 pos = new Vector2((float)Math.Cos(i * 3.1415f / 4), (float)Math.Sin(i * 3.1415f / 8)) * 400f;
                                 int a = Projectile.NewProjectile(player.position + pos, Vector2.Zero, ModContent.ProjectileType<AnubisFireball>(), npc.damage / 2, 7, Main.myPlayer);
                                 Main.projectile[a].Center = player.Center + pos;
                                 Kaboom(Main.projectile[a]);
@@ -840,8 +837,8 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
             }
 
             Vector2 targetPos = Main.player[npc.target].Center;
-            targetPos.X += 300 * (npc.Center.X < targetPos.X ? 1 : -1);
-            targetPos.Y -= 300;
+            targetPos.X += 500 * (npc.Center.X < targetPos.X ? 1 : -1);
+            targetPos.Y -= 500;
             npc.position = targetPos;
 
             int pieCut = 20;

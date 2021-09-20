@@ -148,21 +148,24 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                 npc.alpha = 0;
             }
 
-            internalAI[0] += 1f;
-			if (internalAI[0] == 200f)
-			{
-				QuoteSaid = false;
-				Roar(roarTimerMax, false);
-				internalAI[1] = (float)Main.rand.Next(6);
-			}
-			if (internalAI[0] > 200f)
-			{
-				Attack(npc);
-			}
-			if (internalAI[0] >= 300f)
-			{
-				internalAI[0] = 0f;
-			}
+            if(npc.ai[0] != 1 && npc.ai[0] != 4 && npc.ai[0] != 5 && npc.ai[0] != 6 && npc.ai[0] != 7 && npc.ai[0] != 8 && npc.ai[0] != 13 && npc.ai[0] != 14)
+            {
+                internalAI[0] += 1f;
+                if (internalAI[0] == 200f)
+                {
+                    QuoteSaid = false;
+                    Roar(roarTimerMax, false);
+                    internalAI[1] = (float)Main.rand.Next(6);
+                }
+                if (internalAI[0] > 200f)
+                {
+                    Attack(npc);
+                }
+                if (internalAI[0] >= 300f)
+                {
+                    internalAI[0] = 0f;
+                }
+            }
 
             internalAI[2]++;
 
@@ -409,7 +412,8 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
 
                 case 8: //fire lasers from all segments, slower now
                     npc.velocity *= 0.97f;
-                    if (npc.ai[2] == 30 && Main.netMode != NetmodeID.MultiplayerClient)
+                    if (npc.velocity.Length() < 5f) npc.velocity *= 5f / npc.velocity.Length();
+                    if (++npc.ai[2] == 30 && Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         bool fire = true;
                         for (int i = 0; i < Main.maxNPCs; i+=2)

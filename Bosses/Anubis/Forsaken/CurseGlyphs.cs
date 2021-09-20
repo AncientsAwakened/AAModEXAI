@@ -61,39 +61,21 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                 projectile.oldPos[m] = projectile.oldPos[m - 1];
             }
             projectile.oldPos[0] = projectile.position;
-            ReflectProjectiles(projectile.Hitbox);
+            KillProjectiles(projectile.Hitbox);
         }
 
-        public void ReflectProjectiles(Rectangle myRect)
+        public void KillProjectiles(Rectangle myRect)
         {
             for (int i = 0; i < 1000; i++)
             {
                 if (Main.projectile[i].active && Main.projectile[i].friendly && !Main.projectile[i].hostile)
                 {
                     Rectangle hitbox = Main.projectile[i].Hitbox;
-                    if (myRect.Intersects(hitbox) && Main.rand.Next(10) == 0)
+                    if (Main.projectile[i].Colliding(hitbox, myRect) && Main.rand.Next(5) == 0)
                     {
                         Main.PlaySound(SoundID.Dig, Main.projectile[i].position);
-                        for (int j = 0; j < 3; j++)
-                        {
-                            int num = Dust.NewDust(Main.projectile[i].position, Main.projectile[i].width, Main.projectile[i].height, ModContent.DustType<ForsakenDust>(), 0f, 0f, 0, default, 1f);
-                            Main.dust[num].velocity *= 0.3f;
-                        }
-                        Main.projectile[i].hostile = true;
-                        Main.projectile[i].friendly = false;
-                        Vector2 vector = Main.player[Main.projectile[i].owner].Center - Main.projectile[i].Center;
-                        vector.Normalize();
-                        vector *= Main.projectile[i].oldVelocity.Length();
-                        Vector2 reflectvelocity = new Vector2(Main.rand.Next(-100, 101), Main.rand.Next(-100, 101));
-                        reflectvelocity.Normalize();
-                        reflectvelocity *= vector.Length();
-                        reflectvelocity += vector * 20f;
-                        reflectvelocity.Normalize();
-                        reflectvelocity *= 25f;
-                        Main.projectile[i].penetrate = 1;
-                        Main.projectile[i].GetGlobalProjectile<AAModEXAIGlobalProjectile>().reflectvelocity = reflectvelocity;
-                        Main.projectile[i].GetGlobalProjectile<AAModEXAIGlobalProjectile>().isReflecting = true;
-                        Main.projectile[i].GetGlobalProjectile<AAModEXAIGlobalProjectile>().ReflectConter = 180;
+                        Main.projectile[i].Kill();
+                        Main.projectile[i].netUpdate = true;
                     }
                 }
             }
