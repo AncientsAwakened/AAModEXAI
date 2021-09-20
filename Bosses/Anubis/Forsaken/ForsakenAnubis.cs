@@ -1,15 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
+using System.IO;
+
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-using System;
-using System.IO;
-using AAMod;
-using Terraria.ID;
- 
-using AAMod.Globals;
 using AAModEXAI.Dusts;
+using AAModEXAI.Localization;
 
 namespace AAModEXAI.Bosses.Anubis.Forsaken
 {
@@ -33,8 +31,6 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
             npc.DeathSound = SoundID.NPCDeath6;
             npc.knockBackResist = 0f;
             npc.boss = true;
-            music = ModLoader.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/AnubisA");
-            bossBag = ModLoader.GetMod("AAMod").ItemType("FAnubisBag");
             npc.value = Item.sellPrice(0, 10, 0, 0);
         }
 
@@ -100,8 +96,9 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
             }
 
             Player player = Main.player[npc.target];
+
+            int anubis = ModSupport.GetModNPC("AAMod", "Legendscribe").npc.type;
             
-            int anubis = BaseAI.GetNPC(player.Center, ModContent.NPCType<AAMod.NPCs.TownNPCs.Anubis>(), -1);
             if(anubis > -1)
             {
                 Main.npc[anubis].life = 0;
@@ -148,7 +145,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                     {
                         for (int m = 0; m < RuneCount; m++)
                         {
-                            int p = Projectile.NewProjectile(npc.Center, Vector2.Zero, mod.ProjectileType("CurseGlyphs"), npc.damage / 2, 0, Main.myPlayer);
+                            int p = Projectile.NewProjectile(npc.Center, Vector2.Zero, ModContent.ProjectileType<CurseGlyphs>(), npc.damage / 2, 0, Main.myPlayer);
                             Main.projectile[p].Center = npc.Center;
                             Main.projectile[p].velocity = new Vector2(MathHelper.Lerp(-1f, 1f, (float)Main.rand.NextDouble()), MathHelper.Lerp(-1f, 1f, (float)Main.rand.NextDouble()));
                             Main.projectile[p].velocity *= 8f;
@@ -207,7 +204,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                         return;
                     }
 
-                    int proj = Main.rand.Next(2) == 0 ? mod.ProjectileType("ForsakenBlast") : mod.ProjectileType("ForsakenSkull");
+                    int proj = Main.rand.Next(2) == 0 ? ModContent.ProjectileType<ForsakenBlast>() : ModContent.ProjectileType<ForsakenSkull>();
 
                     int damage = npc.damage / 2;
 
@@ -221,6 +218,11 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                 case 1:
                     if (!AliveCheck(player))
                         break;
+
+                    if (npc.ai[1] == 60)
+                    {
+                        BaseAI.FireProjectile(player.position, npc.position,  ModContent.ProjectileType<ForsakenStaff>(), npc.damage / 2, 14, 10, -1);
+                    }
 
                     if (npc.ai[1] >= 130)
                     {
@@ -247,7 +249,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                     if (!text)
                     {
                         text = true;
-                        CombatText.NewText(npc.Hitbox, Color.ForestGreen, AAMod.Lang.BossChat("FAnubisCombat"), true);
+                        CombatText.NewText(npc.Hitbox, Color.ForestGreen, Trans.text("Anubis", "FAnubisCombat"), true);
                     }
 
                     if (npc.ai[1] == 10 && Main.netMode != NetmodeID.MultiplayerClient)
@@ -256,60 +258,60 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                         {
                             if (npc.life < npc.lifeMax / 3)
                             {
-                                int a = Projectile.NewProjectile(npc.position, Vector2.Zero, mod.ProjectileType("HorusSummon"), 0, 0, Main.myPlayer, npc.Center.X - 150, npc.Center.Y);
-                                int b = Projectile.NewProjectile(npc.position, Vector2.Zero, mod.ProjectileType("HorusSummon"), 0, 0, Main.myPlayer, npc.Center.X + 150, npc.Center.Y);
-                                int c = Projectile.NewProjectile(npc.position, Vector2.Zero, mod.ProjectileType("HorusSummon"), 0, 0, Main.myPlayer, npc.Center.X, npc.Center.Y - 150);
-                                int d = Projectile.NewProjectile(npc.position, Vector2.Zero, mod.ProjectileType("HorusSummon"), 0, 0, Main.myPlayer, npc.Center.X, npc.Center.Y + 150);
-                                int e = Projectile.NewProjectile(npc.position, Vector2.Zero, mod.ProjectileType("HorusSummon"), 0, 0, Main.myPlayer, player.Center.X - 150, player.Center.Y);
-                                int f = Projectile.NewProjectile(npc.position, Vector2.Zero, mod.ProjectileType("HorusSummon"), 0, 0, Main.myPlayer, player.Center.X + 150, player.Center.Y);
-                                int g = Projectile.NewProjectile(npc.position, Vector2.Zero, mod.ProjectileType("HorusSummon"), 0, 0, Main.myPlayer, player.Center.X, player.Center.Y - 150);
-                                int h = Projectile.NewProjectile(npc.position, Vector2.Zero, mod.ProjectileType("HorusSummon"), 0, 0, Main.myPlayer, player.Center.X, player.Center.Y + 150);
+                                int a = Projectile.NewProjectile(npc.position, Vector2.Zero, ModContent.ProjectileType<HorusSummon>(), 0, 0, Main.myPlayer, npc.Center.X - 150, npc.Center.Y);
+                                int b = Projectile.NewProjectile(npc.position, Vector2.Zero, ModContent.ProjectileType<HorusSummon>(), 0, 0, Main.myPlayer, npc.Center.X + 150, npc.Center.Y);
+                                int c = Projectile.NewProjectile(npc.position, Vector2.Zero, ModContent.ProjectileType<HorusSummon>(), 0, 0, Main.myPlayer, npc.Center.X, npc.Center.Y - 150);
+                                int d = Projectile.NewProjectile(npc.position, Vector2.Zero, ModContent.ProjectileType<HorusSummon>(), 0, 0, Main.myPlayer, npc.Center.X, npc.Center.Y + 150);
+                                int e = Projectile.NewProjectile(npc.position, Vector2.Zero, ModContent.ProjectileType<HorusSummon>(), 0, 0, Main.myPlayer, player.Center.X - 150, player.Center.Y);
+                                int f = Projectile.NewProjectile(npc.position, Vector2.Zero, ModContent.ProjectileType<HorusSummon>(), 0, 0, Main.myPlayer, player.Center.X + 150, player.Center.Y);
+                                int g = Projectile.NewProjectile(npc.position, Vector2.Zero, ModContent.ProjectileType<HorusSummon>(), 0, 0, Main.myPlayer, player.Center.X, player.Center.Y - 150);
+                                int h = Projectile.NewProjectile(npc.position, Vector2.Zero, ModContent.ProjectileType<HorusSummon>(), 0, 0, Main.myPlayer, player.Center.X, player.Center.Y + 150);
                             }
                             else if (npc.life < (2 * npc.lifeMax) / 3)
                             {
-                                int a = Projectile.NewProjectile(npc.position, Vector2.Zero, mod.ProjectileType("HorusSummon"), 0, 0, Main.myPlayer, npc.Center.X - 150, npc.Center.Y);
-                                int b = Projectile.NewProjectile(npc.position, Vector2.Zero, mod.ProjectileType("HorusSummon"), 0, 0, Main.myPlayer, npc.Center.X + 150, npc.Center.Y);
-                                int c = Projectile.NewProjectile(npc.position, Vector2.Zero, mod.ProjectileType("HorusSummon"), 0, 0, Main.myPlayer, npc.Center.X, npc.Center.Y - 150);
-                                int d = Projectile.NewProjectile(npc.position, Vector2.Zero, mod.ProjectileType("HorusSummon"), 0, 0, Main.myPlayer, npc.Center.X, npc.Center.Y + 150);
+                                int a = Projectile.NewProjectile(npc.position, Vector2.Zero, ModContent.ProjectileType<HorusSummon>(), 0, 0, Main.myPlayer, npc.Center.X - 150, npc.Center.Y);
+                                int b = Projectile.NewProjectile(npc.position, Vector2.Zero, ModContent.ProjectileType<HorusSummon>(), 0, 0, Main.myPlayer, npc.Center.X + 150, npc.Center.Y);
+                                int c = Projectile.NewProjectile(npc.position, Vector2.Zero, ModContent.ProjectileType<HorusSummon>(), 0, 0, Main.myPlayer, npc.Center.X, npc.Center.Y - 150);
+                                int d = Projectile.NewProjectile(npc.position, Vector2.Zero, ModContent.ProjectileType<HorusSummon>(), 0, 0, Main.myPlayer, npc.Center.X, npc.Center.Y + 150);
                             }
                             else
                             {
-                                int a = Projectile.NewProjectile(npc.position, Vector2.Zero, mod.ProjectileType("HorusSummon"), 0, 0, Main.myPlayer, npc.Center.X - 180, npc.Center.Y - 60);
-                                int b = Projectile.NewProjectile(npc.position, Vector2.Zero, mod.ProjectileType("HorusSummon"), 0, 0, Main.myPlayer, npc.Center.X + 180, npc.Center.Y - 60);
-                                int c = Projectile.NewProjectile(npc.position, Vector2.Zero, mod.ProjectileType("HorusSummon"), 0, 0, Main.myPlayer, npc.Center.X, npc.Center.Y - 200);
+                                int a = Projectile.NewProjectile(npc.position, Vector2.Zero, ModContent.ProjectileType<HorusSummon>(), 0, 0, Main.myPlayer, npc.Center.X - 180, npc.Center.Y - 60);
+                                int b = Projectile.NewProjectile(npc.position, Vector2.Zero, ModContent.ProjectileType<HorusSummon>(), 0, 0, Main.myPlayer, npc.Center.X + 180, npc.Center.Y - 60);
+                                int c = Projectile.NewProjectile(npc.position, Vector2.Zero, ModContent.ProjectileType<HorusSummon>(), 0, 0, Main.myPlayer, npc.Center.X, npc.Center.Y - 200);
                             }
                         }
                         else
                         {
                             if (npc.life < npc.lifeMax / 2)
                             {
-                                int m = NPC.NewNPC((int)npc.position.X + 130, (int)npc.position.Y, mod.NPCType("CurseCircle"));
+                                int m = NPC.NewNPC((int)npc.position.X + 130, (int)npc.position.Y, ModContent.NPCType<CurseCircle>());
                                 Main.npc[m].Center = new Vector2(npc.Center.X + 130, npc.Center.Y);
 
-                                int n = NPC.NewNPC((int)npc.position.X - 130, (int)npc.position.Y, mod.NPCType("CurseCircle"));
+                                int n = NPC.NewNPC((int)npc.position.X - 130, (int)npc.position.Y, ModContent.NPCType<CurseCircle>());
                                 Main.npc[n].Center = new Vector2(npc.Center.X - 130, npc.Center.Y);
 
-                                int o = NPC.NewNPC((int)npc.position.X, (int)npc.position.Y + 130, mod.NPCType("CurseCircle"));
+                                int o = NPC.NewNPC((int)npc.position.X, (int)npc.position.Y + 130, ModContent.NPCType<CurseCircle>());
                                 Main.npc[o].Center = new Vector2(npc.Center.X, npc.Center.Y + 130);
 
-                                int p = NPC.NewNPC((int)npc.position.X, (int)npc.position.Y - 130, mod.NPCType("CurseCircle"));
+                                int p = NPC.NewNPC((int)npc.position.X, (int)npc.position.Y - 130, ModContent.NPCType<CurseCircle>());
                                 Main.npc[p].Center = new Vector2(npc.Center.X, npc.Center.Y - 130);
 
-                                int r = NPC.NewNPC((int)player.position.X, (int)player.position.Y + 130, mod.NPCType("CurseCircle"));
+                                int r = NPC.NewNPC((int)player.position.X, (int)player.position.Y + 130, ModContent.NPCType<CurseCircle>());
                                 Main.npc[o].Center = new Vector2(player.Center.X - 130, player.Center.Y + 130);
 
-                                int s = NPC.NewNPC((int)player.position.X, (int)player.position.Y - 130, mod.NPCType("CurseCircle"));
+                                int s = NPC.NewNPC((int)player.position.X, (int)player.position.Y - 130, ModContent.NPCType<CurseCircle>());
                                 Main.npc[p].Center = new Vector2(player.Center.X - 130, player.Center.Y - 130);
                             }
                             else
                             {
-                                int m = NPC.NewNPC((int)npc.position.X + 130, (int)npc.position.Y, mod.NPCType("CurseCircle"));
+                                int m = NPC.NewNPC((int)npc.position.X + 130, (int)npc.position.Y, ModContent.NPCType<CurseCircle>());
                                 Main.npc[m].Center = new Vector2(npc.Center.X + 130, npc.Center.Y - 60);
 
-                                int n = NPC.NewNPC((int)npc.position.X - 130, (int)npc.position.Y, mod.NPCType("CurseCircle"));
+                                int n = NPC.NewNPC((int)npc.position.X - 130, (int)npc.position.Y, ModContent.NPCType<CurseCircle>());
                                 Main.npc[n].Center = new Vector2(npc.Center.X - 130, npc.Center.Y - 60);
 
-                                int o = NPC.NewNPC((int)npc.position.X, (int)npc.position.Y + 130, mod.NPCType("CurseCircle"));
+                                int o = NPC.NewNPC((int)npc.position.X, (int)npc.position.Y + 130, ModContent.NPCType<CurseCircle>());
                                 Main.npc[o].Center = new Vector2(npc.Center.X, npc.Center.Y + 130);
                             }
                         }
@@ -321,14 +323,14 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
 
                     if (npc.ai[1] == 120)
                     {
-                        BaseAI.FireProjectile(player.position, npc.position, mod.ProjectileType("ForsakenStaff"), npc.damage / 2, 14, 10, -1);
+                        BaseAI.FireProjectile(player.position, npc.position,  ModContent.ProjectileType<ForsakenStaff>(), npc.damage / 2, 14, 10, -1);
                     }
                     if (npc.ai[1] == 140)
                     {
                         ScepterTeleport();
                     }
 
-                    if (npc.ai[1] > 160 && !AAGlobalProjectile.AnyProjectiles(mod.ProjectileType("ForsakenStaff")))
+                    if (npc.ai[1] > 160 && !AAModEXAIGlobalProjectile.AnyProjectiles(ModContent.ProjectileType<ForsakenStaff>()))
                     {
                         npc.ai[0]++;
                         npc.ai[1] = 0;
@@ -356,12 +358,23 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                         Vector2 vel = npc.velocity;
                         vel.Normalize();
                         vel *= 10f;
-                        int type = mod.ProjectileType("SunSummon");
+                        int type = ModContent.ProjectileType<SunSummon>();
                         for (int i = 0; i < Max; i++)
                         {
                             vel = vel.RotatedBy(rotation);
                             Projectile.NewProjectile(npc.Center.X, npc.Center.Y, vel.X, vel.Y, type, 0, 4, Main.myPlayer, npc.direction > 0 ? -1f : 1f, 6f);
                         }
+
+                        
+                        int a = Projectile.NewProjectile(player.position + new Vector2(-250, 0), Vector2.Zero, ModContent.ProjectileType<Razorsand>(), npc.damage / 2, 7, Main.myPlayer);
+                        Main.projectile[a].Center = player.Center + new Vector2(-250, 0);
+                        int b = Projectile.NewProjectile(player.position + new Vector2(250, 0), Vector2.Zero, ModContent.ProjectileType<Razorsand>(), npc.damage / 2, 7, Main.myPlayer);
+                        Main.projectile[b].Center = player.Center + new Vector2(250, 0);
+                        int c = Projectile.NewProjectile(player.position + new Vector2(0, -250), Vector2.Zero, ModContent.ProjectileType<Razorsand>(), npc.damage / 2, 7, Main.myPlayer);
+                        Main.projectile[c].Center = player.Center + new Vector2(0, -250);
+                        int d = Projectile.NewProjectile(player.position + new Vector2(0, 250), Vector2.Zero, ModContent.ProjectileType<Razorsand>(), npc.damage / 2, 7, Main.myPlayer);
+                        Main.projectile[d].Center = player.Center + new Vector2(0, 250);
+                        
                         npc.ai[0]++;
                         npc.ai[1] = 0;
                         npc.ai[2] = 0;
@@ -397,7 +410,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                         return;
                     }
 
-                    int proj1 = mod.ProjectileType("AnubisSoul");
+                    int proj1 = ModContent.ProjectileType<AnubisSoul>();
 
                     BaseAI.ShootPeriodic(npc, player.position, player.width, player.height, proj1, ref npc.ai[3], 100, npc.damage / 2, 10, false);
 
@@ -413,7 +426,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                         break;
                     if (npc.life > npc.lifeMax / 2)
                     {
-                        if (npc.ai[1] > 160 && !AAGlobalProjectile.AnyProjectiles(mod.ProjectileType("Block")))
+                        if (npc.ai[1] > 160 && !AAModEXAIGlobalProjectile.AnyProjectiles(ModContent.ProjectileType<Block>()))
                         {
                             internalAI[1]++;
                             if (internalAI[3] < TeleportCount && internalAI[1] >= 50)
@@ -436,8 +449,8 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                         }
                         if (npc.ai[1] == 40)
                         {
-                            int l = Projectile.NewProjectile(player.position + new Vector2(-800, 0), Vector2.Zero, mod.ProjectileType("BlockF"), npc.damage / 2, 7, Main.myPlayer, 0, 0);
-                            int r = Projectile.NewProjectile(player.position + new Vector2(800, 0), Vector2.Zero, mod.ProjectileType("BlockF"), npc.damage / 2, 7, Main.myPlayer, 1, 0);
+                            int l = Projectile.NewProjectile(player.position + new Vector2(-800, 0), Vector2.Zero, ModContent.ProjectileType<BlockF>(), npc.damage / 2, 7, Main.myPlayer, 0, 0);
+                            int r = Projectile.NewProjectile(player.position + new Vector2(800, 0), Vector2.Zero, ModContent.ProjectileType<BlockF>(), npc.damage / 2, 7, Main.myPlayer, 1, 0);
                             Main.projectile[l].ai[1] = r;
                             Main.projectile[l].Center = player.Center + new Vector2(-800, 0);
                             Main.projectile[r].ai[1] = l;
@@ -445,8 +458,8 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                         }
                         if (npc.ai[1] == 80)
                         {
-                            int u = Projectile.NewProjectile(player.position + new Vector2(0, -800), Vector2.Zero, mod.ProjectileType("BlockF1"), npc.damage / 2, 7, Main.myPlayer, 0, 0);
-                            int d = Projectile.NewProjectile(player.position + new Vector2(0, 800), Vector2.Zero, mod.ProjectileType("BlockF1"), npc.damage / 2, 7, Main.myPlayer, 1, 0);
+                            int u = Projectile.NewProjectile(player.position + new Vector2(0, -800), Vector2.Zero, ModContent.ProjectileType<BlockF1>(), npc.damage / 2, 7, Main.myPlayer, 0, 0);
+                            int d = Projectile.NewProjectile(player.position + new Vector2(0, 800), Vector2.Zero, ModContent.ProjectileType<BlockF1>(), npc.damage / 2, 7, Main.myPlayer, 1, 0);
                             Main.projectile[u].ai[1] = d;
                             Main.projectile[u].Center = player.Center + new Vector2(0, -800);
                             Main.projectile[d].ai[1] = u;
@@ -455,7 +468,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                     }
                     else
                     {
-                        if (npc.ai[1] > 240 && !AAGlobalProjectile.AnyProjectiles(mod.ProjectileType("BlockF")))
+                        if (npc.ai[1] > 240 && !AAModEXAIGlobalProjectile.AnyProjectiles(ModContent.ProjectileType<BlockF>()))
                         {
                             internalAI[1]++;
                             if (internalAI[3] < TeleportCount && internalAI[1] >= 50)
@@ -480,14 +493,14 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                         {
                             if (Main.rand.Next(4) == 0)
                             {
-                                int l = Projectile.NewProjectile(player.position + new Vector2(-800, 0), Vector2.Zero, mod.ProjectileType("BlockF"), npc.damage / 2, 7, Main.myPlayer, 0, 0);
-                                int r = Projectile.NewProjectile(player.position + new Vector2(800, 0), Vector2.Zero, mod.ProjectileType("BlockF"), npc.damage / 2, 7, Main.myPlayer, 1, 0);
+                                int l = Projectile.NewProjectile(player.position + new Vector2(-800, 0), Vector2.Zero, ModContent.ProjectileType<BlockF>(), npc.damage / 2, 7, Main.myPlayer, 0, 0);
+                                int r = Projectile.NewProjectile(player.position + new Vector2(800, 0), Vector2.Zero, ModContent.ProjectileType<BlockF>(), npc.damage / 2, 7, Main.myPlayer, 1, 0);
                                 Main.projectile[l].ai[1] = r;
                                 Main.projectile[l].Center = player.Center + new Vector2(-800, 0);
                                 Main.projectile[r].ai[1] = l;
                                 Main.projectile[r].Center = player.Center + new Vector2(800, 0);
-                                int u = Projectile.NewProjectile(player.position + new Vector2(0, -800), Vector2.Zero, mod.ProjectileType("BlockF1"), npc.damage / 2, 7, Main.myPlayer, 0, 0);
-                                int d = Projectile.NewProjectile(player.position + new Vector2(0, 800), Vector2.Zero, mod.ProjectileType("BlockF1"), npc.damage / 2, 7, Main.myPlayer, 1, 0);
+                                int u = Projectile.NewProjectile(player.position + new Vector2(0, -800), Vector2.Zero, ModContent.ProjectileType<BlockF1>(), npc.damage / 2, 7, Main.myPlayer, 0, 0);
+                                int d = Projectile.NewProjectile(player.position + new Vector2(0, 800), Vector2.Zero, ModContent.ProjectileType<BlockF1>(), npc.damage / 2, 7, Main.myPlayer, 1, 0);
                                 Main.projectile[u].ai[1] = d;
                                 Main.projectile[u].Center = player.Center + new Vector2(0, -800);
                                 Main.projectile[d].ai[1] = u;
@@ -495,8 +508,8 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                             }
                             else if (Main.rand.Next(2) == 0)
                             {
-                                int u = Projectile.NewProjectile(player.position + new Vector2(0, -800), Vector2.Zero, mod.ProjectileType("BlockF1"), npc.damage / 2, 7, Main.myPlayer, 0, 0);
-                                int d = Projectile.NewProjectile(player.position + new Vector2(0, 800), Vector2.Zero, mod.ProjectileType("BlockF1"), npc.damage / 2, 7, Main.myPlayer, 1, 0);
+                                int u = Projectile.NewProjectile(player.position + new Vector2(0, -800), Vector2.Zero, ModContent.ProjectileType<BlockF1>(), npc.damage / 2, 7, Main.myPlayer, 0, 0);
+                                int d = Projectile.NewProjectile(player.position + new Vector2(0, 800), Vector2.Zero, ModContent.ProjectileType<BlockF1>(), npc.damage / 2, 7, Main.myPlayer, 1, 0);
                                 Main.projectile[u].ai[1] = d;
                                 Main.projectile[u].Center = player.Center + new Vector2(0, -800);
                                 Main.projectile[d].ai[1] = u;
@@ -504,8 +517,8 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                             }
                             else
                             {
-                                int l = Projectile.NewProjectile(player.position + new Vector2(-800, 0), Vector2.Zero, mod.ProjectileType("BlockF"), npc.damage / 2, 7, Main.myPlayer, 0, 0);
-                                int r = Projectile.NewProjectile(player.position + new Vector2(800, 0), Vector2.Zero, mod.ProjectileType("BlockF"), npc.damage / 2, 7, Main.myPlayer, 1, 0);
+                                int l = Projectile.NewProjectile(player.position + new Vector2(-800, 0), Vector2.Zero, ModContent.ProjectileType<BlockF>(), npc.damage / 2, 7, Main.myPlayer, 0, 0);
+                                int r = Projectile.NewProjectile(player.position + new Vector2(800, 0), Vector2.Zero, ModContent.ProjectileType<BlockF>(), npc.damage / 2, 7, Main.myPlayer, 1, 0);
                                 Main.projectile[l].ai[1] = r;
                                 Main.projectile[l].Center = player.Center + new Vector2(-800, 0);
                                 Main.projectile[r].ai[1] = l;
@@ -544,81 +557,40 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                     {
                         if (npc.life > npc.lifeMax / 2)
                         {
-                            int a = Projectile.NewProjectile(player.position + new Vector2(-250, 0), Vector2.Zero, mod.ProjectileType("AnubisFireball"), npc.damage / 2, 7, Main.myPlayer);
+                            int a = Projectile.NewProjectile(player.position + new Vector2(-250, 0), Vector2.Zero, ModContent.ProjectileType<AnubisFireball>(), npc.damage / 2, 7, Main.myPlayer);
                             Main.projectile[a].Center = player.Center + new Vector2(-250, 0);
                             Kaboom(Main.projectile[a]);
-                            int b = Projectile.NewProjectile(player.position + new Vector2(250, 0), Vector2.Zero, mod.ProjectileType("AnubisFireball"), npc.damage / 2, 7, Main.myPlayer);
+                            int b = Projectile.NewProjectile(player.position + new Vector2(250, 0), Vector2.Zero, ModContent.ProjectileType<AnubisFireball>(), npc.damage / 2, 7, Main.myPlayer);
                             Main.projectile[b].Center = player.Center + new Vector2(250, 0);
                             Kaboom(Main.projectile[b]);
-                            int c = Projectile.NewProjectile(player.position + new Vector2(0, -250), Vector2.Zero, mod.ProjectileType("AnubisFireball"), npc.damage / 2, 7, Main.myPlayer);
+                            int c = Projectile.NewProjectile(player.position + new Vector2(0, -250), Vector2.Zero, ModContent.ProjectileType<AnubisFireball>(), npc.damage / 2, 7, Main.myPlayer);
                             Main.projectile[c].Center = player.Center + new Vector2(0, -250);
                             Kaboom(Main.projectile[c]);
-                            int d = Projectile.NewProjectile(player.position + new Vector2(0, 250), Vector2.Zero, mod.ProjectileType("AnubisFireball"), npc.damage / 2, 7, Main.myPlayer);
+                            int d = Projectile.NewProjectile(player.position + new Vector2(0, 250), Vector2.Zero, ModContent.ProjectileType<AnubisFireball>(), npc.damage / 2, 7, Main.myPlayer);
                             Main.projectile[d].Center = player.Center + new Vector2(0, 250);
                             Kaboom(Main.projectile[d]);
-                            int e = Projectile.NewProjectile(player.position + new Vector2(-200, 200), Vector2.Zero, mod.ProjectileType("AnubisFireball"), npc.damage / 2, 7, Main.myPlayer);
+                            int e = Projectile.NewProjectile(player.position + new Vector2(-200, 200), Vector2.Zero, ModContent.ProjectileType<AnubisFireball>(), npc.damage / 2, 7, Main.myPlayer);
                             Main.projectile[e].Center = player.Center + new Vector2(-200, 200);
                             Kaboom(Main.projectile[e]);
-                            int f = Projectile.NewProjectile(player.position + new Vector2(200, 200), Vector2.Zero, mod.ProjectileType("AnubisFireball"), npc.damage / 2, 7, Main.myPlayer);
+                            int f = Projectile.NewProjectile(player.position + new Vector2(200, 200), Vector2.Zero, ModContent.ProjectileType<AnubisFireball>(), npc.damage / 2, 7, Main.myPlayer);
                             Main.projectile[f].Center = player.Center + new Vector2(200, 200);
                             Kaboom(Main.projectile[f]);
-                            int g = Projectile.NewProjectile(player.position + new Vector2(200, -200), Vector2.Zero, mod.ProjectileType("AnubisFireball"), npc.damage / 2, 7, Main.myPlayer);
+                            int g = Projectile.NewProjectile(player.position + new Vector2(200, -200), Vector2.Zero, ModContent.ProjectileType<AnubisFireball>(), npc.damage / 2, 7, Main.myPlayer);
                             Main.projectile[g].Center = player.Center + new Vector2(200, -200);
                             Kaboom(Main.projectile[g]);
-                            int h = Projectile.NewProjectile(player.position + new Vector2(-200, -200), Vector2.Zero, mod.ProjectileType("AnubisFireball"), npc.damage / 2, 7, Main.myPlayer);
+                            int h = Projectile.NewProjectile(player.position + new Vector2(-200, -200), Vector2.Zero, ModContent.ProjectileType<AnubisFireball>(), npc.damage / 2, 7, Main.myPlayer);
                             Main.projectile[h].Center = player.Center + new Vector2(-200, -200);
                             Kaboom(Main.projectile[h]);
                         }
                         else
                         {
-                            int a = Projectile.NewProjectile(player.position + new Vector2(-250, 0), Vector2.Zero, mod.ProjectileType("AnubisFireball"), npc.damage / 2, 7, Main.myPlayer);
-                            Main.projectile[a].Center = player.Center + new Vector2(-250, 0);
-                            Kaboom(Main.projectile[a]);
-                            int b = Projectile.NewProjectile(player.position + new Vector2(250, 0), Vector2.Zero, mod.ProjectileType("AnubisFireball"), npc.damage / 2, 7, Main.myPlayer);
-                            Main.projectile[b].Center = player.Center + new Vector2(250, 0);
-                            Kaboom(Main.projectile[b]);
-                            int c = Projectile.NewProjectile(player.position + new Vector2(0, -250), Vector2.Zero, mod.ProjectileType("AnubisFireball"), npc.damage / 2, 7, Main.myPlayer);
-                            Main.projectile[c].Center = player.Center + new Vector2(0, -250);
-                            Kaboom(Main.projectile[c]);
-                            int d = Projectile.NewProjectile(player.position + new Vector2(0, 250), Vector2.Zero, mod.ProjectileType("AnubisFireball"), npc.damage / 2, 7, Main.myPlayer);
-                            Main.projectile[d].Center = player.Center + new Vector2(0, 250);
-                            Kaboom(Main.projectile[d]);
-                            int e = Projectile.NewProjectile(player.position + new Vector2(-200, 200), Vector2.Zero, mod.ProjectileType("AnubisFireball"), npc.damage / 2, 7, Main.myPlayer);
-                            Main.projectile[e].Center = player.Center + new Vector2(-200, 200);
-                            Kaboom(Main.projectile[e]);
-                            int f = Projectile.NewProjectile(player.position + new Vector2(200, 200), Vector2.Zero, mod.ProjectileType("AnubisFireball"), npc.damage / 2, 7, Main.myPlayer);
-                            Main.projectile[f].Center = player.Center + new Vector2(200, 200);
-                            Kaboom(Main.projectile[f]);
-                            int g = Projectile.NewProjectile(player.position + new Vector2(200, -200), Vector2.Zero, mod.ProjectileType("AnubisFireball"), npc.damage / 2, 7, Main.myPlayer);
-                            Main.projectile[g].Center = player.Center + new Vector2(200, -200);
-                            Kaboom(Main.projectile[g]);
-                            int h = Projectile.NewProjectile(player.position + new Vector2(-200, -200), Vector2.Zero, mod.ProjectileType("AnubisFireball"), npc.damage / 2, 7, Main.myPlayer);
-                            Main.projectile[h].Center = player.Center + new Vector2(-200, -200);
-                            Kaboom(Main.projectile[h]);
-                            int a1 = Projectile.NewProjectile(player.position + new Vector2(-500, 0), Vector2.Zero, mod.ProjectileType("AnubisFireball"), npc.damage / 2, 7, Main.myPlayer);
-                            Main.projectile[a1].Center = player.Center + new Vector2(-500, 0);
-                            Kaboom(Main.projectile[a1]);
-                            int b1 = Projectile.NewProjectile(player.position + new Vector2(500, 0), Vector2.Zero, mod.ProjectileType("AnubisFireball"), npc.damage / 2, 7, Main.myPlayer);
-                            Main.projectile[b1].Center = player.Center + new Vector2(500, 0);
-                            Kaboom(Main.projectile[b1]);
-                            int c1 = Projectile.NewProjectile(player.position + new Vector2(0, -500), Vector2.Zero, mod.ProjectileType("AnubisFireball"), npc.damage / 2, 7, Main.myPlayer);
-                            Main.projectile[c1].Center = player.Center + new Vector2(0, -500);
-                            Kaboom(Main.projectile[c1]);
-                            int d1 = Projectile.NewProjectile(player.position + new Vector2(0, 500), Vector2.Zero, mod.ProjectileType("AnubisFireball"), npc.damage / 2, 7, Main.myPlayer);
-                            Main.projectile[d1].Center = player.Center + new Vector2(0, 500);
-                            Kaboom(Main.projectile[d1]);
-                            int e1 = Projectile.NewProjectile(player.position + new Vector2(-400, 400), Vector2.Zero, mod.ProjectileType("AnubisFireball"), npc.damage / 2, 7, Main.myPlayer);
-                            Main.projectile[e1].Center = player.Center + new Vector2(-400, 400);
-                            Kaboom(Main.projectile[e1]);
-                            int f1 = Projectile.NewProjectile(player.position + new Vector2(400, 400), Vector2.Zero, mod.ProjectileType("AnubisFireball"), npc.damage / 2, 7, Main.myPlayer);
-                            Main.projectile[f1].Center = player.Center + new Vector2(400, 400);
-                            Kaboom(Main.projectile[f1]);
-                            int g1 = Projectile.NewProjectile(player.position + new Vector2(400, -400), Vector2.Zero, mod.ProjectileType("AnubisFireball"), npc.damage / 2, 7, Main.myPlayer);
-                            Main.projectile[g1].Center = player.Center + new Vector2(400, -400);
-                            Kaboom(Main.projectile[g1]);
-                            int h1 = Projectile.NewProjectile(player.position + new Vector2(-400, -400), Vector2.Zero, mod.ProjectileType("AnubisFireball"), npc.damage / 2, 7, Main.myPlayer);
-                            Main.projectile[h1].Center = player.Center + new Vector2(-400, -400);
-                            Kaboom(Main.projectile[h1]);
+                            for(int i = 0; i < 16; i++)
+                            {
+                                Vector2 pos = new Vector2((float)Math.Cos(i * 3.1415f / 8), (float)Math.Sin(i * 3.1415f / 8)) * 400f;
+                                int a = Projectile.NewProjectile(player.position + pos, Vector2.Zero, ModContent.ProjectileType<AnubisFireball>(), npc.damage / 2, 7, Main.myPlayer);
+                                Main.projectile[a].Center = player.Center + pos;
+                                Kaboom(Main.projectile[a]);
+                            }
                         }
                     }
                     break;
@@ -636,36 +608,17 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
 
         public override void NPCLoot()
         {
-            NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, ModContent.NPCType<AAMod.NPCs.TownNPCs.Anubis>());
+            NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, ModSupport.GetModNPC("AAMod", "Legendscribe").npc.type);
 
-            if (!AAWorld.downedAnubisA)
+            if (!AAModEXAIWorld.downedAnubisA)
             {
-                if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("FAnubisWin"), Color.ForestGreen);
+                if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(Trans.text("Anubis", "FAnubisWin"), Color.ForestGreen);
             }
 
-            AAWorld.downedAnubisA = true;
+            AAModEXAIWorld.downedAnubisA = true;
 
-            if (Main.rand.Next(10) == 0)
-            {
-                npc.DropLoot(ModLoader.GetMod("AAMod").ItemType("FAnubisTrophy"));
-            }
-
-            if (Main.expertMode)
-            {
-                for(int i = 0; i < 10; i++) npc.DropBossBags();
-                if (!AAWorld.downedAnubisA) npc.DropItemInstanced(npc.position, new Vector2(npc.width, npc.height), ModContent.ItemType<Items.EXSoul>(), 1, true);
-            }
-            else
-            {
-                if (Main.rand.Next(7) == 0)
-                {
-                    npc.DropLoot(ModLoader.GetMod("AAMod").ItemType("FAnubisMask"));
-                }
-                npc.DropLoot(ModLoader.GetMod("AAMod").ItemType("SoulFragment"), Main.rand.Next(8, 16));
-                string[] lootTable = { "Verdict", "Lifeline", "ForsakenStaff", "Soulsplitter", "CursedFury", "HorusCane" };
-                int loot = Main.rand.Next(lootTable.Length);
-                npc.DropLoot(ModLoader.GetMod("AAMod").ItemType(lootTable[loot]));
-            }
+            for(int i = 0; i < 10; i++) npc.DropBossBags();
+            if (!AAModEXAIWorld.downedAnubisA) npc.DropItemInstanced(npc.position, new Vector2(npc.width, npc.height), ModContent.ItemType<Items.EXSoul>(), 1, true);
         }
 
         int deathtimer = 0;
@@ -680,8 +633,8 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                     deathtimer++;
                     if (Main.netMode != NetmodeID.MultiplayerClient && deathtimer > 240)
                     {
-                        if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("FAnubis"), Color.ForestGreen);
-                        int a = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<AAMod.NPCs.TownNPCs.Anubis>());
+                        if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(Trans.text("Anubis", "FAnubisLose"), Color.ForestGreen);
+                        int a = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, ModSupport.GetModNPC("AAMod", "Legendscribe").npc.type);
                         Main.npc[a].Center = npc.Center;
                         npc.active = false;
                     }
@@ -770,9 +723,9 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
             int posX = Main.rand.Next(-800, 800);
 
             int posY = Main.rand.Next(0, 800);
-            if (posX > -400 && posX < 400)
+            if (posX > -500 && posX < 500)
             {
-                 posY = Main.rand.Next(400, 400);
+                 posY = 500;
             }
 
             npc.position = new Vector2(targetPos.X + posX, targetPos.Y - posY);

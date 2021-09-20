@@ -1,14 +1,13 @@
 ﻿
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using AAMod;
-using Terraria.ID;
- 
-using AAMod.Globals;
+
 using AAModEXAI.Dusts;
+using AAModEXAI.Base;
 
 namespace AAModEXAI.Bosses.Anubis
 {
@@ -38,7 +37,7 @@ namespace AAModEXAI.Bosses.Anubis
         public override void AI()
         {
             Player player = Main.player[npc.target];
-			AAAI.AIWorm(npc, new int[]{ mod.NPCType("Uraeus"), mod.NPCType("UraeusBody"), mod.NPCType("UraeusTail") }, 7, 0f, 10f, 0.07f, true, false, true, true, true);
+			AAAI.AIWorm(npc, new int[]{ ModContent.NPCType<Uraeus>(), ModContent.NPCType<UraeusBody>(), ModContent.NPCType<UraeusTail>() }, 7, 0f, 10f, 0.07f, true, false, true, true, true);
         }
 
         public override void HitEffect(int hitDirection, double damage)

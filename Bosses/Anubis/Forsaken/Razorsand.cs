@@ -1,16 +1,15 @@
 using System;
 using Microsoft.Xna.Framework;
+
 using Terraria;
 using Terraria.ModLoader;
-using AAMod;
 using Terraria.ID;
- 
-using AAMod.Globals;
+
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Anubis.Forsaken
 {
-    class Razorsand : ModProjectile
+    public class Razorsand : ModProjectile
     {
         public override void SetStaticDefaults()
         {
@@ -103,7 +102,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
         public override void Kill(int timeleft)
         {
 
-            Projectile.NewProjectile(projectile.position.X, projectile.position.Y, 0f, 0f, 658, 40, 0f, Main.myPlayer, 0f, 0f);
+            Projectile.NewProjectile(projectile.position.X, projectile.position.Y, 0f, 0f, ProjectileID.SandnadoHostileMark, 40, 0f, Main.myPlayer, 0f, 0f);
         }
     }
 }

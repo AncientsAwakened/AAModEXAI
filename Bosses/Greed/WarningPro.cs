@@ -55,7 +55,7 @@ namespace AAModEXAI.Bosses.Greed
                         int A = Main.rand.Next(-50, 50);
                         int B = Main.rand.Next(-200, 200) - 1000;
 
-                        int p = Projectile.NewProjectile(projectile.Center.X + A, projectile.Center.Y + B, 0f, 12f, mod.ProjectileType("CovStalactitePro"), 43, 1);
+                        int p = Projectile.NewProjectile(projectile.Center.X + A, projectile.Center.Y + B, 0f, 12f, mod.ProjectileType("CovStalactitePro"), 80, 1);
                         Main.projectile[p].netUpdate = true;
                     }
                 }
@@ -66,7 +66,7 @@ namespace AAModEXAI.Bosses.Greed
                         int A = Main.rand.Next(-80, 80);
                         int B = Main.rand.Next(-200, 200) - 1000;
 
-                        int p = Projectile.NewProjectile(projectile.Center.X + A, projectile.Center.Y + B, 0f, 10f, mod.ProjectileType("DesireBeam"), 43, 1);
+                        int p = Projectile.NewProjectile(projectile.Center.X + A, projectile.Center.Y + B, 0f, 10f, mod.ProjectileType("DesireBeam"), 80, 1);
                         Main.projectile[p].netUpdate = true;
                     }
                 }

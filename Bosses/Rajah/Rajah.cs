@@ -420,7 +420,7 @@ namespace AAModEXAI.Bosses.Rajah
                         internalAI[3] = 0;
                         if (internalAI[1] == 0)
                         {
-                            if (NPC.CountNPCS(mod.NPCType("RabbitcopterSoldier")) + AAGlobalProjectile.CountProjectiles(mod.ProjectileType("BunnySummon1")) < 5)
+                            if (NPC.CountNPCS(mod.NPCType("RabbitcopterSoldier")) + AAModEXAIGlobalProjectile.CountProjectiles(mod.ProjectileType("BunnySummon1")) < 5)
                             {
                                 Projectile.NewProjectile(StaffPos, Vector2.Zero, mod.ProjectileType("BunnySummon1"), 0, 0, Main.myPlayer, Main.rand.Next((int)npc.Center.X - 200, (int)npc.Center.X + 200), Main.rand.Next((int)npc.Center.Y - 200, (int)npc.Center.Y - 50));
                                 Projectile.NewProjectile(StaffPos, Vector2.Zero, mod.ProjectileType("BunnySummon1"), 0, 0, Main.myPlayer, Main.rand.Next((int)npc.Center.X - 200, (int)npc.Center.X + 200), Main.rand.Next((int)npc.Center.Y - 200, (int)npc.Center.Y - 50));
@@ -436,7 +436,7 @@ namespace AAModEXAI.Bosses.Rajah
                             }
                             if (npc.ai[1] == 0)
                             {
-                                if (NPC.CountNPCS(mod.NPCType("RabbitcopterSoldier")) + AAGlobalProjectile.CountProjectiles(mod.ProjectileType("BunnySummon1")) < 5)
+                                if (NPC.CountNPCS(mod.NPCType("RabbitcopterSoldier")) + AAModEXAIGlobalProjectile.CountProjectiles(mod.ProjectileType("BunnySummon1")) < 5)
                                 {
                                     Projectile.NewProjectile(StaffPos, Vector2.Zero, mod.ProjectileType("BunnySummon1"), 0, 0, Main.myPlayer, Main.rand.Next((int)npc.Center.X - 500, (int)npc.Center.X + 500), Main.rand.Next((int)npc.Center.Y - 200, (int)npc.Center.Y - 50));
                                     Projectile.NewProjectile(StaffPos, Vector2.Zero, mod.ProjectileType("BunnySummon1"), 0, 0, Main.myPlayer, Main.rand.Next((int)npc.Center.X - 500, (int)npc.Center.X + 500), Main.rand.Next((int)npc.Center.Y - 200, (int)npc.Center.Y - 50));
@@ -445,7 +445,7 @@ namespace AAModEXAI.Bosses.Rajah
                             }
                             else if (npc.ai[1] == 1)
                             {
-                                if (NPC.CountNPCS(mod.NPCType("BunnyBrawler")) + AAGlobalProjectile.CountProjectiles(mod.ProjectileType("BunnySummon2")) < 5)
+                                if (NPC.CountNPCS(mod.NPCType("BunnyBrawler")) + AAModEXAIGlobalProjectile.CountProjectiles(mod.ProjectileType("BunnySummon2")) < 5)
                                 {
                                     Projectile.NewProjectile(StaffPos, Vector2.Zero, mod.ProjectileType("BunnySummon2"), 0, 0, Main.myPlayer, Main.rand.Next((int)npc.Center.X - 500, (int)npc.Center.X + 500), Main.rand.Next((int)npc.Center.Y - 200, (int)npc.Center.Y - 50));
                                     Projectile.NewProjectile(StaffPos, Vector2.Zero, mod.ProjectileType("BunnySummon2"), 0, 0, Main.myPlayer, Main.rand.Next((int)npc.Center.X - 500, (int)npc.Center.X + 500), Main.rand.Next((int)npc.Center.Y - 200, (int)npc.Center.Y - 50));
@@ -453,7 +453,7 @@ namespace AAModEXAI.Bosses.Rajah
                             }
                             else if (npc.ai[1] == 2)
                             {
-                                if (NPC.CountNPCS(mod.NPCType("BunnyBattler")) + AAGlobalProjectile.CountProjectiles(mod.ProjectileType("BunnySummon3")) < 8)
+                                if (NPC.CountNPCS(mod.NPCType("BunnyBattler")) + AAModEXAIGlobalProjectile.CountProjectiles(mod.ProjectileType("BunnySummon3")) < 8)
                                 {
                                     Projectile.NewProjectile(StaffPos, Vector2.Zero, mod.ProjectileType("BunnySummon3"), 0, 0, Main.myPlayer, Main.rand.Next((int)npc.Center.X - 500, (int)npc.Center.X + 500), Main.rand.Next((int)npc.Center.Y - 200, (int)npc.Center.Y - 50));
 
@@ -592,7 +592,7 @@ namespace AAModEXAI.Bosses.Rajah
                 }
                 else if (npc.ai[3] == 7) //Carrot Farmer
                 {
-                    if (!AAGlobalProjectile.AnyProjectiles(mod.ProjectileType("CarrotFarmerR")))
+                    if (!AAModEXAIGlobalProjectile.AnyProjectiles(mod.ProjectileType("CarrotFarmerR")))
                     {
                         Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0f, 0f, mod.ProjectileType("CarrotFarmerR"), damage, 3f, Main.myPlayer, npc.whoAmI);
                         npc.netUpdate = true;

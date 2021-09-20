@@ -108,7 +108,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
             Player player = Main.player[npc.target];
             Shooty = true;
 
-            BaseAI.FireProjectile(player.Center, npc, mod.ProjectileType("CurseFlame"), npc.damage / 2, 0f, 2f);
+            BaseAI.FireProjectile(player.Center, npc, ModContent.ProjectileType<CurseFlame>(), npc.damage / 2, 0f, 2f);
         }
 
         public override bool PreDraw(SpriteBatch sb, Color dColor)
@@ -116,7 +116,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
             Texture2D bodyTex = Main.npcTexture[npc.type];
             Color lightColor = BaseDrawing.GetNPCColor(npc, null);
             BaseDrawing.DrawTexture(sb, bodyTex, 0, npc, lightColor);
-            BaseDrawing.DrawTexture(sb, ModLoader.GetMod("AAMod").GetTexture("Glowmasks/Naddaha_Glow"), 0, npc, Color.White, true);
+            BaseDrawing.DrawTexture(sb, mod.GetTexture("Bosses/Anubis/Forsaken/Naddaha_Glow"), 0, npc, Color.White, true);
             return false;
 		}
 	}

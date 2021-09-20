@@ -1,13 +1,11 @@
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using AAMod;
-using Terraria.ID;
- 
-using AAMod.Globals;
+
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Anubis.Forsaken
@@ -29,10 +27,10 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
 
 		public override void AI()
 		{
-            if (master >= 0 && (Main.npc[master] == null || !Main.npc[master].active || Main.npc[master].type != mod.NPCType("ForsakenAnubis"))) master = -1;
+            if (master >= 0 && (Main.npc[master] == null || !Main.npc[master].active || Main.npc[master].type != ModContent.NPCType<ForsakenAnubis>())) master = -1;
             if (master == -1)
             {
-                master = BaseAI.GetNPC(projectile.Center, mod.NPCType("ForsakenAnubis"), -1, null);
+                master = BaseAI.GetNPC(projectile.Center, ModContent.NPCType<ForsakenAnubis>(), -1, null);
                 if (master == -1) master = -2;
             }
             if (master == -1) { return; }
@@ -50,7 +48,8 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
             }
             projectile.oldPos[0] = projectile.position;
 
-            BaseAI.AIBoomerang(projectile, ref projectile.ai, Main.npc[master].position, Main.npc[master].width, Main.npc[master].height, true, 40, 45, 10f, 1f, true);
+            //AIBoomerang(Projectile p, ref float[] ai, Vector2 position = default, int width = -1, int height = -1, bool playSound = true, float maxDistance = 9f, int returnDelay = 35, float speedInterval = 0.4f, float rotationInterval = 0.4f, bool direct = false)
+            BaseAI.AIBoomerang(projectile, ref projectile.ai, Main.npc[master].position, Main.npc[master].width, Main.npc[master].height, true, 120, 60, 10f, 1f, true);
 
             ReflectProjectiles(projectile.Hitbox);
         }

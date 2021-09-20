@@ -41,6 +41,19 @@ namespace AAModEXAI
                 npc.modNPC.bossBag = ModSupport.GetModItem("AAMod", "AkumaBag").item.type;
                 return;
             }
+            //Anubis
+            if(npc.type == ModContent.NPCType<Bosses.Anubis.Anubis>())
+            {
+                npc.modNPC.music = ModSupport.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/Anubis");
+                npc.modNPC.bossBag = ModSupport.GetModItem("AAMod", "AnubisBag").item.type;
+                return;
+            }
+            if(npc.type == ModContent.NPCType<Bosses.Anubis.Forsaken.ForsakenAnubis>())
+            {
+                npc.modNPC.music = ModSupport.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/AnubisA");
+                npc.modNPC.bossBag = ModSupport.GetModItem("AAMod", "FAnubisBag").item.type;
+                return;
+            }
 		}
 
         public override void NPCLoot(NPC npc)
@@ -74,6 +87,19 @@ namespace AAModEXAI
                 for(int i = 0; i < 10; i++) npc.DropBossBags();
                 return;
             }
+            //Anubis
+            if(npc.type == ModContent.NPCType<Bosses.Anubis.Anubis>())
+            {
+                Item.NewItem((int)npc.Center.X, (int)npc.Center.Y, npc.width, npc.height, ModSupport.GetModItem("AAMod", "AnubisTrophy").item.type);
+                Item.NewItem((int)npc.Center.X, (int)npc.Center.Y, npc.width, npc.height, ModSupport.GetModItem("AAMod", "AnubisMask").item.type);
+                return;
+            }
+            if(npc.type == ModContent.NPCType<Bosses.Anubis.Forsaken.ForsakenAnubis>())
+            {
+                Item.NewItem((int)npc.Center.X, (int)npc.Center.Y, npc.width, npc.height, ModSupport.GetModItem("AAMod", "FAnubisTrophy").item.type);
+                Item.NewItem((int)npc.Center.X, (int)npc.Center.Y, npc.width, npc.height, ModSupport.GetModItem("AAMod", "FAnubisMask").item.type);
+                return;
+            }
 		}
 
         public override void AI(NPC npc)
@@ -85,6 +111,27 @@ namespace AAModEXAI
                     npc.modNPC.music = ModSupport.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/AH");
                 }
             }
+            if(npc.type == ModContent.NPCType<Bosses.Akuma.AkumaTransition>())
+            {
+				if (npc.ai[0] >= 300) //after he says 'heh' on the server, change music on the client
+				{
+					npc.modNPC.music = ModSupport.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/Akuma2");
+				}		
+            }
+            if(npc.type == ModContent.NPCType<Bosses.Anubis.Anubis>())
+            {
+                if (((Bosses.Anubis.Anubis)npc.modNPC).internalAI[0] == 1)
+                {
+                    npc.modNPC.music = ModSupport.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/Anubis");
+                }
+            }
+            if(npc.type == ModContent.NPCType<Bosses.Anubis.Forsaken.FATransition>())
+            {
+                if (npc.ai[1] == 120)
+                {
+                    npc.modNPC.music = ModSupport.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/AnubisA");
+                }
+            }
         }
 
         public override bool PreAI(NPC npc)
@@ -92,6 +139,7 @@ namespace AAModEXAI
             //AH
             if(npc.type == ModSupport.GetModNPC("AAMod", "Ashe").npc.type)
             {
+                npc.dontTakeDamage = true;
                 npc.boss = false;
                 npc.life = 0;
                 if(Main.netMode != NetmodeID.MultiplayerClient)
@@ -107,6 +155,7 @@ namespace AAModEXAI
             }
             if(npc.type == ModSupport.GetModNPC("AAMod", "Haruka").npc.type)
             {
+                npc.dontTakeDamage = true;
                 npc.boss = false;
                 npc.life = 0;
                 if(Main.netMode != NetmodeID.MultiplayerClient)
@@ -122,6 +171,7 @@ namespace AAModEXAI
             //Akuma
             if(npc.type == ModSupport.GetModNPC("AAMod", "Akuma").npc.type)
             {
+                npc.dontTakeDamage = true;
                 npc.boss = false;
                 npc.life = 0;
                 if(Main.netMode != NetmodeID.MultiplayerClient)
@@ -137,6 +187,7 @@ namespace AAModEXAI
             }
             if(npc.type == ModSupport.GetModNPC("AAMod", "AkumaA").npc.type)
             {
+                npc.dontTakeDamage = true;
                 npc.boss = false;
                 npc.life = 0;
                 if(Main.netMode != NetmodeID.MultiplayerClient)

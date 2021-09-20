@@ -6,10 +6,6 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-using AAMod;
-using Terraria.ID;
- 
-using AAMod.Globals;
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Anubis
@@ -57,12 +53,12 @@ namespace AAModEXAI.Bosses.Anubis
 			npc.noGravity = true;
 			if(body == -1)
 			{
-				int npcID = BaseAI.GetNPC(npc.Center, mod.NPCType("Anubis"), 500f, null);	
+				int npcID = BaseAI.GetNPC(npc.Center, ModContent.NPCType<Bosses.Anubis.Anubis>(), 500f, null);	
 				if(npcID >= 0) body = npcID;
 			}
 			if(body == -1) return;				
 			NPC anubis = Main.npc[body];
-			if(anubis == null || anubis.life <= 0 || !anubis.active || anubis.type != mod.NPCType("Anubis")){ BaseAI.KillNPCWithLoot(npc); return; }
+			if(anubis == null || anubis.life <= 0 || !anubis.active || anubis.type != ModContent.NPCType<Bosses.Anubis.Anubis>()){ BaseAI.KillNPCWithLoot(npc); return; }
 
 			for (int m = npc.oldPos.Length - 1; m > 0; m--)
 			{
@@ -80,7 +76,7 @@ namespace AAModEXAI.Bosses.Anubis
 			npc.rotation = (npc.position.X - npc.oldPos[1].X) * 0.05f;
 
             Player player = Main.player[anubis.target];
-            BaseAI.ShootPeriodic(npc, player.position, player.width, player.height, mod.ProjectileType("LocustSpit"), ref npc.ai[2], Main.expertMode ? 120 : 80, npc.damage / 2, 9, false);
+            BaseAI.ShootPeriodic(npc, player.position, player.width, player.height, ModContent.ProjectileType<LocusSpit>(), ref npc.ai[2], Main.expertMode ? 120 : 80, npc.damage / 2, 9, false);
 		}
 
 		public override bool PreDraw(SpriteBatch sb, Color dColor)

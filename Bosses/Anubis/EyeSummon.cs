@@ -1,10 +1,9 @@
 using Microsoft.Xna.Framework;
+
 using Terraria;
 using Terraria.ModLoader;
-using AAMod;
 using Terraria.ID;
- 
-using AAMod.Globals;
+
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Anubis
@@ -47,7 +46,7 @@ namespace AAModEXAI.Bosses.Anubis
 
         public override void Kill(int timeLeft)
         {
-            int MinionType = mod.NPCType("EyeSentry");
+            int MinionType = ModContent.NPCType<EyeSentry>();
 
             int Minion = NPC.NewNPC((int)projectile.Center.X, (int)projectile.Center.Y, MinionType, 0);
             Main.npc[Minion].netUpdate2 = true;

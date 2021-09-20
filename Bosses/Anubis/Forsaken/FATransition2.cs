@@ -1,11 +1,9 @@
-﻿using Terraria;
+﻿using Microsoft.Xna.Framework;
+
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-using AAMod;
-using Terraria.ID;
- 
-using AAMod.Globals;
+
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Anubis.Forsaken
@@ -34,7 +32,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
             npc.dontTakeDamage = true;
             npc.damage = 0;
             npc.value = 0;
-            music = ModLoader.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/silence");
+            music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/silence");
         }
 
         readonly int frameHeight = 100;
@@ -46,7 +44,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
             npc.ai[3] = 39;
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
-                music = ModLoader.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/silence");
+                music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/silence");
                 if (npc.velocity.Y == 0)
                 {
                     for (int a = 0; a < 8; a++)
@@ -96,7 +94,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                         int b = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0f, 0f, ModContent.ProjectileType<Effects.ShockwaveBoom>(), 0, 0, Main.myPlayer, 0, 10);
                         Main.projectile[b].Center = npc.Center;
 
-                        NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType("ForsakenAnubis"));
+                        NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, ModContent.NPCType<ForsakenAnubis>());
                         npc.active = false;
                         npc.netUpdate = true;
                     }

@@ -48,6 +48,21 @@ namespace AAModEXAI
             return false;
         }
 
+        public static int CountProjectiles(int type)
+        {
+            int num = 0;
+            for (int i = 0; i < Main.maxProjectiles; i++)
+            {
+                if (Main.projectile[i].active && Main.projectile[i].type == type)
+                {
+                    num++;
+                }
+            }
+
+            return num;
+        }
+
+
         public Vector2 reflectvelocity = Vector2.Zero;
 
         private Vector2 oldvelocity = Vector2.Zero;

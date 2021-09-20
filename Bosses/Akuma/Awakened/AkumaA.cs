@@ -381,10 +381,42 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                     }
                     break;
 
-                case 6: //fire lasers from all segments, slower now
+                case 6: //go up
                     targetPos = player.Center;
-                    MovementWorm(targetPos, 10f, 0.26f);
-                    if (npc.ai[1] == 120 - 60 && Main.netMode != NetmodeID.MultiplayerClient)
+                    targetPos.X += 700 * (npc.Center.X < player.Center.X ? -1 : 1);
+                    targetPos.Y -= 400;
+                    MovementWorm(targetPos, 20f, 0.6f);
+                    if (++npc.ai[1] > 240 || npc.Distance(targetPos) < 100) //initiate dash
+                    {
+                        npc.ai[0]++;
+                        npc.ai[1] = 0;
+                        npc.ai[2] = npc.Center.X < player.Center.X ? 1 : -1; //remember which side to end up on
+                        npc.velocity.X = 25f * npc.ai[2];
+                        npc.velocity.Y /= 5f;
+                        npc.netUpdate = true;
+                    }
+                    break;
+
+                case 7: //wait till past player
+                    if (++npc.ai[1] > 240 || (npc.ai[2] > 0 ? npc.Center.X > player.Center.X : npc.Center.X < player.Center.X))
+                    {
+                        npc.ai[0]++;
+                        npc.ai[1] = 0;
+                        npc.ai[2] = 0;
+                        npc.netUpdate = true;
+                    }
+                    break;
+
+                case 8: //fire lasers from all segments, slower now
+                    npc.velocity *= 0.9875f;
+                    if (++npc.ai[2] >= 30)
+                    {
+                        targetPos = player.Center;
+                        targetPos.X += 700 * (npc.Center.X < player.Center.X ? -1 : 1);
+                        targetPos.Y -= 400;
+                        MovementWorm(targetPos, 10f, 0.26f);
+                    }
+                    if (npc.ai[2] == 30 && Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         bool fire = true;
                         for (int i = 0; i < Main.maxNPCs; i++)
@@ -398,10 +430,6 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                                 }
                             }
                     }
-                    if (++npc.ai[2] > 140)
-                    {
-                        npc.ai[2] = 0;
-                    }
                     if (++npc.ai[1] > 120 + 180)
                     {
                         npc.ai[0]++;
@@ -411,7 +439,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                     }
                     break;
 
-                case 7: //go under and prepare for dash
+                case 9: //go under and prepare for dash
                     targetPos = player.Center;
                     targetPos.X += 700 * (npc.Center.X < player.Center.X ? -1 : 1);
                     targetPos.Y += 400;
@@ -427,7 +455,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                     }
                     break;
 
-                case 8: //wait till past player
+                case 10: //wait till past player
                     if (++npc.ai[1] > 240 || (npc.ai[2] > 0 ? npc.Center.X > player.Center.X : npc.Center.X < player.Center.X))
                     {
                         npc.ai[0]++;
@@ -437,7 +465,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                     }
                     break;
 
-                case 9: //eruption
+                case 11: //eruption
                     npc.velocity *= 0.9875f;
                     if (++npc.ai[2] == 30)
                     {
@@ -485,7 +513,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                     }
                     break;
 
-                case 10: //lakitu and chase player
+                case 12: //lakitu and chase player
                     targetPos = player.Center;
                     MovementWorm(targetPos, 17f, 0.3f);
                     if (npc.ai[2] == 0)
@@ -504,7 +532,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                     }
                     break;
 
-                case 11: //prepare for roiling
+                case 13: //prepare for roiling
                     targetPos = player.Center;
                     targetPos.X += 700 * (npc.Center.X < targetPos.X ? -1 : 1);
                     MovementWorm(targetPos, 20f, 0.6f);
@@ -515,14 +543,14 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                         npc.ai[2] = 0;
                         npc.localAI[1] = npc.Distance(player.Center);
                         npc.netUpdate = true;
-                        npc.velocity = npc.DirectionTo(player.Center).RotatedBy(Math.PI / 2) * 40f;
+                        npc.velocity = npc.DirectionTo(player.Center).RotatedBy(Math.PI / 2) * 24f;
                         npc.rotation = npc.velocity.ToRotation();
                     }
                     break;
 
-                case 12:
+                case 14:
                     npc.velocity -= npc.velocity.RotatedBy(Math.PI / 2) * npc.velocity.Length() / npc.localAI[1];
-                    if (npc.velocity.Length() > 40f) npc.velocity *= 40f / npc.velocity.Length();
+                    if (npc.velocity.Length() > 24f) npc.velocity *= 24f / npc.velocity.Length();
                     if (++npc.ai[2] > 4)
                     {
                         npc.ai[2] = 0;
@@ -543,7 +571,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                     }
                     npc.rotation = (float)Math.Atan2((double)(npc.velocity.Y * (float)npc.direction), (double)(npc.velocity.X * (float)npc.direction));
                     break;
-                case 13: //wait for old attack to go away
+                case 15: //wait for old attack to go away
                     targetPos = player.Center;
                     targetPos.X += 600 * (npc.Center.X < targetPos.X ? -1 : 1);
                     MovementWorm(targetPos, 20f, 0.6f);
@@ -698,6 +726,7 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
             if (Main.expertMode)
             {
                 if (Main.netMode != NetmodeID.MultiplayerClient) AAModEXAI.Chat(AAModEXAIWorld.downedAkuma ? Trans.text("Akuma","AkumaA10") : Trans.text("Akuma","AkumaA11"), Color.DeepSkyBlue.R, Color.DeepSkyBlue.G, Color.DeepSkyBlue.B);
+                if (!AAModEXAIWorld.downedAkuma) npc.DropItemInstanced(npc.position, new Vector2(npc.width, npc.height), ModContent.ItemType<Items.EXSoul>(), 1, true);
                 AAModEXAIWorld.downedAkuma = true;
                 return;
             }
@@ -862,11 +891,11 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
             roarTimer = timer;
             if (fireSound)
             {
-                Main.PlaySound(4, (int)npc.Center.X, (int)npc.Center.Y, 60);
+                Main.PlaySound(SoundID.NPCKilled, (int)npc.Center.X, (int)npc.Center.Y, 60);
             }
             else
             {
-                Main.PlaySound(ModLoader.GetMod("AAMod").GetLegacySoundSlot(SoundType.Custom, "Sounds/Sounds/AkumaRoar"), npc.Center);
+                Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Sounds/AkumaRoar"), npc.Center);
             }
         }
 

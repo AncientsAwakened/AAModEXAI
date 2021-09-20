@@ -199,7 +199,7 @@ namespace AAModEXAI.Bosses.Djinn
                 npc.velocity.Y = 0;
                 if (npc.ai[3] == 9 || npc.ai[3] == 36 || npc.ai[3] == 72)
                 {
-                    if (Main.netMode != NetmodeID.MultiplayerClient && AAGlobalProjectile.CountProjectiles(658) < 5)
+                    if (Main.netMode != NetmodeID.MultiplayerClient && AAModEXAIGlobalProjectile.CountProjectiles(658) < 5)
                     {
                         FireProjectile();
                         npc.netUpdate = true;

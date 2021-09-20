@@ -1,10 +1,8 @@
 using Microsoft.Xna.Framework;
+
 using Terraria;
 using Terraria.ModLoader;
-using AAMod;
-using Terraria.ID;
- 
-using AAMod.Globals;
+
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Anubis.Forsaken
@@ -47,7 +45,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
 
         public override void Kill(int timeLeft)
         {
-            int MinionType = mod.NPCType("HorusSentry");
+            int MinionType = ModContent.NPCType<HorusSentry>();
 
             int Minion = NPC.NewNPC((int)projectile.Center.X, (int)projectile.Center.Y, MinionType, 0);
             Main.npc[Minion].netUpdate2 = true;

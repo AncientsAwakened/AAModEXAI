@@ -1,15 +1,13 @@
 ﻿
-using Microsoft.Xna.Framework;
-using Terraria;
+using System;
 using System.IO;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
+
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using AAMod;
-using Terraria.ID;
- 
-using AAMod.Globals;
+
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Anubis.Forsaken

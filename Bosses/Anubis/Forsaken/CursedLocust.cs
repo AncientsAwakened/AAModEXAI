@@ -5,10 +5,6 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-using AAMod;
-using Terraria.ID;
- 
-using AAMod.Globals;
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Anubis.Forsaken
@@ -74,7 +70,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
 
             if (npc.ai[1] <= 600f)
             {
-                BaseAI.ShootPeriodic(npc, player.position, player.width, player.height, mod.ProjectileType("CurseFlame"), ref npc.ai[3], 120, npc.damage / 2, 12, false);
+                BaseAI.ShootPeriodic(npc, player.position, player.width, player.height, ModContent.ProjectileType<CurseFlame>(), ref npc.ai[3], 120, npc.damage / 2, 12, false);
             }
 
             if (player.Center.X < npc.Center.X)

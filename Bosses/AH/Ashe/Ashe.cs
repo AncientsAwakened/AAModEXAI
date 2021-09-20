@@ -542,6 +542,7 @@ namespace AAModEXAI.Bosses.AH.Ashe
             {
                 NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<AHDeath>());
                 for(int i = 0; i < 10; i++) npc.DropBossBags();
+                if (!AAModEXAIWorld.downedSisters) npc.DropItemInstanced(npc.position, new Vector2(npc.width, npc.height), ModContent.ItemType<Items.EXSoul>(), 1, true);
             }
             int DeathAnim = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<AsheVanish>(), 0);
             Main.npc[DeathAnim].velocity = npc.velocity;

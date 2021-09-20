@@ -1,12 +1,10 @@
 using System;
 using Microsoft.Xna.Framework;
+
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using AAMod;
-using Terraria.ID;
- 
-using AAMod.Globals;
+
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Anubis.Forsaken
@@ -105,7 +103,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
 
         public override void Kill(int timeleft)
         {
-            Projectile.NewProjectile(projectile.position, Vector2.Zero, mod.ProjectileType("ForsakenExplosion"), projectile.damage, projectile.knockBack, Main.myPlayer);
+            Projectile.NewProjectile(projectile.position, Vector2.Zero, ModContent.ProjectileType<ForsakenExplosion>(), projectile.damage, projectile.knockBack, Main.myPlayer);
             int pieCut = 20;
             Main.PlaySound(SoundID.Item14, projectile.position);
             for (int m = 0; m < pieCut; m++)

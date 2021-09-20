@@ -1,14 +1,12 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
 using Terraria;
 using Terraria.ModLoader;
+using Terraria.ID;
 
-using Terraria.ID;
-using Microsoft.Xna.Framework.Graphics;
-using AAMod;
-using Terraria.ID;
- 
-using AAMod.Globals;
 using AAModEXAI.Dusts;
+using AAModEXAI.Misc;
 
 namespace AAModEXAI.Bosses.Anubis
 {
@@ -58,7 +56,7 @@ namespace AAModEXAI.Bosses.Anubis
 
             npc.ai[0] += 1f;
 
-            if (!NPC.AnyNPCs(mod.NPCType("Anubis")))
+            if (!NPC.AnyNPCs(ModContent.NPCType<Bosses.Anubis.Anubis>()))
             {
                 npc.StrikeNPCNoInteraction(9999, 0, 0, false);
             }
@@ -90,7 +88,7 @@ namespace AAModEXAI.Bosses.Anubis
             }
             if (npc.ai[0] >= 340 && npc.ai[0] <= 460)
             {
-                BaseAI.ShootPeriodic(npc, player.position, player.width, player.height, mod.ProjectileType("Runefire"), ref npc.ai[1], 30, npc.damage / 2, 10, false);
+                BaseAI.ShootPeriodic(npc, player.position, player.width, player.height, ModContent.ProjectileType<Runefire>(), ref npc.ai[1], 30, npc.damage / 2, 10, false);
             }
             if (npc.ai[0] > 460)
             {

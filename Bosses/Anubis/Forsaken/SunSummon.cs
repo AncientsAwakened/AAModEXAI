@@ -1,11 +1,10 @@
-using Terraria;
-using Terraria.ModLoader;
 using System;
 using Microsoft.Xna.Framework;
-using AAMod;
+
+using Terraria;
+using Terraria.ModLoader;
 using Terraria.ID;
- 
-using AAMod.Globals;
+
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Anubis.Forsaken
@@ -63,7 +62,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
 
         public override void Kill(int timeLeft)
         {
-            int MinionType = mod.NPCType("ForsakenSun");
+            int MinionType = ModContent.NPCType<ForsakenSun>();
 
             if (!HitTile)
             {

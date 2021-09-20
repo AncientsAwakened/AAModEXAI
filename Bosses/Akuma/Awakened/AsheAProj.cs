@@ -1,12 +1,10 @@
 using Microsoft.Xna.Framework;
+using System;
+
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using System;
-using AAMod;
-using Terraria.ID;
- 
-using AAMod.Globals;
+
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Akuma.Awakened

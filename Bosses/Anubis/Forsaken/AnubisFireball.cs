@@ -1,11 +1,10 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+
 using Terraria;
 using Terraria.ModLoader;
-using AAMod;
 using Terraria.ID;
- 
-using AAMod.Globals;
+
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Anubis.Forsaken
@@ -63,8 +62,8 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
             for (int i = 0; i < 6; i++)
             {
                 double offsetAngle = (startAngle + deltaAngle * (i + i * i) / 2f) + 32f * i;
-                Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, (float)(Math.Sin(offsetAngle) * 7f), (float)(Math.Cos(offsetAngle) * 7f), mod.ProjectileType("CurseFlame"), projectile.damage, projectile.knockBack, projectile.owner, 0f, 1f);
-                Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, (float)(-Math.Sin(offsetAngle) * 7f), (float)(-Math.Cos(offsetAngle) * 7f), mod.ProjectileType("CurseFlame"), projectile.damage, projectile.knockBack, projectile.owner, 0f, 1f);
+                Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, (float)(Math.Sin(offsetAngle) * 7f), (float)(Math.Cos(offsetAngle) * 7f), ModContent.ProjectileType<CurseFlame>(), projectile.damage, projectile.knockBack, projectile.owner, 0f, 1f);
+                Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, (float)(-Math.Sin(offsetAngle) * 7f), (float)(-Math.Cos(offsetAngle) * 7f), ModContent.ProjectileType<CurseFlame>(), projectile.damage, projectile.knockBack, projectile.owner, 0f, 1f);
             }
             for (int dust = 0; dust < 5; dust++)
 			{

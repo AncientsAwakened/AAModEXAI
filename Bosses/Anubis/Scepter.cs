@@ -4,10 +4,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using AAMod;
-using Terraria.ID;
- 
-using AAMod.Globals;
+
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Anubis
@@ -30,10 +27,10 @@ namespace AAModEXAI.Bosses.Anubis
 
 		public override void AI()
 		{
-            if (master >= 0 && (Main.npc[master] == null || !Main.npc[master].active || Main.npc[master].type != mod.NPCType("Anubis"))) master = -1;
+            if (master >= 0 && (Main.npc[master] == null || !Main.npc[master].active || Main.npc[master].type != ModContent.NPCType<Bosses.Anubis.Anubis>())) master = -1;
             if (master == -1)
             {
-                master = BaseAI.GetNPC(projectile.Center, mod.NPCType("Anubis"), -1, null);
+                master = BaseAI.GetNPC(projectile.Center, ModContent.NPCType<Bosses.Anubis.Anubis>(), -1, null);
                 if (master == -1) master = -2;
             }
             if (master == -1) { return; }

@@ -415,7 +415,7 @@ namespace AAModEXAI.Bosses.Equinox
                         {
                             for (int i = 0; i < Main.maxNPCs; i+= 3)
                             {
-                                if (Main.npc[i].active && Main.npc[i].type == mod.NPCType("DaybringerBody") && Main.npc[i].realLife == npc.whoAmI && AAGlobalProjectile.CountProjectiles(mod.ProjectileType("DaybringerSun")) < 3)
+                                if (Main.npc[i].active && Main.npc[i].type == mod.NPCType("DaybringerBody") && Main.npc[i].realLife == npc.whoAmI && AAModEXAIGlobalProjectile.CountProjectiles(mod.ProjectileType("DaybringerSun")) < 3)
                                 {
                                     Vector2 speed = Vector2.Normalize(new Vector2(1f, 0f).RotatedBy(Main.npc[i].rotation + 3.1415f)) * 8f;
                                     Projectile.NewProjectile(Main.npc[i].Center.X, Main.npc[i].Center.Y, -speed.X, -speed.Y, mod.ProjectileType("DaybringerSun"), damage/ 3, 1, 255);
@@ -434,7 +434,7 @@ namespace AAModEXAI.Bosses.Equinox
                         {
                             for (int i = 0; i < Main.maxNPCs; i+= 3)
                             {
-                                if (Main.npc[i].active && Main.npc[i].type == mod.NPCType("DaybringerBody") && Main.npc[i].realLife == npc.whoAmI && AAGlobalProjectile.CountProjectiles(mod.ProjectileType("DaybringerSun")) < 3)
+                                if (Main.npc[i].active && Main.npc[i].type == mod.NPCType("DaybringerBody") && Main.npc[i].realLife == npc.whoAmI && AAModEXAIGlobalProjectile.CountProjectiles(mod.ProjectileType("DaybringerSun")) < 3)
                                 {
                                     Vector2 speed = Vector2.Normalize(new Vector2(1f, 0f).RotatedBy(Main.npc[i].rotation + 3.1415f)) * 8f;
                                     Projectile.NewProjectile(Main.npc[i].Center.X, Main.npc[i].Center.Y, -speed.X, -speed.Y, mod.ProjectileType("DaybringerSun"), damage/ 3, 1, 255);

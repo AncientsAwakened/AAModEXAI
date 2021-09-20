@@ -79,11 +79,7 @@ namespace AAModEXAI.Bosses.Akuma
 					{
 						npc.alpha = 0;
 					}
-				}
-				if (npc.ai[0] >= 300) //after he says 'heh' on the server, change music on the client
-				{
-					music = ModLoader.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/Akuma2");
-				}				
+				}		
 				if (npc.ai[0] >= 660) //after 660 on the server, transition color
 				{
 					RVal -= 5;

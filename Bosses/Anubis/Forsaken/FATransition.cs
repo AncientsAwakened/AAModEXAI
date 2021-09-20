@@ -1,13 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
+
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-using AAMod;
-using Terraria.ID;
- 
-using AAMod.Globals;
 using AAModEXAI.Dusts;
+using AAModEXAI.Localization;
 
 namespace AAModEXAI.Bosses.Anubis.Forsaken
 {
@@ -33,7 +31,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
             npc.dontTakeDamage = true;
             npc.damage = 0;
             npc.value = 0;
-            music = ModLoader.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/silence");
+            music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/silence");
         }
 
         public override void AI()
@@ -48,38 +46,37 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                     npc.ai[1]++;
                     if (npc.ai[1] == 120)
                     {
-                        if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("AnubisTransition1"), Color.Gold);
-                        music = ModLoader.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/AnubisA");
+                        if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(Trans.text("Anubis", "AnubisTransition1"), Color.Gold);
                     }
 
                     if (npc.ai[1] == 240)
                     {
-                        if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("AnubisTransition2"), Color.Gold);
+                        if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(Trans.text("Anubis", "AnubisTransition2"), Color.Gold);
                     }
 
                     if (npc.ai[1] == 360)
                     {
-                        if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("AnubisTransition3"), Color.Gold);
+                        if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(Trans.text("Anubis", "AnubisTransition3"), Color.Gold);
                     }
 
                     if (npc.ai[1] == 480)
                     {
-                        if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("AnubisTransition4"), Color.Gold);
+                        if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(Trans.text("Anubis", "AnubisTransition4"), Color.Gold);
                     }
 
                     if (npc.ai[1] == 600)
                     {
-                        if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("AnubisTransition5"), Color.Gold);
+                        if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(Trans.text("Anubis", "AnubisTransition5"), Color.Gold);
                     }
 
                     if (npc.ai[1] == 720)
                     {
-                        if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("AnubisTransition6"), Color.Gold);
+                        if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(Trans.text("Anubis", "AnubisTransition6"), Color.Gold);
                     }
 
                     if (npc.ai[1] == 840)
                     {
-                        if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("AnubisTransition7"), Color.ForestGreen);
+                        if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(Trans.text("Anubis", "AnubisTransition7"), Color.ForestGreen);
                     }
 
                     if (npc.ai[1] >= 900)
@@ -114,7 +111,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                         int b = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0f, 0f, ModContent.ProjectileType<Effects.ShockwaveBoom>(), 0, 0, Main.myPlayer, 0, 10);
                         Main.projectile[b].Center = npc.Center;
 
-                        NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType("ForsakenAnubis"));
+                        NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, ModContent.NPCType<ForsakenAnubis>());
                         npc.active = false;
                         npc.netUpdate = true;
                     }

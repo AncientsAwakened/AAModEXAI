@@ -1,13 +1,12 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
 using Terraria;
 using Terraria.ModLoader;
-
-using Microsoft.Xna.Framework.Graphics;
-using AAMod;
 using Terraria.ID;
- 
-using AAMod.Globals;
+
 using AAModEXAI.Dusts;
+using AAModEXAI.Misc;
 
 namespace AAModEXAI.Bosses.Anubis
 {
@@ -55,7 +54,7 @@ namespace AAModEXAI.Bosses.Anubis
 
                         int Type = Main.rand.Next(2);
 
-                        if (!NPC.AnyNPCs(mod.NPCType("Uraeus")))
+                        if (!NPC.AnyNPCs(ModContent.NPCType<Uraeus>()))
                         {
                             Type = Main.rand.Next(3);
                         }
@@ -63,13 +62,13 @@ namespace AAModEXAI.Bosses.Anubis
                         switch (Type)
                         {
                             case 0:
-                                Type = mod.NPCType("HorusHawk");
+                                Type = ModContent.NPCType<HorusHawk>();
                                 break;
                             case 1:
-                                Type = mod.NPCType("Scarab");
+                                Type = ModContent.NPCType<Scarab>();
                                 break;
                             case 2:
-                                Type = mod.NPCType("Uraeus");
+                                Type = ModContent.NPCType<Uraeus>();
                                 break;
                         }
 

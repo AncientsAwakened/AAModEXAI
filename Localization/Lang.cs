@@ -19,11 +19,21 @@ namespace AAModEXAI.Localization
                 index = 2;
             }
 
+            string Info = info;
+
+            Translation(place, info, index);
+            if(info == Info) Translation(place, info, 0);
+
+            return info;
+        }
+
+        public static void Translation(string place, string info, int index)
+        {
             if(place == "Common") Common(ref info, index);
             else if(place == "AH") AHChat(ref info, index);
             else if(place == "Akuma") AkumaChat(ref info, index);
-
-            return info;
+            else if(place == "Anubis") AnubisChat(ref info, index);
+            return;
         }
 
         public static void Common(ref string info, int index)
@@ -457,6 +467,166 @@ namespace AAModEXAI.Localization
                 else if(index == 2) info = "АУ, урод..! Я все!";
             }
 
+        }
+
+        public static void AnubisChat(ref string info, int index)
+        {
+            if(info == "AnubisCombat1")
+            {
+                if(index == 0) info = "YEET";
+                else if(index == 1) info = "咦嘻嘻！";
+                else if(index == 2) info = "ЕЕЕЕЕ";
+            }
+            if(info == "AnubisCombat2")
+            {
+                if(index == 0) info = "Careful! Projectiles hurt.";
+                else if(index == 1) info = "小心点! 我的射弹可有点疼.";
+                else if(index == 2) info = "Осторожно! Снаряды бьют больно.";
+            }
+            if(info == "AnubisCombat3")
+            {
+                if(index == 0) info = "Let me grab some friends";
+                else if(index == 1) info = "我叫点好兄弟来助助兴";
+                else if(index == 2) info = "Давай я позову друзей.";
+            }
+            if(info == "AnubisCombat4")
+            {
+                if(index == 0) info = "Catch!";
+                else if(index == 1) info = "接好!";
+                else if(index == 2) info = "Лови!";
+            }
+            if(info == "AnubisCombat5")
+            {
+                if(index == 0) info = "Smashing, Init?";
+                else if(index == 1) info = "压扁你的头, 然后咱们再来一遍？";
+                else if(index == 2) info = "Сокрушительно, не так ли?";
+            }
+
+            if(info == "AnubisFalse")
+            {
+                if(index == 0) info = "HAH! Get hosed-- er, sanded.";
+                else if(index == 1) info = "哈! 再回去练练吧-- 或者, 打磨一下自己.";
+                else if(index == 2) info = "ХАХ! Кого теперь облили вод-песком!";
+            }
+
+            if(info == "AnubisGuys")
+            {
+                if(index == 0) info = "guys";
+                else if(index == 1) info = "伙计们";
+                else if(index == 2) info = "ребят";
+            }
+            if(info == "Anubisbud")
+            {
+                if(index == 0) info = "bud";
+                else if(index == 1) info = "哥们";
+                else if(index == 2) info = "дружок";
+            }
+
+            if(info == "Anubis1")
+            {
+                if(index == 0) info = "Well, ";
+                else if(index == 1) info = "好, ";
+                else if(index == 2) info = "Что же, ";
+            }
+            if(info == "Anubis2")
+            {
+                if(index == 0) info = ". Here we are.";
+                else if(index == 1) info = ". 到地方了.";
+                else if(index == 2) info = ". вот и тот самый момент.";
+            }
+            if(info == "Anubis3")
+            {
+                if(index == 0) info = "I hope you're ready for a real fight.";
+                else if(index == 1) info = "我希望你已经对真正的战斗做好了充足的准备.";
+                else if(index == 2) info = "Я надеюсь, ты готов к настоящему бою.";
+            }
+            if(info == "Anubis4")
+            {
+                if(index == 0) info = "Especially since I'm in my superior form.";
+                else if(index == 1) info = "尤其是因为我现在处于我的超强形态.";
+                else if(index == 2) info = "Учти, что я в своей самой сильной форме";
+            }
+            if(info == "Anubis5")
+            {
+                if(index == 0) info = "You ready? I won't hesitate to slap you silly!";
+                else if(index == 1) info = "准备好了吗? 我这一大嘴巴子下去可不会手下留情!";
+                else if(index == 2) info = "Ты готов? Я не буду стесняться бить тебя!";
+            }
+            if(info == "Anubis6")
+            {
+                if(index == 0) info = "Let's go!";
+                else if(index == 1) info = "开始吧!";
+                else if(index == 2) info = "Поехали!";
+            }
+            if(info == "Anubis7")
+            {
+                if(index == 0) info = "A rematch eh? Alright, this should be fun!";
+                else if(index == 1) info = "再比一次，嗯? 好呀, 想必很有乐趣!";
+                else if(index == 2) info = "Хочешь реванш, а? Ладненько, будет весело!";
+            }
+
+            if(info == "AnubisTransition1")
+            {
+                if(index == 0) info = "...hrgh...";
+                else if(index == 1) info = "...呼哈...";
+                else if(index == 2) info = "... хргх...";
+            }
+            if(info == "AnubisTransition2")
+            {
+                if(index == 0) info = "...alright.";
+                else if(index == 1) info = "...好了.";
+                else if(index == 2) info = "... ладно.";
+            }
+            if(info == "AnubisTransition3")
+            {
+                if(index == 0) info = "I think...it's time.";
+                else if(index == 1) info = "我觉得...是时候了.";
+                else if(index == 2) info = "Я думаю... что время пришло.";
+            }
+            if(info == "AnubisTransition4")
+            {
+                if(index == 0) info = "No more stops being pulled.";
+                else if(index == 1) info = "有些事情已经无法阻止了.";
+                else if(index == 2) info = "Больше никаких детских игр.";
+            }
+            if(info == "AnubisTransition5")
+            {
+                if(index == 0) info = "If you're gonna be taking on the dark forces of the world...";
+                else if(index == 1) info = "如果你想要和这个世界上的黑暗势力搏杀的话...";
+                else if(index == 2) info = "Если ты будешь сражаться с темными силами этого мира...";
+            }
+            if(info == "AnubisTransition6")
+            {
+                if(index == 0) info = "I need to make sure you're ready, because...unless you're ready...";
+                else if(index == 1) info = "我就必须确认你已经完全准备好了, 因为...倘若你还没准备好...";
+                else if(index == 2) info = "Мне надо быть уверенным, что ты готов... потому что если ты не готов...";
+            }
+            if(info == "AnubisTransition7")
+            {
+                if(index == 0) info = "...Some things should stay locked away for your own good.";
+                else if(index == 1) info = "...为你好，有些东西你还是不碰为妙.";
+                else if(index == 2) info = "... некоторые вещи должны быть скрыты от тебя";
+            }
+
+            if(info == "FAnubisCombat")
+            {
+                if(index == 0) info = "No Warnings this time.";
+                else if(index == 1) info = "这次可没有预警.";
+                else if(index == 2) info = "В этот раз без предупреждений.";
+            }
+
+            if(info == "FAnubisWin")
+            {
+                if(index == 0) info = "...You done good, bud. Let's make a game plan moving forward. Come talk to me when you're ready.";
+                else if(index == 1) info = "...你做的很好，兄弟. 让我们来制定一个前进的计划，准备好了就来找我.";
+                else if(index == 2) info = "... Ты справился хорошо, приятель. Давай продвинемся дальше. Поговори со мной, когда будешь готов..";
+            }
+            if(info == "FAnubisLose")
+            {
+                if(index == 0) info = "...Sorry, but you aren't ready yet.";
+                else if(index == 1) info = "...对不起, 看来你还没准备好.";
+                else if(index == 2) info = "... Извини, ты еще не готов.";
+            }
         }
     }
 }

@@ -1,14 +1,13 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
+
 using Terraria;
 using Terraria.ModLoader;
+using Terraria.ID;
 
-using Terraria.ID;
-using Microsoft.Xna.Framework.Graphics;
-using AAMod;
-using Terraria.ID;
- 
-using AAMod.Globals;
 using AAModEXAI.Dusts;
+using AAModEXAI.Misc;
 
 namespace AAModEXAI.Bosses.Anubis.Forsaken
 {
@@ -58,7 +57,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
 
             npc.ai[0] += 1f;
 
-            if (!NPC.AnyNPCs(mod.NPCType("ForsakenAnubis")))
+            if (!NPC.AnyNPCs(ModContent.NPCType<ForsakenAnubis>()))
             {
                 npc.StrikeNPCNoInteraction(99999, 0, 0, false);
             }
@@ -91,7 +90,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
             }
             if (npc.ai[0] >= 340 && npc.ai[0] <= 460)
             {
-                BaseAI.ShootPeriodic(npc, player.position, player.width, player.height, mod.ProjectileType("CurseFlame"), ref npc.ai[1], 20, npc.damage / 2, 10, false);
+                BaseAI.ShootPeriodic(npc, player.position, player.width, player.height, ModContent.ProjectileType<CurseFlame>(), ref npc.ai[1], 20, npc.damage / 2, 10, false);
             }
             if (npc.ai[0] > 460)
             {

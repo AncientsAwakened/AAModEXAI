@@ -1,13 +1,12 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
 using Terraria;
 using Terraria.ModLoader;
-
-using Microsoft.Xna.Framework.Graphics;
-using AAMod;
 using Terraria.ID;
- 
-using AAMod.Globals;
+
 using AAModEXAI.Dusts;
+using AAModEXAI.Misc;
 
 namespace AAModEXAI.Bosses.Anubis.Forsaken
 {
@@ -58,13 +57,13 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                         switch (Type)
                         {
                             case 0:
-                                Type = mod.NPCType("CursedLocust");
+                                Type = ModContent.NPCType<CursedLocust>();
                                 break;
                             case 1:
-                                Type = mod.NPCType("CursedScarab");
+                                Type = ModContent.NPCType<CursedScarab>();
                                 break;
                             case 2:
-                                Type = mod.NPCType("Naddaha");
+                                Type = ModContent.NPCType<Naddaha>();
                                 break;
                         }
 

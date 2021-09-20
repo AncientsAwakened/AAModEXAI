@@ -77,7 +77,7 @@ namespace AAModEXAI.Bosses.Greed
                 projectile.ai[1] += 5f * multiplier;
             }
             attackCounter++;
-            if (projectile.ai[1] == charge)
+            if (projectile.ai[1] >= charge)
             {
                 projectile.hostile = true;
             }

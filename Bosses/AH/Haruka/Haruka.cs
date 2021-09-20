@@ -160,6 +160,7 @@ namespace AAModEXAI.Bosses.AH.Haruka
             {
                 NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<AHDeath>());
                 for(int i = 0; i < 10; i++) npc.DropBossBags();
+                if (!AAModEXAIWorld.downedSisters) npc.DropItemInstanced(npc.position, new Vector2(npc.width, npc.height), ModContent.ItemType<Items.EXSoul>(), 1, true);
             }
             if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(Trans.text("AH", "HarukaDowned"), new Color(72, 78, 117));
             NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<HarukaVanish>());
