@@ -25,7 +25,7 @@ namespace AAModEXAI.Bosses.Anubis
         public override void AI()
         {
             projectile.rotation = projectile.velocity.ToRotation() + 1.57079637f;
-            int dustType = ModContent.DustType<Rune>();
+            int dustType = ModContent.DustType<JudgementDust>();
             if (projectile.localAI[0] == 0f)
             {
                 projectile.localAI[0] = 1f;
@@ -41,7 +41,7 @@ namespace AAModEXAI.Bosses.Anubis
         }
         public override void Kill(int timeLeft)
         {
-            int dustType = ModContent.DustType<Rune>();
+            int dustType = ModContent.DustType<JudgementDust>();
             int pieCut = 20;
             for (int m = 0; m < pieCut; m++)
             {

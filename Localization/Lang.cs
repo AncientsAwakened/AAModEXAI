@@ -21,13 +21,13 @@ namespace AAModEXAI.Localization
 
             string Info = info;
 
-            Translation(place, info, index);
-            if(info == Info) Translation(place, info, 0);
+            Translation(place, ref info, index);
+            if(info == Info) Translation(place, ref info, 0);
 
             return info;
         }
 
-        public static void Translation(string place, string info, int index)
+        public static void Translation(string place, ref string info, int index)
         {
             if(place == "Common") Common(ref info, index);
             else if(place == "AH") AHChat(ref info, index);

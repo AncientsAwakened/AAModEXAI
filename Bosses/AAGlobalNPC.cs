@@ -201,6 +201,39 @@ namespace AAModEXAI
                 npc.netUpdate = true;
                 return false;
             }
+            //Anubis
+            if(npc.type == ModSupport.GetModNPC("AAMod", "Anubis").npc.type)
+            {
+                npc.dontTakeDamage = true;
+                npc.boss = false;
+                npc.life = 0;
+                if(Main.netMode != NetmodeID.MultiplayerClient)
+                {
+                    int id = ChangeToSAABoss(npc.whoAmI, ModContent.NPCType<Bosses.Anubis.Anubis>());
+                    if (Main.netMode == NetmodeID.Server && id < 200) NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, id);
+                    Main.npc[id].netUpdate = true;
+                }
+                AAModEXAI.ShowTitle(npc, 1);
+                npc.active = false;
+                npc.netUpdate = true;
+                return false;
+            }
+            if(npc.type == ModSupport.GetModNPC("AAMod", "ForsakenAnubis").npc.type)
+            {
+                npc.dontTakeDamage = true;
+                npc.boss = false;
+                npc.life = 0;
+                if(Main.netMode != NetmodeID.MultiplayerClient)
+                {
+                    int id = ChangeToSAABoss(npc.whoAmI, ModContent.NPCType<Bosses.Anubis.Forsaken.ForsakenAnubis>());
+                    if (Main.netMode == NetmodeID.Server && id < 200) NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, id);
+                    Main.npc[id].netUpdate = true;
+                }
+                AAModEXAI.ShowTitle(npc, 4);
+                npc.active = false;
+                npc.netUpdate = true;
+                return false;
+            }
 
             if(npc.type == ModLoader.GetMod("AAMod").NPCType("Athena"))
             {
@@ -243,36 +276,6 @@ namespace AAModEXAI
                     npc.netUpdate = true;
                 }
                 AAModEXAI.ShowTitle(npc, 3);
-                npc.active = false;
-                npc.netUpdate = true;
-                return false;
-            }
-            if(npc.type == ModLoader.GetMod("AAMod").NPCType("Anubis") && npc.boss)
-            {
-                npc.boss = false;
-                npc.life = 0;
-                if(Main.netMode != NetmodeID.MultiplayerClient)
-                {
-                    int id = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("Anubis"));
-                    Main.npc[id].position = npc.position;
-                    npc.netUpdate = true;
-                }
-                AAModEXAI.ShowTitle(npc, 1);
-                npc.active = false;
-                npc.netUpdate = true;
-                return false;
-            }
-            if(npc.type == ModLoader.GetMod("AAMod").NPCType("ForsakenAnubis"))
-            {
-                npc.boss = false;
-                npc.life = 0;
-                if(Main.netMode != NetmodeID.MultiplayerClient)
-                {
-                    int id = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("ForsakenAnubis"));
-                    Main.npc[id].position = npc.position;
-                    npc.netUpdate = true;
-                }
-                AAModEXAI.ShowTitle(npc, 4);
                 npc.active = false;
                 npc.netUpdate = true;
                 return false;
