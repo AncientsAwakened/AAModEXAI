@@ -35,7 +35,7 @@ namespace AAModEXAI.Bosses.Athena.Olympian
             npc.value = BaseUtility.CalcValue(0, 10, 0, 0);
             npc.npcSlots = 1000;
             npc.aiStyle = -1;
-            npc.lifeMax = 110000;
+            npc.lifeMax = 140000;
             npc.defense = 80;
             npc.damage = 110;
             npc.knockBackResist = 0f;

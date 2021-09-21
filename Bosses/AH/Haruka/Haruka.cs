@@ -998,7 +998,7 @@ namespace AAModEXAI.Bosses.AH.Haruka
                     int projType = ModContent.ProjectileType<HarukaProj>();
                     for (int i = 0; i < 16; i++)
                     {
-                        shoot = new Vector2((float)Math.Sin(i * (Pi / 6)), (float)Math.Cos(i * (Pi / 6)));
+                        shoot = new Vector2((float)Math.Sin(i * (Pi / 8)), (float)Math.Cos(i * (Pi / 8)));
                         shoot *= 13f;
                         Projectile.NewProjectile(ShadowkingPosition.X, ShadowkingPosition.Y, shoot.X, shoot.Y, projType, damage * 1, 5, Main.myPlayer);
                     }

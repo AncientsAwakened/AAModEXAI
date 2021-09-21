@@ -127,6 +127,18 @@ namespace AAModEXAI
                 }
             }
 
+            if (dragonFire)
+            {
+                if (player.lifeRegen > 0)
+                {
+                    player.lifeRegen = 0;
+                }
+
+                player.lifeRegenTime = 0;
+                player.lifeRegen -= 8;
+                
+            }
+
             if (hydraToxin)
             {
                 if (player.lifeRegen > 0)

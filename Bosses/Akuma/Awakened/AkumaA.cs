@@ -540,15 +540,15 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                         npc.ai[2] = 0;
                         npc.localAI[1] = npc.Distance(player.Center);
                         npc.netUpdate = true;
-                        npc.velocity = npc.DirectionTo(player.Center).RotatedBy(Math.PI / 2) * 24f;
+                        npc.velocity = npc.DirectionTo(player.Center).RotatedBy(Math.PI / 2) * 34f;
                         npc.rotation = npc.velocity.ToRotation();
                     }
                     break;
 
                 case 14:
                     npc.velocity -= npc.velocity.RotatedBy(Math.PI / 2) * npc.velocity.Length() / npc.localAI[1];
-                    if (npc.velocity.Length() > 24f) npc.velocity *= 24f / npc.velocity.Length();
-                    if (++npc.ai[2] > 6)
+                    if (npc.velocity.Length() > 34f) npc.velocity *= 34f / npc.velocity.Length();
+                    if (++npc.ai[2] > 4)
                     {
                         npc.ai[2] = 0;
                         if (Main.netMode != NetmodeID.MultiplayerClient)

@@ -6,11 +6,8 @@ using Terraria.ModLoader;
 
 using Microsoft.Xna.Framework.Graphics;
 using System.IO;
-using AAMod.NPCs.Enemies.Sky;
 using AAMod;
-using Terraria.ID;
- 
-using AAMod.Globals;
+using AAMod.NPCs.Enemies.Sky;
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Athena
@@ -151,7 +148,7 @@ namespace AAModEXAI.Bosses.Athena
                             internalAI[4]++; 
                             if (internalAI[4] == 60)
                             {
-                                CombatText.NewText(npc.Hitbox, Color.CadetBlue, "...");
+                                CombatText.NewText(npc.Hitbox, Color.CadetBlue, "..."); 
                             }
 
                             if (internalAI[4] == 180)
