@@ -230,13 +230,14 @@ namespace AAModEXAI.Bosses.Greed
                     {
                         if (internalAI[1] % 400 == 50)
                         {
-                            int skip = Main.rand.Next(19) - 9;
-                            int skip2 = Main.rand.Next(19) - 9;
-                            int skip3 = Main.rand.Next(19) - 9;
-                            int skip4 = Main.rand.Next(19) - 9;
-                            for(int k = -9; k<=9; k++)
+                            int skip = Main.rand.Next(41) - 20;
+                            int skip2 = Main.rand.Next(41) - 20;
+                            int skip3 = Main.rand.Next(41) - 20;
+                            int skip4 = Main.rand.Next(41) - 20;
+                            int skip5 = Main.rand.Next(41) - 20;
+                            for(int k = -20; k<=20; k++)
                             {
-                                if(k == skip || k == skip2 || k == skip3 || k == skip4) continue;
+                                if(k == skip || k == skip2 || k == skip3 || k == skip4 || k == skip4) continue;
                                 if(Main.netMode != NetmodeID.MultiplayerClient)
                                 {
                                     int p = Projectile.NewProjectile(player.Center.X - 2000f, player.Center.Y + k * 70f, 10f, 0, mod.ProjectileType("DesireBeam"), 100, 1);

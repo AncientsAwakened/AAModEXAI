@@ -322,15 +322,7 @@ namespace AAModEXAI.Bosses.Invoker.DeathWorm
 
         public override void BossLoot(ref string name, ref int potionType)
         {
-            if (Main.expertMode)
-            {
-                potionType = 0;
-            }
-            else
-            {
-                AAModEXAIWorld.downedAkuma = true;
-                potionType = ItemID.SuperHealingPotion;
-            }
+            
         }
 
         public override void HitEffect(int hitDirection, double damage)
@@ -392,20 +384,28 @@ namespace AAModEXAI.Bosses.Invoker.DeathWorm
         }
     }
 /*
-
     public class DeathWormBody : ModProjectile
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Akuma, Draconian Demon");
+            DisplayName.SetDefault("Invoked Tatzel");
         }
 
         public override void SetDefaults()
         {
+            projectile.width = 10;
+            projectile.height = 10;
+            projectile.hostile = true;
+            projectile.alpha = 255;
+            projectile.penetrate = -1;
+            projectile.tileCollide = false;
+            projectile.timeLeft = 600;
+            cooldownSlot = 1;
         }
 
-        public override bool PreAI()
+        public override bool AI()
         {
+            NPC npc = Main.npc[(int)projectile.ai[1]];
             Vector2 chasePosition = Main.npc[(int)npc.ai[1]].Center;
             Vector2 directionVector = chasePosition - npc.Center;
             npc.spriteDirection = (directionVector.X > 0f) ? 1 : -1;
@@ -415,7 +415,7 @@ namespace AAModEXAI.Bosses.Invoker.DeathWorm
                 npc.TargetClosest(true);
             if (Main.player[npc.target].dead && npc.timeLeft > 300)
                 npc.timeLeft = 300;
-            if (npc.alpha != 0)
+            if (projectile.alpha != 0)
             {
                 for (int spawnDust = 0; spawnDust < 2; spawnDust++)
                 {
@@ -433,12 +433,9 @@ namespace AAModEXAI.Bosses.Invoker.DeathWorm
 
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
-                if (!Main.npc[(int)npc.ai[1]].active || Main.npc[(int)npc.ai[3]].type != ModContent.NPCType<Bosses.Akuma.Akuma>())
+                if (!Main.npc[(int)npc.ai[1]].active || Main.npc[(int)npc.ai[3]].type != ModContent.NPCType<DeathWorm>())
                 {
-                    npc.life = 0;
-                    npc.HitEffect(0, 10.0);
-                    npc.active = false;
-                    NetMessage.SendData(MessageID.StrikeNPC, -1, -1, null, npc.whoAmI, -1f, 0.0f, 0.0f, 0, 0, 0);
+                    projectile.Kill();
                 }
             }
 
@@ -476,35 +473,18 @@ namespace AAModEXAI.Bosses.Invoker.DeathWorm
             return false;
         }
 
-        public override bool StrikeNPC(ref double damage, int defense, ref float knockback, int hitDirection, ref bool crit)
+        public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
-            damage *= .1f;
-            return true;
-        }
-
-        public override bool? DrawHealthBar(byte hbPosition, ref float scale, ref Vector2 position)
-        {
-            return false;
-        }
-
-        public override bool PreNPCLoot()
-        {
-            return false;
-        }
-
-        public override void FindFrame(int frameHeight)
-        {
-            npc.frame.Y = frameHeight * (int)npc.ai[2];
-        }
-
-        public override bool CheckActive()
-        {
-            if (NPC.AnyNPCs(ModContent.NPCType<Bosses.Akuma.Akuma>()))
+            if (projHitbox.Intersects(targetHitbox))
             {
-                return false;
+                return true;
             }
-            npc.active = false;
-            return true;
+            float k = 0f;
+            if (Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), projectile.Center, projectile.Center + projectile.velocity * projectile.localAI[1], 22f * projectile.scale, ref k))
+            {
+                return true;
+            }
+            return false;
         }
     }
 */

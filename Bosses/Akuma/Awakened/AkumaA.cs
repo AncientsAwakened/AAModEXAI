@@ -540,20 +540,20 @@ namespace AAModEXAI.Bosses.Akuma.Awakened
                         npc.ai[2] = 0;
                         npc.localAI[1] = npc.Distance(player.Center);
                         npc.netUpdate = true;
-                        npc.velocity = npc.DirectionTo(player.Center).RotatedBy(Math.PI / 2) * 34f;
+                        npc.velocity = npc.DirectionTo(player.Center).RotatedBy(Math.PI / 2) * 40f;
                         npc.rotation = npc.velocity.ToRotation();
                     }
                     break;
 
                 case 14:
                     npc.velocity -= npc.velocity.RotatedBy(Math.PI / 2) * npc.velocity.Length() / npc.localAI[1];
-                    if (npc.velocity.Length() > 34f) npc.velocity *= 34f / npc.velocity.Length();
-                    if (++npc.ai[2] > 4)
+                    if (npc.velocity.Length() > 40f) npc.velocity *= 40f / npc.velocity.Length();
+                    if (++npc.ai[2] > 3)
                     {
                         npc.ai[2] = 0;
                         if (Main.netMode != NetmodeID.MultiplayerClient)
                         {
-                            const float ai0 = 0.004f;
+                            const float ai0 = 0.01f;
                             Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(Math.PI / 2), ModContent.ProjectileType<AkumaAFireballAccel>(), npc.damage / 4, 0f, Main.myPlayer, ai0);
                             Projectile.NewProjectile(npc.Center, Vector2.Normalize(npc.velocity).RotatedBy(-Math.PI / 2), ModContent.ProjectileType<AkumaAFireballAccel>(), npc.damage / 4, 0f, Main.myPlayer, ai0);
                         }

@@ -319,8 +319,7 @@ namespace AAModEXAI
                 {
                     if(Main.npc[i].type == ModContent.NPCType<Bosses.Akuma.Akuma>() || Main.npc[i].type == ModContent.NPCType<Bosses.Akuma.Awakened.AkumaA>())
                     {
-                        double offsetAngle = (double)(Main.rand.NextFloat() * Math.PI);
-                        Projectile.NewProjectile(player.Center.X, player.Center.Y, 0f, 0f, ModContent.ProjectileType<AkumaFireHeal>(), 0, 0, Main.myPlayer, i, damage * 7f);
+                        Projectile.NewProjectile(player.Center.X, player.Center.Y, 0f, 0f, ModContent.ProjectileType<AkumaFireHeal>(), 0, 0, Main.myPlayer, i, (float)damage * 7f);
                     }
                 }
             }

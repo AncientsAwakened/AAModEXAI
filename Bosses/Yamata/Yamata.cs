@@ -441,7 +441,7 @@ namespace AAModEXAI.Bosses.Yamata
         {
             bool playerTooFar = playerDistance > playerTooFarDist;
             YamataBody(npc, ref npc.ai, true, 0.2f, 3.5f, 8f, 0.07f, 1.5f, 4);
-            if (playerTooFar) npc.position += playerTarget.position - playerTarget.oldPosition;
+            //if (playerTooFar) npc.position += playerTarget.position - playerTarget.oldPosition;
             npc.rotation = 0f;
         }
 
@@ -555,7 +555,7 @@ namespace AAModEXAI.Bosses.Yamata
                 npc.velocity.X -= moveInterval * 0.5f;
                 if (npc.velocity.X > maxSpeedX) { npc.velocity.X -= 0.1f; }
                 else
-                    if (npc.velocity.X > 0f) { npc.velocity.X += 0.05f; }
+                    if (npc.velocity.X > 0f) { npc.velocity.X -= 0.05f; }
                 if (npc.velocity.X < -maxSpeedX) { npc.velocity.X = -maxSpeedX; }
             }
             else
@@ -564,7 +564,7 @@ namespace AAModEXAI.Bosses.Yamata
                 npc.velocity.X += moveInterval * 0.5f;
                 if (npc.velocity.X < -maxSpeedX) { npc.velocity.X += 0.1f; }
                 else
-                    if (npc.velocity.X < 0f) { npc.velocity.X -= 0.05f; }
+                    if (npc.velocity.X < 0f) { npc.velocity.X += 0.05f; }
                 if (npc.velocity.X > maxSpeedX) { npc.velocity.X = maxSpeedX; }
             }
 
