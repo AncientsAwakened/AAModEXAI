@@ -127,6 +127,18 @@ namespace AAModEXAI
                 }
             }
 
+            if (dragonFire)
+            {
+                if (player.lifeRegen > 0)
+                {
+                    player.lifeRegen = 0;
+                }
+
+                player.lifeRegenTime = 0;
+                player.lifeRegen -= 8;
+                
+            }
+
             if (hydraToxin)
             {
                 if (player.lifeRegen > 0)
@@ -237,17 +249,6 @@ namespace AAModEXAI
 
         public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
 		{
-            if(BlazingMadness)
-            {
-                for(int i = 0; i < 200; i++)
-                {
-                    if(Main.npc[i].type == ModContent.NPCType<Bosses.Akuma.Akuma>() || Main.npc[i].type == ModContent.NPCType<Bosses.Akuma.Awakened.AkumaA>())
-                    {
-                        double offsetAngle = (double)(Main.rand.NextFloat() * Math.PI);
-                        Projectile.NewProjectile(player.Center.X, player.Center.Y, 0f, 0f, ModContent.ProjectileType<AkumaFireHeal>(), 0, 0, Main.myPlayer, i, damage * 1.2f);
-                    }
-                }
-            }
             if(Spellreflow)
             {
                 if(damage > player.statLife && damage < player.statLife + player.statMana)
@@ -308,6 +309,20 @@ namespace AAModEXAI
                 }
             }
             return true;
+		}
+
+        public override void PostHurt(bool pvp, bool quiet, double damage, int hitDirection, bool crit)
+		{
+            if(BlazingMadness)
+            {
+                for(int i = 0; i < 200; i++)
+                {
+                    if(Main.npc[i].type == ModContent.NPCType<Bosses.Akuma.Akuma>() || Main.npc[i].type == ModContent.NPCType<Bosses.Akuma.Awakened.AkumaA>())
+                    {
+                        Projectile.NewProjectile(player.Center.X, player.Center.Y, 0f, 0f, ModContent.ProjectileType<AkumaFireHeal>(), 0, 0, Main.myPlayer, i, (float)damage * 7f);
+                    }
+                }
+            }
 		}
 
         public override void PostUpdate()

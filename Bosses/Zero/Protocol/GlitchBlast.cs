@@ -69,7 +69,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
 		{
 			if (Main.rand.Next(7) == 0)
 			{
-				target.AddBuff(mod.BuffType("Unstable"), 180, true);
+				target.AddBuff(ModContent.BuffType<DeBuffs.Unstable>(), 180, true);
 			}
 		}
 

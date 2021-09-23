@@ -42,7 +42,7 @@ namespace AAModEXAI.Bosses.Greed
             {
                 npc.TargetClosest(true);
             }
-            int damage = 34;
+            int damage = 74;
 
 
             if (npc.alpha < 0)

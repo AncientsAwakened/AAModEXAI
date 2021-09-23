@@ -33,7 +33,7 @@ namespace AAModEXAI.Bosses.Greed
         }
         private float charge = 40f;
         public float LaserLength { get { return projectile.localAI[1]; } set { projectile.localAI[1] = value; } }
-        public const float LaserLengthMax = 2000f;
+        public const float LaserLengthMax = 4000f;
         int multiplier = 1;
         public override bool ShouldUpdatePosition()
         {

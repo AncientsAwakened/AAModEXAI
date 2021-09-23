@@ -1,12 +1,10 @@
 
 using Microsoft.Xna.Framework;
+
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using AAMod;
-using Terraria.ID;
- 
-using AAMod.Globals;
+
 using AAModEXAI.Dusts;
 using AAModEXAI.Bosses;
 
@@ -36,7 +34,7 @@ namespace AAModEXAI.Bosses.Athena
             npc.damage = 0;
             npc.value = 0;
             npc.noTileCollide = true;
-            music = ModLoader.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/silence");
+            music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/silence");
         }
 
         public override void AI()

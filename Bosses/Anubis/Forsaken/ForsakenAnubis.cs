@@ -26,7 +26,7 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
             npc.aiStyle = -1;
             npc.damage = 85;
             npc.defense = 80;
-            npc.lifeMax = 150000;
+            npc.lifeMax = 170000;
             npc.HitSound = SoundID.NPCHit1;
             npc.DeathSound = SoundID.NPCDeath6;
             npc.knockBackResist = 0f;
@@ -577,14 +577,14 @@ namespace AAModEXAI.Bosses.Anubis.Forsaken
                         {
                             for(int i = 0; i < 4; i++)
                             {
-                                Vector2 pos = new Vector2((float)Math.Cos(i * 3.1415f / 2), (float)Math.Sin(i * 3.1415f / 8)) * 200f;
+                                Vector2 pos = new Vector2((float)Math.Cos(i * (3.1415f / 2)), (float)Math.Sin(i * (3.1415f / 2))) * 200f;
                                 int a = Projectile.NewProjectile(player.position + pos, Vector2.Zero, ModContent.ProjectileType<AnubisFireball>(), npc.damage / 2, 7, Main.myPlayer);
                                 Main.projectile[a].Center = player.Center + pos;
                                 Kaboom(Main.projectile[a]);
                             }
                             for(int i = 0; i < 8; i++)
                             {
-                                Vector2 pos = new Vector2((float)Math.Cos(i * 3.1415f / 4), (float)Math.Sin(i * 3.1415f / 8)) * 400f;
+                                Vector2 pos = new Vector2((float)Math.Cos(i * (3.1415f / 4)), (float)Math.Sin(i * (3.1415f / 4))) * 400f;
                                 int a = Projectile.NewProjectile(player.position + pos, Vector2.Zero, ModContent.ProjectileType<AnubisFireball>(), npc.damage / 2, 7, Main.myPlayer);
                                 Main.projectile[a].Center = player.Center + pos;
                                 Kaboom(Main.projectile[a]);

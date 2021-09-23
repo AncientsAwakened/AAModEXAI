@@ -361,14 +361,8 @@ namespace AAModEXAI.Bosses.Zero.Protocol
 
                                         int yPos = Math.Abs(player.velocity.Y) > 4f? -500 * dirY : -750 * dirY;
 
-                                        for (int z = 0; z < 7; z++)
-                                        {
-                                            int a1 = Projectile.NewProjectile(new Vector2(player.Center.X, player.Center.Y), Vector2.Zero, mod.ProjectileType("Blast"), damage, 3, Main.myPlayer, 0f, 0f);
-                                            int a2 = Projectile.NewProjectile(new Vector2(player.Center.X, player.Center.Y), Vector2.Zero, mod.ProjectileType("Blast"), damage, 3, Main.myPlayer, 1f, 0f);
-                                            Main.projectile[a1].Center = player.Center + new Vector2(-500, yPos);
-                                            Main.projectile[a2].Center = player.Center + new Vector2(500, yPos);
-                                            yPos += 250 * dirY;
-                                        }
+                                        int a1 = Projectile.NewProjectile(new Vector2(player.Center.X, player.Center.Y), Vector2.Zero, ModContent.ProjectileType<Blast>(), damage, 3, Main.myPlayer, 0f, 0f);
+                                        Main.projectile[a1].Center = player.Center + new Vector2(-500, yPos);
                                     }
                                     else
                                     {
@@ -376,14 +370,8 @@ namespace AAModEXAI.Bosses.Zero.Protocol
 
                                         int xPos = Math.Abs(player.velocity.X) > 4f? -500 * dirX : -750 * dirX;
 
-                                        for (int z = 0; z < 7; z++)
-                                        {
-                                            int h1 = Projectile.NewProjectile(new Vector2(player.Center.X, player.Center.Y), Vector2.Zero, mod.ProjectileType("Blast"), damage, 3, Main.myPlayer , 2f, 0f);
-                                            int h2 = Projectile.NewProjectile(new Vector2(player.Center.X, player.Center.Y), Vector2.Zero, mod.ProjectileType("Blast"), damage, 3, Main.myPlayer , 3f, 0f);
-                                            Main.projectile[h1].Center = player.Center + new Vector2(xPos, -500);
-                                            Main.projectile[h2].Center = player.Center + new Vector2(xPos, 500);
-                                            xPos += 250 * dirX;
-                                        }
+                                        int h1 = Projectile.NewProjectile(new Vector2(player.Center.X, player.Center.Y), Vector2.Zero, ModContent.ProjectileType<Blast>(), damage, 3, Main.myPlayer , 1f, 0f);
+                                        Main.projectile[h1].Center = player.Center + new Vector2(xPos, -500);
                                     }
                                 }
                             }
@@ -397,22 +385,8 @@ namespace AAModEXAI.Bosses.Zero.Protocol
                                     int xPos = Math.Abs(player.velocity.X) > 4f? -500 * dirX : -750 * dirX;
                                     int yPos = Math.Abs(player.velocity.Y) > 4f? -500 * dirY : -750 * dirY;
 
-                                    for (int z = 0; z < 13; z++)
-                                    {
-                                        int a1 = Projectile.NewProjectile(new Vector2(player.Center.X, player.Center.Y), Vector2.Zero, mod.ProjectileType("Blast"), damage, 3, Main.myPlayer, 0f, 0f);
-                                        int a2 = Projectile.NewProjectile(new Vector2(player.Center.X, player.Center.Y), Vector2.Zero, mod.ProjectileType("Blast"), damage, 3, Main.myPlayer, 1f, 0f);
-                                        Main.projectile[a1].Center = player.Center + new Vector2(-500, yPos);
-                                        Main.projectile[a2].Center = player.Center + new Vector2(500, yPos);
-                                        yPos += 250 * dirY;
-                                    }
-                                    for (int z = 0; z < 13; z++)
-                                    {
-                                        int h1 = Projectile.NewProjectile(new Vector2(player.Center.X, player.Center.Y), Vector2.Zero, mod.ProjectileType("Blast"), damage, 3, Main.myPlayer , 2f, 0f);
-                                        int h2 = Projectile.NewProjectile(new Vector2(player.Center.X, player.Center.Y), Vector2.Zero, mod.ProjectileType("Blast"), damage, 3, Main.myPlayer , 3f, 0f);
-                                        Main.projectile[h1].Center = player.Center + new Vector2(xPos, -500);
-                                        Main.projectile[h2].Center = player.Center + new Vector2(xPos, 500);
-                                        xPos += 250 * dirX;
-                                    }
+                                    int a1 = Projectile.NewProjectile(new Vector2(player.Center.X, player.Center.Y), Vector2.Zero, ModContent.ProjectileType<Blast>(), damage, 3, Main.myPlayer, 2f, 0f);
+                                    Main.projectile[a1].Center = player.Center + new Vector2(xPos, yPos);
                                 }
                             }
                         }
@@ -898,7 +872,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
 		{
 			if (Main.rand.Next(2) == 0)
 			{
-				target.AddBuff(mod.BuffType("Unstable"), 360, true);
+				target.AddBuff(ModContent.BuffType<DeBuffs.Unstable>(), 360, true);
 			}
 		}
     }

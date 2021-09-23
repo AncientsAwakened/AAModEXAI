@@ -25,7 +25,7 @@ namespace AAModEXAI.Bosses.Zero.ZeroSag
 
 		public override void SetDefaults()
         {
-            npc.lifeMax = 30000;
+            npc.lifeMax = 45000;
             npc.boss = true;
             npc.defense = 90;
             npc.damage = 70;
@@ -34,7 +34,7 @@ namespace AAModEXAI.Bosses.Zero.ZeroSag
             npc.aiStyle = -1;
             npc.HitSound = SoundID.NPCHit4;
             npc.DeathSound = SoundID.NPCDeath14;
-            npc.value = 80000f;
+            npc.value = 0f;
             npc.knockBackResist = 0f;
             npc.noGravity = true;
             npc.noTileCollide = true;
