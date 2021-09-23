@@ -151,13 +151,13 @@ namespace AAModEXAI.Bosses.Zero.Protocol
             Texture2D arg_ABD8_1 = texture2D19;
             SpriteBatch arg_AE2D_0 = Main.spriteBatch;
             Texture2D arg_AE2D_1 = texture2D21;
-            for(int k = - 50; k < 50 ; k ++)
+            for(int k = - 15; k < 15 ; k ++)
             {
                 Vector2 arg_ABD8_2 = projectile.Center - Main.screenPosition;
                 Rectangle? sourceRectangle2 = null;
                 arg_ABD8_0.Draw(arg_ABD8_1, arg_ABD8_2, sourceRectangle2, color44, projectile.rotation, texture2D19.Size() / 2f, projectile.scale, SpriteEffects.None, 0f);
                 num223 -= (texture2D19.Height / 2 + texture2D21.Height) * projectile.scale;
-                Vector2 value20 = projectile.Center + k * 150 * Vector2.Normalize(new Vector2(projectile.velocity.Y, -projectile.velocity.X));
+                Vector2 value20 = projectile.Center + k * 200 * Vector2.Normalize(new Vector2(projectile.velocity.Y, -projectile.velocity.X));
                 value20 += projectile.velocity * projectile.scale * texture2D19.Height / 2f;
                 if (num223 > 0f)
                 {
