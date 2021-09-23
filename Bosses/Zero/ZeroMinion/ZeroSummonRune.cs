@@ -1,14 +1,12 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
 using Terraria;
 using Terraria.ModLoader;
+using Terraria.ID;
 
-using Terraria.ID;
-using Microsoft.Xna.Framework.Graphics;
-using AAMod;
-using Terraria.ID;
- 
-using AAMod.Globals;
 using AAModEXAI.Dusts;
+using AAModEXAI.Base;
 
 namespace AAModEXAI.Bosses.Zero.ZeroMinion
 {
@@ -52,14 +50,14 @@ namespace AAModEXAI.Bosses.Zero.ZeroMinion
                     timer ++;
                     return;
                 }
-                if(npc.ai[1] == mod.NPCType("ZeroTeslaTurrent") && Main.netMode != NetmodeID.MultiplayerClient)
+                if(npc.ai[1] == ModContent.NPCType<ZeroTeslaTurrent>() && Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     int a = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, (int)npc.ai[1]);
                     Main.npc[a].Center = npc.Center;
                     Main.npc[a].ai[1] = npc.Center.X;
                     Main.npc[a].ai[2] = npc.Center.Y;
                 }
-                if(npc.ai[1] == mod.NPCType("ZeroSag") && Main.netMode != NetmodeID.MultiplayerClient)
+                if(npc.ai[1] == ModContent.NPCType<Bosses.Zero.ZeroSag.ZeroSag>() && Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     int a = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, (int)npc.ai[1]);
                     Main.npc[a].Center = npc.Center;

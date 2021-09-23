@@ -1,12 +1,12 @@
 using Microsoft.Xna.Framework;
+
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Graphics.Shaders;
-using AAMod;
-using Terraria.ID;
- 
-using AAMod.Globals;
+
 using AAModEXAI.Dusts;
+using AAModEXAI.Base;
 
 namespace AAModEXAI.Bosses.Zero.Protocol
 {
@@ -47,16 +47,18 @@ namespace AAModEXAI.Bosses.Zero.Protocol
                 switch (projectile.ai[0])
                 {
                     case 0f:
-                        Projectile.NewProjectile(projectile.Center, new Vector2(10, 0), mod.ProjectileType("EchoRay"), 70, 3f, Main.myPlayer, 0, projectile.whoAmI);
+                        Projectile.NewProjectile(projectile.Center, new Vector2(10, 0), ModContent.ProjectileType<EchoRay2>(), 150, 3f, Main.myPlayer, 0, projectile.whoAmI);
+                        Projectile.NewProjectile(projectile.Center, new Vector2(-10, 0), ModContent.ProjectileType<EchoRay2>(), 150, 3f, Main.myPlayer, 0, projectile.whoAmI);
                         break;
                     case 1f:
-                        Projectile.NewProjectile(projectile.Center, new Vector2(-10, 0), mod.ProjectileType("EchoRay"), 70, 3f, Main.myPlayer, 0, projectile.whoAmI);
-                        break;
-                    case 2f:
-                        Projectile.NewProjectile(projectile.Center, new Vector2(0, 10), mod.ProjectileType("EchoRay"), 70, 3f, Main.myPlayer, 0, projectile.whoAmI);
+                        Projectile.NewProjectile(projectile.Center, new Vector2(0, 10), ModContent.ProjectileType<EchoRay2>(), 150, 3f, Main.myPlayer, 0, projectile.whoAmI);
+                        Projectile.NewProjectile(projectile.Center, new Vector2(0, -10), ModContent.ProjectileType<EchoRay2>(), 150, 3f, Main.myPlayer, 0, projectile.whoAmI);
                         break;
                     default:
-                        Projectile.NewProjectile(projectile.Center, new Vector2(0, -10), mod.ProjectileType("EchoRay"), 70, 3f, Main.myPlayer, 0, projectile.whoAmI);
+                        Projectile.NewProjectile(projectile.Center, new Vector2(0, 10), ModContent.ProjectileType<EchoRay2>(), 150, 3f, Main.myPlayer, 0, projectile.whoAmI);
+                        Projectile.NewProjectile(projectile.Center, new Vector2(10, 0), ModContent.ProjectileType<EchoRay2>(), 150, 3f, Main.myPlayer, 0, projectile.whoAmI);
+                        Projectile.NewProjectile(projectile.Center, new Vector2(0, -10), ModContent.ProjectileType<EchoRay2>(), 150, 3f, Main.myPlayer, 0, projectile.whoAmI);
+                        Projectile.NewProjectile(projectile.Center, new Vector2(-10, 0), ModContent.ProjectileType<EchoRay2>(), 150, 3f, Main.myPlayer, 0, projectile.whoAmI);
                         break;
                 }
             }
@@ -102,7 +104,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
 		{
 			if (Main.rand.Next(7) == 0)
 			{
-				target.AddBuff(mod.BuffType("Unstable"), 180, true);
+				target.AddBuff(ModContent.BuffType<DeBuffs.Unstable>(), 180, true);
 			}
 		}
     }

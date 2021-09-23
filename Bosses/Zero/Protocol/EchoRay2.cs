@@ -12,8 +12,9 @@ using AAModEXAI.Base;
 
 namespace AAModEXAI.Bosses.Zero.Protocol
 {
-    public class EchoRay : ModProjectile
+    public class EchoRay2 : ModProjectile
     {
+        public override string Texture => "AAModEXAI/Bosses/Zero/Protocol/EchoRay";
         private const float maxTime = 90;
 
         public override void SetStaticDefaults()
@@ -61,18 +62,10 @@ namespace AAModEXAI.Bosses.Zero.Protocol
                 projectile.velocity = -Vector2.UnitY;
             }
             int ai1 = (int)projectile.ai[1];
-
-            if (Main.npc[ai1].active && (Main.npc[ai1].type == ModContent.NPCType<ZeroEcho>() || Main.npc[ai1].type == ModContent.NPCType<ZeroMini>() || Main.npc[ai1].type == ModContent.NPCType<ZeroProtocol>()))
+            
+            if (Main.projectile[ai1].active && Main.projectile[ai1].type == mod.ProjectileType("Blast"))
             {
-                projectile.Center = Main.npc[ai1].Center;
-                if(Main.npc[ai1].type == ModContent.NPCType<ZeroEcho>())
-                {
-                    projectile.Center = Main.npc[ai1].Center + 20f * projectile.velocity;
-                }
-                else if(Main.npc[ai1].type == ModContent.NPCType<ZeroProtocol>())
-                {
-                    projectile.Center = Main.npc[ai1].Center + 50f * projectile.velocity;
-                }
+                projectile.Center = Main.projectile[ai1].Center;
             }
             else
             {
@@ -87,7 +80,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
             {
                 Main.PlaySound(SoundID.Zombie, (int)projectile.position.X, (int)projectile.position.Y, 104, 1f, 0f);
             }
-            float num801 = Main.npc[ai1].type == ModContent.NPCType<ZeroProtocol>() ? 2f:1f;
+            float num801 = 1f;
             projectile.localAI[0] += 1f;
             if (projectile.localAI[0] >= maxTime)
             {
@@ -156,37 +149,41 @@ namespace AAModEXAI.Bosses.Zero.Protocol
             Color color44 = AAColor.Oblivion * 0.9f;
             SpriteBatch arg_ABD8_0 = Main.spriteBatch;
             Texture2D arg_ABD8_1 = texture2D19;
-            Vector2 arg_ABD8_2 = projectile.Center - Main.screenPosition;
-            Rectangle? sourceRectangle2 = null;
-            arg_ABD8_0.Draw(arg_ABD8_1, arg_ABD8_2, sourceRectangle2, color44, projectile.rotation, texture2D19.Size() / 2f, projectile.scale, SpriteEffects.None, 0f);
-            num223 -= (texture2D19.Height / 2 + texture2D21.Height) * projectile.scale;
-            Vector2 value20 = projectile.Center;
-            value20 += projectile.velocity * projectile.scale * texture2D19.Height / 2f;
-            if (num223 > 0f)
-            {
-                float num224 = 0f;
-                Rectangle rectangle7 = new Rectangle(0, 16 * (projectile.timeLeft / 3 % 5), texture2D20.Width, 16);
-                while (num224 + 1f < num223)
-                {
-                    if (num223 - num224 < rectangle7.Height)
-                    {
-                        rectangle7.Height = (int)(num223 - num224);
-                    }
-                    Main.spriteBatch.Draw(texture2D20, value20 - Main.screenPosition, new Rectangle?(rectangle7), color44, projectile.rotation, new Vector2(rectangle7.Width / 2, 0f), projectile.scale, SpriteEffects.None, 0f);
-                    num224 += rectangle7.Height * projectile.scale;
-                    value20 += projectile.velocity * rectangle7.Height * projectile.scale;
-                    rectangle7.Y += 16;
-                    if (rectangle7.Y + rectangle7.Height > texture2D20.Height)
-                    {
-                        rectangle7.Y = 0;
-                    }
-                }
-            }
             SpriteBatch arg_AE2D_0 = Main.spriteBatch;
             Texture2D arg_AE2D_1 = texture2D21;
-            Vector2 arg_AE2D_2 = value20 - Main.screenPosition;
-            sourceRectangle2 = null;
-            arg_AE2D_0.Draw(arg_AE2D_1, arg_AE2D_2, sourceRectangle2, color44, projectile.rotation, texture2D21.Frame(1, 1, 0, 0).Top(), projectile.scale, SpriteEffects.None, 0f);
+            for(int k = - 50; k < 50 ; k ++)
+            {
+                Vector2 arg_ABD8_2 = projectile.Center - Main.screenPosition;
+                Rectangle? sourceRectangle2 = null;
+                arg_ABD8_0.Draw(arg_ABD8_1, arg_ABD8_2, sourceRectangle2, color44, projectile.rotation, texture2D19.Size() / 2f, projectile.scale, SpriteEffects.None, 0f);
+                num223 -= (texture2D19.Height / 2 + texture2D21.Height) * projectile.scale;
+                Vector2 value20 = projectile.Center + k * 150 * Vector2.Normalize(new Vector2(projectile.velocity.Y, -projectile.velocity.X));
+                value20 += projectile.velocity * projectile.scale * texture2D19.Height / 2f;
+                if (num223 > 0f)
+                {
+                    float num224 = 0f;
+                    Rectangle rectangle7 = new Rectangle(0, 16 * (projectile.timeLeft / 3 % 5), texture2D20.Width, 16);
+                    while (num224 + 1f < num223)
+                    {
+                        if (num223 - num224 < rectangle7.Height)
+                        {
+                            rectangle7.Height = (int)(num223 - num224);
+                        }
+                        Main.spriteBatch.Draw(texture2D20, value20 - Main.screenPosition, new Rectangle?(rectangle7), color44, projectile.rotation, new Vector2(rectangle7.Width / 2, 0f), projectile.scale, SpriteEffects.None, 0f);
+                        num224 += rectangle7.Height * projectile.scale;
+                        value20 += projectile.velocity * rectangle7.Height * projectile.scale;
+                        rectangle7.Y += 16;
+                        if (rectangle7.Y + rectangle7.Height > texture2D20.Height)
+                        {
+                            rectangle7.Y = 0;
+                        }
+                    }
+                }
+                Vector2 arg_AE2D_2 = value20 - Main.screenPosition;
+                sourceRectangle2 = null;
+                arg_AE2D_0.Draw(arg_AE2D_1, arg_AE2D_2, sourceRectangle2, color44, projectile.rotation, texture2D21.Frame(1, 1, 0, 0).Top(), projectile.scale, SpriteEffects.None, 0f);
+            }
+            
             return false;
         }
 
@@ -196,12 +193,16 @@ namespace AAModEXAI.Bosses.Zero.Protocol
             {
                 return true;
             }
-            float num6 = 0f;
-            if (Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), projectile.Center, projectile.Center + projectile.velocity * projectile.localAI[1], 22f * projectile.scale, ref num6))
+
+            bool flag = false;
+            for(int k = - 50; k < 50 ; k ++)
             {
-                return true;
+                float num6 = 0f;
+                Vector2 Center = projectile.Center + k * 150 * Vector2.Normalize(new Vector2(projectile.velocity.Y, -projectile.velocity.X));
+                flag = flag || Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Center, Center + projectile.velocity * projectile.localAI[1], 22f * projectile.scale, ref num6);
             }
-            return false;
+
+            return flag;
         }
     }
 }
