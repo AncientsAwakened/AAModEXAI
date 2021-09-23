@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ModLoader;
@@ -13,7 +14,7 @@ namespace AAModEXAI.Items
         
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("desire beam test");
+            DisplayName.SetDefault("Zero DeathRay test");
             Tooltip.SetDefault(@"Top 10 op weapons in video games");
         }
 
@@ -60,20 +61,14 @@ namespace AAModEXAI.Items
 
         public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
         {
-            int skip = Main.rand.Next(19) - 9;
-            int skip2 = Main.rand.Next(19) - 9;
-            int skip3 = Main.rand.Next(19) - 9;
-            int skip4 = Main.rand.Next(19) - 9;
-            for(int k = -9; k<=9; k++)
-            {
-                if(k == skip || k == skip2 || k == skip3 || k == skip4) continue;
-                if(Main.netMode != NetmodeID.MultiplayerClient)
-                {
-                    int p = Projectile.NewProjectile(player.Center.X - 1000f, player.Center.Y + k * 70f, 10f, 0, mod.ProjectileType("DesireBeam"), 100, 1);
-                    Main.projectile[p].ai[0] = 1f;
-                    Main.projectile[p].netUpdate = true;
-                }
-            }
+            int dirX = player.velocity.X > 0? 1:-1;
+            int dirY = player.velocity.Y > 0? 1:-1;
+
+            int xPos = Math.Abs(player.velocity.X) > 4f? -500 * dirX : -750 * dirX;
+            int yPos = Math.Abs(player.velocity.Y) > 4f? -500 * dirY : -750 * dirY;
+
+            int a1 = Projectile.NewProjectile(new Vector2(player.Center.X, player.Center.Y), Vector2.Zero, ModContent.ProjectileType<Bosses.Zero.Protocol.Blast>(), damage, 3, Main.myPlayer, 2f, 0f);
+            Main.projectile[a1].Center = player.Center + new Vector2(xPos, yPos);
 
             return false;
         }
