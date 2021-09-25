@@ -64,8 +64,8 @@ namespace AAModEXAI.Items
             int dirX = player.velocity.X > 0? 1:-1;
             int dirY = player.velocity.Y > 0? 1:-1;
 
-            int xPos = Math.Abs(player.velocity.X) > 4f? -500 * dirX : -750 * dirX;
-            int yPos = Math.Abs(player.velocity.Y) > 4f? -500 * dirY : -750 * dirY;
+            int xPos = Math.Abs(player.velocity.X) > 4f? -100 * dirX : -300 * dirX;
+            int yPos = Math.Abs(player.velocity.Y) > 4f? -100 * dirY : -300 * dirY;
 
             int a1 = Projectile.NewProjectile(new Vector2(player.Center.X, player.Center.Y), Vector2.Zero, ModContent.ProjectileType<Bosses.Zero.Protocol.Blast>(), damage, 3, Main.myPlayer, 2f, 0f);
             Main.projectile[a1].Center = player.Center + new Vector2(xPos, yPos);
