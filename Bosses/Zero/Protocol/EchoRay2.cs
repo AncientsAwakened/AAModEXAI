@@ -102,7 +102,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
                 samplingPoint = vector78.Value;
             }
             float[] array3 = new float[(int)num805];
-            for (int i = 0; i < array3.Length; i++) array3[i] = 4000f;
+            for (int i = 0; i < array3.Length; i++) array3[i] = 6000f;
             float num807 = 0f;
             int num3;
             for (int num808 = 0; num808 < array3.Length; num808 = num3 + 1)
@@ -145,14 +145,14 @@ namespace AAModEXAI.Bosses.Zero.Protocol
             Texture2D texture2D19 = Main.projectileTexture[projectile.type];
             Texture2D texture2D20 = mod.GetTexture("Bosses/Zero/Protocol/EchoRayBody");
             Texture2D texture2D21 = mod.GetTexture("Bosses/Zero/Protocol/EchoRayEnd");
-            float num223 = projectile.localAI[1];
             Color color44 = AAColor.Oblivion * 0.9f;
             SpriteBatch arg_ABD8_0 = Main.spriteBatch;
             Texture2D arg_ABD8_1 = texture2D19;
             SpriteBatch arg_AE2D_0 = Main.spriteBatch;
             Texture2D arg_AE2D_1 = texture2D21;
-            for(int k = - 15; k < 15 ; k ++)
+            for(int k = - 30; k < 30 ; k ++)
             {
+                float num223 = projectile.localAI[1];
                 Vector2 arg_ABD8_2 = projectile.Center - Main.screenPosition;
                 Rectangle? sourceRectangle2 = null;
                 arg_ABD8_0.Draw(arg_ABD8_1, arg_ABD8_2, sourceRectangle2, color44, projectile.rotation, texture2D19.Size() / 2f, projectile.scale, SpriteEffects.None, 0f);
@@ -198,7 +198,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
             for(int k = - 50; k < 50 ; k ++)
             {
                 float num6 = 0f;
-                Vector2 Center = projectile.Center + k * 150 * Vector2.Normalize(new Vector2(projectile.velocity.Y, -projectile.velocity.X));
+                Vector2 Center = projectile.Center + k * 200 * Vector2.Normalize(new Vector2(projectile.velocity.Y, -projectile.velocity.X));
                 flag = flag || Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Center, Center + projectile.velocity * projectile.localAI[1], 22f * projectile.scale, ref num6);
             }
 
