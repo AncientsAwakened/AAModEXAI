@@ -61,7 +61,7 @@ namespace AAModEXAI.Bosses.Invoker.DeathWorm
             npc.noTileCollide = true;
             npc.behindTiles = true;
             npc.HitSound = SoundID.NPCHit1;
-            npc.DeathSound = mod.GetLegacySoundSlot(SoundType.NPCKilled, "Sounds/Sounds/AkumaRoar");
+            npc.DeathSound = SoundID.NPCDeath7;
             for (int k = 0; k < npc.buffImmune.Length; k++)
             {
                 npc.buffImmune[k] = true;
@@ -71,13 +71,11 @@ namespace AAModEXAI.Bosses.Invoker.DeathWorm
             musicPriority = MusicPriority.BossHigh;
         }
 
-        private bool fireAttack;
-        private int attackFrame;
-        private int attackCounter;
-        private int attackTimer;
-        public static int MinionCount = 0;
-        public int MaxMinons = Main.expertMode ? 3 : 4;
-        public int damage = 0;
+        public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
+        {
+            npc.lifeMax = (int)(npc.lifeMax * 0.7f * bossLifeScale);
+            npc.damage = (int)(npc.damage * 0.6f);
+        }
 
         public override void SendExtraAI(BinaryWriter writer)
         {
@@ -126,86 +124,8 @@ namespace AAModEXAI.Bosses.Invoker.DeathWorm
 
             Vector2 targetPos;
 
-            switch ((int)npc.ai[0])
-            {
-                case 0: //prepare for roiling
-                    if (!npc.HasPlayerTarget)
-                        npc.TargetClosest(true);
-                    targetPos = player.Center;
-                    targetPos.X += 6000 * (npc.Center.X < targetPos.X ? -1 : 1);
-                    MovementWorm(targetPos, 20f, 0.6f);
-                    if (++npc.ai[1] > 240 || npc.Distance(targetPos) < 50f)
-                    {
-                        npc.ai[0]++;
-                        npc.ai[1] = 0;
-                        npc.ai[2] = 0;
-                        npc.localAI[1] = npc.Distance(player.Center);
-                        npc.netUpdate = true;
-                        npc.velocity = npc.DirectionTo(player.Center).RotatedBy(Math.PI / 2) * 60f;
-                        npc.rotation = npc.velocity.ToRotation();
-                    }
-                    break;
+            MovementWorm();
 
-                case 1:
-                    npc.velocity -= npc.velocity.RotatedBy(Math.PI / 2) * npc.velocity.Length() / npc.localAI[1];
-                    if (npc.velocity.Length() > 60f) npc.velocity *= 60f / npc.velocity.Length();
-                    if (++npc.ai[1] > 500)
-                    {
-                        npc.ai[0]++;
-                        npc.ai[1] = 0;
-                        npc.ai[2] = 0;
-                        npc.localAI[1] = 0;
-                        npc.netUpdate = true;
-                    }
-                    npc.rotation = (float)Math.Atan2((double)(npc.velocity.Y * (float)npc.direction), (double)(npc.velocity.X * (float)npc.direction));
-                    break;
-                case 2: //wait for dash
-                    targetPos = player.Center + player.DirectionTo(npc.Center) * 5000f;
-                    MovementWorm(targetPos, 60f, 0.6f);
-                    if (++npc.ai[2] > 120 || npc.Distance(targetPos) < 50f)
-                    {
-                        npc.ai[0]++;
-                        npc.ai[1] = 0;
-                        npc.velocity = npc.DirectionTo(player.Center) * 45;
-                        npc.netUpdate = true;
-                    }
-                    npc.rotation = 0;
-                    break;
-                case 3: //dash
-                    if (npc.ai[1]++ > 180)
-                    {
-                        npc.velocity.Y *= 0.5f;
-                        npc.ai[1] = 0;
-                        if (++npc.ai[2] >= 5) //repeat five times
-                        {
-                            npc.ai[0]++;
-                            npc.ai[2] = 0;
-                        }
-                        else
-                            npc.ai[0]--;
-                        npc.netUpdate = true;
-                    }
-                    npc.rotation = 0;
-                    break;
-                case 4: //wait
-                    targetPos = npc.Center;
-                    targetPos.X += 100 * (npc.Center.X < targetPos.X ? -1 : 1);
-                    targetPos.Y += 100 * (npc.Center.Y < targetPos.Y ? -1 : 1);
-                    MovementWorm(targetPos, 20f, 0.6f);
-                    if (++npc.ai[2] > 120 || npc.Distance(targetPos) < 50f)
-                    {
-                        npc.ai[0]++;
-                        npc.ai[1] = 0;
-                        npc.ai[2] = 0;
-                        npc.velocity = npc.DirectionTo(player.Center) * 45;
-                        npc.netUpdate = true;
-                    }
-                    npc.rotation = 0;
-                    break;
-                default:
-                    npc.ai[0] = 0;
-                    goto case 0;
-            }
             npc.rotation = (float)Math.Atan2(npc.velocity.Y, npc.velocity.X) + 1.57f;
             if (npc.velocity.X < 0f)
             {
@@ -216,111 +136,131 @@ namespace AAModEXAI.Bosses.Invoker.DeathWorm
             {
                 npc.spriteDirection = -1;
             }
-            if (npc.position.X <= Main.leftWorld + 1000f || npc.position.X + npc.width >= Main.rightWorld - 1000f)
-            {
-                npc.velocity.X *= .9f;
-            }
-            if (npc.position.Y <= Main.topWorld + 1000f || npc.position.Y + npc.height >= Main.bottomWorld - 1000f)
-            {
-                npc.velocity.Y *= .9f;
-            }
             return false;
         }
 
-        public void MovementWorm(Vector2 target, float speed, float acceleration)
+        public void MovementWorm()
         {
             
+            bool collision = true;
 
-            if (target.X <= Main.leftWorld)
-            {
-                target.X = Main.leftWorld + 1000f;
-            }
-            if (target.X + npc.width >= Main.rightWorld)
-            {
-                target.X = Main.rightWorld - 1000f;
-            }
-            if (target.Y <= Main.topWorld)
-            {
-                target.Y = Main.topWorld + 1000f;
-            }
-            if (target.Y + npc.height >= Main.bottomWorld)
-            {
-                target.Y = Main.bottomWorld - 1000f;
-            }
-            
-            Vector2 npcCenter = npc.Center;// new Vector2(npc.position.X + npc.width * 0.5f, npc.position.Y + npc.height * 0.5f);
-            //float targetXPos = Main.player[npc.target].position.X + (Main.player[npc.target].width / 2);
-            //float targetYPos = Main.player[npc.target].position.Y + (Main.player[npc.target].height / 2);
+            float speed;
+            float acceleration;
 
-            float targetRoundedPosX = target.X;// (int)(targetXPos / 16.0) * 16;
-            float targetRoundedPosY = target.Y;// (int)(targetYPos / 16.0) * 16;
-            //npcCenter.X = (int)(npcCenter.X / 16.0) * 16;
-            //npcCenter.Y = (int)(npcCenter.Y / 16.0) * 16;
+            speed = 30f;
+            acceleration = 0.28f;
+
+            Vector2 npcCenter = new Vector2(npc.position.X + npc.width * 0.5f, npc.position.Y + npc.height * 0.5f);
+            float targetXPos = Main.player[npc.target].position.X + (Main.player[npc.target].width / 2);
+            float targetYPos = Main.player[npc.target].position.Y + (Main.player[npc.target].height / 2);
+
+            float targetRoundedPosX = (int)(targetXPos / 16.0) * 16;
+            float targetRoundedPosY = (int)(targetYPos / 16.0) * 16;
+            npcCenter.X = (int)(npcCenter.X / 16.0) * 16;
+            npcCenter.Y = (int)(npcCenter.Y / 16.0) * 16;
             float dirX = targetRoundedPosX - npcCenter.X;
             float dirY = targetRoundedPosY - npcCenter.Y;
-            npc.TargetClosest(true);
+
             float length = (float)Math.Sqrt(dirX * dirX + dirY * dirY);
-
-            float absDirX = Math.Abs(dirX);
-            float absDirY = Math.Abs(dirY);
-            float newSpeed = speed / length;
-            dirX *= newSpeed;
-            dirY *= newSpeed;
-            if (npc.velocity.X > 0.0 && dirX > 0.0 || npc.velocity.X < 0.0 && dirX < 0.0 || npc.velocity.Y > 0.0 && dirY > 0.0 || npc.velocity.Y < 0.0 && dirY < 0.0)
+            if (!collision)
             {
-                if (npc.velocity.X < dirX)
-                    npc.velocity.X = npc.velocity.X + acceleration;
-                else if (npc.velocity.X > dirX)
-                    npc.velocity.X = npc.velocity.X - acceleration;
-                if (npc.velocity.Y < dirY)
-                    npc.velocity.Y = npc.velocity.Y + acceleration;
-                else if (npc.velocity.Y > dirY)
-                    npc.velocity.Y = npc.velocity.Y - acceleration;
-                if (Math.Abs(dirY) < speed * 0.2 && (npc.velocity.X > 0.0 && dirX < 0.0 || npc.velocity.X < 0.0 && dirX > 0.0))
+                npc.TargetClosest(true);
+                npc.velocity.Y = npc.velocity.Y + 0.11f;
+                if (npc.velocity.Y > speed)
+                    npc.velocity.Y = speed;
+                if (Math.Abs(npc.velocity.X) + Math.Abs(npc.velocity.Y) < speed * 0.4)
                 {
-                    if (npc.velocity.Y > 0.0)
-                        npc.velocity.Y = npc.velocity.Y + acceleration * 2f;
+                    if (npc.velocity.X < 0.0)
+                        npc.velocity.X = npc.velocity.X - acceleration * 1.1f;
                     else
-                        npc.velocity.Y = npc.velocity.Y - acceleration * 2f;
+                        npc.velocity.X = npc.velocity.X + acceleration * 1.1f;
                 }
-                if (Math.Abs(dirX) < speed * 0.2 && (npc.velocity.Y > 0.0 && dirY < 0.0 || npc.velocity.Y < 0.0 && dirY > 0.0))
+                else if (npc.velocity.Y == speed)
                 {
-                    if (npc.velocity.X > 0.0)
-                        npc.velocity.X = npc.velocity.X + acceleration * 2f;
-                    else
-                        npc.velocity.X = npc.velocity.X - acceleration * 2f;
+                    if (npc.velocity.X < dirX)
+                        npc.velocity.X = npc.velocity.X + acceleration;
+                    else if (npc.velocity.X > dirX)
+                        npc.velocity.X = npc.velocity.X - acceleration;
                 }
-            }
-            else if (absDirX > absDirY)
-            {
-                if (npc.velocity.X < dirX)
-                    npc.velocity.X = npc.velocity.X + acceleration * 1.1f;
-                else if (npc.velocity.X > dirX)
-                    npc.velocity.X = npc.velocity.X - acceleration * 1.1f;
-
-                if (Math.Abs(npc.velocity.X) + Math.Abs(npc.velocity.Y) < speed * 0.5)
+                else if (npc.velocity.Y > 4.0)
                 {
-                    if (npc.velocity.Y > 0.0)
-                        npc.velocity.Y = npc.velocity.Y + acceleration;
+                    if (npc.velocity.X < 0.0)
+                        npc.velocity.X = npc.velocity.X + acceleration * 0.9f;
                     else
-                        npc.velocity.Y = npc.velocity.Y - acceleration;
+                        npc.velocity.X = npc.velocity.X - acceleration * 0.9f;
                 }
             }
             else
             {
-                if (npc.velocity.Y < dirY)
-                    npc.velocity.Y = npc.velocity.Y + acceleration * 1.1f;
-                else if (npc.velocity.Y > dirY)
-                    npc.velocity.Y = npc.velocity.Y - acceleration * 1.1f;
-
-                if (Math.Abs(npc.velocity.X) + Math.Abs(npc.velocity.Y) < speed * 0.5)
+                if (npc.soundDelay == 0)
                 {
-                    if (npc.velocity.X > 0.0)
+                    float num1 = length / 40f;
+                    if (num1 < 10.0)
+                        num1 = 10f;
+                    if (num1 > 20.0)
+                        num1 = 20f;
+                    npc.soundDelay = (int)num1;
+                }
+                float absDirX = Math.Abs(dirX);
+                float absDirY = Math.Abs(dirY);
+                float newSpeed = speed / length;
+                dirX *= newSpeed;
+                dirY *= newSpeed;
+                if (npc.velocity.X > 0.0 && dirX > 0.0 || npc.velocity.X < 0.0 && dirX < 0.0 || npc.velocity.Y > 0.0 && dirY > 0.0 || npc.velocity.Y < 0.0 && dirY < 0.0)
+                {
+                    if (npc.velocity.X < dirX)
                         npc.velocity.X = npc.velocity.X + acceleration;
-                    else
+                    else if (npc.velocity.X > dirX)
                         npc.velocity.X = npc.velocity.X - acceleration;
+                    if (npc.velocity.Y < dirY)
+                        npc.velocity.Y = npc.velocity.Y + acceleration;
+                    else if (npc.velocity.Y > dirY)
+                        npc.velocity.Y = npc.velocity.Y - acceleration;
+                    if (Math.Abs(dirY) < speed * 0.2 && (npc.velocity.X > 0.0 && dirX < 0.0 || npc.velocity.X < 0.0 && dirX > 0.0))
+                    {
+                        if (npc.velocity.Y > 0.0)
+                            npc.velocity.Y = npc.velocity.Y + acceleration * 2f;
+                        else
+                            npc.velocity.Y = npc.velocity.Y - acceleration * 2f;
+                    }
+                    if (Math.Abs(dirX) < speed * 0.2 && (npc.velocity.Y > 0.0 && dirY < 0.0 || npc.velocity.Y < 0.0 && dirY > 0.0))
+                    {
+                        if (npc.velocity.X > 0.0)
+                            npc.velocity.X = npc.velocity.X + acceleration * 2f;
+                        else
+                            npc.velocity.X = npc.velocity.X - acceleration * 2f;
+                    }
+                }
+                else if (absDirX > absDirY)
+                {
+                    if (npc.velocity.X < dirX)
+                        npc.velocity.X = npc.velocity.X + acceleration * 1.1f;
+                    else if (npc.velocity.X > dirX)
+                        npc.velocity.X = npc.velocity.X - acceleration * 1.1f;
+                    if (Math.Abs(npc.velocity.X) + Math.Abs(npc.velocity.Y) < speed * 0.5)
+                    {
+                        if (npc.velocity.Y > 0.0)
+                            npc.velocity.Y = npc.velocity.Y + acceleration;
+                        else
+                            npc.velocity.Y = npc.velocity.Y - acceleration;
+                    }
+                }
+                else
+                {
+                    if (npc.velocity.Y < dirY)
+                        npc.velocity.Y = npc.velocity.Y + acceleration * 1.1f;
+                    else if (npc.velocity.Y > dirY)
+                        npc.velocity.Y = npc.velocity.Y - acceleration * 1.1f;
+                    if (Math.Abs(npc.velocity.X) + Math.Abs(npc.velocity.Y) < speed * 0.5)
+                    {
+                        if (npc.velocity.X > 0.0)
+                            npc.velocity.X = npc.velocity.X + acceleration;
+                        else
+                            npc.velocity.X = npc.velocity.X - acceleration;
+                    }
                 }
             }
+            npc.rotation = (float)Math.Atan2(npc.velocity.Y, npc.velocity.X) + 1.57f;
         }
 
         public override bool PreDraw(SpriteBatch spriteBatch, Color drawColor)
@@ -427,13 +367,11 @@ namespace AAModEXAI.Bosses.Invoker.DeathWorm
                     projectile.netUpdate = true;
                 }
             }
-
-            projectile.Center = headnpc.Center;
             projectile.rotation = headnpc.rotation;
             projectile.direction = headnpc.direction;
             projectile.spriteDirection = headnpc.spriteDirection;
 
-            bodyPos[0] = projectile.position - new Vector2(5f, 0f);
+            bodyPos[0] = headnpc.position;
 
             if(projectile.ai[0] == 0f)
             {
@@ -495,11 +433,12 @@ namespace AAModEXAI.Bosses.Invoker.DeathWorm
                     Texture2D bodyglowTex2 = mod.GetTexture(bodypath + frame + "Glow2");
 
                     Rectangle Rectframe = BaseDrawing.GetFrame(0, bodyTex.Width, bodyTex.Height, 0, 0);
-
+                    /*
                     if (Main.mapFullscreen || Main.mapStyle == 1 || Main.mapStyle == 2)
                     {
                         drawBossHead(bodypath + frame, i, rotation, spriteDirection);
                     }
+                    */
 
                     BaseDrawing.DrawTexture(spriteBatch, bodyTex, 0, bodyPos[bodyPos.Length - 1 - i], projectile.width, projectile.height, 1f, rotation, spriteDirection, 1, Rectframe, projectile.GetAlpha(drawColor), true);
                     BaseDrawing.DrawTexture(spriteBatch, bodyglowTex, 0, bodyPos[bodyPos.Length - 1 - i], projectile.width, projectile.height, 1f, rotation, spriteDirection, 1, Rectframe, Color.White, true);
@@ -512,13 +451,13 @@ namespace AAModEXAI.Bosses.Invoker.DeathWorm
                 Texture2D headglowTex2 = mod.GetTexture(headpath + "Glow2");
 
                 Rectangle Rectheadframe = BaseDrawing.GetFrame(0, headTex.Width, headTex.Height, 0, 0);
-                spriteBatch.Draw(headTex, projectile.Center - Main.screenPosition, Rectheadframe, projectile.GetAlpha(drawColor), projectile.rotation, Rectheadframe.Size() / 2, projectile.scale, projectile.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
-                spriteBatch.Draw(headglowTex, projectile.Center - Main.screenPosition, Rectheadframe, Color.White, projectile.rotation, Rectheadframe.Size() / 2, projectile.scale, projectile.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
-                spriteBatch.Draw(headglowTex2, projectile.Center - Main.screenPosition, Rectheadframe, Color.White, projectile.rotation, Rectheadframe.Size() / 2, projectile.scale, projectile.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
+                spriteBatch.Draw(headTex, bodyPos[0] + new Vector2(headTex.Width/2, headTex.Height/2) + new Vector2(-75f, -67f) - Main.screenPosition, Rectheadframe, projectile.GetAlpha(drawColor), projectile.rotation, Rectheadframe.Size() / 2, projectile.scale, projectile.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
+                spriteBatch.Draw(headglowTex, bodyPos[0] + new Vector2(headTex.Width/2, headTex.Height/2) + new Vector2(-75f, -67f) - Main.screenPosition, Rectheadframe, Color.White, projectile.rotation, Rectheadframe.Size() / 2, projectile.scale, projectile.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
+                spriteBatch.Draw(headglowTex2, bodyPos[0] + new Vector2(headTex.Width/2, headTex.Height/2) + new Vector2(-75f, -67f) - Main.screenPosition, Rectheadframe, Color.White, projectile.rotation, Rectheadframe.Size() / 2, projectile.scale, projectile.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
             }
             return false;
         }
-
+/*
         public void drawBossHead(string path, int i, float rotation, int spriteDirection)
         {
             Texture2D BossheadTex = mod.GetTexture(path + "_Head_Boss");
@@ -598,13 +537,9 @@ namespace AAModEXAI.Bosses.Invoker.DeathWorm
                 Main.spriteBatch.Draw(BossheadTex, new Vector2(PosX, PosY), null, new Microsoft.Xna.Framework.Color((int)alpha, (int)alpha, (int)alpha, (int)alpha), rotation, BossheadTex.Size() / 2f, Scale, bossHeadSpriteEffects, 0f);
             }
         }
-
+*/
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
-            if (projHitbox.Intersects(targetHitbox))
-            {
-                return true;
-            }
             for(int i = 1; i < bodyPos.Length - 1; i ++)
             {
                 Rectangle bodyhitbox = new Rectangle((int)bodyPos[i].X, (int)bodyPos[i].Y, projectile.width, projectile.height);
