@@ -42,7 +42,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
                     projectile.frame = 0;
                 }
             }
-            if (projectile.ai[1]++ == 120 && Main.netMode != NetmodeID.MultiplayerClient)
+            if (projectile.ai[1]++ == 120)
             {
                 switch (projectile.ai[0])
                 {

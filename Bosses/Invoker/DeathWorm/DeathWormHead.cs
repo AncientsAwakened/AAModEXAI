@@ -30,7 +30,7 @@ namespace AAModEXAI.Bosses.Invoker.DeathWorm
 
         public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
         {
-            npc.lifeMax = (int)(npc.lifeMax * 0.5f * bossLifeScale);
+            npc.lifeMax = (int)(npc.lifeMax * 0.7f * bossLifeScale);
             npc.damage = (int)(npc.damage * 0.6f);
         }
 
@@ -71,12 +71,6 @@ namespace AAModEXAI.Bosses.Invoker.DeathWorm
             musicPriority = MusicPriority.BossHigh;
         }
 
-        public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
-        {
-            npc.lifeMax = (int)(npc.lifeMax * 0.7f * bossLifeScale);
-            npc.damage = (int)(npc.damage * 0.6f);
-        }
-
         public override void SendExtraAI(BinaryWriter writer)
         {
             base.SendExtraAI(writer);
@@ -108,13 +102,10 @@ namespace AAModEXAI.Bosses.Invoker.DeathWorm
             }
             if(npc.ai[3] > 1000 || Main.projectile[(int)npc.ai[3]].type != ModContent.ProjectileType<DeathWormBody>() || !AAModEXAIGlobalProjectile.AnyProjectiles(ModContent.ProjectileType<DeathWormBody>()))
             {
-                if(Main.netMode != NetmodeID.MultiplayerClient)
-                {
-                    int id = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0f, 0f, ModContent.ProjectileType<DeathWormBody>(), npc.damage / 4, 5, Main.myPlayer);
-                    Main.projectile[id].ai[0] = 0;
-                    Main.projectile[id].ai[1] = npc.whoAmI;
-                    npc.ai[3] = id;
-                }
+                int id = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0f, 0f, ModContent.ProjectileType<DeathWormBody>(), npc.damage / 4, 5, Main.myPlayer);
+                Main.projectile[id].ai[0] = 0;
+                Main.projectile[id].ai[1] = npc.whoAmI;
+                npc.ai[3] = id;
             }
 
             if (npc.timeLeft < NPC.activeTime)
@@ -359,14 +350,12 @@ namespace AAModEXAI.Bosses.Invoker.DeathWorm
             
             NPC headnpc = Main.npc[(int)projectile.ai[1]];
 
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (!headnpc.active || headnpc.type != ModContent.NPCType<DeathWormHead>())
             {
-                if (!headnpc.active || headnpc.type != ModContent.NPCType<DeathWormHead>())
-                {
-                    projectile.active = false;
-                    projectile.netUpdate = true;
-                }
+                projectile.active = false;
+                projectile.netUpdate = true;
             }
+
             projectile.rotation = headnpc.rotation;
             projectile.direction = headnpc.direction;
             projectile.spriteDirection = headnpc.spriteDirection;
@@ -391,7 +380,6 @@ namespace AAModEXAI.Bosses.Invoker.DeathWorm
 
                 bodyPos[i].X = bodyPos[i].X + posX;
                 bodyPos[i].Y = bodyPos[i].Y + posY;
-
             }
 
             projectile.timeLeft ++;
@@ -402,62 +390,55 @@ namespace AAModEXAI.Bosses.Invoker.DeathWorm
         public override bool PreDraw(SpriteBatch spriteBatch, Color drawColor)
         {
             if(projectile.ai[0] < 1f) return false;
-            if(Main.netMode != NetmodeID.Server)
+            for(int i = 1; i < bodyPos.Length - 1; i ++)
             {
-                spriteBatch.End();
-                spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);	
-                for(int i = 1; i < bodyPos.Length - 1; i ++)
+                Vector2 bodytobody = bodyPos[bodyPos.Length - 1 - i - 1] - bodyPos[bodyPos.Length - 1 - i];
+                float rotation = (float)Math.Atan2(bodytobody.Y, bodytobody.X) + 1.57f;
+
+                int spriteDirection = 1;
+
+                if (bodytobody.X < 0f)
                 {
-                    Vector2 bodytobody = bodyPos[bodyPos.Length - 1 - i - 1] - bodyPos[bodyPos.Length - 1 - i];
-                    float rotation = (float)Math.Atan2(bodytobody.Y, bodytobody.X) + 1.57f;
+                    spriteDirection = 1;
 
-                    int spriteDirection = 1;
-
-                    if (bodytobody.X < 0f)
-                    {
-                        spriteDirection = 1;
-
-                    }
-                    else
-                    {
-                        spriteDirection = -1;
-                    }
-
-                    int frame = 0;
-                    frame = i % 2;
-                    if(i == 1) frame = 2;
-
-                    string bodypath = "Bosses/Invoker/DeathWorm/DeathWormBody";
-                    Texture2D bodyTex = mod.GetTexture(bodypath + frame);
-                    Texture2D bodyglowTex = mod.GetTexture(bodypath + frame + "Glow");
-                    Texture2D bodyglowTex2 = mod.GetTexture(bodypath + frame + "Glow2");
-
-                    Rectangle Rectframe = BaseDrawing.GetFrame(0, bodyTex.Width, bodyTex.Height, 0, 0);
-                    /*
-                    if (Main.mapFullscreen || Main.mapStyle == 1 || Main.mapStyle == 2)
-                    {
-                        drawBossHead(bodypath + frame, i, rotation, spriteDirection);
-                    }
-                    */
-
-                    BaseDrawing.DrawTexture(spriteBatch, bodyTex, 0, bodyPos[bodyPos.Length - 1 - i], projectile.width, projectile.height, 1f, rotation, spriteDirection, 1, Rectframe, projectile.GetAlpha(drawColor), true);
-                    BaseDrawing.DrawTexture(spriteBatch, bodyglowTex, 0, bodyPos[bodyPos.Length - 1 - i], projectile.width, projectile.height, 1f, rotation, spriteDirection, 1, Rectframe, Color.White, true);
-                    BaseDrawing.DrawTexture(spriteBatch, bodyglowTex2, 0, bodyPos[bodyPos.Length - 1 - i], projectile.width, projectile.height, 1f, rotation, spriteDirection, 1, Rectframe, Color.White, true);
+                }
+                else
+                {
+                    spriteDirection = -1;
                 }
 
-                string headpath = "Bosses/Invoker/DeathWorm/DeathWormHead";
-                Texture2D headTex = mod.GetTexture(headpath + "");
-                Texture2D headglowTex = mod.GetTexture(headpath + "Glow");
-                Texture2D headglowTex2 = mod.GetTexture(headpath + "Glow2");
+                int frame = 0;
+                frame = i % 2;
+                if(i == 1) frame = 2;
 
-                Rectangle Rectheadframe = BaseDrawing.GetFrame(0, headTex.Width, headTex.Height, 0, 0);
-                spriteBatch.Draw(headTex, bodyPos[0] + new Vector2(headTex.Width/2, headTex.Height/2) + new Vector2(-75f, -67f) - Main.screenPosition, Rectheadframe, projectile.GetAlpha(drawColor), projectile.rotation, Rectheadframe.Size() / 2, projectile.scale, projectile.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
-                spriteBatch.Draw(headglowTex, bodyPos[0] + new Vector2(headTex.Width/2, headTex.Height/2) + new Vector2(-75f, -67f) - Main.screenPosition, Rectheadframe, Color.White, projectile.rotation, Rectheadframe.Size() / 2, projectile.scale, projectile.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
-                spriteBatch.Draw(headglowTex2, bodyPos[0] + new Vector2(headTex.Width/2, headTex.Height/2) + new Vector2(-75f, -67f) - Main.screenPosition, Rectheadframe, Color.White, projectile.rotation, Rectheadframe.Size() / 2, projectile.scale, projectile.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
+                string bodypath = "Bosses/Invoker/DeathWorm/DeathWormBody";
+                Texture2D bodyTex = mod.GetTexture(bodypath + frame);
+                Texture2D bodyglowTex = mod.GetTexture(bodypath + frame + "Glow");
+                Texture2D bodyglowTex2 = mod.GetTexture(bodypath + frame + "Glow2");
+
+                Rectangle Rectframe = BaseDrawing.GetFrame(0, bodyTex.Width, bodyTex.Height, 0, 0);
+
+                if (Main.mapFullscreen || Main.mapStyle == 1 || Main.mapStyle == 2)
+                {
+                    drawBossHead(bodypath + frame, i, rotation, spriteDirection);
+                }
+
+                BaseDrawing.DrawTexture(spriteBatch, bodyTex, 0, bodyPos[bodyPos.Length - 1 - i], projectile.width, projectile.height, 1f, rotation, spriteDirection, 1, Rectframe, projectile.GetAlpha(drawColor), true);
+                BaseDrawing.DrawTexture(spriteBatch, bodyglowTex, 0, bodyPos[bodyPos.Length - 1 - i], projectile.width, projectile.height, 1f, rotation, spriteDirection, 1, Rectframe, Color.White, true);
+                BaseDrawing.DrawTexture(spriteBatch, bodyglowTex2, 0, bodyPos[bodyPos.Length - 1 - i], projectile.width, projectile.height, 1f, rotation, spriteDirection, 1, Rectframe, Color.White, true);
             }
+
+            string headpath = "Bosses/Invoker/DeathWorm/DeathWormHead";
+            Texture2D headTex = mod.GetTexture(headpath + "");
+            Texture2D headglowTex = mod.GetTexture(headpath + "Glow");
+            Texture2D headglowTex2 = mod.GetTexture(headpath + "Glow2");
+
+            Rectangle Rectheadframe = BaseDrawing.GetFrame(0, headTex.Width, headTex.Height, 0, 0);
+            spriteBatch.Draw(headTex, bodyPos[0] + new Vector2(headTex.Width/2, headTex.Height/2) + new Vector2(-75f, -67f) - Main.screenPosition, Rectheadframe, projectile.GetAlpha(drawColor), projectile.rotation, Rectheadframe.Size() / 2, projectile.scale, projectile.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
+            spriteBatch.Draw(headglowTex, bodyPos[0] + new Vector2(headTex.Width/2, headTex.Height/2) + new Vector2(-75f, -67f) - Main.screenPosition, Rectheadframe, Color.White, projectile.rotation, Rectheadframe.Size() / 2, projectile.scale, projectile.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
+            spriteBatch.Draw(headglowTex2, bodyPos[0] + new Vector2(headTex.Width/2, headTex.Height/2) + new Vector2(-75f, -67f) - Main.screenPosition, Rectheadframe, Color.White, projectile.rotation, Rectheadframe.Size() / 2, projectile.scale, projectile.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
             return false;
         }
-/*
         public void drawBossHead(string path, int i, float rotation, int spriteDirection)
         {
             Texture2D BossheadTex = mod.GetTexture(path + "_Head_Boss");
@@ -468,12 +449,12 @@ namespace AAModEXAI.Bosses.Invoker.DeathWorm
 			if (Main.mapFullscreen)
 			{
 				screenScale = Main.mapFullscreenScale;
-                alpha = byte.MaxValue;
+                alpha = /*byte.MaxValue*/(byte)(255f * Main.mapOverlayAlpha);
 			}
 			else if (Main.mapStyle == 1)
 			{
 				screenScale = Main.mapMinimapScale;
-                alpha = (byte)(255f * Main.mapMinimapAlpha);
+                alpha = /*(byte)(255f * Main.mapMinimapAlpha)*/(byte)(255f * Main.mapOverlayAlpha);
 			}
 			else
 			{
@@ -496,7 +477,7 @@ namespace AAModEXAI.Bosses.Invoker.DeathWorm
 						Scale = 1f;
 					}
 					Scale *= Main.UIScale;
-                    Main.spriteBatch.Draw(BossheadTex, new Vector2(PosX, PosY), null, new Microsoft.Xna.Framework.Color((int)alpha, (int)alpha, (int)alpha, (int)alpha), rotation, BossheadTex.Size() / 2f, Scale, bossHeadSpriteEffects, 0f);
+                    Main.spriteBatch.Draw(BossheadTex, new Vector2(PosX, PosY), null, new Microsoft.Xna.Framework.Color((int)alpha, (int)alpha, (int)alpha, (int)alpha), rotation - 1.57f, BossheadTex.Size() / 2f, Scale, bossHeadSpriteEffects, 0f);
                 }
                 else if(Main.mapStyle == 1)
                 {
@@ -529,15 +510,10 @@ namespace AAModEXAI.Bosses.Invoker.DeathWorm
                 PosX -= 10f * screenScale;
                 PosY -= 10f * screenScale;
                 float Scale = (screenScale * 0.25f * 2f + 1f) / 3f;
-                if (Scale > 1f)
-                {
-                    Scale = 1f;
-                }
-				Scale *= Main.UIScale;
+				Scale = Main.UIScale;
                 Main.spriteBatch.Draw(BossheadTex, new Vector2(PosX, PosY), null, new Microsoft.Xna.Framework.Color((int)alpha, (int)alpha, (int)alpha, (int)alpha), rotation, BossheadTex.Size() / 2f, Scale, bossHeadSpriteEffects, 0f);
             }
         }
-*/
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
             for(int i = 1; i < bodyPos.Length - 1; i ++)

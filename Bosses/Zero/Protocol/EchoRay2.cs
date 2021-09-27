@@ -183,7 +183,6 @@ namespace AAModEXAI.Bosses.Zero.Protocol
                 sourceRectangle2 = null;
                 arg_AE2D_0.Draw(arg_AE2D_1, arg_AE2D_2, sourceRectangle2, color44, projectile.rotation, texture2D21.Frame(1, 1, 0, 0).Top(), projectile.scale, SpriteEffects.None, 0f);
             }
-            
             return false;
         }
 
@@ -195,7 +194,7 @@ namespace AAModEXAI.Bosses.Zero.Protocol
             }
 
             bool flag = false;
-            for(int k = - 50; k < 50 ; k ++)
+            for(int k = - 30; k < 30 ; k ++)
             {
                 float num6 = 0f;
                 Vector2 Center = projectile.Center + k * 200 * Vector2.Normalize(new Vector2(projectile.velocity.Y, -projectile.velocity.X));
