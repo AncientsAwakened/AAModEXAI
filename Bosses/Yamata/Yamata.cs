@@ -73,7 +73,6 @@ namespace AAModEXAI.Bosses.Yamata
             npc.defense = 999999;
             npc.knockBackResist = 0f;
             npc.boss = true;
-            music = ModLoader.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/Yamata");
             musicPriority = MusicPriority.BossHigh;
             npc.noGravity = true;
             npc.netAlways = true;
@@ -83,7 +82,7 @@ namespace AAModEXAI.Bosses.Yamata
             npc.frame = BaseDrawing.GetFrame(frameCount, frameWidth, frameHeight, 0, 2);
             frameBottom = BaseDrawing.GetFrame(frameCount, frameWidth, 54, 0, 2);
             frameHead = BaseDrawing.GetFrame(frameCount, frameWidth, 118, 0, 2);
-            npc.DeathSound = ModLoader.GetMod("AAMod").GetLegacySoundSlot(SoundType.NPCKilled, "Sounds/Sounds/YamataRoar");
+            npc.DeathSound = mod.GetLegacySoundSlot(SoundType.NPCKilled, "Sounds/Sounds/YamataRoar");
             for (int k = 0; k < npc.buffImmune.Length; k++)
             {
                 npc.buffImmune[k] = true;
@@ -160,27 +159,11 @@ namespace AAModEXAI.Bosses.Yamata
             if (!Tag)
             {
                 npc.DropLoot(AAMod.Items.Vanity.Mask.YamataMask.type, 1f / 7f);
-                if (!Main.expertMode)
-                {
-                    AAWorld.downedYamata = true;
-                    npc.DropLoot(ModLoader.GetMod("AAMod").ItemType("DreadScale"), 20, 30);
-                    string[] lootTable = { "Flairdra", "Crescent", "Hydraslayer", "AbyssArrow", "HydraStabber", "MidnightWrath", "YamataTerratool" };
-                    int loot = Main.rand.Next(lootTable.Length);
-                    npc.DropLoot(ModLoader.GetMod("AAMod").ItemType(lootTable[loot]));
-                    npc.DropLoot(AAMod.Items.Boss.Yamata.YamataTrophy.type, 1f / 10);
-                    if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("Yamata1"), new Color(45, 46, 70));
-                    npc.DropLoot(AAMod.Items.Vanity.Mask.YamataMask.type, 1f / 7);
-                    if (!AAWorld.downedYamata)
-                    {
-                        if (Main.netMode != NetmodeID.MultiplayerClient) BaseUtility.Chat(AAMod.Lang.BossChat("Yamata2"), Color.Indigo);
-                    }
-                }
-                if (Main.expertMode)
-                {
-                    int npcID = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("YamataTransition"), 0, 0, 0, 0, 0, npc.target);
-                    Main.npc[npcID].Center = npc.Center;
-                    Main.npc[npcID].netUpdate2 = true; Main.npc[npcID].netUpdate = true;
-                }
+                
+                int npcID = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("YamataTransition"), 0, 0, 0, 0, 0, npc.target);
+                Main.npc[npcID].Center = npc.Center;
+                Main.npc[npcID].netUpdate2 = true; Main.npc[npcID].netUpdate = true;
+
                 npc.value = 0f;
                 npc.boss = false;
             }

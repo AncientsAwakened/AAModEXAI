@@ -40,8 +40,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
             npc.npcSlots = 0;
             npc.noTileCollide = true;
             npc.noGravity = true;
-            npc.DeathSound = ModLoader.GetMod("AAMod").GetLegacySoundSlot(SoundType.NPCKilled, "Sounds/Sounds/YamataRoar");
-            music = ModLoader.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/Yamata2");
+            npc.DeathSound = mod.GetLegacySoundSlot(SoundType.NPCKilled, "Sounds/Sounds/YamataRoar");
             npc.knockBackResist *= 0.05f;
             for (int k = 0; k < npc.buffImmune.Length; k++)
             {

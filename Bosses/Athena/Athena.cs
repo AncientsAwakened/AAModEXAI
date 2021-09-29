@@ -118,7 +118,7 @@ namespace AAModEXAI.Bosses.Athena
             if (internalAI[2] != 1)
             {
                 npc.dontTakeDamage = true;
-                music = ModLoader.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/silence");
+                music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/silence");
                 if (Vector2.Distance(npc.Center, Acropolis) < 10)
                 {
                     npc.velocity *= 0;

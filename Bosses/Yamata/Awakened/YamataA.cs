@@ -76,7 +76,6 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
             npc.defense = 999999;
             npc.knockBackResist = 0f;
             npc.boss = true;
-            music = ModLoader.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/Yamata");
             npc.noGravity = true;
             npc.netAlways = true;
             frameWidth = 324;
@@ -85,11 +84,9 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
             npc.frame = BaseDrawing.GetFrame(0, frameWidth, frameHeight, 0, 2);
             frameBottom = BaseDrawing.GetFrame(frameCount, frameWidth, 54, 0, 2);
             frameHead = BaseDrawing.GetFrame(frameCount, frameWidth, 118, 0, 2);
-            npc.DeathSound = ModLoader.GetMod("AAMod").GetLegacySoundSlot(SoundType.NPCKilled, "Sounds/Sounds/YamataRoar");
+            npc.DeathSound = mod.GetLegacySoundSlot(SoundType.NPCKilled, "Sounds/Sounds/YamataRoar");
             npc.chaseable = false;
             npc.value = Item.sellPrice(0, 40, 0, 0);
-            music = ModLoader.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/Yamata2");
-            bossBag = ModLoader.GetMod("AAMod").ItemType("YamataBag");
             for (int k = 0; k < npc.buffImmune.Length; k++)
             {
                 npc.buffImmune[k] = true;
@@ -530,26 +527,20 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
                 }
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    foreach (NPC head in HeadAlive)
+                    int k = HeadAlive.Count;
+                    int randomhead = Main.rand.Next(k);
+                    if(((YamataAHeadF)HeadAlive[randomhead].modNPC).internalAI[4] == 1f)
                     {
-                        if(!head.active) continue;
-                        if(((YamataAHeadF)head.modNPC).internalAI[4] == 1f)
-                        {
-                            int k = HeadAlive.Count;
-                            if(k == 1) break;
-                            int randomhead = Main.rand.Next(k);
-                            if(HeadAlive[randomhead] == head)
-                            {
-                                randomhead++;
-                                if(randomhead >= k) randomhead = 0;
-                            }
-                            ((YamataAHeadF)head.modNPC).internalAI[4] = 0f;
-                            ((YamataAHeadF)HeadAlive[randomhead].modNPC).internalAI[4] = 1f;
-                            HeadAlive[randomhead].netUpdate = true;
-                            head.netUpdate = true;
-                            break;
-                        }
+                        randomhead++;
+                        if(randomhead >= k) randomhead = 0;
                     }
+                    foreach (NPC Head in HeadAlive)
+                    {
+                        ((YamataAHeadF)Head.modNPC).internalAI[4] = 0f;
+                        Head.netUpdate = true;
+                    }
+                    ((YamataAHeadF)HeadAlive[randomhead].modNPC).internalAI[4] = 1f;
+                    HeadAlive[randomhead].netUpdate = true;
                 }
                 HeadAlive.Clear();
             }

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace AAModEXAI.Sounds.Sounds
 {
-    public class AkumaRoar : ModSound
+    public class Rajah : ModSound
     {
         public override SoundEffectInstance PlaySound(ref SoundEffectInstance soundInstance, float volume, float pan, SoundType type)
         {

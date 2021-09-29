@@ -38,6 +38,7 @@ namespace AAModEXAI
             if(npc.type == ModContent.NPCType<Bosses.Akuma.Awakened.AkumaA>())
             {
                 npc.modNPC.music = ModSupport.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/Akuma2");
+                npc.modNPC.music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/Ancients");
                 npc.modNPC.bossBag = ModSupport.GetModItem("AAMod", "AkumaBag").item.type;
                 return;
             }
@@ -54,6 +55,59 @@ namespace AAModEXAI
                 npc.modNPC.bossBag = ModSupport.GetModItem("AAMod", "FAnubisBag").item.type;
                 return;
             }
+            
+
+            
+            //Rajah
+
+            if(npc.type == ModContent.NPCType<Bosses.Rajah.Rajah>())
+            {
+                npc.modNPC.music = ModSupport.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/RajahTheme");
+                npc.modNPC.bossBag = ModSupport.GetModItem("AAMod", "RajahBag").item.type;
+                return;
+            }
+            if(npc.type == ModContent.NPCType<Bosses.Rajah.SupremeRajah>())
+            {
+                npc.modNPC.music = ModSupport.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/RajahTheme");
+                npc.modNPC.music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/SuperAncients");
+                npc.modNPC.bossBag = ModSupport.GetModItem("AAMod", "RajahCache").item.type;
+                return;
+            }
+
+            //Shen
+            if(npc.type == ModContent.NPCType<Bosses.Shen.Shen>())
+            {
+                npc.modNPC.music = ModSupport.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/Shen");
+                return;
+            }
+            if(npc.type == ModContent.NPCType<Bosses.Shen.Shen>())
+            {
+                npc.modNPC.music = ModSupport.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/ShenA");
+                npc.modNPC.music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/SuperAncients");
+                npc.modNPC.bossBag = ModSupport.GetModItem("AAMod", "ShenCache").item.type;
+                return;
+            }
+
+            //Yamata
+            if(npc.type == ModContent.NPCType<Bosses.Yamata.Yamata>())
+            {
+                npc.modNPC.music = ModSupport.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/Yamata");
+                return;
+            }
+            if(npc.type == ModContent.NPCType<Bosses.Yamata.Awakened.YamataA>())
+            {
+                npc.modNPC.music = ModSupport.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/Yamata2");
+                npc.modNPC.music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/Ancients");
+                npc.modNPC.bossBag = ModSupport.GetModItem("AAMod", "YamataBag").item.type;
+                return;
+            }
+            if(npc.type == ModContent.NPCType<Bosses.Yamata.Awakened.YamataAHead>())
+            {
+                npc.modNPC.music = ModSupport.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/Yamata2");
+                npc.modNPC.music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/Ancients");
+                return;
+            }
+
 		}
 
         public override void NPCLoot(NPC npc)

@@ -31,8 +31,6 @@ namespace AAModEXAI.Bosses.Shen
 			npc.defense = 240;
             npc.lifeMax = 1500000;
             npc.value = Item.sellPrice(1, 0, 0, 0);
-            bossBag = ModLoader.GetMod("AAMod").ItemType("ShenCache");
-            music = ModLoader.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/ShenA");
             musicPriority = (MusicPriority)11;
             isAwakened = true;
             npc.alpha = 255;

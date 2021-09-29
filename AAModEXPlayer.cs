@@ -25,6 +25,8 @@ namespace AAModEXAI
         #region Buff bools
         public bool dragonFire = false;
         public bool hydraToxin = false;
+        public bool VoidGravity = false;
+        public int VoidGravityDir = 1;
 
         public bool AkumaPain = false;
         public bool BlazingMadness = false;
@@ -58,6 +60,8 @@ namespace AAModEXAI
         {
             dragonFire = false;
             hydraToxin = false;
+            VoidGravity = false;
+
             AkumaPain = false;
             BlazingMadness = false;
             YamataGravity = false;
@@ -74,6 +78,8 @@ namespace AAModEXAI
         {
             dragonFire = false;
             hydraToxin = false;
+            VoidGravity = false;
+
             AkumaPain = false;
             BlazingMadness = false;
             YamataGravity = false;
@@ -332,6 +338,44 @@ namespace AAModEXAI
             if(player.endurance >= 1f)
             {
                 player.endurance = .8f;
+            }
+
+            bool ZoneVoid = (bool) ModSupport.GetModPlayerConditions("AAMod", player, "AAPlayer", "ZoneVoid", false, false);
+            if(ZoneVoid)
+            {
+                player.AddBuff(ModContent.BuffType<DeBuffs.VoidGravity>(), 2);
+            }
+
+            if(VoidGravity)
+            {
+                if(ZoneVoid)
+                {
+                    if(VoidGravityDir == 1)
+                    {
+                        player.velocity.Y += 0.01f;	
+                        if(player.velocity.Y > .6f)
+                        {
+                            VoidGravityDir = -1;
+                        }	
+                    }else
+                    if(VoidGravityDir == -1)
+                    {
+                        player.velocity.Y -= 0.01f;	
+                        if(player.velocity.Y < -.6f)
+                        {
+                            VoidGravityDir = 1;
+                        }				
+                    }
+                    else
+                    {
+                        VoidGravityDir = 1;
+                    }
+
+                    if(player.controlDown && player.velocity.Y <= 0)
+                    {
+                        player.velocity.Y = 4f;
+                    }
+                }
             }
 
             for(int i = 0; i < 200; i++)

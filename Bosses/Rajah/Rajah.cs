@@ -40,12 +40,10 @@ namespace AAModEXAI.Bosses.Rajah
             npc.knockBackResist = 0f;
             npc.npcSlots = 1000f;
             npc.HitSound = SoundID.NPCHit1;
-            npc.DeathSound = ModLoader.GetMod("AAMod").GetLegacySoundSlot(SoundType.NPCKilled, "Sounds/Sounds/Rajah");
+            npc.DeathSound = mod.GetLegacySoundSlot(SoundType.NPCKilled, "Sounds/Sounds/RajahRoar");
             npc.value = Item.sellPrice(0, 1, 10, 0);
             npc.boss = true;
             npc.netAlways = true;
-            music = ModLoader.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/RajahTheme");
-            bossBag = ModLoader.GetMod("AAMod").ItemType("RajahBag");
         }
 
         public bool isSupreme = false;
@@ -1286,11 +1284,8 @@ namespace AAModEXAI.Bosses.Rajah
             npc.defense = 0;
             npc.lifeMax = 1200000;
             npc.life = 1200000;
-            music = ModLoader.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/Rajah");
-            bossBag = ModLoader.GetMod("AAMod").ItemType("RajahCache");
             isSupreme = true;
             npc.value = Item.sellPrice(3, 0, 0, 0);
-            music = ModLoader.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/RajahTheme");
         }
         public override string BossHeadTexture => "AAModEXAI/Bosses/Rajah/SupremeRajah_Head_Boss";
     }
