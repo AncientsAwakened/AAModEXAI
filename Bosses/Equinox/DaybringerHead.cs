@@ -893,7 +893,7 @@ namespace AAModEXAI.Bosses.Equinox
             npc.height = 68;
             if (wormStronger)
             {
-                string texName = "NPCs/Bosses/Equinox/";
+                string texName = "Bosses/Equinox/";
                 if (npc.type == mod.NPCType("DaybringerHead")) { texName += "DaybringerHeadBig"; }
                 else
                 if (npc.type == mod.NPCType("DaybringerBody")) { texName += "DaybringerBodyBig"; }

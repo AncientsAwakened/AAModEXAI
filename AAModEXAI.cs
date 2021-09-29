@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Audio;
 
 using Terraria;
 using Terraria.ID;
+using Terraria.UI;
 using Terraria.ModLoader;
 using Terraria.Localization;
 
@@ -46,6 +48,31 @@ namespace AAModEXAI
         {
             WeakReferences.PerformModSupport();
         }
+
+        public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
+		{
+            int num = layers.FindIndex((GameInterfaceLayer layer) => layer.Name == "Vanilla: Mouse Text");
+			if (num != -1)
+			{
+                layers.Insert(num, new LegacyGameInterfaceLayer("Death Worm Head Icon", delegate()
+				{
+                    if (!Main.mapFullscreen && (Main.mapStyle == 1 || Main.mapStyle == 2))
+                    {
+                        string text = "";
+                        Bosses.Invoker.DeathWorm.DeathWormBody.DrawHeadIcon(Main.spriteBatch, ref text);
+                    }
+					return true;
+				}, InterfaceScaleType.UI));
+            }
+		}
+
+        public override void PostDrawFullscreenMap(ref string mouseText)
+		{
+            if (Main.mapFullscreen)
+            {
+                Bosses.Invoker.DeathWorm.DeathWormBody.DrawHeadIcon(Main.spriteBatch, ref mouseText);
+            }
+		}
 
 		public static void Chat(string s, Color color, bool sync = true)
         {

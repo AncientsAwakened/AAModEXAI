@@ -383,7 +383,14 @@ namespace AAModEXAI.Bosses.Shen
                     {
                         npc.ai[0]++;
                         npc.ai[1] = 0;
-                        npc.ai[2] = 0;
+                        if(halfLifeAIChange)
+                        {
+                            npc.ai[2] = Main.rand.Next(2);
+                        }
+                        else
+                        {
+                            npc.ai[2] = 0;
+                        }
                         npc.netUpdate = true;
                     }
                     break;
@@ -397,6 +404,7 @@ namespace AAModEXAI.Bosses.Shen
                         {
                             targetPos = player.Center;
                             targetPos.X += 1000 * (npc.Center.X < targetPos.X ? -1 : 1);
+                            targetPos.Y += 400 * (npc.ai[2] == 0? 1 : -1);
                             Movement(targetPos, 0.8f);
                             if (npc.ai[1] > 180 || Math.Abs(npc.Center.Y - targetPos.Y) < 50) //initiate dash
                             {
