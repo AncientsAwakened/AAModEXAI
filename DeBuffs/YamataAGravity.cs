@@ -18,6 +18,10 @@ namespace AAModEXAI.DeBuffs
 		public override void Update(Player player, ref int buffIndex)
 		{
 			player.GetModPlayer<AAModEXPlayer>().YamataAGravity = true;
+			if(player.velocity.Y > 4f)
+			{
+				player.gravity = 0f;
+			}
 		}
 	}
 }

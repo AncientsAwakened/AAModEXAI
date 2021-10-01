@@ -1,8 +1,10 @@
 using Microsoft.Xna.Framework;
 using System;
+
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
+
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Rajah.Supreme.RoyalRabbit
@@ -153,9 +155,9 @@ namespace AAModEXAI.Bosses.Rajah.Supreme.RoyalRabbit
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitPlayer(Player target, int damage, bool crit)
         {
-            target.AddBuff(BuffID.Daybreak, 800);
+            target.AddBuff(ModLoader.GetMod("AAMod").BuffType("InfinityOverload"), 800);
         }
     }
 }

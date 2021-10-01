@@ -33,6 +33,7 @@ namespace AAModEXAI.Localization
             else if(place == "AH") AHChat(ref info, index);
             else if(place == "Akuma") AkumaChat(ref info, index);
             else if(place == "Anubis") AnubisChat(ref info, index);
+            else if(place == "Rajah") RajahChat(ref info, index);
             return;
         }
 
@@ -626,6 +627,62 @@ namespace AAModEXAI.Localization
                 if(index == 0) info = "...Sorry, but you aren't ready yet.";
                 else if(index == 1) info = "...对不起, 看来你还没准备好.";
                 else if(index == 2) info = "... Извини, ты еще не готов.";
+            }
+        }
+
+        public static void RajahChat(ref string info, int index)
+        {
+            if(info == "SupremeRajahChat")
+            {
+                if(index == 0) info = "Rajah glows with furious energy as he attacks, strengthening his defenses";
+                else if(index == 1) info = "王公兔在攻击时散发巨大的愤怒能量, 强化了他的防御";
+                else if(index == 2) info = "Атакуя, Раджа горит яростной энергией, усиливая свою защиту";
+            }
+            if(info == "SupremeRajahChat2")
+            {
+                if(index == 0) info = "MUDERER";
+                else if(index == 1) info = "杀 人 犯";
+            }
+            if(info == "SupremeRajahChat3")
+            {
+                if(index == 0) info = "Terrarians";
+                else if(index == 1) info = "你们泰拉人";
+            }
+            if(info == "SupremeRajahChat4")
+            {
+                if(index == 0) info = "THIS ISN'T THE END, ";
+                else if(index == 1) info = "这 事 没 完, ";
+                else if(index == 2) info = "ЭТО ЕЩЕ НЕ КОНЕЦ, ";
+            }
+            if(info == "SupremeRajahChat5")
+            {
+                if(index == 0) info = "! RIVALS CLASH TILL THE VERY END!";
+                else if(index == 1) info = "!我 会 打 到 最 后!";
+                else if(index == 2) info = "! СОПЕРНИКИ СРАЖАЮТСЯ ДО КОНЦА!";
+            }
+            if(info == "SupremeRajahChat6")
+            {
+                if(index == 0) info = "And stay down.";
+                else if(index == 1) info = "给我跪下. ";
+                else if(index == 2) info = "И не вылезай.";
+            }
+            if(info == "SupremeRajahChat7")
+            {
+                if(index == 0) info = "Coward.";
+                else if(index == 1) info = "懦夫. ";
+                else if(index == 2) info = "Трус.";
+            }
+            if(info == "SupremeRajahChat8")
+            {
+                if(index == 0) info = "Well fought, ";
+                else if(index == 1) info = "打得不错, ";
+                else if(index == 2) info = "Неплохо сражался, ";
+            }
+            if(info == "SupremeRajahChat9")
+            {
+                if(index == 0) info = ". Take your reward.";
+                else if(index == 1) info = ". 拿着你的奖励. ";
+                else if(index == 2) info = ". Бери награду.";
             }
         }
     }

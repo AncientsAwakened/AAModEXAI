@@ -142,6 +142,7 @@ namespace AAModEXAI.Bosses.Shen
             if (Main.netMode == NetmodeID.Server || Main.dedServ)
             {
                 writer.Write(FleeTimer[0]);
+                writer.Write(SpawnGrips);
             }
         }
 
@@ -151,6 +152,7 @@ namespace AAModEXAI.Bosses.Shen
             if (Main.netMode == NetmodeID.MultiplayerClient)
             {
                 FleeTimer[0] = reader.ReadFloat();
+                SpawnGrips = reader.ReadBool();
             }
         }
 

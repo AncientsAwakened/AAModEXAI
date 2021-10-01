@@ -148,7 +148,7 @@ namespace AAModEXAI.Bosses.Yamata
                 }
             }
             
-            return true;
+            return false;
         }
 
         public bool Dead = false;

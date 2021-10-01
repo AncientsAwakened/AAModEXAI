@@ -6,17 +6,17 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-
 using Terraria.Graphics.Shaders;
+
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Rajah.Supreme.RoyalRabbit
 {
-    public class RoyalRabbitShooter3 : ModNPC
+    public class RoyalRabbitSummoner : ModNPC
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Royal Rabbit DayStrom Shooter");
+            DisplayName.SetDefault("Royal Rabbit Lung Summoner");
             Main.npcFrameCount[npc.type] = 3;
         }
 
@@ -62,39 +62,61 @@ namespace AAModEXAI.Bosses.Rajah.Supreme.RoyalRabbit
             Player player = Main.player[npc.target];
             npc.direction = npc.spriteDirection = npc.Center.X > player.Center.X ? 1 : -1;
 
-            if(npc.Center.Y > player.Center.Y - 100f && npc.Center.Y < player.Center.Y + 100f)
+            if(npc.ai[0] ++ > 30)
             {
-                if(npc.ai[0] ++ > 7)
+                if(Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    if(Main.netMode != NetmodeID.MultiplayerClient)
+                    int num184 = -1;
+                    int num185 = -1;
+                    int num74 = ModContent.ProjectileType<RabbitDragonHead>();
+                    int num76 = npc.damage;
+                    float num77 = 5f;
+                    Vector2 vector2 = npc.Center;
+                    for (int num186 = 0; num186 < 1000; num186++)
                     {
-                        int shootdirection = npc.Center.X < player.Center.X ? 1 : -1;
-                        float speedX = 34f * shootdirection;
-                        float speedY = 0;
-                        if (npc.ai[1]++ > 6) npc.ai[1] = 0;
-
-                        for (int i = 0; i < 4; i++)
+                        if (Main.projectile[num186].active && Main.projectile[num186].owner == Main.myPlayer)
                         {
-                            Vector2 perturbedSpeed = new Vector2(speedX, speedY).RotatedByRandom(MathHelper.ToRadians(15)) * .5f;
-                            Projectile.NewProjectile(npc.Center.X, npc.Center.Y, perturbedSpeed.X, perturbedSpeed.Y, ModContent.ProjectileType<RajahDayStormBullet1>(), npc.damage / 2, 5, Main.myPlayer);
-                        }
-
-                        if (Main.rand.Next(3) == 0)
-                        {
-                            for (int i = 0; i < Main.rand.Next(2); i++)
+                            if (num184 == -1 && Main.projectile[num186].type == ModContent.ProjectileType<RabbitDragonHead>())
                             {
-                                Vector2 perturbedSpeed2 = new Vector2(speedX, speedY).RotatedByRandom(MathHelper.ToRadians(15));
-                                Projectile.NewProjectile(npc.Center.X, npc.Center.Y, perturbedSpeed2.X, perturbedSpeed2.Y, ModContent.ProjectileType<RajahDayStormBullet2>(), (int)(npc.damage / 2 * 1.5f), 5, Main.myPlayer);
+                                num184 = num186;
+                            }
+                            if (num185 == -1 && Main.projectile[num186].type == ModContent.ProjectileType<RabbitDragonTail>())
+                            {
+                                num185 = num186;
+                            }
+                            if (num184 != -1 && num185 != -1)
+                            {
+                                break;
                             }
                         }
                     }
-                    Main.PlaySound(SoundID.Item41, npc.Center);
-                    npc.ai[0] = 0;
+
+
+                    if (num184 == -1 && num185 == -1)
+                    {
+                        float num81 = 0f;
+                        float num82 = 0f;
+                        vector2.X = Main.mouseX + Main.screenPosition.X;
+                        vector2.Y = Main.mouseY + Main.screenPosition.Y;
+                        int num187 = Projectile.NewProjectile(vector2.X, vector2.Y, num81, num82, num74, num76, num77, Main.myPlayer, npc.whoAmI, 0f);
+                        num187 = Projectile.NewProjectile(vector2.X, vector2.Y, num81, num82, ModContent.ProjectileType<RabbitDragonBody>(), num76, num77, Main.myPlayer, num187, 0f);
+                        int num188 = num187;
+                        for (int z = 0; z < (int)(player.maxMinions + 5) * 2; z++)
+                        {
+                            num187 = Projectile.NewProjectile(vector2.X, vector2.Y, num81, num82, ModContent.ProjectileType<RabbitDragonBody>(), num76, num77, Main.myPlayer, num187, 0f);
+                            Main.projectile[num188].localAI[1] = num187;
+                            num188 = num187;
+                        }
+                        num187 = Projectile.NewProjectile(vector2.X, vector2.Y, num81, num82, ModContent.ProjectileType<RabbitDragonTail>(), num76, num77, Main.myPlayer, num187, 0f);
+                        Main.projectile[num188].localAI[1] = num187;
+                    }
                 }
+                Main.PlaySound(SoundID.Item44, npc.Center);
+                npc.ai[0] = 0;
             }
 
             Vector2 targetPos = player.Center;
-            targetPos.X += 500 * (npc.Center.X < targetPos.X ? -1 : 1);
+            targetPos.X += 700 * (npc.Center.X < targetPos.X ? -1 : 1);
 
             if (npc.Distance(targetPos) > 50)
             {

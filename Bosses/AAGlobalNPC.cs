@@ -69,7 +69,6 @@ namespace AAModEXAI
             if(npc.type == ModContent.NPCType<Bosses.Rajah.SupremeRajah>())
             {
                 npc.modNPC.music = ModSupport.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/RajahTheme");
-                npc.modNPC.music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/SuperAncients");
                 npc.modNPC.bossBag = ModSupport.GetModItem("AAMod", "RajahCache").item.type;
                 return;
             }
@@ -80,7 +79,7 @@ namespace AAModEXAI
                 npc.modNPC.music = ModSupport.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/Shen");
                 return;
             }
-            if(npc.type == ModContent.NPCType<Bosses.Shen.Shen>())
+            if(npc.type == ModContent.NPCType<Bosses.Shen.ShenA>())
             {
                 npc.modNPC.music = ModSupport.GetMod("AAMod").GetSoundSlot(SoundType.Music, "Sounds/Music/ShenA");
                 npc.modNPC.music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/SuperAncients");
@@ -154,6 +153,18 @@ namespace AAModEXAI
                 Item.NewItem((int)npc.Center.X, (int)npc.Center.Y, npc.width, npc.height, ModSupport.GetModItem("AAMod", "FAnubisMask").item.type);
                 return;
             }
+            //Rajah
+            if(npc.type == ModContent.NPCType<Bosses.Rajah.Rajah>())
+            {
+                Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, ModSupport.GetModItem("AAMod", "RajahTrophy").item.type);
+                return;
+            }
+            if(npc.type == ModContent.NPCType<Bosses.Rajah.SupremeRajah>())
+            {
+                Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, ModSupport.GetModItem("AAMod", "RajahTrophy").item.type);
+                return;
+            }
+
 		}
 
         public override void AI(NPC npc)

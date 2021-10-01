@@ -1,14 +1,13 @@
 using System;
+using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-
-using System.IO;
-using AAMod.Items.Boss.Rajah;
 using Terraria.Graphics.Shaders;
-using Terraria.ID;
+
 using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Rajah.Supreme.RoyalRabbit
@@ -23,12 +22,13 @@ namespace AAModEXAI.Bosses.Rajah.Supreme.RoyalRabbit
 
         public override void SetDefaults()
         {
+            npc.boss = true;
             npc.width = 32;
             npc.height = 58;
             npc.aiStyle = -1;
-            npc.damage = 150;
-            npc.defense = 130;
-            npc.lifeMax = 70000;
+            npc.damage = 250;
+            npc.defense = 200;
+            npc.lifeMax = 200000;
             npc.knockBackResist = 0f;
             npc.HitSound = SoundID.NPCHit1;
             npc.DeathSound = SoundID.NPCDeath1;
@@ -36,6 +36,7 @@ namespace AAModEXAI.Bosses.Rajah.Supreme.RoyalRabbit
             npc.noTileCollide = true;
             npc.value = 0;
             npc.netAlways = true;
+            music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/SuperAncients");
         }
 
         public override void FindFrame(int frameHeight)
@@ -66,7 +67,7 @@ namespace AAModEXAI.Bosses.Rajah.Supreme.RoyalRabbit
                 if(npc.ai[0] ++ > 22)
                 {
                     int shootdirection = npc.Center.X < player.Center.X ? 1 : -1;
-                    if(Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 18f * shootdirection, 0, mod.ProjectileType("CarrowR"), npc.damage / 2, 5, Main.myPlayer);
+                    if(Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 18f * shootdirection, 0, ModContent.ProjectileType<CarrowR>(), npc.damage / 2, 5, Main.myPlayer);
                     Main.PlaySound(SoundID.Item5, npc.Center);
                     npc.ai[0] = 0;
                 }
@@ -106,7 +107,7 @@ namespace AAModEXAI.Bosses.Rajah.Supreme.RoyalRabbit
 
             for (int num92 = 0; num92 < 200; num92 ++)
             {
-                bool check = Main.npc[num92].type == npc.type;
+                bool check = npc.boss;
                 if (num92 != npc.whoAmI && Main.npc[num92].active && check && Math.Abs(npc.position.X - Main.npc[num92].position.X) + Math.Abs(npc.position.Y - Main.npc[num92].position.Y) < (float)npc.width)
                 {
                     if (npc.position.X < Main.npc[num92].position.X)

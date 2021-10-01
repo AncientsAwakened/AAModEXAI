@@ -12,11 +12,11 @@ using AAModEXAI.Dusts;
 
 namespace AAModEXAI.Bosses.Rajah.Supreme.RoyalRabbit
 {
-    public class RoyalRabbitShooter3 : ModNPC
+    public class RoyalRabbitLancer : ModNPC
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Royal Rabbit DayStrom Shooter");
+            DisplayName.SetDefault("Royal Rabbit Lancer");
             Main.npcFrameCount[npc.type] = 3;
         }
 
@@ -52,6 +52,21 @@ namespace AAModEXAI.Bosses.Rajah.Supreme.RoyalRabbit
             }
         }
 
+        public override bool PreDraw(SpriteBatch spritebatch, Color dColor)
+        {
+            Texture2D Tex = Main.npcTexture[npc.type];
+            Player player = Main.player[npc.target];
+            Rectangle Rectframe = npc.frame;
+
+            if(AAModEXAIGlobalProjectile.AnyProjectiles(ModContent.ProjectileType<RoyalRabbitLancerSpear>()))
+            {
+                Tex = mod.GetTexture("Bosses/Rajah/Supreme/RoyalRabbit/RoyalRabbitLancerAttack");
+            }
+            BaseDrawing.DrawTexture(spritebatch, Tex, 0, npc.position - new Vector2(npc.direction == 1 ? 12f : -12f, 14f), npc.width, npc.height, npc.scale, npc.rotation, npc.direction, 3, Rectframe, dColor, true);
+
+            return false;
+        }
+
         public override void AI()
         {
             if (npc.target < 0 || npc.target == 255 || Main.player[npc.target].dead)
@@ -62,39 +77,19 @@ namespace AAModEXAI.Bosses.Rajah.Supreme.RoyalRabbit
             Player player = Main.player[npc.target];
             npc.direction = npc.spriteDirection = npc.Center.X > player.Center.X ? 1 : -1;
 
-            if(npc.Center.Y > player.Center.Y - 100f && npc.Center.Y < player.Center.Y + 100f)
+            if(npc.ai[0] ++ > 23)
             {
-                if(npc.ai[0] ++ > 7)
+                if(Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    if(Main.netMode != NetmodeID.MultiplayerClient)
-                    {
-                        int shootdirection = npc.Center.X < player.Center.X ? 1 : -1;
-                        float speedX = 34f * shootdirection;
-                        float speedY = 0;
-                        if (npc.ai[1]++ > 6) npc.ai[1] = 0;
-
-                        for (int i = 0; i < 4; i++)
-                        {
-                            Vector2 perturbedSpeed = new Vector2(speedX, speedY).RotatedByRandom(MathHelper.ToRadians(15)) * .5f;
-                            Projectile.NewProjectile(npc.Center.X, npc.Center.Y, perturbedSpeed.X, perturbedSpeed.Y, ModContent.ProjectileType<RajahDayStormBullet1>(), npc.damage / 2, 5, Main.myPlayer);
-                        }
-
-                        if (Main.rand.Next(3) == 0)
-                        {
-                            for (int i = 0; i < Main.rand.Next(2); i++)
-                            {
-                                Vector2 perturbedSpeed2 = new Vector2(speedX, speedY).RotatedByRandom(MathHelper.ToRadians(15));
-                                Projectile.NewProjectile(npc.Center.X, npc.Center.Y, perturbedSpeed2.X, perturbedSpeed2.Y, ModContent.ProjectileType<RajahDayStormBullet2>(), (int)(npc.damage / 2 * 1.5f), 5, Main.myPlayer);
-                            }
-                        }
-                    }
-                    Main.PlaySound(SoundID.Item41, npc.Center);
-                    npc.ai[0] = 0;
+                    Vector2 speed = npc.DirectionTo(player.Center) * 7f;
+                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, speed.X, speed.Y, ModContent.ProjectileType<RoyalRabbitLancerSpear>(), (int)(npc.damage / 2 * 1.5f), 5, Main.myPlayer, 0f, npc.whoAmI);
                 }
+                Main.PlaySound(SoundID.Item20, npc.Center);
+                npc.ai[0] = 0;
             }
 
             Vector2 targetPos = player.Center;
-            targetPos.X += 500 * (npc.Center.X < targetPos.X ? -1 : 1);
+            targetPos.X += 700 * (npc.Center.X < targetPos.X ? -1 : 1);
 
             if (npc.Distance(targetPos) > 50)
             {
