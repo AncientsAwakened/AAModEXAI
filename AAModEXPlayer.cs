@@ -181,6 +181,14 @@ namespace AAModEXAI
                 }
             }
 
+            if (YamataGravity || YamataAGravity || VoidGravity)
+            {
+                if(!player.pulley && player.wingTime == 0 && player.velocity.Y < 0.2f && player.velocity.Y >- 0.2f)
+                {
+                    player.wingTime = player.wingTimeMax;
+                }
+            }
+
             if (Unstable)
             {
                 bool flag = player.controlLeft;

@@ -171,7 +171,7 @@ namespace AAModEXAI.Bosses.Yamata
                         }
                     }
 
-                    Main.PlaySound(ModLoader.GetMod("AAMod").GetLegacySoundSlot(SoundType.Custom, "Sounds/Sounds/YamataRoar"), npc.position);
+                    Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/Sounds/YamataRoar"), npc.position);
                     Vector2 position = npc.Center + (Vector2.One * -20f);
                     int num84 = 40;
                     int height3 = num84;

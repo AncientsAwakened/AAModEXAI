@@ -38,7 +38,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
             npc.chaseable = false;
             npc.damage = 210;
             NPCID.Sets.TechnicallyABoss[npc.type] = true;
-            npc.DeathSound = ModLoader.GetMod("AAMod").GetLegacySoundSlot(SoundType.NPCKilled, "Sounds/Sounds/YamataRoar");
+            npc.DeathSound = mod.GetLegacySoundSlot(SoundType.NPCKilled, "Sounds/Sounds/YamataRoar");
             npc.lifeMax = Main.expertMode? 325000 : 650000;
             npc.width = 46;
             npc.height = 46;
@@ -119,7 +119,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
             
             npc.TargetClosest(true);
             Player targetPlayer = Main.player[npc.target];
-            if (targetPlayer == null || !targetPlayer.active || targetPlayer.dead) targetPlayer = null; //deliberately set to null
+            if (targetPlayer == null || !targetPlayer.active || targetPlayer.dead) npc.TargetClosest(true); //deliberately set to null
             
             Vector2 nextTarget = Body.npc.Center + new Vector2(npc.ai[1], npc.ai[2]);
             

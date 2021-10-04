@@ -1466,6 +1466,230 @@ namespace AAModEXAI.Bosses.Rajah
             }
             
             StompAI();
+            HalfAttackAI();
+        }
+
+        public void HalfAttackAI()
+        {
+            if (Main.netMode != NetmodeID.MultiplayerClient)
+            {
+                npc.ai[2]++;
+                internalAI[3]++;
+            }
+            if (npc.ai[2] >= 1000)
+            {
+                internalAI[3] = 0;
+                npc.ai[2] = 0;
+                npc.ai[3] = 0;
+                npc.netUpdate = true;
+            }
+            else if (npc.ai[3] == 0 && npc.ai[2] >= ChangeRate())
+            {
+                if (Main.rand.Next(5) == 0)
+                {
+                    Roar(roarTimerMax);
+                }
+                if (Main.netMode != NetmodeID.MultiplayerClient)
+                {
+                    internalAI[3] = 0;
+                    npc.ai[2] = 0;
+                    npc.ai[3] = Main.rand.Next(7);
+                }
+                npc.netUpdate = true;
+            }
+
+            if (Main.netMode != NetmodeID.MultiplayerClient)
+            {
+                if (npc.ai[3] == 0) //Minion Phase
+                {
+                    if (internalAI[3] >= 80)
+                    {
+                        internalAI[3] = 0;
+                        if (internalAI[1] == 0)
+                        {
+                            if (NPC.CountNPCS(ModContent.NPCType<RabbitcopterSoldier>()) + AAModEXAIGlobalProjectile.CountProjectiles(ModContent.ProjectileType<BunnySummon1>()) < 5)
+                            {
+                                Projectile.NewProjectile(StaffPos, Vector2.Zero, ModContent.ProjectileType<BunnySummon1>(), 0, 0, Main.myPlayer, Main.rand.Next((int)npc.Center.X - 200, (int)npc.Center.X + 200), Main.rand.Next((int)npc.Center.Y - 200, (int)npc.Center.Y - 50));
+                                Projectile.NewProjectile(StaffPos, Vector2.Zero, ModContent.ProjectileType<BunnySummon1>(), 0, 0, Main.myPlayer, Main.rand.Next((int)npc.Center.X - 200, (int)npc.Center.X + 200), Main.rand.Next((int)npc.Center.Y - 200, (int)npc.Center.Y - 50));
+                                Projectile.NewProjectile(StaffPos, Vector2.Zero, ModContent.ProjectileType<BunnySummon1>(), 0, 0, Main.myPlayer, Main.rand.Next((int)npc.Center.X - 200, (int)npc.Center.X + 200), Main.rand.Next((int)npc.Center.Y - 200, (int)npc.Center.Y - 50));
+                            }
+                            npc.netUpdate = true;
+                        }
+                        else
+                        {
+                            if (npc.ai[1] > 2)
+                            {
+                                npc.ai[1] = 0;
+                            }
+                            if (npc.ai[1] == 0)
+                            {
+                                if (NPC.CountNPCS(ModContent.NPCType<RabbitcopterSoldier>()) + AAModEXAIGlobalProjectile.CountProjectiles(ModContent.ProjectileType<BunnySummon1>()) < 5)
+                                {
+                                    Projectile.NewProjectile(StaffPos, Vector2.Zero, ModContent.ProjectileType<BunnySummon1>(), 0, 0, Main.myPlayer, Main.rand.Next((int)npc.Center.X - 500, (int)npc.Center.X + 500), Main.rand.Next((int)npc.Center.Y - 200, (int)npc.Center.Y - 50));
+                                    Projectile.NewProjectile(StaffPos, Vector2.Zero, ModContent.ProjectileType<BunnySummon1>(), 0, 0, Main.myPlayer, Main.rand.Next((int)npc.Center.X - 500, (int)npc.Center.X + 500), Main.rand.Next((int)npc.Center.Y - 200, (int)npc.Center.Y - 50));
+                                    Projectile.NewProjectile(StaffPos, Vector2.Zero, ModContent.ProjectileType<BunnySummon1>(), 0, 0, Main.myPlayer, Main.rand.Next((int)npc.Center.X - 500, (int)npc.Center.X + 500), Main.rand.Next((int)npc.Center.Y - 200, (int)npc.Center.Y - 50));
+                                }
+                            }
+                            else if (npc.ai[1] == 1)
+                            {
+                                if (NPC.CountNPCS(ModContent.NPCType<BunnyBrawler>()) + AAModEXAIGlobalProjectile.CountProjectiles(ModContent.ProjectileType<BunnySummon2>()) < 5)
+                                {
+                                    Projectile.NewProjectile(StaffPos, Vector2.Zero, ModContent.ProjectileType<BunnySummon2>(), 0, 0, Main.myPlayer, Main.rand.Next((int)npc.Center.X - 500, (int)npc.Center.X + 500), Main.rand.Next((int)npc.Center.Y - 200, (int)npc.Center.Y - 50));
+                                    Projectile.NewProjectile(StaffPos, Vector2.Zero, ModContent.ProjectileType<BunnySummon2>(), 0, 0, Main.myPlayer, Main.rand.Next((int)npc.Center.X - 500, (int)npc.Center.X + 500), Main.rand.Next((int)npc.Center.Y - 200, (int)npc.Center.Y - 50));
+                                }
+                            }
+                            else if (npc.ai[1] == 2)
+                            {
+                                if (NPC.CountNPCS(ModContent.NPCType<BunnyBattler>()) + AAModEXAIGlobalProjectile.CountProjectiles(ModContent.ProjectileType<BunnySummon3>()) < 8)
+                                {
+                                    Projectile.NewProjectile(StaffPos, Vector2.Zero, ModContent.ProjectileType<BunnySummon3>(), 0, 0, Main.myPlayer, Main.rand.Next((int)npc.Center.X - 500, (int)npc.Center.X + 500), Main.rand.Next((int)npc.Center.Y - 200, (int)npc.Center.Y - 50));
+
+                                    Projectile.NewProjectile(StaffPos, Vector2.Zero, ModContent.ProjectileType<BunnySummon3>(), 0, 0, Main.myPlayer, Main.rand.Next((int)npc.Center.X - 500, (int)npc.Center.X + 500), Main.rand.Next((int)npc.Center.Y - 200, (int)npc.Center.Y - 50));
+
+                                    Projectile.NewProjectile(StaffPos, Vector2.Zero, ModContent.ProjectileType<BunnySummon3>(), 0, 0, Main.myPlayer, Main.rand.Next((int)npc.Center.X - 500, (int)npc.Center.X + 500), Main.rand.Next((int)npc.Center.Y - 200, (int)npc.Center.Y - 50));
+
+                                    Projectile.NewProjectile(StaffPos, Vector2.Zero, ModContent.ProjectileType<BunnySummon3>(), 0, 0, Main.myPlayer, Main.rand.Next((int)npc.Center.X - 500, (int)npc.Center.X + 500), Main.rand.Next((int)npc.Center.Y - 200, (int)npc.Center.Y - 50));
+                                }
+                            }
+                            npc.ai[1] += 1;
+                            npc.netUpdate = true;
+                        }
+                    }
+                }
+                else if (npc.ai[3] == 1) //Bunzooka
+                {
+                    if (npc.ai[2] > 500)
+                    {
+                        
+                    }
+                    else if (internalAI[3] > 40)
+                    {
+                        internalAI[3] = 0;
+                        int Rocket = ModContent.ProjectileType<RajahRocketEXR>();
+                        Vector2 shoot = PredictPlayerMovement(ProjSpeed(), player);
+                        shoot.Normalize();
+                        shoot *= ProjSpeed();
+                        Projectile.NewProjectile(WeaponPos.X, WeaponPos.Y, shoot.X, shoot.Y, Rocket, damage, 5, Main.myPlayer);
+                        npc.netUpdate = true;
+                    }
+                }
+                else if (npc.ai[3] == 2) //Royal Scepter
+                {
+                    int carrots = 5;
+                    int carrotType = ModContent.ProjectileType<CarrotEXR>();
+                    float spread = 45f * 0.0174f * .5f;
+                    Vector2 dir = PredictPlayerMovement(ProjSpeed() + 3f, player);
+                    dir.Normalize();
+                    dir *= ProjSpeed() + 3f;
+                    float baseSpeed = (float)Math.Sqrt((dir.X * dir.X) + (dir.Y * dir.Y));
+                    double startAngle = Math.Atan2(dir.X, dir.Y) - .1d;
+                    double deltaAngle = spread / carrots * 2;
+                    if (internalAI[3] > 40)
+                    {
+                        internalAI[3] = 0;
+                        for (int i = 0; i < carrots; i++)
+                        {
+                            double offsetAngle = startAngle + deltaAngle * (i - (int)(carrots * .5f));
+                            Projectile.NewProjectile(WeaponPos.X, WeaponPos.Y, baseSpeed * (float)Math.Sin(offsetAngle), baseSpeed * (float)Math.Cos(offsetAngle), carrotType, damage, 5, Main.myPlayer, 0);
+                        }
+                        npc.netUpdate = true;
+                    }
+                }
+                else if (npc.ai[3] == 3) //Javelin
+                {
+                    int Javelin = ModContent.ProjectileType<BaneTEXR>();
+                    if (internalAI[3] == 40)
+                    {
+                        Vector2 dir = PredictPlayerMovement(ProjSpeed(), player);
+                        dir.Normalize();
+                        dir *= ProjSpeed();
+                        Projectile.NewProjectile(WeaponPos.X, WeaponPos.Y, dir.X, dir.Y, Javelin, damage, 5, Main.myPlayer);
+                    }
+                    if (internalAI[3] > 60)
+                    {
+                        internalAI[3] = 0;
+                    }
+                    npc.netUpdate = true;
+                }
+                else if (npc.ai[3] == 4) //Excalihare
+                {
+                    if (internalAI[3] > 20)
+                    {
+                        internalAI[3] = 0;
+                        Vector2 dir = PredictPlayerMovement(ProjSpeed() + 3f, player);
+                        dir.Normalize();
+                        dir *= ProjSpeed() + 3f;
+                        Projectile.NewProjectile(WeaponPos.X, WeaponPos.Y, dir.X, dir.Y, ModContent.ProjectileType<ExcalihareR>(), damage, 5, Main.myPlayer);
+                        npc.netUpdate = true;
+                    }
+                }
+                else if (npc.ai[3] == 5) //Fluffy Fury
+                {
+                    int Arrows = Main.rand.Next(2, 4);
+                    float spread = 45f * 0.0174f * .3f;
+                    Vector2 dir = PredictPlayerMovement(ProjSpeed(), player);
+                    dir.Normalize();
+                    dir *= ProjSpeed();
+                    float baseSpeed = (float)Math.Sqrt((dir.X * dir.X) + (dir.Y * dir.Y));
+                    double startAngle = Math.Atan2(dir.X, dir.Y) - .1d;
+                    double deltaAngle = spread / (Arrows * 2);
+                    float delay = 15;
+                    if (internalAI[3] > delay)
+                    {
+                        internalAI[3] = 0;
+                        for (int i = 0; i < Arrows; i++)
+                        {
+                            double offsetAngle = startAngle + (deltaAngle * i);
+                            Projectile.NewProjectile(WeaponPos.X, WeaponPos.Y, baseSpeed * (float)Math.Sin(offsetAngle), baseSpeed * (float)Math.Cos(offsetAngle), ModContent.ProjectileType<CarrowR>(), damage, 5, Main.myPlayer);
+                        }
+                        npc.netUpdate = true;
+                    }
+                }
+                else if (npc.ai[3] == 6) //Rabbits Wrath
+                {
+                    if (internalAI[3] > 5)
+                    {
+                        internalAI[3] = 0;
+                        if(npc.ai[2] < 20) internalAI[5] = player.Center.X;
+                        if(internalAI[5] - player.Center.X > 200f) internalAI[5] = player.Center.X + 100f;
+                        else if(internalAI[5] - player.Center.X < -200f) internalAI[5] = player.Center.X - 100f;
+                        Vector2 ShootPos = new Vector2(internalAI[5], player.Center.Y) + new Vector2(player.velocity.X / 10f * ((npc.ai[2] / 60) % 20) * 600f / 14f, 0);
+                        Vector2 vector12 = ShootPos;
+                        float num75 = 14f;
+                        for (int num120 = 0; num120 < 3; num120++)
+                        {
+                            Vector2 vector2 = ShootPos + new Vector2(-(float)Main.rand.Next(0, 401) * player.direction, -600f);
+                            vector2.Y -= 120 * num120;
+                            Vector2 vector13 = vector12 - vector2;
+                            if (vector13.Y < 0f)
+                            {
+                                vector13.Y *= -1f;
+                            }
+                            if (vector13.Y < 20f)
+                            {
+                                vector13.Y = 20f;
+                            }
+                            vector13.Normalize();
+                            vector13 *= num75;
+                            float num82 = vector13.X;
+                            float num83 = vector13.Y;
+                            float speedX5 = num82;
+                            float speedY6 = num83 + Main.rand.Next(-40, 41) * 0.02f;
+                            int p = Projectile.NewProjectile(vector2.X, vector2.Y, speedX5, speedY6, ModContent.ProjectileType<CarrotEXR>(), damage, 6, Main.myPlayer, 0, 0);
+                            Main.projectile[p].tileCollide = false;
+                        }
+                        npc.netUpdate = true;
+                    }
+                }
+                else if (npc.ai[3] == 7) //Carrot Farmer
+                {
+                    if (!AAModEXAIGlobalProjectile.AnyProjectiles(ModContent.ProjectileType<CarrotFarmerR>()))
+                    {
+                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0f, 0f, ModContent.ProjectileType<CarrotFarmerR>(), damage, 3f, Main.myPlayer, npc.whoAmI);
+                        npc.netUpdate = true;
+                    }
+                }
+            }
         }
     }
 }

@@ -14,7 +14,7 @@ namespace AAModEXAI.Items
             DisplayName.SetDefault("Super Ancients Soul");
             Tooltip.SetDefault("Essence of ancient, arcane magic. Be used for making the Legendary equipments.");
             // ticksperframe, frameCount
-            Main.RegisterItemAnimation(item.type, new DrawAnimationVertical(4, 4));
+            Main.RegisterItemAnimation(item.type, new DrawAnimationVertical(4, 10));
             ItemID.Sets.ItemNoGravity[item.type] = true;
         }
 

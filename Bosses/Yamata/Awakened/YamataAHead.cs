@@ -123,7 +123,7 @@ namespace AAModEXAI.Bosses.Yamata.Awakened
 
             Laugh();
 
-            int roarSound = ModLoader.GetMod("AAMod").GetSoundSlot(SoundType.Item, "Sounds/Sounds/YamataRoar");
+            int roarSound = mod.GetSoundSlot(SoundType.Item, "Sounds/Sounds/YamataRoar");
 
             if (!player.active || player.dead || !Body.npc.active)
             {

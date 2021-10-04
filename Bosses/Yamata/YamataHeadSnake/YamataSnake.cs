@@ -31,7 +31,7 @@ namespace AAModEXAI.Bosses.Yamata.YamataHeadSnake
             npc.damage = 140;
             npc.defense = 100;
             npc.lifeMax = 25000;
-            npc.DeathSound = ModLoader.GetMod("AAMod").GetLegacySoundSlot(SoundType.NPCKilled, "Sounds/Sounds/YamataRoar");
+            npc.DeathSound = mod.GetLegacySoundSlot(SoundType.NPCKilled, "Sounds/Sounds/YamataRoar");
             npc.noGravity = true;
             npc.knockBackResist = 0f;
             npc.value = 0f;
@@ -150,8 +150,8 @@ namespace AAModEXAI.Bosses.Yamata.YamataHeadSnake
 
             npc.direction = npc.velocity.X < 0f ? 1 : -1;
 
-            float num37 = 16f;
-            float num38 = 0.75f;
+            float num37 = 18f;
+            float num38 = 0.28f;
 
             Vector2 NPCCenter = npc.Center;
             float playerCenterX = Main.player[npc.target].Center.X;
