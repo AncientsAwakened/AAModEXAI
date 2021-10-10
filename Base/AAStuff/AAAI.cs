@@ -6,9 +6,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Microsoft.Xna.Framework.Graphics;
 
-using AAModEXAI.Misc;
-
-namespace AAModEXAI.Base
+namespace AAModEXAI.Base.AAStuff
 {
     public class AAAI
 	{

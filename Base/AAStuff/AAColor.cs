@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using System;
 
-namespace AAModEXAI.Base
+namespace AAModEXAI.Base.AAStuff
 {
     public static class AAColor
     {

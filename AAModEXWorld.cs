@@ -6,7 +6,6 @@ using Terraria.ModLoader;
 using Terraria.ID;
 using Terraria.Utilities;
 using Terraria.ModLoader.IO;
-using AAModEXAI.Dusts;
 
 namespace AAModEXAI
 {

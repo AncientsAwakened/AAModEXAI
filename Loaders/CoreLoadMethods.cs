@@ -40,5 +40,11 @@ namespace AAModEXAI.Loaders
             Filters.Scene["AAModEXAI:Shockwave"] = new Filter(new ScreenShaderData(screenRef, "Shockwave"), EffectPriority.VeryHigh);
             Filters.Scene["AAModEXAI:Shockwave"].Load();
         }
+
+        [LoadThis(true)]
+        public static void LoadSubWorld()
+        {
+            AAModEXAI.instance.Load();
+        }
     }
 }

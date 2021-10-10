@@ -10,29 +10,6 @@ namespace AAModEXAI
     {
         public override bool InstancePerEntity => true;
         public override bool CloneNewInstances => true;
-
-        public override void VerticalWingSpeeds(Item item, Player player, ref float ascentWhenFalling, ref float ascentWhenRising, ref float maxCanAscendMultiplier, ref float maxAscentMultiplier, ref float constantAscend)
-		{
-            AAModEXPlayer AAplayer = player.GetModPlayer<AAModEXPlayer>();
-            if(item == ItemLoader.GetWing(player) && AAplayer.ForbiddenTele && (player.inventory[player.selectedItem].type == ItemID.RodofDiscord || player.HeldItem.type == ItemID.RodofDiscord))
-            {
-                ascentWhenFalling += 0.3f;
-                ascentWhenRising += 0.3f;
-                maxCanAscendMultiplier += 0.3f;
-                maxAscentMultiplier += 0.3f;
-                constantAscend += 0.3f;
-            }
-		}
-
-        public override void HorizontalWingSpeeds(Item item, Player player, ref float speed, ref float acceleration)
-		{
-			AAModEXPlayer AAplayer = player.GetModPlayer<AAModEXPlayer>();
-            if(AAplayer.ForbiddenTele && player.wings > 0 && (player.inventory[player.selectedItem].type == ItemID.RodofDiscord || player.HeldItem.type == ItemID.RodofDiscord))
-            {
-                speed += 3f;
-			    acceleration += 0.3f;
-            }
-		}
     }
 }
 

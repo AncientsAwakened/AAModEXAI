@@ -2,7 +2,8 @@
 using System;
 using Terraria;
 using Terraria.ID;
-namespace AAModEXAI.Misc
+
+namespace AAModEXAI.Base.AAStuff
 {
     public static class ColorUtils
     {

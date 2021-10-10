@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -11,7 +12,7 @@ using Terraria.ModLoader;
 using Terraria.Localization;
 
 using AAModEXAI.Loaders;
-using AAModEXAI.Dusts;
+using AAModEXAI.Base.SubWorld;
 
 namespace AAModEXAI
 {
@@ -46,7 +47,36 @@ namespace AAModEXAI
 
         public override void PostSetupContent()
         {
-            WeakReferences.PerformModSupport();
+            
+        }
+
+        public override void AddRecipes()
+		{
+			SubworldLibrary.Instance.AddRecipes();
+		}
+
+        public override void UpdateUI(GameTime gameTime)
+		{
+			SubworldLibrary.Instance.UpdateUI(gameTime);
+		}
+
+		public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
+		{
+			SubworldLibrary.Instance.ModifyInterfaceLayers(layers);
+		}
+
+        public override void HandlePacket(BinaryReader reader, int whoAmI)
+		{
+            SubworldLibrary.Instance.HandlePacket(reader, whoAmI);
+        }
+
+        public override object Call(params object[] args)
+		{
+            var sub = SubworldLibrary.Call(args);
+
+            if(sub != null) return sub;
+            
+            return null;
         }
 	}
 }

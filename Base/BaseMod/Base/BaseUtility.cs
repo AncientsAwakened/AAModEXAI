@@ -419,7 +419,7 @@ namespace AAModEXAI
             bool canPlay = false;
             if (x == -1 || y == -1) { canPlay = true; }else
             {
-                if (WorldGen.gen || Main.netMode == 2) { return; }
+                if (WorldGen.gen || Main.netMode == NetmodeID.Server) { return; }
                 Rectangle value = new Rectangle((int)(Main.screenPosition.X - (float)(Main.screenWidth * 2)), (int)(Main.screenPosition.Y - (float)(Main.screenHeight * 2)), Main.screenWidth * 5, Main.screenHeight * 5);
                 Rectangle rectangle = new Rectangle(x, y, 1, 1);
                 Vector2 vector = new Vector2(Main.screenPosition.X + (float)Main.screenWidth * 0.5f, Main.screenPosition.Y + (float)Main.screenHeight * 0.5f);

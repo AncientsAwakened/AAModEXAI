@@ -4,8 +4,6 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 
-using AAModEXAI.Dusts;
-
 namespace AAModEXAI
 {
     public class AAModEXAIGlobalProjectile : GlobalProjectile

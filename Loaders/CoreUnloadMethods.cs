@@ -39,5 +39,11 @@ namespace AAModEXAI.Loaders
 				}
 			}
 		}
+
+		[UnloadThis(true)]
+        public static void UnLoadSubWorld()
+        {
+            AAModEXAI.instance.Unload();
+        }
     }
 }
