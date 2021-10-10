@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+
 using Terraria;
 using Terraria.ID;
+
 using static AAModEXAI.AAModEXAI;
+using AAModEXAI.Base.SubWorld;
 
 namespace AAModEXAI.Loaders
 {
@@ -43,7 +46,7 @@ namespace AAModEXAI.Loaders
 		[UnloadThis(true)]
         public static void UnLoadSubWorld()
         {
-            AAModEXAI.instance.Unload();
+            SubworldLibrary.Unload();
         }
     }
 }

@@ -65,32 +65,32 @@ namespace AAModEXAI.Base.SubWorld
 			SubworldLibrary.Instance = this;
 		}
 
-		public void Load()
+		public static void Load()
 		{
 			SubworldLibrary.WorldIO = typeof(ModLoader).Assembly.GetType("Terraria.ModLoader.IO.WorldIO");
 			SubworldLibrary.WorldIO_Load = SubworldLibrary.WorldIO.GetMethod("Load", BindingFlags.Static | BindingFlags.NonPublic);
 			SubworldLibrary.WorldHooks_SetupWorld = typeof(WorldHooks).GetMethod("SetupWorld", BindingFlags.Static | BindingFlags.NonPublic);
-			Main.UpdateTime += new ILContext.Manipulator(this.HookUpdateTime);
-			WorldGen.UpdateWorld += new ILContext.Manipulator(this.HookUpdateWorld);
-			Liquid.Update += new ILContext.Manipulator(this.HookUpdate);
-			SubworldLibrary.PreUpdate += new ILContext.Manipulator(this.HookPreUpdate);
-			SubworldLibrary.PostUpdate += new ILContext.Manipulator(this.HookPostUpdate);
-			Player.Update += new ILContext.Manipulator(this.HookUpdatePlayer);
-			NPC.UpdateNPC_UpdateGravity += new ILContext.Manipulator(this.HookUpdateGravity);
-			WorldGen.do_worldGenCallBack += new ILContext.Manipulator(this.HookWorldGen);
-			Player.SavePlayer += new ILContext.Manipulator(this.HookSavePlayer);
-			WorldFile.saveWorld_bool_bool += new ILContext.Manipulator(this.HookSaveWorld);
-			SubworldLibrary.Save += new ILContext.Manipulator(this.HookSave);
-			Main.EraseWorld += new ILContext.Manipulator(this.HookEraseWorld);
-			Main.DoDraw += new ILContext.Manipulator(this.HookDoDraw);
-			Main.DrawBlack += new ILContext.Manipulator(this.HookDrawBlack);
-			Main.DrawBG += new ILContext.Manipulator(this.HookDrawBG);
-			Main.DrawBackground += new ILContext.Manipulator(this.HookDrawBackground);
-			Main.OldDrawBackground += new ILContext.Manipulator(this.HookOldDrawBackground);
-			Main.DrawUnderworldBackground += new ILContext.Manipulator(this.HookDrawUnderworldBackground);
-			Player.UpdateBiomes += new ILContext.Manipulator(this.HookUpdateBiomes);
-			IngameOptions.Draw += new ILContext.Manipulator(this.HookDraw);
-			Lighting.PreRenderPhase += new ILContext.Manipulator(this.HookPreRenderPhase);
+			Main.UpdateTime += new ILContext.Manipulator(HookUpdateTime);
+			WorldGen.UpdateWorld += new ILContext.Manipulator(HookUpdateWorld);
+			Liquid.Update += new ILContext.Manipulator(HookUpdate);
+			SubworldLibrary.PreUpdate += new ILContext.Manipulator(HookPreUpdate);
+			SubworldLibrary.PostUpdate += new ILContext.Manipulator(HookPostUpdate);
+			Player.Update += new ILContext.Manipulator(HookUpdatePlayer);
+			NPC.UpdateNPC_UpdateGravity += new ILContext.Manipulator(HookUpdateGravity);
+			WorldGen.do_worldGenCallBack += new ILContext.Manipulator(HookWorldGen);
+			Player.SavePlayer += new ILContext.Manipulator(HookSavePlayer);
+			WorldFile.saveWorld_bool_bool += new ILContext.Manipulator(HookSaveWorld);
+			SubworldLibrary.Save += new ILContext.Manipulator(HookSave);
+			Main.EraseWorld += new ILContext.Manipulator(HookEraseWorld);
+			Main.DoDraw += new ILContext.Manipulator(HookDoDraw);
+			Main.DrawBlack += new ILContext.Manipulator(HookDrawBlack);
+			Main.DrawBG += new ILContext.Manipulator(HookDrawBG);
+			Main.DrawBackground += new ILContext.Manipulator(HookDrawBackground);
+			Main.OldDrawBackground += new ILContext.Manipulator(HookOldDrawBackground);
+			Main.DrawUnderworldBackground += new ILContext.Manipulator(HookDrawUnderworldBackground);
+			Player.UpdateBiomes += new ILContext.Manipulator(HookUpdateBiomes);
+			IngameOptions.Draw += new ILContext.Manipulator(HookDraw);
+			Lighting.PreRenderPhase += new ILContext.Manipulator(HookPreRenderPhase);
 			Subworld.subworlds = new List<Subworld>();
 			foreach (Mod mod in ModLoader.Mods)
 			{
@@ -110,20 +110,20 @@ namespace AAModEXAI.Base.SubWorld
 			}
 			if (!Terraria.Main.dedServ)
 			{
-				this.UI = new UserInterface();
+				AAModEXAI.instance.SubWorldInterface = new UserInterface();
 			}
-			ModTranslation modTranslation = AAModEXAI.instance.CreateTranslation("Return");
+			ModTranslation modTranslation = ModContent.GetInstance<AAModEXAI>().CreateTranslation("Return");
 			modTranslation.SetDefault("Return");
-			AAModEXAI.instance.AddTranslation(modTranslation);
-			modTranslation = AAModEXAI.instance.CreateTranslation("Voting");
+			ModContent.GetInstance<AAModEXAI>().AddTranslation(modTranslation);
+			modTranslation = ModContent.GetInstance<AAModEXAI>().CreateTranslation("Voting");
 			modTranslation.SetDefault("Someone wants to enter {0}.");
-			AAModEXAI.instance.AddTranslation(modTranslation);
-			modTranslation = AAModEXAI.instance.CreateTranslation("VotingToLeave");
+			ModContent.GetInstance<AAModEXAI>().AddTranslation(modTranslation);
+			modTranslation = ModContent.GetInstance<AAModEXAI>().CreateTranslation("VotingToLeave");
 			modTranslation.SetDefault("Someone wants to leave.");
-			AAModEXAI.instance.AddTranslation(modTranslation);
+			ModContent.GetInstance<AAModEXAI>().AddTranslation(modTranslation);
 		}
 
-		public void AddRecipes()
+		public static void AddRecipes()
 		{
 			SubworldLibrary.canRegister = false;
 		}
@@ -205,38 +205,40 @@ namespace AAModEXAI.Base.SubWorld
 			return null;
 		}
 
-		public void Unload()
+		public static void Unload()
 		{
-			SubworldLibrary.PreUpdate -= new ILContext.Manipulator(this.HookPreUpdate);
-			SubworldLibrary.PostUpdate -= new ILContext.Manipulator(this.HookPostUpdate);
-			SubworldLibrary.Save -= new ILContext.Manipulator(this.HookSave);
+			SubworldLibrary.WorldIO = typeof(ModLoader).Assembly.GetType("Terraria.ModLoader.IO.WorldIO");
+			SubworldLibrary.PreUpdate -= new ILContext.Manipulator(HookPreUpdate);
+			SubworldLibrary.PostUpdate -= new ILContext.Manipulator(HookPostUpdate);
+			SubworldLibrary.Save -= new ILContext.Manipulator(HookSave);
+			SubworldLibrary.WorldIO = null;
 			Subworld.subworlds = null;
 			SubworldLibrary.canRegister = true;
 		}
 
-		public void UpdateUI(GameTime gameTime)
+		public static void UpdateUI(GameTime gameTime)
 		{
-			UserInterface ui = this.UI;
+			UserInterface ui = AAModEXAI.instance.SubWorldInterface;
 			if (((ui != null) ? ui.CurrentState : null) != null)
 			{
-				this.UI.Update(gameTime);
+				AAModEXAI.instance.SubWorldInterface.Update(gameTime);
 			}
 		}
 
-		public void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
+		public static void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
 		{
 			int num = layers.FindIndex((GameInterfaceLayer layer) => layer.Name.Equals("Vanilla: Mouse Text"));
 			if (num != -1)
 			{
 				layers.Insert(num, new LegacyGameInterfaceLayer("Subworld Library: Voting UI", delegate()
 				{
-					this.UI.Draw(Terraria.Main.spriteBatch, new GameTime());
+					AAModEXAI.instance.SubWorldInterface.Draw(Terraria.Main.spriteBatch, new GameTime());
 					return true;
 				}, InterfaceScaleType.UI));
 			}
 		}
 
-		public void HandlePacket(BinaryReader reader, int whoAmI)
+		public static void HandlePacket(BinaryReader reader, int whoAmI)
 		{
 			byte b = reader.ReadByte();
 			switch (b)
@@ -305,7 +307,7 @@ namespace AAModEXAI.Base.SubWorld
 				SLWorld.votingFor = reader.ReadUInt16();
 				SLWorld.votingToLeave = reader.ReadBoolean();
 				SLWorld.votingTimer = (SLWorld.votingToLeave ? SLWorld.currentSubworld.votingDuration : Subworld.subworlds[(int)SLWorld.votingFor].votingDuration);
-				UserInterface ui = this.UI;
+				UserInterface ui = AAModEXAI.instance.SubWorldInterface;
 				if (ui == null)
 				{
 					return;
@@ -319,7 +321,7 @@ namespace AAModEXAI.Base.SubWorld
 			}
 		}
 
-		private void HookUpdateTime(ILContext il)
+		private static void HookUpdateTime(ILContext il)
 		{
 			ILCursor ilcursor = new ILCursor(il);
 			ilcursor.Emit(OpCodes.Ldsfld, typeof(SLWorld).GetField("subworld"));
@@ -329,11 +331,10 @@ namespace AAModEXAI.Base.SubWorld
 			ilcursor.MarkLabel(illabel);
 		}
 
-		private void HookUpdateWorld(ILContext il)
+		private static void HookUpdateWorld(ILContext il)
 		{
 			ILCursor ilcursor = new ILCursor(il);
-			int index = ilcursor.Index;
-			ilcursor.Index = index + 1;
+			ilcursor.Index ++;
 			ilcursor.Emit(OpCodes.Call, typeof(SLWorld).GetMethod("VotingCountdown", BindingFlags.Static | BindingFlags.NonPublic));
 			ilcursor.EmitDelegate<Func<bool>>(() => SLWorld.subworld && SLWorld.currentSubworld.noWorldUpdate);
 			ILLabel illabel = ilcursor.DefineLabel();
@@ -343,10 +344,10 @@ namespace AAModEXAI.Base.SubWorld
 			ilcursor.MarkLabel(illabel);
 		}
 
-		private void HookUpdate(ILContext il)
+		private static void HookUpdate(ILContext il)
 		{
 			ILCursor ilcursor = new ILCursor(il);
-			if (!ILPatternMatchingExt.MatchLdsfld(ilcursor.Next, typeof(Main), "maxTilesY"))
+			if (!ILPatternMatchingExt.MatchLdsfld(ilcursor.Next, typeof(Terraria.Main), "maxTilesY"))
 			{
 				return;
 			}
@@ -362,7 +363,7 @@ namespace AAModEXAI.Base.SubWorld
 			ilcursor.MarkLabel(illabel);
 		}
 
-		private void HookPreUpdate(ILContext il)
+		private static void HookPreUpdate(ILContext il)
 		{
 			ILCursor ilcursor = new ILCursor(il);
 			ilcursor.EmitDelegate<Func<bool>>(delegate()
@@ -380,7 +381,7 @@ namespace AAModEXAI.Base.SubWorld
 			ilcursor.MarkLabel(illabel);
 		}
 
-		private void HookPostUpdate(ILContext il)
+		private static void HookPostUpdate(ILContext il)
 		{
 			ILCursor ilcursor = new ILCursor(il);
 			ilcursor.EmitDelegate<Func<bool>>(delegate()
@@ -398,7 +399,7 @@ namespace AAModEXAI.Base.SubWorld
 			ilcursor.MarkLabel(illabel);
 		}
 
-		private void HookUpdatePlayer(ILContext il)
+		private static void HookUpdatePlayer(ILContext il)
 		{
 			ILCursor ilcursor = new ILCursor(il);
 			do
@@ -432,7 +433,7 @@ namespace AAModEXAI.Base.SubWorld
 			ilcursor.MarkLabel(illabel2);
 		}
 
-		private void HookUpdateGravity(ILContext il)
+		private static void HookUpdateGravity(ILContext il)
 		{
 			ILCursor ilcursor = new ILCursor(il);
 			ILCursor ilcursor2 = ilcursor;
@@ -450,7 +451,7 @@ namespace AAModEXAI.Base.SubWorld
 			ilcursor.Emit(OpCodes.Brtrue, illabel);
 			ILCursor ilcursor4 = ilcursor;
 			Func<Instruction, bool>[] array2 = new Func<Instruction, bool>[1];
-			array2[0] = ((Instruction i) => ILPatternMatchingExt.MatchStsfld(i, typeof(NPC).GetField("gravity", BindingFlags.Static | BindingFlags.NonPublic)));
+			array2[0] = ((Instruction i) => ILPatternMatchingExt.MatchStsfld(i, typeof(Terraria.NPC).GetField("gravity", BindingFlags.Static | BindingFlags.NonPublic)));
 			if (!ilcursor4.TryGotoNext(array2))
 			{
 				return;
@@ -461,12 +462,12 @@ namespace AAModEXAI.Base.SubWorld
 			ilcursor.MarkLabel(illabel);
 		}
 
-		private void HookWorldGen(ILContext il)
+		private static void HookWorldGen(ILContext il)
 		{
 			ILCursor ilcursor = new ILCursor(il);
 			ILCursor ilcursor2 = ilcursor;
 			Func<Instruction, bool>[] array = new Func<Instruction, bool>[1];
-			array[0] = ((Instruction i) => ILPatternMatchingExt.MatchCall(i, typeof(WorldFile), "saveWorld"));
+			array[0] = ((Instruction i) => ILPatternMatchingExt.MatchCall(i, typeof(Terraria.IO.WorldFile), "saveWorld"));
 			if (!ilcursor2.TryGotoNext(array))
 			{
 				return;
@@ -477,7 +478,7 @@ namespace AAModEXAI.Base.SubWorld
 			ilcursor.Emit(OpCodes.Call, typeof(SLWorld).GetMethod("GenerateSubworlds", BindingFlags.Static | BindingFlags.NonPublic));
 		}
 
-		private void HookSavePlayer(ILContext il)
+		private static void HookSavePlayer(ILContext il)
 		{
 			ILCursor ilcursor = new ILCursor(il);
 			ilcursor.EmitDelegate<Func<bool>>(() => SLWorld.subworld && SLWorld.currentSubworld.disablePlayerSaving);
@@ -487,7 +488,7 @@ namespace AAModEXAI.Base.SubWorld
 			ilcursor.MarkLabel(illabel);
 		}
 
-		private void HookSaveWorld(ILContext il)
+		private static void HookSaveWorld(ILContext il)
 		{
 			ILCursor ilcursor = new ILCursor(il);
 			ilcursor.EmitDelegate<Func<bool>>(() => SLWorld.subworld && !SLWorld.currentSubworld.saveSubworld);
@@ -497,7 +498,7 @@ namespace AAModEXAI.Base.SubWorld
 			ilcursor.MarkLabel(illabel);
 		}
 
-		private void HookSave(ILContext il)
+		private static void HookSave(ILContext il)
 		{
 			ILCursor ilcursor = new ILCursor(il);
 			ILCursor ilcursor2 = ilcursor;
@@ -534,7 +535,7 @@ namespace AAModEXAI.Base.SubWorld
 			ilcursor.MarkLabel(illabel);
 		}
 
-		private void HookEraseWorld(ILContext il)
+		private static void HookEraseWorld(ILContext il)
 		{
 			ILCursor ilcursor = new ILCursor(il);
 			ilcursor.Emit(OpCodes.Ldarg_0);
@@ -549,12 +550,12 @@ namespace AAModEXAI.Base.SubWorld
 			});
 		}
 
-		private void HookDoDraw(ILContext il)
+		private static void HookDoDraw(ILContext il)
 		{
 			ILCursor ilcursor = new ILCursor(il);
 			ILCursor ilcursor2 = ilcursor;
 			Func<Instruction, bool>[] array = new Func<Instruction, bool>[1];
-			array[0] = ((Instruction i) => ILPatternMatchingExt.MatchStsfld(i, typeof(Main), "HoverItem"));
+			array[0] = ((Instruction i) => ILPatternMatchingExt.MatchStsfld(i, typeof(Terraria.Main), "HoverItem"));
 			if (ilcursor2.TryGotoNext(array))
 			{
 				ILCursor ilcursor3 = ilcursor;
@@ -564,7 +565,7 @@ namespace AAModEXAI.Base.SubWorld
 				ILLabel illabel = ilcursor.DefineLabel();
 				ilcursor.Emit(OpCodes.Brtrue, illabel);
 				ilcursor.Emit(OpCodes.Ldc_R4, 1f);
-				ilcursor.Emit(OpCodes.Stsfld, typeof(Main).GetField("_uiScaleUsed", BindingFlags.Static | BindingFlags.NonPublic));
+				ilcursor.Emit(OpCodes.Stsfld, typeof(Terraria.Main).GetField("_uiScaleUsed", BindingFlags.Static | BindingFlags.NonPublic));
 				ilcursor.Emit(OpCodes.Ldc_R4, 1f);
 				ilcursor.Emit(OpCodes.Ldc_R4, 1f);
 				ilcursor.Emit(OpCodes.Ldc_R4, 1f);
@@ -574,7 +575,7 @@ namespace AAModEXAI.Base.SubWorld
 					typeof(float),
 					typeof(float)
 				}));
-				ilcursor.Emit(OpCodes.Stsfld, typeof(Main).GetField("_uiScaleMatrix", BindingFlags.Static | BindingFlags.NonPublic));
+				ilcursor.Emit(OpCodes.Stsfld, typeof(Terraria.Main).GetField("_uiScaleMatrix", BindingFlags.Static | BindingFlags.NonPublic));
 				ilcursor.Emit(OpCodes.Ldarg_0);
 				ilcursor.Emit(OpCodes.Call, typeof(SLWorld).GetMethod("DrawMenu", BindingFlags.Static | BindingFlags.NonPublic));
 				ilcursor.Emit(OpCodes.Ret);
@@ -582,7 +583,7 @@ namespace AAModEXAI.Base.SubWorld
 			}
 			ILCursor ilcursor4 = ilcursor;
 			Func<Instruction, bool>[] array2 = new Func<Instruction, bool>[1];
-			array2[0] = ((Instruction i) => ILPatternMatchingExt.MatchStsfld(i, typeof(Main), "atmo"));
+			array2[0] = ((Instruction i) => ILPatternMatchingExt.MatchStsfld(i, typeof(Terraria.Main), "atmo"));
 			if (!ilcursor4.TryGotoNext(array2))
 			{
 				return;
@@ -595,7 +596,7 @@ namespace AAModEXAI.Base.SubWorld
 			ilcursor.MarkLabel(illabel2);
 		}
 
-		private void HookDrawBlack(ILContext il)
+		private static void HookDrawBlack(ILContext il)
 		{
 			ILCursor ilcursor = new ILCursor(il);
 			int index;
@@ -612,7 +613,7 @@ namespace AAModEXAI.Base.SubWorld
 				index = ilcursor3.Index;
 				ilcursor3.Index = index + 1;
 			}
-			while (!ILPatternMatchingExt.MatchLdsfld(ilcursor.Next, typeof(Main), "maxTilesY"));
+			while (!ILPatternMatchingExt.MatchLdsfld(ilcursor.Next, typeof(Terraria.Main), "maxTilesY"));
 			ILCursor ilcursor4 = ilcursor;
 			index = ilcursor4.Index;
 			ilcursor4.Index = index - 1;
@@ -629,7 +630,7 @@ namespace AAModEXAI.Base.SubWorld
 			ilcursor.MarkLabel(illabel);
 		}
 
-		private void HookDrawBG(ILContext il)
+		private static void HookDrawBG(ILContext il)
 		{
 			ILCursor ilcursor = new ILCursor(il);
 			ILCursor ilcursor2 = ilcursor;
@@ -645,7 +646,7 @@ namespace AAModEXAI.Base.SubWorld
 			ilcursor.Emit(OpCodes.Brtrue, illabel);
 			ILCursor ilcursor3 = ilcursor;
 			Func<Instruction, bool>[] array2 = new Func<Instruction, bool>[1];
-			array2[0] = ((Instruction i) => ILPatternMatchingExt.MatchLdsfld(i, typeof(Main), "shroomTiles"));
+			array2[0] = ((Instruction i) => ILPatternMatchingExt.MatchLdsfld(i, typeof(Terraria.Main), "shroomTiles"));
 			if (!ilcursor3.TryGotoNext(array2))
 			{
 				return;
@@ -653,7 +654,7 @@ namespace AAModEXAI.Base.SubWorld
 			ilcursor.MarkLabel(illabel);
 		}
 
-		private void HookDrawBackground(ILContext il)
+		private static void HookDrawBackground(ILContext il)
 		{
 			ILCursor ilcursor = new ILCursor(il);
 			do
@@ -692,7 +693,7 @@ namespace AAModEXAI.Base.SubWorld
 			ilcursor.MarkLabel(illabel2);
 		}
 
-		private void HookOldDrawBackground(ILContext il)
+		private static void HookOldDrawBackground(ILContext il)
 		{
 			ILCursor ilcursor = new ILCursor(il);
 			for (;;)
@@ -709,7 +710,6 @@ namespace AAModEXAI.Base.SubWorld
 					goto Block_1;
 				}
 			}
-			IL_13D:
 			do
 			{
 				ILCursor ilcursor3 = ilcursor;
@@ -720,7 +720,7 @@ namespace AAModEXAI.Base.SubWorld
 					return;
 				}
 			}
-			while (!ILPatternMatchingExt.MatchStfld(ilcursor.Prev, typeof(Main), "bgTop"));
+			while (!ILPatternMatchingExt.MatchStfld(ilcursor.Prev, typeof(Terraria.Main), "bgTop"));
 			ilcursor.Index += 8;
 			ilcursor.Emit(OpCodes.Ldsfld, typeof(SLWorld).GetField("drawUnderworldBackground"));
 			ILLabel illabel = ilcursor.DefineLabel();
@@ -738,10 +738,9 @@ namespace AAModEXAI.Base.SubWorld
 			ilcursor.Emit(OpCodes.Pop);
 			ilcursor.Emit(OpCodes.Ldloc_0);
 			ilcursor.MarkLabel(illabel2);
-			goto IL_13D;
 		}
 
-		private void HookDrawUnderworldBackground(ILContext il)
+		private static void HookDrawUnderworldBackground(ILContext il)
 		{
 			ILCursor ilcursor = new ILCursor(il);
 			ilcursor.Emit(OpCodes.Ldsfld, typeof(SLWorld).GetField("drawUnderworldBackground"));
@@ -751,7 +750,7 @@ namespace AAModEXAI.Base.SubWorld
 			ilcursor.MarkLabel(illabel);
 		}
 
-		private void HookUpdateBiomes(ILContext il)
+		private static void HookUpdateBiomes(ILContext il)
 		{
 			ILCursor ilcursor = new ILCursor(il);
 			ILCursor ilcursor2 = ilcursor;
@@ -769,7 +768,7 @@ namespace AAModEXAI.Base.SubWorld
 			ilcursor.MarkLabel(illabel);
 		}
 
-		private void HookDraw(ILContext il)
+		private static void HookDraw(ILContext il)
 		{
 			ILCursor ilcursor = new ILCursor(il);
 			ILCursor ilcursor2 = ilcursor;
@@ -803,7 +802,7 @@ namespace AAModEXAI.Base.SubWorld
 			ilcursor.MarkLabel(illabel3);
 			ILCursor ilcursor3 = ilcursor;
 			Func<Instruction, bool>[] array2 = new Func<Instruction, bool>[1];
-			array2[0] = ((Instruction i) => ILPatternMatchingExt.MatchCall(i, typeof(WorldGen), "SaveAndQuit"));
+			array2[0] = ((Instruction i) => ILPatternMatchingExt.MatchCall(i, typeof(Terraria.WorldGen), "SaveAndQuit"));
 			if (!ilcursor3.TryGotoNext(array2))
 			{
 				return;
@@ -822,7 +821,7 @@ namespace AAModEXAI.Base.SubWorld
 			ilcursor.MarkLabel(illabel2);
 		}
 
-		private void HookPreRenderPhase(ILContext il)
+		private static void HookPreRenderPhase(ILContext il)
 		{
 			ILCursor ilcursor = new ILCursor(il);
 			ILCursor ilcursor2 = ilcursor;
@@ -852,8 +851,6 @@ namespace AAModEXAI.Base.SubWorld
 		internal static SubworldLibrary Instance;
 
 		internal static bool canRegister = true;
-
-		internal UserInterface UI;
 
 		internal static Type WorldIO;
 

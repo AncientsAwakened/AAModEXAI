@@ -17,6 +17,7 @@ using Terraria.Utilities;
 
 using static AAModEXAI.AAModEXAI;
 using static Terraria.ModLoader.ModContent;
+using AAModEXAI.Base.SubWorld;
 
 namespace AAModEXAI.Loaders
 {
@@ -34,17 +35,17 @@ namespace AAModEXAI.Loaders
         }
 
         [LoadThis(true)]
+        public static void LoadSubWorld()
+        {
+            SubworldLibrary.Load();
+        }
+
+        [LoadThis(true)]
         public static void LoadShaders()
         {
             Ref<Effect> screenRef = new Ref<Effect>(instance.GetEffect("Effects/Shockwave"));
             Filters.Scene["AAModEXAI:Shockwave"] = new Filter(new ScreenShaderData(screenRef, "Shockwave"), EffectPriority.VeryHigh);
             Filters.Scene["AAModEXAI:Shockwave"].Load();
-        }
-
-        [LoadThis(true)]
-        public static void LoadSubWorld()
-        {
-            AAModEXAI.instance.Load();
         }
     }
 }

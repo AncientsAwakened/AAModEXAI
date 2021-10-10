@@ -66,7 +66,7 @@ namespace AAModEXAI.Base.SubWorld
 			}
 			if (SLWorld.votingTimer == 0)
 			{
-				SubworldLibrary.Instance.UI.SetState(null);
+				AAModEXAI.instance.SubWorldInterface.SetState(null);
 			}
 		}
 

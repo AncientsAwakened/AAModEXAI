@@ -26,6 +26,9 @@ namespace AAModEXAI
 
         public static List<SoundEffectInstance> activeRumbleSounds;
 
+        //SubWorldUI
+        internal UserInterface SubWorldInterface;
+
 		public override void Load()
         {
             Loader.Load();
@@ -52,22 +55,22 @@ namespace AAModEXAI
 
         public override void AddRecipes()
 		{
-			SubworldLibrary.Instance.AddRecipes();
+			SubworldLibrary.AddRecipes();
 		}
 
         public override void UpdateUI(GameTime gameTime)
 		{
-			SubworldLibrary.Instance.UpdateUI(gameTime);
+			SubworldLibrary.UpdateUI(gameTime);
 		}
 
 		public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
 		{
-			SubworldLibrary.Instance.ModifyInterfaceLayers(layers);
+			SubworldLibrary.ModifyInterfaceLayers(layers);
 		}
 
         public override void HandlePacket(BinaryReader reader, int whoAmI)
 		{
-            SubworldLibrary.Instance.HandlePacket(reader, whoAmI);
+            SubworldLibrary.HandlePacket(reader, whoAmI);
         }
 
         public override object Call(params object[] args)

@@ -235,7 +235,7 @@ namespace AAModEXAI.Base.SubWorld
 				packet.Write(6);
 			}
 			packet.Send(-1, -1);
-			SubworldLibrary.Instance.UI.SetState(null);
+			AAModEXAI.instance.SubWorldInterface.SetState(null);
 		}
 
 		public static void VoteAgainst(UIMouseEvent evt, UIElement listeningElement)
@@ -251,7 +251,7 @@ namespace AAModEXAI.Base.SubWorld
 				packet.Write(0);
 			}
 			packet.Send(-1, -1);
-			SubworldLibrary.Instance.UI.SetState(null);
+			AAModEXAI.instance.SubWorldInterface.SetState(null);
 		}
 
 		public static void Exit(bool noVote = false)

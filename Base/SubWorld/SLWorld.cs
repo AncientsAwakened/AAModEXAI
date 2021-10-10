@@ -85,9 +85,9 @@ namespace AAModEXAI.Base.SubWorld
 			SLWorld.votingFor = reader.ReadUInt16();
 			SLWorld.votingToLeave = reader.ReadBoolean();
 			SLWorld.votingTimer = reader.ReadUInt16();
-			if (!flag2 && SLWorld.votingTimer > 0 && SubworldLibrary.Instance.UI.CurrentState == null)
+			if (!flag2 && SLWorld.votingTimer > 0 && AAModEXAI.instance.SubWorldInterface.CurrentState == null)
 			{
-				UserInterface ui = SubworldLibrary.Instance.UI;
+				UserInterface ui = AAModEXAI.instance.SubWorldInterface;
 				if (ui == null)
 				{
 					return;
