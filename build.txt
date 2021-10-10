@@ -1,0 +1,6 @@
+displayName = The Memory of Ancients
+author = Cerberus
+hideCode = true
+includeSource = false
+version = 1.0.0.2
+homepage = https://discord.gg/MmpCpj4
