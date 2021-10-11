@@ -1,6 +1,6 @@
 using Terraria.Localization;
 
-namespace AAModEXAI.Localization
+namespace AAModEXAI
 {
     public class Trans
     {
@@ -93,6 +93,12 @@ namespace AAModEXAI.Localization
                 if(index == 0) info = " have awoken!";
                 else if(index == 1) info = " 已苏醒！";
                 else if(index == 2) info = " пробудились!";
+            }
+
+            if(info == "RajahStatueInfo")
+            {
+                if(index == 0) info = "When Bodhisattva Avalokiteshvara was practicing the profound Prajna Paramita, he illuminated the Five Skandhas and saw that they are all empty, and he crossed beyond all suffering and difficulty.";
+                else if(index == 1) info = "观自在菩萨，行深般若波罗蜜多时，照见五蕴皆空，度一切苦厄";
             }
         }
 

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace AAModEXAI
 {
-    public class AAModGlobalItem : GlobalItem
+    public class AAModEXGlobalItem : GlobalItem
     {
         public override bool InstancePerEntity => true;
         public override bool CloneNewInstances => true;

@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 using Terraria.UI;
 using Terraria.World.Generation;
 
-namespace AAModEXAI.Base.SubWorld
+namespace AAModEXAI
 {
 	public class WeakRefSubworld : Subworld
 	{

@@ -12,7 +12,6 @@ using Terraria.ModLoader;
 using Terraria.Localization;
 
 using AAModEXAI.Loaders;
-using AAModEXAI.Base.SubWorld;
 
 namespace AAModEXAI
 {

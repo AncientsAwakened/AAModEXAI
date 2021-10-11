@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 using Terraria.UI;
 using Terraria.ID;
 
-namespace AAModEXAI.Base.SubWorld
+namespace AAModEXAI
 {
 	public class UIDefaultVoting : UIState
 	{

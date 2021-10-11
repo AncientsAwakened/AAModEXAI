@@ -16,7 +16,7 @@ using Terraria.UI;
 using Terraria.Utilities;
 using Terraria.World.Generation;
 
-namespace AAModEXAI.Base.SubWorld
+namespace AAModEXAI
 {
 	public class SLWorld : ModWorld
 	{

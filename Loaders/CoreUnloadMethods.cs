@@ -8,7 +8,6 @@ using Terraria;
 using Terraria.ID;
 
 using static AAModEXAI.AAModEXAI;
-using AAModEXAI.Base.SubWorld;
 
 namespace AAModEXAI.Loaders
 {

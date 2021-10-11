@@ -17,7 +17,6 @@ using Terraria.Utilities;
 
 using static AAModEXAI.AAModEXAI;
 using static Terraria.ModLoader.ModContent;
-using AAModEXAI.Base.SubWorld;
 
 namespace AAModEXAI.Loaders
 {

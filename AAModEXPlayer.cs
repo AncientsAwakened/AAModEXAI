@@ -10,5 +10,20 @@ namespace AAModEXAI
 {
 	public class AAModEXPlayer : ModPlayer
 	{
+		public override void ResetEffects()
+        {
+		}
+
+		public override void Initialize()
+        {
+		}
+
+		public override void UpdateBiomes()
+        {
+		}
+
+		public override void UpdateBiomeVisuals()
+        {
+		}
 	}
 }

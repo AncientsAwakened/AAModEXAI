@@ -20,7 +20,7 @@ using Terraria.UI;
 using Terraria.Utilities;
 using Terraria.World.Generation;
 
-namespace AAModEXAI.Base.SubWorld
+namespace AAModEXAI
 {
 	public class SubworldLibrary
 	{
@@ -92,27 +92,23 @@ namespace AAModEXAI.Base.SubWorld
 			IngameOptions.Draw += new ILContext.Manipulator(HookDraw);
 			Lighting.PreRenderPhase += new ILContext.Manipulator(HookPreRenderPhase);
 			Subworld.subworlds = new List<Subworld>();
-			foreach (Mod mod in ModLoader.Mods)
+
+			foreach (Type type in ModContent.GetInstance<AAModEXAI>().Code.GetExportedTypes())
 			{
-				if (mod.Code != null && mod != ModLoader.GetMod("AAModEXAI"))
+				if (!type.IsAbstract && !(type.GetConstructor(new Type[0]) == null) && type.IsSubclassOf(typeof(Subworld)))
 				{
-					foreach (Type type in mod.Code.GetExportedTypes())
-					{
-						if (type.IsSubclassOf(typeof(Subworld)))
-						{
-							Subworld subworld = (Subworld)Activator.CreateInstance(type);
-							subworld.mod = mod;
-							subworld.id = mod.Name + "_" + subworld.GetType().Name;
-							Subworld.subworlds.Add(subworld);
-						}
-					}
+					Subworld subworld = (Subworld)Activator.CreateInstance(type);
+					subworld.mod = ModContent.GetInstance<AAModEXAI>();
+					subworld.id = ModContent.GetInstance<AAModEXAI>().Name + "_" + subworld.GetType().Name;
+					Subworld.subworlds.Add(subworld);
 				}
 			}
+
 			if (!Terraria.Main.dedServ)
 			{
 				AAModEXAI.instance.SubWorldInterface = new UserInterface();
 			}
-			ModTranslation modTranslation = ModContent.GetInstance<AAModEXAI>().CreateTranslation("Return");
+			ModTranslation modTranslation = ModContent.GetInstance<AAModEXAI>().CreateTranslation("SubworldReturn");
 			modTranslation.SetDefault("Return");
 			ModContent.GetInstance<AAModEXAI>().AddTranslation(modTranslation);
 			modTranslation = ModContent.GetInstance<AAModEXAI>().CreateTranslation("Voting");
@@ -790,7 +786,7 @@ namespace AAModEXAI.Base.SubWorld
 			ilcursor.Emit(OpCodes.Ldsfld, typeof(SLWorld).GetField("subworld"));
 			illabel = ilcursor.DefineLabel();
 			ilcursor.Emit(OpCodes.Brfalse, illabel);
-			ilcursor.Emit(OpCodes.Ldstr, "Mods.SubworldLibrary.Return");
+			ilcursor.Emit(OpCodes.Ldstr, "Mods.AAModEXAI.SubworldReturn");
 			ilcursor.Emit(OpCodes.Call, typeof(Language).GetMethod("GetTextValue", new Type[]
 			{
 				typeof(string)

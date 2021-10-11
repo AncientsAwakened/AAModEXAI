@@ -1,7 +1,7 @@
 ﻿using System;
 using Terraria.World.Generation;
 
-namespace AAModEXAI.Base.SubWorld
+namespace AAModEXAI
 {
 	public class SubworldGenPass : GenPass
 	{
